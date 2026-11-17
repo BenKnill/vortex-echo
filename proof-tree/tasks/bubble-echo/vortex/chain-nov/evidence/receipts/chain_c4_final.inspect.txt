@@ -1,0 +1,59 @@
+PASSED chain_c4_final.ml: 23/23 bindings proved, 23/23 spec bindings matched, 75/75 spec pins matched, 0 new axioms, eval 66.3s (wasm)
+budgets: leaf=1800s preparation=5400s (separate)
+source: /home/bluestar/lanes/demo1-wave-20261110-141705/vortex-pop/assembly/proj/tasks/bubble-echo/vortex/proofs/chain_c4_final.ml sha=7ade4523d2bd
+  VA1_FILM_INVERSE_CLICK: proved source_line=53
+  VA1_FILM_INVERSE_AUTO: proved source_line=68
+  VA1_FILM_TO_END_CLICK: proved source_line=84
+  VA1_FILM_TO_END_AUTO: proved source_line=103
+  VA1_PUNCT_REL_SAT: proved source_line=123
+  VA1_AUTOPUNCT_REL_SAT: proved source_line=127
+  VA1_FILM_SAT: proved source_line=132
+  VA1_HCALL_UNPUNCT: proved source_line=144
+  VA1_BAD_PUNCT: proved source_line=159
+  VA1_POP_CHAIN_BYTES: proved source_line=164
+  VA1_POP_HCALL_END: proved source_line=176
+  VA1_NP_SCRUB_FRAME: proved source_line=183
+  ... 11 more (11 proved); use --verbose or --binding NAME
+binding_counts: proved=23 failed=0 printed_unprobed=0 missing=0 unknown=0
+successful_probe_counts: conclusion_checked=23 thm_type_only=0 unknown=0
+spec: satisfied 23/23 bindings match, 75/75 pins match sha=e22e71101ef9 file=/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-pop/assembly/proj/tasks/bubble-echo/vortex/proofs/chain_c4_final.spec
+  spec VA1_FILM_INVERSE_CLICK: matched (|- forall fs gl mdl N ap x0 K n m0. va1_fs_np fs /\ va1_fs_pop fs /\ fs 26 = va1_f26_mc,0,1 /\ mdl 1 = word N /\ 1 <= N /\ N <= 640 /\ 1 <= K /\ K + 520 < 4294967296 /\ n <= 520 /\ (ap = word 0 \/ K < val ap) /\ va1_np_st (word 0) ap mdl N x0 m0 /\ va1_clean m0 ==> va1_hrun (wasmc fs) (REPLICATE K t...)
+  spec VA1_FILM_INVERSE_AUTO: matched (|- forall fs gl mdl N x0 K n m0. va1_fs_np fs /\ va1_fs_pop fs /\ fs 26 = va1_f26_mc,0,1 /\ mdl 1 = word N /\ 1 <= N /\ N <= 640 /\ 1 <= K /\ K + 520 < 4294967296 /\ n <= 520 /\ va1_np_st (word 0) (word K) mdl N x0 m0 /\ va1_clean m0 ==> va1_hrun (wasmc fs) (REPLICATE (K - 1) true) (\gl1 m1. gl1 = g...)
+  spec VA1_FILM_TO_END_CLICK: matched (|- forall fs gl mdl N ap x0 K m0. va1_fs_np fs /\ va1_fs_pop fs /\ fs 26 = va1_f26_mc,0,1 /\ mdl 1 = word N /\ 1 <= N /\ N <= 640 /\ 1 <= K /\ K + 520 < 4294967296 /\ (ap = word 0 \/ K < val ap) /\ va1_np_st (word 0) ap mdl N x0 m0 /\ va1_clean m0 ==> va1_hrun (wasmc fs) (REPLICATE K true) (\gl1 m1....)
+  spec VA1_FILM_TO_END_AUTO: matched (|- forall fs gl mdl N x0 K m0. va1_fs_np fs /\ va1_fs_pop fs /\ fs 26 = va1_f26_mc,0,1 /\ mdl 1 = word N /\ 1 <= N /\ N <= 640 /\ 1 <= K /\ K + 520 < 4294967296 /\ va1_np_st (word 0) (word K) mdl N x0 m0 /\ va1_clean m0 ==> va1_hrun (wasmc fs) (REPLICATE (K - 1) true) (\gl1 m1. gl1 = gl /\ va1_np_st...)
+  spec VA1_PUNCT_REL_SAT: matched (|- forall mdl gl m. exists gl' m'. va1_punct_rel mdl gl m gl' m')
+  spec VA1_AUTOPUNCT_REL_SAT: matched (|- forall mdl N x gl m. N <= 640 ==> (exists gl' m'. va1_autopunct_rel mdl N x gl m gl' m'))
+  spec VA1_FILM_SAT: matched (|- (exists fs. va1_fs_np fs /\ va1_fs_pop fs /\ fs 26 = va1_f26_mc,0,1) /\ (forall ap mdl N x0. N <= 640 ==> (exists m0. va1_np_st (word 0) ap mdl N x0 m0 /\ va1_clean m0)) /\ (exists fs mdl N x0 m0. va1_fs_np fs /\ va1_fs_pop fs /\ fs 26 = va1_f26_mc,0,1 /\ mdl 1 = word N /\ 1 <= N /\ N <= 640 /\ v...)
+  spec VA1_HCALL_UNPUNCT: matched (|- forall fs gl p ap mdl N y hp tbl ra rb jq jp di zq zp nd h m. mdl 1 = word N /\ 1 <= N /\ N <= 640 /\ fs 10 = va1_f10_mc,0,0 /\ fs 26 = va1_f26_mc,0,1 /\ fs 28 = va1_f28_mc,0,0 /\ ~(p = word 4294967295) /\ ~(p = word 0) /\ va1_st p p ap mdl N y hp tbl (ra,rb,jq,jp,di,zq,zp,nd) m /\ read (bytes32 ...)
+  spec VA1_BAD_PUNCT: matched (|- forall mdl tbl. va1_bad mdl tbl ((\k. word 251658), va1_rbinit tbl, (\k. word 0), (\k. word 0), (\k. word 0), va1_zpseed mdl, word 0) = word 0)
+  spec VA1_POP_CHAIN_BYTES: matched (|- forall fs gl mdl N p ap x0 hp tbl t0 S0 k m. mdl 1 = word N /\ 1 <= N /\ N <= 640 /\ va1_fs_pop fs /\ ~(p = word 4294967295) /\ val p <= val t0 /\ val t0 + k <= val p + 520 /\ val p + 520 < 4294967296 /\ va1_log_ok t0 (va1_diof S0) (va1_ndof S0) /\ va1_st t0 p ap mdl N x0 hp tbl S0 m ==> va1_hrun...)
+  spec VA1_POP_HCALL_END: matched (|- forall fs gl t p ap m. ~(p = word 4294967295) /\ val p <= val t /\ val (word_add p (word 520)) <= val t /\ va1_tick t m /\ va1_pop p ap m ==> va1_hcall (wasmc fs) va1_tick_forward_mc [] (word 0) (\gl' m'. gl' = gl /\ m' = m) gl m)
+  spec VA1_NP_SCRUB_FRAME: matched (|- forall fs gl mdl N ap x0 K. mdl 1 = word N /\ 1 <= N /\ N <= 640 /\ va1_fs_np fs /\ K < 4294967296 /\ (ap = word 0 \/ K < val ap) ==> (forall cs u m. u <= K /\ va1_cmds_ok K u cs /\ va1_np_st (word u) ap mdl N (ITER u (va1_swf mdl) x0) m ==> va1_hrun (wasmc fs) cs (\gl' m'. gl' = gl /\ va1_np_st ...)
+  ... 11 more; use --json --verbose
+  spec definition va1_clean: pinned (|- va1_clean = (\m. va1_w32s 16408 26 (\k. word 0) m /\ va1_w32s 65536 262144 (\k. word 0) m /\ va1_w32s 1130496 2048 (\k. word 0) m /\ va1_w32s 1138688 2048 (\k. word 0) m /\ va1_w32s 1146880 2048 (\k. word 0) m /\ va1_w32s 1155072 2048 (\k. word 0) m /\ va1_bs ((\k. word 0),(\k. word 0),(\k. word ...)
+  spec definition va1_punct_frame: pinned (|- va1_punct_frame = (\m0 m. forall a. a < 4194304 /\ ~(16288 <= a /\ a < 16384) /\ ~(16396 <= a /\ a < 16404) /\ ~(16408 <= a /\ a < 16504) /\ ~(65536 <= a /\ a < 1114112) /\ ~(1130496 <= a /\ a < 1966080) ==> read (bytes8 (word a)) m = read (bytes8 (word a)) m0))
+  spec definition va1_punct_rel: pinned (|- va1_punct_rel = (\mdl gl m gl' m'. gl' = gl /\ read (bytes32 (word 16396)) m' = read (bytes32 (word 16392)) m /\ read (bytes32 (word 16400)) m' = word 0 /\ (exists tbl. va1_w32s 65536 262144 tbl m' /\ va1_w32s 1138688 2048 (va1_rbinit tbl) m') /\ va1_w32s 1130496 2048 (\k. word 251658) m' /\ va1_...)
+  spec definition va1_autopunct_rel: pinned (|- va1_autopunct_rel = (\mdl N x gl m gl' m'. exists m1. read (bytes32 (word 16392)) m1 = word_add (read (bytes32 (word 16392)) m) (word 1) /\ va1_vab N (va1_swf mdl x) m1 /\ va1_np_frame m m1 /\ va1_punct_rel mdl gl m1 gl' m'))
+  spec definition va1_film_bytes: pinned (|- va1_film_bytes = (\N m0 m. forall a. a < 4194304 /\ ~(16288 <= a /\ a < 16384) /\ ~(1114112 + 12 * N <= a /\ a < 1122304) /\ ~(1122304 + 12 * N <= a /\ a < 1130496) /\ ~(1966080 <= a /\ a < 2039808) ==> read (bytes8 (word a)) m = read (bytes8 (word a)) m0))
+  spec definition va1_hcall: pinned (|- va1_hcall = (\step code args r Q gl m. exists e decls. wasm_entry code = SOME e /\ wasm_decl_vals code = SOME decls /\ (forall s0. read wmemsize s0 = 4194304 /\ read wglobals s0 = gl /\ read wmem s0 = m ==> eventually step (\s. read wstatus s = WDone /\ read wstack s = [I32 r] /\ read wmemsize s ...)
+  spec definition va1_hrun: pinned (|- va1_hrun = (\step cs Q. ITLIST (\c R. va1_hcall step (if c then va1_tick_forward_mc else va1_tick_backward_mc) [] (word 1) R) cs Q))
+  spec definition va1_swf: pinned (|- va1_swf = (\mdl. ve_fredkin_fwdn (\i. ve_vk mdl) 16))
+  spec definition va1_np_st: pinned (|- va1_np_st = (\t ap mdl N x m. va1_tick t m /\ va1_pop (word 4294967295) ap m /\ va1_mdl mdl m /\ va1_vab N x m))
+  spec definition va1_fs_np: pinned (|- va1_fs_np = (\fs. fs 9 = va1_f9_mc,0,0 /\ fs 10 = va1_f10_mc,0,0 /\ fs 27 = va1_f27_mc,0,0 /\ fs 28 = va1_f28_mc,0,0))
+  spec definition va1_np_frame: pinned (|- va1_np_frame = (\m0 m. forall a. a < 4194304 /\ ~(16392 <= a /\ a < 16396) /\ ~(1114112 <= a /\ a < 1130496) /\ ~(1966080 <= a /\ a < 2039808) ==> read (bytes8 (word a)) m = read (bytes8 (word a)) m0))
+  spec definition ve_fredkin_fwd: pinned (|- ve_fredkin_fwd = (\f s. SND s,(\m. word_add (FST s m) (f (SND s) m))))
+  ... 63 more; use --json --verbose
+spec_unpinned: va1_cmds_ok, va1_cmds_end (allowed by name only; meaning not checked)
+spec_foundation: 0 new axioms; no new definitions, types or constants
+phases: preparation=0.000s restore=2.166s evaluation=2.537s probe=62.488s request_overhead=1.284s evaluation_cpu=1.291s (observed)
+label: c4fin-c4final
+inputs: 75 files; closure_sha=59088216621c
+inherited_project_basis: /home/bluestar/.cache/hol-hearth/project-bases/.automatic/8ffebdc7a5bce37c2a5c76aedf745c4cf1a0321d7a06456a5c7140253b6fe61f/dependencies.ml sha=8ffebdc7a5bc
+basis_preparation_receipt: /home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c4/official-runs/20261113T191135Z-2211651-dependencies-be36d0/transcript.log.json
+basis_layer 1/4: e60a863a2982 /home/bluestar/.cache/hol-hearth/project-bases/.automatic/3df62bb3dfb6149d794bb61cab4a35c5a861432261ab0a8f4e4acc3cd4eed02a/dependencies.ml receipt=/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c3/official-runs/20261113T073230Z-1304231-dependencies-4b42ed/transcript.log.json
+basis_layer 2/4: 632f8862e62e /home/bluestar/.cache/hol-hearth/project-bases/.automatic/f9a100dd17d25b22c45b0e993b49bd8406bb4cec351bb6ca146f364d7cf75ebc/dependencies.ml receipt=/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c3/official-runs/20261113T074102Z-1313422-dependencies-1566fa/transcript.log.json
+basis_layer 3/4: ea724158ec3f /home/bluestar/.cache/hol-hearth/project-bases/.automatic/4c50881608e41764676abbc9a17087594ec06e48026b96a45c0025bed74b31b3/dependencies.ml receipt=/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c3/official-runs/20261113T080627Z-1327634-dependencies-d7f5e3/transcript.log.json
+basis_layer 4/4: 494e7be3173c /home/bluestar/.cache/hol-hearth/project-bases/.automatic/8ffebdc7a5bce37c2a5c76aedf745c4cf1a0321d7a06456a5c7140253b6fe61f/dependencies.ml receipt=/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c4/official-runs/20261113T191135Z-2211651-dependencies-be36d0/transcript.log.json
+basis_scope: preparation was checked separately; this attempt checks the full leaf in a fresh child
+receipt: /home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c4/official-runs/20261113T200833Z-2266653-chain_c4_final-94e1ae/transcript.log.json
+NEXT: /home/bluestar/src/hol-hearth/hearth inspect /home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c4/official-runs/20261113T200833Z-2266653-chain_c4_final-94e1ae

@@ -1,0 +1,14 @@
+{
+ "schema": "bubble-echo.vortex-cold-record.v1",
+ "leaf": "c8a_r4n",
+ "outcome": "reproduced",
+ "headline": "COLD CHECK: reproduced c8a_r4n.ml: 13/13 spec theorems matched, 100/100 pins matched, 0 new axioms; 13 bindings re-run (13 against the spec, 0 matched their quotations, 0 type-checked only)",
+ "exit": 0,
+ "mode": "reproduce",
+ "receipt": "/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c8/official-runs/20261116T021430Z-3552800-c8a_r4n-37eba9/transcript.log.json",
+ "receipt_sha256": "d89783429d63d8485e923922966664b3f75d82813baa4fb7f182c5bfd7eb93b3",
+ "hearth_revision": "6adb41ce24fa3e62faa14013ed79bef5dd87ec26",
+ "prepared_utc": "2026-11-16T08:36:35Z",
+ "context": "/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c8/cold/r4n-ctx-083633",
+ "cold_verdict_sha256": "f5fcbb918248e1620ecf8f5209ae8701a2f31458873e8e4264db923f7233dd0e"
+}

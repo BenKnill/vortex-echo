@@ -1,0 +1,44 @@
+PASSED chain_c5_punct_final.ml: 7/7 bindings proved, 7/7 spec bindings matched, 13/13 spec pins matched, 0 new axioms, eval 4.8s (wasm)
+budgets: leaf=1800s preparation=3600s (separate)
+source: /home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c5/proj/tasks/bubble-echo/vortex/proofs/chain_c5_punct_final.ml sha=beebea7a0eae
+  VA1_F33_ENTRY: proved source_line=3
+  VA1_F33_GUARD_P: proved source_line=10
+  VA1_F33_GUARD_T: proved source_line=19
+  VA1_F33_GUARD_ARGS: proved source_line=28
+  VA1_F33_EPILOGUE: proved source_line=38
+  VA1_F33_SAT: proved source_line=44
+  VA1_F33_EPI_SAT: proved source_line=52
+binding_counts: proved=7 failed=0 printed_unprobed=0 missing=0 unknown=0
+successful_probe_counts: conclusion_checked=7 thm_type_only=0 unknown=0
+spec: satisfied 7/7 bindings match, 13/13 pins match sha=de4ae155cd46 file=/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c5/proj/tasks/bubble-echo/vortex/proofs/chain_c5_punct.spec
+  spec VA1_F33_ENTRY: matched (|- forall a0 a1 a2 s. read wmemsize s = 4194304 /\ read (wglobal 0) s = I32 (word 16384) ==> va1_f33_pre a0 a1 a2 (read wmem s) (wcall_entry va1_puncture_mc 3 1 [I32 a2; I32 a1; I32 a0] 17 [I32 (word 0); I32 (word 0); F64 (word 0); F64 (word 0); F64 (word 0); F64 (word 0); F64 (word 0); F64 (word 0)...)
+  spec VA1_F33_GUARD_P: matched (|- forall fs a0 a1 a2 m. ~(read (bytes32 (word 16396)) m = word 4294967295) ==> ensures (wasmc fs) (va1_f33_pre a0 a1 a2 m) (\s. read wstatus s = WDone /\ read wstack s = [I32 (word 1)] /\ read (wglobal 0) s = I32 (word 16384) /\ read wmem s = m) (MAYCHANGE [wpc] ,, MAYCHANGE [wstack] ,, MAYCHANGE [...)
+  spec VA1_F33_GUARD_T: matched (|- forall fs a0 a1 a2 m. read (bytes32 (word 16396)) m = word 4294967295 /\ read (bytes32 (word 16392)) m = word 0 ==> ensures (wasmc fs) (va1_f33_pre a0 a1 a2 m) (\s. read wstatus s = WDone /\ read wstack s = [I32 (word 3)] /\ read (wglobal 0) s = I32 (word 16384) /\ read wmem s = m) (MAYCHANGE [wp...)
+  spec VA1_F33_GUARD_ARGS: matched (|- forall fs a0 a1 a2 m. read (bytes32 (word 16396)) m = word 4294967295 /\ ~(read (bytes32 (word 16392)) m = word 0) /\ a0 = word 0 /\ a1 = word 0 /\ a2 = word 0 ==> ensures (wasmc fs) (va1_f33_pre a0 a1 a2 m) (\s. read wstatus s = WDone /\ read wstack s = [I32 (word 2)] /\ read (wglobal 0) s = I32...)
+  spec VA1_F33_EPILOGUE: matched (|- forall fs r. ensures (wasmc fs) (va1_f33_epi_pre r) (\s. read wstatus s = WDone /\ read wstack s = [I32 r] /\ read (wglobal 0) s = I32 (word 16384)) (MAYCHANGE [wpc] ,, MAYCHANGE [wstack] ,, MAYCHANGE [wlabels] ,, MAYCHANGE [wstatus] ,, MAYCHANGE [wlocal 4] ,, MAYCHANGE [wglobal 0]))
+  spec VA1_F33_SAT: matched (|- forall a0 a1 a2. exists fs m1 m2 m3 s1 s2 s3. fs 32 = va1_f32_mc,2,1 /\ fs 34 = va1_f34_mc,3,0 /\ ~(read (bytes32 (word 16396)) m1 = word 4294967295) /\ read (bytes32 (word 16396)) m2 = word 4294967295 /\ read (bytes32 (word 16392)) m2 = word 0 /\ read (bytes32 (word 16396)) m3 = word 4294967295 ...)
+  spec VA1_F33_EPI_SAT: matched (|- forall r. exists s. va1_f33_epi_pre r s)
+  spec definition va1_f32_mc: pinned (|- va1_f32_mc = [word 2; word 1; word 124; word 1; word 126; word 32; word 0; word 32; word 0; word 68; word 131; word 200; word 201; word 109; word 48; word 95; word 228; word 63; word 162; word 68; word 0; word 0; word 0; word 0; word 0; word 0; word 224; word 63; word 160; word 156; word 34; word...)
+  spec definition va1_f34_mc: pinned (|- va1_f34_mc = [word 3; word 1; word 124; word 1; word 127; word 5; word 124; word 32; word 1; word 32; word 0; word 43; word 3; word 8; word 34; word 3; word 68; word 0; word 0; word 0; word 0; word 0; word 0; word 0; word 0; word 68; word 0; word 0; word 0; word 0; word 0; word 0; word 240; word ...)
+  spec definition va1_puncture_mc: pinned (|- va1_puncture_mc = [word 8; word 2; word 127; word 6; word 124; word 1; word 127; word 11; word 124; word 1; word 127; word 8; word 124; word 1; word 127; word 1; word 126; word 35; word 128; word 128; word 128; word 128; word 0; word 65; word 224; word 0; word 107; word 34; word 3; word 36; word ...)
+  spec definition wzero_of: pinned (|- wzero_of = (\t. if t = 126 then I64 (word 0) else if t = 125 then F32 (word 0) else if t = 124 then F64 (word 0) else I32 (word 0)))
+  spec definition wasm_decl_vals: pinned (|- wasm_decl_vals = (\code. wobind (wuleb code) (\p. wdecl_vals (FST p) code (SND p))))
+  spec definition wcall_locals: pinned (|- wcall_locals = (\args decls k. if k < LENGTH args then EL (LENGTH args - 1 - k) args else if k - LENGTH args < LENGTH decls then EL (k - LENGTH args) decls else I32 (word 0)))
+  spec definition wcall_entry: pinned (|- wcall_entry = (\code np nr stk e decls s. write wcode code (write wpc (word e) (write wstack [] (write wlocals (wcall_locals (wtake np stk) decls) (write wlabels [] (write warity nr (write wstatus WRunning s))))))))
+  spec definition wcall_return: pinned (|- wcall_return = (\npc np c1 s. if read wstatus c1 = WDone then write wpc (word npc) (write wstack (APPEND (read wstack c1) (wdrop np (read wstack s))) (write wmem (read wmem c1) (write wmemsize (read wmemsize c1) (write wglobals (read wglobals c1) s)))) else write wstatus WTrapped (write wmem (rea...)
+  spec definition wasm_call: pinned (|- wasm_call = (\fs f npc s s'. exists code np nr e decls c1. fs f = code,np,nr /\ np <= LENGTH (read wstack s) /\ wasm_entry code = SOME e /\ wasm_decl_vals code = SOME decls /\ RTC wasm (wcall_entry code np nr (read wstack s) e decls s) c1 /\ ~(read wstatus c1 = WRunning) /\ s' = wcall_return npc ...)
+  spec definition wasmc: pinned (|- wasmc = (\fs s s'. wasm s s' \/ read wstatus s = WRunning /\ (exists f n. wasm_decode (read wcode s) (val (read wpc s)) = SOME (Wcall f,n) /\ wasm_call fs f (val (read wpc s) + n) s s')))
+  spec definition va1_f33_pre: pinned (|- va1_f33_pre = (\a0 a1 a2 m s. read wcode s = va1_puncture_mc /\ read wpc s = word 17 /\ read wstatus s = WRunning /\ read wstack s = [] /\ read wlabels s = [] /\ read warity s = 1 /\ read wmemsize s = 4194304 /\ read (wglobal 0) s = I32 (word 16384) /\ read (wlocal 0) s = I32 a0 /\ read (wlocal 1...)
+  spec definition va1_f33_frame: pinned (|- va1_f33_frame = (\m0 m. forall a. a < 4194304 /\ ~(16288 <= a /\ a < 16384) /\ ~(65536 <= a /\ a < 1114112) ==> read (bytes8 (word a)) m = read (bytes8 (word a)) m0))
+  ... 1 more; use --json --verbose
+spec_foundation: 0 new axioms; no new definitions, types or constants
+phases: preparation=0.000s restore=0.000s evaluation=0.333s probe=3.770s request_overhead=0.673s evaluation_cpu=0.312s (observed)
+label: c5fin-punct
+inputs: 10 files; closure_sha=39c70c0b2b97
+inherited_project_basis: /home/bluestar/.cache/hol-hearth/project-bases/.automatic/59b9ee9c92f1cea30d597aff800671cc4c2ae321d6405829b1c208ffd65b07a3/dependencies.ml sha=59b9ee9c92f1
+basis_preparation_receipt: /home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c5/official-runs/20261113T200826Z-2126570-dependencies-e1e5ef/transcript.log.json
+basis_layer 1/2: 37cdecb513e5 /home/bluestar/.cache/hol-hearth/project-bases/.automatic/f9c27d585d1ab59808a2bdee920867fb30a957e049f4db119fb37e6936ce1abb/dependencies.ml receipt=/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c5/official-runs/20261113T165515Z-2043982-dependencies-fe27fa/transcript.log.json
+basis_layer 2/2: 80cd5c6262b1 /home/bluestar/.cache/hol-hearth/project-bases/.automatic/59b9ee9c92f1cea30d597aff800671cc4c2ae321d6405829b1c208ffd65b07a3/dependencies.ml receipt=/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c5/official-runs/20261113T200826Z-2126570-dependencies-e1e5ef/transcript.log.json
+basis_scope: preparation was checked separately; this attempt checks the full leaf in a fresh child
+receipt: /home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c5/official-runs/20261113T201025Z-2268690-chain_c5_punct_final-3aab26/transcript.log.json
+NEXT: /home/bluestar/src/hol-hearth/hearth inspect /home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c5/official-runs/20261113T201025Z-2268690-chain_c5_punct_final-3aab26

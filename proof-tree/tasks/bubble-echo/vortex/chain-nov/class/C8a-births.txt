@@ -1,0 +1,19 @@
+C8a class sentence (draft, vortex-chain-20261111-142342 c8a, Claude Opus 5.5, 2026-11-15; for Sol proof+class review):
+
+On the exact bytes of vortex_a1.wasm's droplet-birth function f13, in Hearth's model of WebAssembly (0 new axioms), a
+call that starts in the full precondition of VA1_BIRTH_EQ (f13's code at pc 13 with empty stack and labels, arity 1,
+the 4194304-byte memory, the locals initialized from f13's declarations, and in memory the tick T, the pop window, the
+model words, the header words, the speed table, RA, RB and the record log in their stated shape: va1_pop_window,
+va1_log_ok: ND <= 16384, earlier records stamped no later than the tick, the log zero past record ND) runs to completion and leaves the record
+log, the parent debits ZQ/ZP and the count ND exactly as appending a named list of records to the entry log would:
+va1_born, three folds over the bead index k = 0..2047 (pinch-off records for beads that pass va1_b1_ok, with the
+parent's ZQ/ZP read and debited as the fold goes; spray records for beads that pass va1_b2_ok; antipode records for
+beads that pass va1_b3_ok; the record words are closed integer formulas of RB, RA, the speed table, the header words,
+the model word and T, including the 32-step shift-subtract square-root recurrence va1_b_isqrt = ve_isq 32, stated as that
+recurrence and not as a floor-square-root characterization), each fold stopping once ND reaches 16384. Every born record carries tick T+1 and zero words 10-11,
+and ND + LENGTH(va1_born) <= 16384 (VA1_BORN_SHAPE); this named form implies the earlier "some list" contract
+va1_birth_ok (VA1_BIRTH_EQ_OK). Only the pc, stack, labels, status, the 42 locals, the ND cell, ZQ/ZP [1163264, 1179648), the record log
+[1179648, 1966080) and the bytes [1966080, 2039808) may change. Not covered: the tick-level forms R3/R4 with the named births (rows A8/A9, a separate
+spec still to be written and frozen), the films, and anything about f13 called from a state outside the stated
+precondition. Assumed, not proved: Hearth's WebAssembly semantics for the instructions f13 uses, and the decoded
+locals declaration of f13 (wasm_decl_vals) as the precondition states it.

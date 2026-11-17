@@ -1,0 +1,13 @@
+C8p rows P3/P4 class sentence (2026-11-15):
+On the exact bytes of vortex_a1.wasm (sha256 a3cf8c82...), in hol-hearth's model of WebAssembly with 0 new axioms (spec-locked
+receipt, check-rung), and under exactly the entry conditions of C5's VA1_F33_TO_F25 (f33 entered as puncture(a0, a1, a2) with
+va1_f33_pre, functions 32 and 34 bound to f32 and f34, the puncture guard word 16396 = -1, the tick word 16392 nonzero, and
+a0, a1, a2 not all zero): f33 still reaches its `call 25` at pc 1232 with everything VA1_F33_TO_F25 says, and in addition
+the 262144 i32 words it leaves at 65536 + 4 j (j < 262144) are the named terms va1_ptbl a0 a1 a2 w j =
+va1_pcell a0 a1 a2 w (j DIV 128) (j MOD 128), where w is the model word at byte 16648 of the entry memory and va1_pcell is
+a transcription of the bytes in operation order (prologue frame from f34 and four f32 calls, row and cell counters as
+iterated float sums, the clamp, the select, the guarded truncations). The float operations wfbin and wfun are the model's
+fixed but unspecified arithmetic; the comparisons wfrel and the conversions wfcvt 176/183/184 have the bit-level semantics
+pinned in the spec. Not covered here: that these terms equal any particular IEEE-754 computation (the node test against V8
+doubles on 1,176,576 cells is tested evidence, not proof), what the table means for the simulation, f25 itself (its header
+words are row P5) and the click and auto puncture compositions (rows P6, P7).

@@ -1,0 +1,15 @@
+C8p rows P6/P7 class sentence (2026-11-15; spec c8p_nu.spec 02b1240b, frozen):
+On the exact bytes of vortex_a1.wasm (sha256 a3cf8c82...), in hol-hearth's model of WebAssembly with 0 new axioms (spec-locked
+receipt, check-rung), and under exactly the premises of the frozen theorems they extend (C8b's VA1_TICK_FORWARD_PUNCT_U for
+the auto puncture, C6a's VA1_HCALL_PUNCTURE and VA1_PUNCTURE_OK for the click, with C7's renaming va1_rbinit_b, va1_zpseed_b,
+va1_bad_b): when the click call puncture(a0, a1, a2) returns (VA1_HCALL_PUNCTURE_N, VA1_PUNCTURE_OK_N), and when a tick_forward
+whose swirl tick reaches the auto puncture returns (VA1_TICK_FORWARD_PUNCT_NU, a0 a1 a2 = the words at 16516..16524 of the
+entry memory), everything the frozen theorem says still holds, and in addition the final memory holds the speed table named
+by row P4 (the i32 word at 65536 + 4 j is va1_ptbl a0 a1 a2 w j for every j < 262144, w = the model word at byte 16648 of the
+entry memory, which the swirl tick keeps) and the 21 header words named by row P5 (the i32 word at 16420 + 4 k is
+va1_phdr a0 a1 a2 k for k < 21). The proof composes rows P3/P4 and P5 (re-executed unchanged, apart from needs lines, in the
+C7/C8b context on C8a's s5 layer, because layer P cannot stack with C8b's) with the frames of f25, f33 after its call 25 and
+tick_forward after its call 33. Not covered here: what the table or the header mean (no float-accuracy or geometry claim; the
+float operations wfbin and wfun stay the model's fixed but unspecified arithmetic, as in P4), memory words outside the two
+named ranges beyond what the frozen postconditions and frames already say, the tick_backward direction and the endpoint
+statements (rung C8e), and the films (rung C8f).

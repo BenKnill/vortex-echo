@@ -1,0 +1,36 @@
+PASSED chain_c7b_final.ml: 4/4 bindings proved, 4/4 spec bindings matched, 46/46 spec pins matched, 0 new axioms, eval 51.6s (wasm)
+budgets: leaf=1800s preparation=10800s (separate)
+source: /home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c7/proj/tasks/bubble-echo/vortex/proofs/chain_c7b_final.ml sha=b588972e375e
+  VA1_FILM_AUTO: proved source_line=64
+  VA1_FILM_AUTO_TO_END: proved source_line=79
+  VA1_C7B_SAT: proved source_line=98
+  VA1_WDECL_VALS_CLAUSES: proved source_line=110
+binding_counts: proved=4 failed=0 printed_unprobed=0 missing=0 unknown=0
+successful_probe_counts: conclusion_checked=4 thm_type_only=0 unknown=0
+spec: satisfied 4/4 bindings match, 46/46 pins match sha=5243b2ead4aa file=/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c7/proj/tasks/bubble-echo/vortex/proofs/chain_c7b_final.spec
+  spec VA1_FILM_AUTO: matched (|- forall fs gl mdl N x0 K n m0. va1_fs_np fs /\ va1_fs_pop fs /\ fs 26 = va1_f26_mc,0,1 /\ fs 33 = va1_puncture_mc,3,1 /\ fs 25 = va1_f25_mc,3,1 /\ fs 32 = va1_f32_mc,2,1 /\ fs 34 = va1_f34_mc,3,0 /\ gl 0 = I32 (word 16384) /\ mdl 1 = word N /\ 1 <= N /\ N <= 640 /\ 1 <= K /\ K + 520 < 4294967296 /...)
+  spec VA1_FILM_AUTO_TO_END: matched (|- forall fs gl mdl N x0 K m0. va1_fs_np fs /\ va1_fs_pop fs /\ fs 26 = va1_f26_mc,0,1 /\ fs 33 = va1_puncture_mc,3,1 /\ fs 25 = va1_f25_mc,3,1 /\ fs 32 = va1_f32_mc,2,1 /\ fs 34 = va1_f34_mc,3,0 /\ gl 0 = I32 (word 16384) /\ mdl 1 = word N /\ 1 <= N /\ N <= 640 /\ 1 <= K /\ K + 520 < 4294967296 /\ ...)
+  spec VA1_C7B_SAT: matched (|- forall K n. 1 <= K /\ K + 520 < 4294967296 /\ n <= 520 ==> (exists fs gl mdl N x0 m0. va1_fs_np fs /\ va1_fs_pop fs /\ fs 26 = va1_f26_mc,0,1 /\ fs 33 = va1_puncture_mc,3,1 /\ fs 25 = va1_f25_mc,3,1 /\ fs 32 = va1_f32_mc,2,1 /\ fs 34 = va1_f34_mc,3,0 /\ gl 0 = I32 (word 16384) /\ mdl 1 = word N /...)
+  spec VA1_WDECL_VALS_CLAUSES: matched (|- (forall code pc. wdecl_vals 0 code pc = SOME []) /\ (forall k code pc. wdecl_vals (SUC k) code pc = wobind (wuleb (wdrop pc code)) (\p. wobind (whd (wdrop (pc + SND p) code)) (\t. wobind (wdecl_vals k code (pc + SND p + 1)) (\r. SOME (APPEND (REPLICATE (FST p) (wzero_of (val t))) r))))))
+  spec definition va1_clean: pinned (|- va1_clean = (\m. va1_w32s 16408 26 (\k. word 0) m /\ va1_w32s 65536 262144 (\k. word 0) m /\ va1_w32s 1130496 2048 (\k. word 0) m /\ va1_w32s 1138688 2048 (\k. word 0) m /\ va1_w32s 1146880 2048 (\k. word 0) m /\ va1_w32s 1155072 2048 (\k. word 0) m /\ va1_bs ((\k. word 0),(\k. word 0),(\k. word ...)
+  spec definition va1_film_bytes: pinned (|- va1_film_bytes = (\N m0 m. forall a. a < 4194304 /\ ~(16288 <= a /\ a < 16384) /\ ~(1114112 + 12 * N <= a /\ a < 1122304) /\ ~(1122304 + 12 * N <= a /\ a < 1130496) /\ ~(1966080 <= a /\ a < 2039808) ==> read (bytes8 (word a)) m = read (bytes8 (word a)) m0))
+  spec definition va1_hcall: pinned (|- va1_hcall = (\step code args r Q gl m. exists e decls. wasm_entry code = SOME e /\ wasm_decl_vals code = SOME decls /\ (forall s0. read wmemsize s0 = 4194304 /\ read wglobals s0 = gl /\ read wmem s0 = m ==> eventually step (\s. read wstatus s = WDone /\ read wstack s = [I32 r] /\ read wmemsize s ...)
+  spec definition va1_hrun: pinned (|- va1_hrun = (\step cs Q. ITLIST (\c R. va1_hcall step (if c then va1_tick_forward_mc else va1_tick_backward_mc) [] (word 1) R) cs Q))
+  spec definition va1_np_st: pinned (|- va1_np_st = (\t ap mdl N x m. va1_tick t m /\ va1_pop (word 4294967295) ap m /\ va1_mdl mdl m /\ va1_vab N x m))
+  spec definition va1_fs_np: pinned (|- va1_fs_np = (\fs. fs 9 = va1_f9_mc,0,0 /\ fs 10 = va1_f10_mc,0,0 /\ fs 27 = va1_f27_mc,0,0 /\ fs 28 = va1_f28_mc,0,0))
+  spec definition wasm_decl_vals: pinned (|- wasm_decl_vals = (\code. wobind (wuleb code) (\p. wdecl_vals (FST p) code (SND p))))
+  spec definition wcall_locals: pinned (|- wcall_locals = (\args decls k. if k < LENGTH args then EL (LENGTH args - 1 - k) args else if k - LENGTH args < LENGTH decls then EL (k - LENGTH args) decls else I32 (word 0)))
+  spec definition wcall_entry: pinned (|- wcall_entry = (\code np nr stk e decls s. write wcode code (write wpc (word e) (write wstack [] (write wlocals (wcall_locals (wtake np stk) decls) (write wlabels [] (write warity nr (write wstatus WRunning s))))))))
+  spec definition wcall_return: pinned (|- wcall_return = (\npc np c1 s. if read wstatus c1 = WDone then write wpc (word npc) (write wstack (APPEND (read wstack c1) (wdrop np (read wstack s))) (write wmem (read wmem c1) (write wmemsize (read wmemsize c1) (write wglobals (read wglobals c1) s)))) else write wstatus WTrapped (write wmem (rea...)
+  spec definition va1_tick: pinned (|- va1_tick = (\t m. read (bytes32 (word 16392)) m = t))
+  spec definition va1_pop: pinned (|- va1_pop = (\pt ap m. read (bytes32 (word 16396)) m = pt /\ read (bytes32 (word 16512)) m = ap))
+  ... 34 more; use --json --verbose
+spec_foundation: 0 new axioms; no new definitions, types or constants
+phases: preparation=5188.411s restore=1.377s evaluation=1.659s probe=49.254s request_overhead=0.695s evaluation_cpu=0.472s (observed)
+label: c7fin-c7bfinal
+inputs: 88 files; closure_sha=422caacf427b
+inherited_project_basis: /home/bluestar/.cache/hol-hearth/project-bases/.automatic/b0801de40f3ccafe19743881470d391c57748fe0a7c33127af36d99b54be8600/dependencies.ml sha=b0801de40f3c
+basis_preparation_receipt: /home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c7/official-runs/20261114T180516Z-2467216-dependencies-178935/transcript.log.json
+basis_scope: preparation was checked separately; this attempt checks the full leaf in a fresh child
+receipt: /home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c7/official-runs/20261114T180514Z-2467216-chain_c7b_final-ba9127/transcript.log.json
+NEXT: /home/bluestar/src/hol-hearth/hearth inspect /home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c7/official-runs/20261114T180514Z-2467216-chain_c7b_final-ba9127

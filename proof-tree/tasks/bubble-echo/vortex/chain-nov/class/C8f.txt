@@ -1,0 +1,30 @@
+C8f class sentence (rung C8f "the films with named births and unused words"; spec c8f.spec 231a26c4, frozen 2026-11-16 13:48:48 EST;
+C8f prover, Claude Opus 5.5):
+On the exact bytes of vortex_a1.wasm (sha256 a3cf8c82...), in hol-hearth's model of WebAssembly with 0 new axioms (spec-locked
+receipt, attest, check-rung, inline re-execution), the three films of rungs C2, C4/C7b and C4/C7a hold again with every
+intermediate snapshot (the 487424 i32 words at bytes [16384, 1966080)) NAMED as an iterate of C8e's snapshot step va1_fwd, which
+names the births (C8a's va1_born) and the puncture's speed table (C8p's va1_ptbl):
+ - pop window (C2, wasmc): from a kind-1 snapshot sg0 in C8e's domain va1_dom with P + 520 < 2^32 and T + K <= P + 520, every host
+   call sequence whose clock walk stays in [0, K] keeps the globals and ends with the snapshot ITER e va1_fwd sg0, where e is the
+   final clock offset (VA1_POP_SCRUB_N); so k forward then k backward calls restore the whole snapshot, births, rings and unused
+   vortex words included (VA1_POP_CHAIN_N); from the first pop tick, 520 forward calls, one forward call that returns 0 and changes
+   neither globals nor memory, then 520 backward calls (VA1_POP_CHAIN_TO_END_N);
+ - auto film (C7b's premises, wasmn): after the K + n forward calls (the K-th the auto puncture) the snapshot is ITER (K + n)
+   va1_fwd of the start snapshot, and after the n + K backward calls every byte below 4194304 equals the start except the 96-byte
+   shadow-stack area [16288, 16384) and the vort scratch area [1966080, 2039808) (va1_film_bytes_s): C7b's exclusion of the unused
+   vortex slots is gone (VA1_FILM_AUTO_N; to the end state and back: VA1_FILM_AUTO_TO_END_N);
+ - click film (C7a's premises plus the true call-table fact fs 33 = puncture, wasmc): after K forward calls the snapshot is
+   ITER K va1_fwd of the start; the puncture export with arguments a0 a1 a2 returns 0 and leaves va1_clk a0 a1 a2 of it (P := T, the
+   header, C8p's table and rings named, no swirl tick); n forward calls leave ITER n va1_fwd of that; the n + K backward calls end
+   in va1_film_bytes_s of the start (VA1_FILM_CLICK_N, VA1_FILM_CLICK_TO_END_N). The click pair "tick_forward; puncture" is undone
+   by ONE tick_backward; in pure HOL, va1_bwd (va1_clk a0 a1 a2 (va1_fwd sg)) = sg for clean kind-0 sg in va1_dom whose clock does
+   not reach 0xffffffff (VA1_CLICK_PAIR_INV).
+The auto and click premises hold for every K, n in range, and a memory meeting the pop-window premises with T = P exists
+(VA1_C8F_SAT).
+Not covered: host non-interference (an assumption built into va1_hcall: nothing else touches memory or globals between or during
+calls, memory does not grow); that init produces the start states (premises; tested after init by C4/C7, not proved); the two
+named byte regions at the end of a film (tested: they do change) and bytes outside the snapshot at intermediate points of a film
+beyond what C7/C2 already state; the pop-window theorems say nothing outside the snapshot (C2's frame theorems cover that, not
+re-proved here); any float value (the table is the named term va1_ptbl over fixed but unspecified rounding functions; every
+theorem holds for every choice); refused calls, other exports, states outside the premises and C8e's va1_dom boundary cases; the
+trusted base (Hearth's wasm model incl. wasmn's one-step calls, the call-table premises, global 0 = 16384, the HOL kernel).

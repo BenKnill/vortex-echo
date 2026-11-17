@@ -1,0 +1,16 @@
+C8a A8/A9 class sentence (draft, vortex-chain-20261111-142342 c8a, Claude Opus 5.5, 2026-11-15; for Sol proof+class review):
+
+On the exact bytes of vortex_a1.wasm's tick_forward (f35), in Hearth's model of WebAssembly (0 new axioms), a pop-window
+forward tick that starts in the full precondition of C8b's VA1_TICK_FORWARD_POP_R5C_U (f35's code at pc 3 with empty stack
+and labels, arity 1, the 4194304-byte memory, the function table entries for f9, f11, f13, f15, f17, f19, f21, f23, f27,
+1 <= N <= 640 with model word 1 = N, va1_pop_window T P, the births log well formed (va1_log_ok), the vortex state named
+by va1_st and the unused vortex words named by va1_vabu) returns 1 and ends in the state R5C_U describes, with the
+existential births list replaced by a named one: the records appended to the log are exactly
+va1_born mdl hp tbl T RA1 RB1 ZQ1 ZP1 ND, where RA1, RB1 are the rings after the rim step (ve_fredkin_fwd (va1_rimd tbl)),
+ZQ1, ZP1 after the four corrugation kick-drifts (ve_kd_fwdn with va1_ck and va1_cdrift), and ND is the count before the
+births: f13's byte-level formula (C8a A7) applied to the state f13 is called in (VA1_TICK_FORWARD_POP_R5C_NU, which has
+no remaining leaf-contract premises). The same holds for the R3 form with the contracts as premises
+(VA1_TICK_FORWARD_POP_COND_NU, with the named f13 contract va1_birth_eq in place of va1_birth_ok), R4 and R4b. The unused
+vortex words are unchanged and the frame is R5C_U's. Not covered: the host-call and film forms (C1/C2/C4/C7, rung C8f);
+f13's return value and the scratch area; any claim that va1_born matches the C source or a real-number model. Assumed,
+not proved: Hearth's WebAssembly semantics for the instructions used, and the call/host model of the input theorems.

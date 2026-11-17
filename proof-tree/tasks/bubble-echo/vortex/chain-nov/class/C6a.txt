@@ -1,0 +1,19 @@
+C6a class sentence (round 1 for Sol):
+
+PROVED (spec-locked Hearth receipt c6a/runs/20261113T093222Z-1518944-chain_c6a_final-12cd59 on the shared runtime, hol-hearth main 6adb41ce, wasm profile; 0 new axioms, hr attest
+transitive axioms 0; spec chain_c6a_final.spec 4082be06, frozen at Sol 9/10) for the exact bytes of vortex_a1.wasm
+(sha256 a3cf8c82...): one host call of the export "puncture" with arguments a0, a1, a2, made from any state whose memory has
+the pop word P = -1, a nonzero clock word T, the model words mdl, memory size 4194304 and global 0 = 16384, with the call map
+sending 25, 32 and 34 to the module's own f25, f32 and f34 bodies and the arguments not all zero, always finishes, never
+traps, returns 0 and leaves: the globals as they were; P = T; the droplet count 0; header words 6, 7, 8 = a0, a1, a2; for the
+speed table the call wrote, RB = the rb_init of that table; RA = 251658, JQ = JP = ZQ = 0, ZP = the zp_seed of the model,
+the droplet words 0; and every other byte of the 4 MiB memory unchanged except the puncture's 96-byte stack frame
+[16288,16384), header words 6..29 and the table itself. A finished run exists from every such state and every run that stops
+ends this way (VA1_PUNCTURE_RUNS); the premises are satisfiable (VA1_C6A_SAT). This composes C5 (f33's prologue and
+2048 x 128 table loops, epilogue) with C3b (f25) through the model's call rule; it holds whatever the model's unspecified
+float rounding functions compute (compares and trapping truncations are exact on the bits), so no float value, table entry,
+frame double or header word 9..29 is claimed. Not covered: refused calls (P <> -1, T = 0, all-zero arguments: C5's guard
+theorems, not restated as host calls), the auto puncture inside tick_forward (two call levels, outside this model), entry
+with other global 0 or memory size. Host non-interference (the host does not write memory or globals during the call and
+memory does not grow) is an assumption of the host model, not a WebAssembly guarantee. TESTED separately on the real bytes
+in node (2000 calls, 14 planted mutants caught), which is evidence for the test, not part of the proof.

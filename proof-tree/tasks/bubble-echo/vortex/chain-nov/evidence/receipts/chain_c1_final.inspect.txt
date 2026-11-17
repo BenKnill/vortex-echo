@@ -1,0 +1,67 @@
+PASSED chain_c1_final.ml: 27/27 bindings proved, 27/27 spec bindings matched, 40/40 spec pins matched, 0 new axioms, eval 13.2s (wasm)
+budgets: leaf=1800s preparation=1800s (separate)
+source: /home/bluestar/lanes/demo1-wave-20261110-141705/vortex-pop/assembly/proj/tasks/bubble-echo/vortex/proofs/chain_c1_final.ml sha=51faf663e702
+  VA1_HRUN_CLAUSES: proved source_line=21
+  VA1_CMDS_OK_CLAUSES: proved source_line=30
+  VA1_CMDS_END_CLAUSES: proved source_line=36
+  VA1_HCALL_ENSURES: proved source_line=41
+  VA1_HCALL_MONO: proved source_line=55
+  VA1_HRUN_MONO: proved source_line=62
+  VA1_HRUN_APPEND: proved source_line=69
+  VA1_HCALL_START_SAT: proved source_line=74
+  VA1_HCALL_RUNS: proved source_line=79
+  VA1_TICKF_CALLEE: proved source_line=95
+  VA1_TICKB_CALLEE: proved source_line=100
+  VA1_NP_HCALL_FWD: proved source_line=105
+  ... 15 more (15 proved); use --verbose or --binding NAME
+binding_counts: proved=27 failed=0 printed_unprobed=0 missing=0 unknown=0
+successful_probe_counts: conclusion_checked=27 thm_type_only=0 unknown=0
+spec: satisfied 27/27 bindings match, 40/40 pins match sha=3b62701f116d file=/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-pop/assembly/proj/tasks/bubble-echo/vortex/proofs/chain_c1_final.spec
+  spec VA1_HRUN_CLAUSES: matched (|- (forall step Q gl m. va1_hrun step [] Q gl m <=> Q gl m) /\ (forall step c cs Q gl m. va1_hrun step (CONS c cs) Q gl m <=> va1_hcall step (if c then va1_tick_forward_mc else va1_tick_backward_mc) [] (word 1) (va1_hrun step cs Q) gl m))
+  spec VA1_CMDS_OK_CLAUSES: matched (|- (forall K u. va1_cmds_ok K u [] <=> true) /\ (forall K u c cs. va1_cmds_ok K u (CONS c cs) <=> (if c then u < K /\ va1_cmds_ok K (u + 1) cs else 0 < u /\ va1_cmds_ok K (u - 1) cs)))
+  spec VA1_CMDS_END_CLAUSES: matched (|- (forall u. va1_cmds_end u [] = u) /\ (forall u c cs. va1_cmds_end u (CONS c cs) = va1_cmds_end (if c then u + 1 else u - 1) cs))
+  spec VA1_HCALL_ENSURES: matched (|- forall step code e decls args r P Q C R gl m. wasm_entry code = SOME e /\ wasm_decl_vals code = SOME decls /\ ensures step P Q C /\ (forall s0. read wmemsize s0 = 4194304 /\ read wglobals s0 = gl /\ read wmem s0 = m ==> P (wcall_entry code (LENGTH args) 1 args e decls s0)) /\ (forall s0 s. read w...)
+  spec VA1_HCALL_MONO: matched (|- forall step code args r Q Q' gl m. (forall g x. Q g x ==> Q' g x) /\ va1_hcall step code args r Q gl m ==> va1_hcall step code args r Q' gl m)
+  spec VA1_HRUN_MONO: matched (|- forall step cs Q Q' gl m. (forall g x. Q g x ==> Q' g x) /\ va1_hrun step cs Q gl m ==> va1_hrun step cs Q' gl m)
+  spec VA1_HRUN_APPEND: matched (|- forall step cs1 cs2 Q. va1_hrun step (APPEND cs1 cs2) Q = va1_hrun step cs1 (va1_hrun step cs2 Q))
+  spec VA1_HCALL_START_SAT: matched (|- forall gl m. exists s0. read wmemsize s0 = 4194304 /\ read wglobals s0 = gl /\ read wmem s0 = m)
+  spec VA1_HCALL_RUNS: matched (|- forall fs code args r Q gl m. va1_hcall (wasmc fs) code args r Q gl m ==> (exists e decls. wasm_entry code = SOME e /\ wasm_decl_vals code = SOME decls /\ (forall s0. read wmemsize s0 = 4194304 /\ read wglobals s0 = gl /\ read wmem s0 = m ==> (exists s. RTC (wasmc fs) (wcall_entry code (LENGTH ar...)
+  spec VA1_TICKF_CALLEE: matched (|- wasm_entry va1_tick_forward_mc = SOME 3 /\ wasm_decl_vals va1_tick_forward_mc = SOME [I32 (word 0); I32 (word 0); I32 (word 0)])
+  spec VA1_TICKB_CALLEE: matched (|- wasm_entry va1_tick_backward_mc = SOME 3 /\ wasm_decl_vals va1_tick_backward_mc = SOME [I32 (word 0); I32 (word 0)])
+  spec VA1_NP_HCALL_FWD: matched (|- forall fs gl t ap mdl N x m. mdl 1 = word N /\ 1 <= N /\ N <= 640 /\ va1_fs_np fs /\ (ap = word 0 \/ ~(ap = word_add t (word 1))) /\ va1_np_st t ap mdl N x m ==> va1_hcall (wasmc fs) va1_tick_forward_mc [] (word 1) (\gl' m'. gl' = gl /\ va1_np_st (word_add t (word 1)) ap mdl N (va1_swf mdl x) m')...)
+  ... 15 more; use --json --verbose
+  spec definition va1_hcall: pinned (|- va1_hcall = (\step code args r Q gl m. exists e decls. wasm_entry code = SOME e /\ wasm_decl_vals code = SOME decls /\ (forall s0. read wmemsize s0 = 4194304 /\ read wglobals s0 = gl /\ read wmem s0 = m ==> eventually step (\s. read wstatus s = WDone /\ read wstack s = [I32 r] /\ read wmemsize s ...)
+  spec definition va1_hrun: pinned (|- va1_hrun = (\step cs Q. ITLIST (\c R. va1_hcall step (if c then va1_tick_forward_mc else va1_tick_backward_mc) [] (word 1) R) cs Q))
+  spec definition va1_swf: pinned (|- va1_swf = (\mdl. ve_fredkin_fwdn (\i. ve_vk mdl) 16))
+  spec definition va1_swb: pinned (|- va1_swb = (\mdl. ve_fredkin_bwdn (\i. ve_vk mdl) 16))
+  spec definition va1_np_st: pinned (|- va1_np_st = (\t ap mdl N x m. va1_tick t m /\ va1_pop (word 4294967295) ap m /\ va1_mdl mdl m /\ va1_vab N x m))
+  spec definition va1_fs_np: pinned (|- va1_fs_np = (\fs. fs 9 = va1_f9_mc,0,0 /\ fs 10 = va1_f10_mc,0,0 /\ fs 27 = va1_f27_mc,0,0 /\ fs 28 = va1_f28_mc,0,0))
+  spec definition va1_np_frame: pinned (|- va1_np_frame = (\m0 m. forall a. a < 4194304 /\ ~(16392 <= a /\ a < 16396) /\ ~(1114112 <= a /\ a < 1130496) /\ ~(1966080 <= a /\ a < 2039808) ==> read (bytes8 (word a)) m = read (bytes8 (word a)) m0))
+  spec definition ve_fredkin_fwd: pinned (|- ve_fredkin_fwd = (\f s. SND s,(\m. word_add (FST s m) (f (SND s) m))))
+  spec definition ve_fredkin_bwd: pinned (|- ve_fredkin_bwd = (\f s. (\m. word_sub (SND s m) (f (FST s) m)),FST s))
+  spec definition ve_vk_sx: pinned (|- ve_vk_sx = (\S i c. word_sx (S (3 * i + c))))
+  spec definition ve_vk_ss: pinned (|- ve_vk_ss = (\S i. word_add (word_add (word_mul (ve_vk_sx S i 1) (ve_vk_sx S i 1)) (word_mul (ve_vk_sx S i 0) (ve_vk_sx S i 0))) (word_mul (ve_vk_sx S i 2) (ve_vk_sx S i 2))))
+  spec definition ve_vk_len: pinned (|- ve_vk_len = (\S i. let r = FST (SND (ve_isq 32 (ve_vk_ss S i,word 0,word 4611686018427387904))) in if ival r > &1 then r else word 1))
+  ... 28 more; use --json --verbose
+spec_unpinned: va1_cmds_ok, va1_cmds_end (allowed by name only; meaning not checked)
+spec_foundation: 0 new axioms; no new definitions, types or constants
+phases: preparation=0.000s restore=0.000s evaluation=0.945s probe=11.322s request_overhead=0.922s evaluation_cpu=0.744s (observed)
+label: c1f-off-final
+inputs: 46 files; closure_sha=de120cb48205
+inherited_project_basis: /home/bluestar/.cache/hol-hearth/project-bases/.automatic/c2acf5cedc572462510c6ed1da2e8d0077005d46f4887a902c566e26c7a230b1/dependencies.ml sha=c2acf5cedc57
+basis_preparation_receipt: /home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c1/official-runs/20261111T230130Z-182345-dependencies-ec4f88/transcript.log.json
+basis_layer 1/12: 474cdbdde6b1 /home/bluestar/.cache/hol-hearth/project-bases/.automatic/58c8d31472f573569dc7ae3d1b45f6115287d1754fdd08d8a3ecb50a493f0c99/dependencies.ml receipt=/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-pop/assembly/official/runs/20261111T102635Z-3028402-dependencies-d1b452/transcript.log.json
+basis_layer 2/12: 5e0032428054 /home/bluestar/.cache/hol-hearth/project-bases/.automatic/3df62bb3dfb6149d794bb61cab4a35c5a861432261ab0a8f4e4acc3cd4eed02a/dependencies.ml receipt=/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-pop/assembly/official/runs/20261111T103125Z-3030369-dependencies-0f0723/transcript.log.json
+basis_layer 3/12: f966342f7be6 /home/bluestar/.cache/hol-hearth/project-bases/.automatic/47dc162351c8a2193bc88e8909fb5c8fea2a1f8f7c356f72faeafd4add110a3b/dependencies.ml receipt=/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-pop/assembly/official/runs/20261111T103447Z-3032215-dependencies-f2f458/transcript.log.json
+basis_layer 4/12: 575821a05e08 /home/bluestar/.cache/hol-hearth/project-bases/.automatic/f9a100dd17d25b22c45b0e993b49bd8406bb4cec351bb6ca146f364d7cf75ebc/dependencies.ml receipt=/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-pop/assembly/official/runs/20261111T103745Z-3033646-dependencies-fe70ce/transcript.log.json
+basis_layer 5/12: f145f1cdb5a4 /home/bluestar/.cache/hol-hearth/project-bases/.automatic/4c50881608e41764676abbc9a17087594ec06e48026b96a45c0025bed74b31b3/dependencies.ml receipt=/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-pop/assembly/official/runs/20261111T104547Z-3037824-dependencies-9f9caf/transcript.log.json
+basis_layer 6/12: df9740e9fc29 /home/bluestar/.cache/hol-hearth/project-bases/.automatic/29d7d7c72b2fff2e32f62254320dfb2e620a00e4dcab9cdac0db05e1af569855/dependencies.ml receipt=/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-pop/assembly/official/runs/20261111T105834Z-3043221-dependencies-a0edca/transcript.log.json
+basis_layer 7/12: b6d5beab934b /home/bluestar/.cache/hol-hearth/project-bases/.automatic/2bef79e07ad674575f26163dec3fdf027f775fcdfe86362e23a1707c152ea455/dependencies.ml receipt=/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-pop/assembly/official/runs/20261111T105855Z-3043467-dependencies-eecf8d/transcript.log.json
+basis_layer 8/12: d55d8f795e69 /home/bluestar/.cache/hol-hearth/project-bases/.automatic/1fe74e91d400f87ae6d247f2de10ff486f778f12c64203a43d4ef950ccafb2c3/dependencies.ml receipt=/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-pop/assembly/official/runs/20261111T105919Z-3043744-dependencies-8d6d3a/transcript.log.json
+basis_layer 9/12: e0a86f2a05f9 /home/bluestar/.cache/hol-hearth/project-bases/.automatic/33f9cef1f0efdf51dbdc4faefaa988d22ef57c3649883b5e542ae754ae1f00a8/dependencies.ml receipt=/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-pop/assembly/official/runs/20261111T105958Z-3044107-dependencies-5f7f14/transcript.log.json
+basis_layer 10/12: 414ae3e81a07 /home/bluestar/.cache/hol-hearth/project-bases/.automatic/449319989a0ed2a686a584a11ef4db0a7be55736a36b49827fa0e4bc199c523c/dependencies.ml receipt=/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c1/official-runs/20261111T225838Z-179105-dependencies-e32689/transcript.log.json
+basis_layer 11/12: 1b669b3ba215 /home/bluestar/.cache/hol-hearth/project-bases/.automatic/3b3f872507f5d1a3d210708c5ca333a00d910e9134b985c120b33067794995f2/dependencies.ml receipt=/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c1/official-runs/20261111T230107Z-182068-dependencies-b4eb1a/transcript.log.json
+basis_layer 12/12: 99fcaf04bcb9 /home/bluestar/.cache/hol-hearth/project-bases/.automatic/c2acf5cedc572462510c6ed1da2e8d0077005d46f4887a902c566e26c7a230b1/dependencies.ml receipt=/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c1/official-runs/20261111T230130Z-182345-dependencies-ec4f88/transcript.log.json
+basis_scope: preparation was checked separately; this attempt checks the full leaf in a fresh child
+receipt: /home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c1/official-runs/20261111T230145Z-182646-chain_c1_final-8e8d37/transcript.log.json
+NEXT: /home/bluestar/src/hol-hearth/hearth inspect /home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c1/official-runs/20261111T230145Z-182646-chain_c1_final-8e8d37

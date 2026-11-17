@@ -1,0 +1,1337 @@
+{
+  "basis_chain": {
+    "basis_foundation": {
+      "axioms": 0,
+      "constants": 231,
+      "definitions": 231,
+      "types": 0
+    },
+    "every_layer_zero_axioms": true,
+    "layers": [
+      {
+        "captured_input_count": 21,
+        "checkpoint": {
+          "image_dir": "/home/bluestar/.cache/hol-hearth/project-bases/c93ee21fab1b46a0c4560542b768d31cf848e86bffcef1ea25465a58aa8bbc57/generations/dfec36eb121b247fcb7ad17c9ad2d66b62d7e6a6df3cde9b/checkpoint-311cef88389d0b50",
+          "image_inventory_sha256": "3cd3a915cc271a55a6c0ebbba95b566db95fb2b429bde65581cf967445fa7131"
+        },
+        "closure_sha256": "1d1b6f5a975d63ae9a78721f65c0cb55c5ba881a9b168739a06be5e413f392e8",
+        "foundation": {
+          "axioms": 0,
+          "constants": 83,
+          "definitions": 83,
+          "status": "observed",
+          "types": 0
+        },
+        "key": "c5015d5f69a57e8f695c5fd5b91177821d25edd14a6f9eaf65448fd96f8d4faa",
+        "preparation_receipt": "/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c8/official-runs/20261116T000210Z-3433566-dependencies-6f7334/transcript.log.json",
+        "preparation_receipt_sha256": "df46e4fc0d5b1c35517ca9d0663b0f60e33da54bbd58753d5c71d03ed2f2a74c",
+        "selection": "explicit",
+        "source": "/home/bluestar/.cache/hol-hearth/project-bases/.automatic/fef71dde60d3bcce3f123e55e3b9d971b06686df9f9ae8b4c4a349efe00d1c2a/dependencies.ml",
+        "source_sha256": "fef71dde60d3bcce3f123e55e3b9d971b06686df9f9ae8b4c4a349efe00d1c2a"
+      },
+      {
+        "captured_input_count": 24,
+        "checkpoint": {
+          "image_dir": "/home/bluestar/.cache/hol-hearth/project-bases/4a9f7304f4de4fb1e116e728da2044d47f1cb13cbe4f269865b43d3e9a696b84/generations/fde3b4b9b95c7ff2d0ea3646c9bb4e3f5b3276670bcf5d7f/checkpoint-7cf2cb2477c5533c",
+          "image_inventory_sha256": "e9d69217f6e1283358029dfa729ba9cea00ce22a5d72b0430da73056a3023067"
+        },
+        "closure_sha256": "69bc9e69a9aa9d3b078cbcfd8f2558c2e859f49e542f2cb1d80442de133f9f24",
+        "foundation": {
+          "axioms": 0,
+          "constants": 0,
+          "definitions": 0,
+          "status": "observed",
+          "types": 0
+        },
+        "key": "cfc71a3e09fb413a484489700aaf1dd8ab30469497d047070bfdbfafb1d65e10",
+        "preparation_receipt": "/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c8/official-runs/20261116T001010Z-3439804-dependencies-beaf20/transcript.log.json",
+        "preparation_receipt_sha256": "b7d2e3c01bbccedda694fd218d4b83c3ea169bd05e184900502cdd1fac709dae",
+        "selection": "explicit",
+        "source": "/home/bluestar/.cache/hol-hearth/project-bases/.automatic/6206e228bb1e97cfb1339eb1f56026fcf068cc12a085879f9a865b0fc4f02083/dependencies.ml",
+        "source_sha256": "6206e228bb1e97cfb1339eb1f56026fcf068cc12a085879f9a865b0fc4f02083"
+      },
+      {
+        "captured_input_count": 26,
+        "checkpoint": {
+          "image_dir": "/home/bluestar/.cache/hol-hearth/project-bases/e1632e2584d2772b9d87516501480eeff611556190ca07ebd625d5245d84fe9c/generations/46efa1c0ab27db6b35c252ffc8f4bbee3064a316758d7543/checkpoint-aad42ed58531b564",
+          "image_inventory_sha256": "24666a9bf1031e15bec1ec6ba5b6d60f899c750d1a2dbce1d3487e38ec95a52d"
+        },
+        "closure_sha256": "caa8e726dcb081e63e17f60b34d1ab87d024ca4451bb4e03d4994a68c43fede2",
+        "foundation": {
+          "axioms": 0,
+          "constants": 0,
+          "definitions": 0,
+          "status": "observed",
+          "types": 0
+        },
+        "key": "17344ab0e4cac9fdb6866635636a712bfab42b3e5d8b6c1a5603634c0772ba0d",
+        "preparation_receipt": "/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c8/official-runs/20261116T002119Z-3448458-dependencies-35b178/transcript.log.json",
+        "preparation_receipt_sha256": "41f353c1d032557002ee32943cd8621ae2465ea10e69ca57fab5b601a888463f",
+        "selection": "explicit",
+        "source": "/home/bluestar/.cache/hol-hearth/project-bases/.automatic/931b36cb3e7eef77a59c961c7f6e1816d0c43cf38dae893ea7fafcc460bf11ae/dependencies.ml",
+        "source_sha256": "931b36cb3e7eef77a59c961c7f6e1816d0c43cf38dae893ea7fafcc460bf11ae"
+      },
+      {
+        "captured_input_count": 39,
+        "checkpoint": {
+          "image_dir": "/home/bluestar/.cache/hol-hearth/project-bases/8256ba683fbc5239ab25dc6c67b687e600c909c4dcf89799cde6f0f3ce2f1912/generations/1ac3cf535d31430dcae85c8e72f5b420111f642c4d60770f/checkpoint-832f9a4292fa1455",
+          "image_inventory_sha256": "b12308e9eda4c36436a2830f4ab66c4bb571808be77afacb2a92cbadcfde2b16"
+        },
+        "closure_sha256": "d1db1052ac5e4e65edbb4a2e13949a0ad31bbb04793cb88b680ce4d6c800730d",
+        "foundation": {
+          "axioms": 0,
+          "constants": 56,
+          "definitions": 56,
+          "status": "observed",
+          "types": 0
+        },
+        "key": "9d769d248600506f4ad90ad60478f7ebaeb6e1262b456ae21d2dc3e4e73b2015",
+        "preparation_receipt": "/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c8/official-runs/20261116T031913Z-3701053-dependencies-a9da7e/transcript.log.json",
+        "preparation_receipt_sha256": "fd6724675945a0234584bab7264a2ebb9c467efb12d7b7e8d0067bfeced1d689",
+        "selection": "explicit",
+        "source": "/home/bluestar/.cache/hol-hearth/project-bases/.automatic/b05011e08a6b4094b685907ca9abe6931baa5a52815208174f2d7fb36e9a5ec8/dependencies.ml",
+        "source_sha256": "b05011e08a6b4094b685907ca9abe6931baa5a52815208174f2d7fb36e9a5ec8"
+      },
+      {
+        "captured_input_count": 42,
+        "checkpoint": {
+          "image_dir": "/home/bluestar/.cache/hol-hearth/project-bases/c03b7a5588ba7c6613e36ce74591f8e652a03068549fd2e77e590b47a4fc7e91/generations/8716bbad215c2b6de21f5ebd957994feaf6fc0136312cf15/checkpoint-e712ec1b6391a742",
+          "image_inventory_sha256": "1e52c7e62ec1e940a9fc31b371f4796eddfc49e537ecfb8c0504a803ebe3136f"
+        },
+        "closure_sha256": "3593f6d36724d67e27c9333578b8ce1f522321abaed63f6ccdd7514bc5e0203c",
+        "foundation": {
+          "axioms": 0,
+          "constants": 9,
+          "definitions": 9,
+          "status": "observed",
+          "types": 0
+        },
+        "key": "a70f03077b24155e7913db1ca950d05d6c21df3792f9c9b1f916ed0e673ecb0f",
+        "preparation_receipt": "/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c8/official-runs/20261116T032159Z-3702863-dependencies-ddb8a9/transcript.log.json",
+        "preparation_receipt_sha256": "4b6a64b90f7d0deb62acb364de1a36f7f84a08dd36e371ccdecdd92fbc0432ee",
+        "selection": "explicit",
+        "source": "/home/bluestar/.cache/hol-hearth/project-bases/.automatic/5ae90c0e2eed7df80572de32d5122297b9afa2765fcfe568b6db4ffd7aec4198/dependencies.ml",
+        "source_sha256": "5ae90c0e2eed7df80572de32d5122297b9afa2765fcfe568b6db4ffd7aec4198"
+      },
+      {
+        "captured_input_count": 44,
+        "checkpoint": {
+          "image_dir": "/home/bluestar/.cache/hol-hearth/project-bases/4586cabe407d0bb5b1a46faad57d4a66652a08eab4cb0a10e0696c9bcedcb08f/generations/73aef6a01bc13b383aacf67b86e1343104269b62318ac738/checkpoint-ccddbd58b7164dac",
+          "image_inventory_sha256": "e182f9dc82a01179ca97deaaee093b8e810b0e11a09fb989e6b0b63b30417be4"
+        },
+        "closure_sha256": "67f537613b7034878aae1b7ed86cc39e2aded230ec689da8cf6465ef2207fd2f",
+        "foundation": {
+          "axioms": 0,
+          "constants": 0,
+          "definitions": 0,
+          "status": "observed",
+          "types": 0
+        },
+        "key": "ddad8b8a57b9f71bb686beb6259ac07284644b6602c095f7f38603aaf2974fbe",
+        "preparation_receipt": "/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c8/official-runs/20261116T032502Z-3705079-dependencies-19cdda/transcript.log.json",
+        "preparation_receipt_sha256": "b4f8d8db6a7debd00590f4d9db0b194a96b58b5e2b53213691cf2c7542c324a8",
+        "selection": "explicit",
+        "source": "/home/bluestar/.cache/hol-hearth/project-bases/.automatic/59a8afdbbccad71d98e67a57061a37944df6578de613b41bbdbb7358e4cf9175/dependencies.ml",
+        "source_sha256": "59a8afdbbccad71d98e67a57061a37944df6578de613b41bbdbb7358e4cf9175"
+      },
+      {
+        "captured_input_count": 54,
+        "checkpoint": {
+          "image_dir": "/home/bluestar/.cache/hol-hearth/project-bases/34a39e662ef276d5f701464b76d195ed83b4915377c17f5c8f2a360f1ce2ea26/generations/0385c097811790609ccbba8ebac5df9f924cc8dab95006c6/checkpoint-042868f004092cb4",
+          "image_inventory_sha256": "4f54f331fedee5ea3b2050f50c5824f26ea56a2a32e782e88cae0327de55a0ec"
+        },
+        "closure_sha256": "68f7003dade64987c598852dda8e35840c6ab00763c8ad2e0b44dd9c9330d120",
+        "foundation": {
+          "axioms": 0,
+          "constants": 19,
+          "definitions": 19,
+          "status": "observed",
+          "types": 0
+        },
+        "key": "f86e56534b846163adc0bb3c4dcf474d8b24e076e9e1fb8e17823d927d7e9413",
+        "preparation_receipt": "/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c8/official-runs/20261116T032533Z-3705513-dependencies-b42afc/transcript.log.json",
+        "preparation_receipt_sha256": "7de3631ad06eb7fe71262442597430509333278ed7ae74e1654c0fba1c6a0ba9",
+        "selection": "explicit",
+        "source": "/home/bluestar/.cache/hol-hearth/project-bases/.automatic/1f5bd27df225adf2d6bb96b8fa7c612f0eba67c321b4239ea1244a60f5a382ab/dependencies.ml",
+        "source_sha256": "1f5bd27df225adf2d6bb96b8fa7c612f0eba67c321b4239ea1244a60f5a382ab"
+      },
+      {
+        "captured_input_count": 60,
+        "checkpoint": {
+          "image_dir": "/home/bluestar/.cache/hol-hearth/project-bases/3869a4fdac18de3b49a923314743429fcb9b94a300918576534e5c48ecc9dba3/generations/a8bb7d77697e645bac219b522bf0036a14a3ca66956db263/checkpoint-f911fd1753722800",
+          "image_inventory_sha256": "f47bf970e8212438330ac5a401272be516c339f60375e2c52908636d66ccd694"
+        },
+        "closure_sha256": "81bf07c63d2b24292fa9f0e1d572ab67e976805e6bcf4d3e109910e0d36d54f2",
+        "foundation": {
+          "axioms": 0,
+          "constants": 63,
+          "definitions": 63,
+          "status": "observed",
+          "types": 0
+        },
+        "key": "84c571c0668374ebe42b774e2eacf23e2cad1a989814ee50ddb35547e66b263d",
+        "preparation_receipt": "/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c8/official-runs/20261116T034020Z-3738945-dependencies-f0a399/transcript.log.json",
+        "preparation_receipt_sha256": "91f55532c22d6ba01c4fc20390a069205ea3394a5aa46425109f78ad2a587922",
+        "selection": "explicit",
+        "source": "/home/bluestar/.cache/hol-hearth/project-bases/.automatic/eeb68a673a14b0ad0e7037a3427261d2439da61fcc34fe88a23c78035fb552a2/dependencies.ml",
+        "source_sha256": "eeb68a673a14b0ad0e7037a3427261d2439da61fcc34fe88a23c78035fb552a2"
+      },
+      {
+        "captured_input_count": 62,
+        "checkpoint": {
+          "image_dir": "/home/bluestar/.cache/hol-hearth/project-bases/aa748ab152952d1ff3c0c2411c093d4a7852bfdd64c00b36848a70c80dad6215/generations/571b068790787e12bad8f0b1f143d3ae367d67d07f9e6673/checkpoint-9eb333d7deeed5e7",
+          "image_inventory_sha256": "fe5ff178e9ac8cbebbb8e0eba048688d79c86fde580fe0cc8c0751366ea50cb0"
+        },
+        "closure_sha256": "de87f101300a737dc27a2e853257ce20f98578773f4241843c58e0ba3e4c2b73",
+        "foundation": {
+          "axioms": 0,
+          "constants": 0,
+          "definitions": 0,
+          "status": "observed",
+          "types": 0
+        },
+        "key": "c576ebcc2521dff8b897d77442687ef80d310626ff991ac5da9441111a9a4895",
+        "preparation_receipt": "/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c8/official-runs/20261116T034241Z-3741738-dependencies-337b79/transcript.log.json",
+        "preparation_receipt_sha256": "abb356158bbd41db5c0521d0329182acf6d3d09f93b4e3127f8ccf73e79f4b0f",
+        "selection": "explicit",
+        "source": "/home/bluestar/.cache/hol-hearth/project-bases/.automatic/73758a5cc28c96572b5f9a528b59562c77c3008ba64c748595597e25cd3ddf9f/dependencies.ml",
+        "source_sha256": "73758a5cc28c96572b5f9a528b59562c77c3008ba64c748595597e25cd3ddf9f"
+      },
+      {
+        "captured_input_count": 64,
+        "checkpoint": {
+          "image_dir": "/home/bluestar/.cache/hol-hearth/project-bases/9a2effc28ef00cd3851ca5d93bbd34383a7afb2049c772af3353665b73b92deb/generations/f937373c54cfb652adb795ef39dee4030e9133b9c1ee9fe7/checkpoint-c9e936ebb00c750b",
+          "image_inventory_sha256": "be136cc30f2a1c0c5769e54d16768be15cab1c282753d8ffe46a5a23fb15ba76"
+        },
+        "closure_sha256": "af305bfad3ecdc6bf2cfcd90054f9db73e50508542f95ad7da3682d3121596f5",
+        "foundation": {
+          "axioms": 0,
+          "constants": 0,
+          "definitions": 0,
+          "status": "observed",
+          "types": 0
+        },
+        "key": "3eda3dae2daaee00a2f6bbf981ea566888066c4178a3489155caadd761e63711",
+        "preparation_receipt": "/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c8/official-runs/20261116T034959Z-3747454-dependencies-df220d/transcript.log.json",
+        "preparation_receipt_sha256": "12080c6f405aaa13ba85a319156b75da68d501f6af95ef7c7242b2b2e1ddd42a",
+        "selection": "explicit",
+        "source": "/home/bluestar/.cache/hol-hearth/project-bases/.automatic/759803a40e9c6f2f3308b1faabadcf7c54262a4f59696079545f78cc9060b8fd/dependencies.ml",
+        "source_sha256": "759803a40e9c6f2f3308b1faabadcf7c54262a4f59696079545f78cc9060b8fd"
+      },
+      {
+        "captured_input_count": 66,
+        "checkpoint": {
+          "image_dir": "/home/bluestar/.cache/hol-hearth/project-bases/4d7d80d20e637dd48a420c6390ada4d6c8107a1ecc13b1e5af5f5d4db03d6fed/generations/230c845c44b02a9a2ee7edb5ed895368588827fafedc4ea1/checkpoint-6644f4e63cf4ff1a",
+          "image_inventory_sha256": "a7fc7cecbae0a8e3cffdbf10e374910ab28fd251bd08b26dc6430ae3b3a0f2aa"
+        },
+        "closure_sha256": "293e1f96ae44092c6eaa6eeec3af3d69e0844015b2869934e532b8ab43934c21",
+        "foundation": {
+          "axioms": 0,
+          "constants": 1,
+          "definitions": 1,
+          "status": "observed",
+          "types": 0
+        },
+        "key": "0234f44dacb418a5efadcd0adf6eed800b03ed74bfefc6635d662365bc6215bf",
+        "preparation_receipt": "/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c8/official-runs/20261116T035109Z-3748263-dependencies-30815a/transcript.log.json",
+        "preparation_receipt_sha256": "64fd942344df6f0b845ad57a7708230c1002114b3f405eddbf9c3b7b31564aa2",
+        "selection": "explicit",
+        "source": "/home/bluestar/.cache/hol-hearth/project-bases/.automatic/49dc5ff181d4e888ed8930d9dcd456e03d5bb58dde38c4df283bb5effed55f07/dependencies.ml",
+        "source_sha256": "49dc5ff181d4e888ed8930d9dcd456e03d5bb58dde38c4df283bb5effed55f07"
+      },
+      {
+        "captured_input_count": 68,
+        "checkpoint": {
+          "image_dir": "/home/bluestar/.cache/hol-hearth/project-bases/e3d3fd97941c677facffbb2ac1b74c388b521d1e4a61d09aec3b0566004e9660/generations/4552bb51ae3ea95e5a11bb648c1a9a298edf00aad19ca8a9/checkpoint-cb1db6cd7ed12514",
+          "image_inventory_sha256": "e8b5bfb4a00af27a32ffb64229a1b2000fc0e237a9fd56ac4c1884962a61ad77"
+        },
+        "closure_sha256": "4fdfd75c2d662a96900348b3646d98029ad49efd36042fceba9042ee63c00308",
+        "foundation": {
+          "axioms": 0,
+          "constants": 0,
+          "definitions": 0,
+          "status": "observed",
+          "types": 0
+        },
+        "key": "80d75ad772dc533eab9287a19c58b1347b9390d2d09fea6608f10a0d97d8d690",
+        "preparation_receipt": "/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c8/official-runs/20261116T035238Z-3749270-dependencies-ee5df7/transcript.log.json",
+        "preparation_receipt_sha256": "3f963dc31ee4eb060c6b8ccf880986d9472a31c5849e5b1c7744960ab908daaa",
+        "selection": "explicit",
+        "source": "/home/bluestar/.cache/hol-hearth/project-bases/.automatic/5b23363a2f88fb30d23300237ea658b1da37672e709332174e57eb0952dfb2ae/dependencies.ml",
+        "source_sha256": "5b23363a2f88fb30d23300237ea658b1da37672e709332174e57eb0952dfb2ae"
+      },
+      {
+        "captured_input_count": 69,
+        "checkpoint": {
+          "image_dir": "/home/bluestar/.cache/hol-hearth/project-bases/b9fefe33f0d957b846e5803b3bac53d10b1bc07ed77b73be8189b988c38b580a/generations/df9b794576290c6cbb5264fafcaeb4d55022cbb7b4f2e595/checkpoint-20e36b8c8ebf5c8f",
+          "image_inventory_sha256": "0a8970317a1c5eee99b25ffdcf678850092e6f38d772e449782ac810b17c249e"
+        },
+        "closure_sha256": "d3796fe97f6ee67c049c182f197a852a5f9ad009b58c60c80ad0ba0a37294265",
+        "foundation": {
+          "axioms": 0,
+          "constants": 0,
+          "definitions": 0,
+          "status": "observed",
+          "types": 0
+        },
+        "key": "aa74a8910b855cc8b8524833456a6798798e1bd2d4029544df998aac7cd4b2f8",
+        "preparation_receipt": "/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c8/official-runs/20261116T035442Z-3750969-dependencies-216904/transcript.log.json",
+        "preparation_receipt_sha256": "9a21c29dbf112933f769407b471095c49d13df4663e6198d79c509f0eb68e44a",
+        "selection": "explicit",
+        "source": "/home/bluestar/.cache/hol-hearth/project-bases/.automatic/5a234839f50c865c118e7cc57ab28e898038478de2a2e2c1c1adf260f9c4f6f0/dependencies.ml",
+        "source_sha256": "5a234839f50c865c118e7cc57ab28e898038478de2a2e2c1c1adf260f9c4f6f0"
+      }
+    ],
+    "transitive_foundation": {
+      "axioms": 0,
+      "constants": 231,
+      "definitions": 231,
+      "types": 0
+    }
+  },
+  "closure": {
+    "files": [
+      {
+        "package_path": "execution.ml",
+        "path": "/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c8/proj/tasks/bubble-echo/vortex/proofs/c8p_f33_final.ml",
+        "role": "entrypoint",
+        "sha256": "3f602660628a8f60ee8c723591539711d0d6a727dabd192835ee05f1952f2ed9",
+        "size_bytes": 1380
+      },
+      {
+        "declared_path": "/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c8/proj/tasks/bubble-echo/vortex/proofs/chain_c6b_host.ml",
+        "declaring_file": "/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c8/proj/tasks/bubble-echo/vortex/proofs/c8p_f33_final.ml",
+        "loader": "needs",
+        "package_path": "1ee428451ba061ecd9d8c6635180b63be485aeee3d812caa785c16ab557d42bf/chain_c6b_host.ml",
+        "path": "/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c8/proj/tasks/bubble-echo/vortex/proofs/chain_c6b_host.ml",
+        "resolution": "source_local",
+        "role": "dependency",
+        "sha256": "1ee428451ba061ecd9d8c6635180b63be485aeee3d812caa785c16ab557d42bf",
+        "size_bytes": 16669
+      },
+      {
+        "declared_path": "/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c8/proj/tasks/bubble-echo/vortex/proofs/c8p_leaves2_pf.ml",
+        "declaring_file": "/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c8/proj/tasks/bubble-echo/vortex/proofs/c8p_f33_final.ml",
+        "loader": "needs",
+        "package_path": "59350bae8e801bc710e3755a68eda33bc0e91282191d3f2763d27e61303e7059/c8p_leaves2_pf.ml",
+        "path": "/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c8/proj/tasks/bubble-echo/vortex/proofs/c8p_leaves2_pf.ml",
+        "resolution": "source_local",
+        "role": "dependency",
+        "sha256": "59350bae8e801bc710e3755a68eda33bc0e91282191d3f2763d27e61303e7059",
+        "size_bytes": 6114
+      },
+      {
+        "declared_path": "/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c8/proj/tasks/bubble-echo/vortex/proofs/c8p_f33_defs.ml",
+        "declaring_file": "/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c8/proj/tasks/bubble-echo/vortex/proofs/c8p_f33_final.ml",
+        "loader": "needs",
+        "package_path": "d0479791e5660a5e70066074d2a614d76bfa58dbb99d29e097a73010dc40a70b/c8p_f33_defs.ml",
+        "path": "/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c8/proj/tasks/bubble-echo/vortex/proofs/c8p_f33_defs.ml",
+        "resolution": "source_local",
+        "role": "dependency",
+        "sha256": "d0479791e5660a5e70066074d2a614d76bfa58dbb99d29e097a73010dc40a70b",
+        "size_bytes": 10067
+      },
+      {
+        "declared_path": "/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c8/proj/tasks/bubble-echo/vortex/proofs/c8p_f33_p.ml",
+        "declaring_file": "/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c8/proj/tasks/bubble-echo/vortex/proofs/c8p_f33_final.ml",
+        "loader": "needs",
+        "package_path": "50bb446f9b761af21e5614cef36ad2b2b7a2cb1006645280013dcad413f0ec48/c8p_f33_p.ml",
+        "path": "/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c8/proj/tasks/bubble-echo/vortex/proofs/c8p_f33_p.ml",
+        "resolution": "source_local",
+        "role": "dependency",
+        "sha256": "50bb446f9b761af21e5614cef36ad2b2b7a2cb1006645280013dcad413f0ec48",
+        "size_bytes": 2199
+      },
+      {
+        "declared_path": "/home/bluestar/.cache/hol-hearth/project-bases/.automatic/5a234839f50c865c118e7cc57ab28e898038478de2a2e2c1c1adf260f9c4f6f0/dependencies.ml",
+        "declaring_file": null,
+        "loader": "loadt",
+        "package_path": "5a234839f50c865c118e7cc57ab28e898038478de2a2e2c1c1adf260f9c4f6f0/dependencies.ml",
+        "path": "/home/bluestar/.cache/hol-hearth/project-bases/.automatic/5a234839f50c865c118e7cc57ab28e898038478de2a2e2c1c1adf260f9c4f6f0/dependencies.ml",
+        "resolution": "source_local",
+        "role": "dependency",
+        "sha256": "5a234839f50c865c118e7cc57ab28e898038478de2a2e2c1c1adf260f9c4f6f0",
+        "size_bytes": 827
+      },
+      {
+        "declared_path": "/home/bluestar/.cache/hol-hearth/project-bases/.automatic/5b23363a2f88fb30d23300237ea658b1da37672e709332174e57eb0952dfb2ae/dependencies.ml",
+        "declaring_file": null,
+        "loader": "loadt",
+        "package_path": "5b23363a2f88fb30d23300237ea658b1da37672e709332174e57eb0952dfb2ae/dependencies.ml",
+        "path": "/home/bluestar/.cache/hol-hearth/project-bases/.automatic/5b23363a2f88fb30d23300237ea658b1da37672e709332174e57eb0952dfb2ae/dependencies.ml",
+        "resolution": "source_local",
+        "role": "dependency",
+        "sha256": "5b23363a2f88fb30d23300237ea658b1da37672e709332174e57eb0952dfb2ae",
+        "size_bytes": 373
+      },
+      {
+        "declared_path": "/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c8/proj/tasks/bubble-echo/vortex/proofs/c8p_f33_d.ml",
+        "declaring_file": "/home/bluestar/.cache/hol-hearth/project-bases/.automatic/5b23363a2f88fb30d23300237ea658b1da37672e709332174e57eb0952dfb2ae/dependencies.ml",
+        "loader": "needs",
+        "package_path": "3254877081fa5c666dbb8224ecfc6308e73b58795f76144c619dc09dc8c26a9e/c8p_f33_d.ml",
+        "path": "/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c8/proj/tasks/bubble-echo/vortex/proofs/c8p_f33_d.ml",
+        "resolution": "source_local",
+        "role": "dependency",
+        "sha256": "3254877081fa5c666dbb8224ecfc6308e73b58795f76144c619dc09dc8c26a9e",
+        "size_bytes": 8043
+      },
+      {
+        "declared_path": "/home/bluestar/.cache/hol-hearth/project-bases/.automatic/49dc5ff181d4e888ed8930d9dcd456e03d5bb58dde38c4df283bb5effed55f07/dependencies.ml",
+        "declaring_file": null,
+        "loader": "loadt",
+        "package_path": "49dc5ff181d4e888ed8930d9dcd456e03d5bb58dde38c4df283bb5effed55f07/dependencies.ml",
+        "path": "/home/bluestar/.cache/hol-hearth/project-bases/.automatic/49dc5ff181d4e888ed8930d9dcd456e03d5bb58dde38c4df283bb5effed55f07/dependencies.ml",
+        "resolution": "source_local",
+        "role": "dependency",
+        "sha256": "49dc5ff181d4e888ed8930d9dcd456e03d5bb58dde38c4df283bb5effed55f07",
+        "size_bytes": 373
+      },
+      {
+        "declared_path": "/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c8/proj/tasks/bubble-echo/vortex/proofs/c8p_f33_c2.ml",
+        "declaring_file": "/home/bluestar/.cache/hol-hearth/project-bases/.automatic/49dc5ff181d4e888ed8930d9dcd456e03d5bb58dde38c4df283bb5effed55f07/dependencies.ml",
+        "loader": "needs",
+        "package_path": "71d6f33c31be2569abd4465e6a871485e339d11704737e1ce689585fbc9adf7b/c8p_f33_c2.ml",
+        "path": "/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c8/proj/tasks/bubble-echo/vortex/proofs/c8p_f33_c2.ml",
+        "resolution": "source_local",
+        "role": "dependency",
+        "sha256": "71d6f33c31be2569abd4465e6a871485e339d11704737e1ce689585fbc9adf7b",
+        "size_bytes": 984
+      },
+      {
+        "declared_path": "/home/bluestar/.cache/hol-hearth/project-bases/.automatic/759803a40e9c6f2f3308b1faabadcf7c54262a4f59696079545f78cc9060b8fd/dependencies.ml",
+        "declaring_file": null,
+        "loader": "loadt",
+        "package_path": "759803a40e9c6f2f3308b1faabadcf7c54262a4f59696079545f78cc9060b8fd/dependencies.ml",
+        "path": "/home/bluestar/.cache/hol-hearth/project-bases/.automatic/759803a40e9c6f2f3308b1faabadcf7c54262a4f59696079545f78cc9060b8fd/dependencies.ml",
+        "resolution": "source_local",
+        "role": "dependency",
+        "sha256": "759803a40e9c6f2f3308b1faabadcf7c54262a4f59696079545f78cc9060b8fd",
+        "size_bytes": 374
+      },
+      {
+        "declared_path": "/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c8/proj/tasks/bubble-echo/vortex/proofs/c8p_f33_c1.ml",
+        "declaring_file": "/home/bluestar/.cache/hol-hearth/project-bases/.automatic/759803a40e9c6f2f3308b1faabadcf7c54262a4f59696079545f78cc9060b8fd/dependencies.ml",
+        "loader": "needs",
+        "package_path": "e49283d5e59dde13847bade626213aa64a3b1c1ef6e3f5e2a45a15ebee57d5b1/c8p_f33_c1.ml",
+        "path": "/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c8/proj/tasks/bubble-echo/vortex/proofs/c8p_f33_c1.ml",
+        "resolution": "source_local",
+        "role": "dependency",
+        "sha256": "e49283d5e59dde13847bade626213aa64a3b1c1ef6e3f5e2a45a15ebee57d5b1",
+        "size_bytes": 642
+      },
+      {
+        "declared_path": "/home/bluestar/.cache/hol-hearth/project-bases/.automatic/73758a5cc28c96572b5f9a528b59562c77c3008ba64c748595597e25cd3ddf9f/dependencies.ml",
+        "declaring_file": null,
+        "loader": "loadt",
+        "package_path": "73758a5cc28c96572b5f9a528b59562c77c3008ba64c748595597e25cd3ddf9f/dependencies.ml",
+        "path": "/home/bluestar/.cache/hol-hearth/project-bases/.automatic/73758a5cc28c96572b5f9a528b59562c77c3008ba64c748595597e25cd3ddf9f/dependencies.ml",
+        "resolution": "source_local",
+        "role": "dependency",
+        "sha256": "73758a5cc28c96572b5f9a528b59562c77c3008ba64c748595597e25cd3ddf9f",
+        "size_bytes": 374
+      },
+      {
+        "declared_path": "/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c8/proj/tasks/bubble-echo/vortex/proofs/c8p_f33_a.ml",
+        "declaring_file": "/home/bluestar/.cache/hol-hearth/project-bases/.automatic/73758a5cc28c96572b5f9a528b59562c77c3008ba64c748595597e25cd3ddf9f/dependencies.ml",
+        "loader": "needs",
+        "package_path": "ae4f156cac9be257636f27468dee69a1277ea9c8490279a2a39a855b1b6cc9d9/c8p_f33_a.ml",
+        "path": "/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c8/proj/tasks/bubble-echo/vortex/proofs/c8p_f33_a.ml",
+        "resolution": "source_local",
+        "role": "dependency",
+        "sha256": "ae4f156cac9be257636f27468dee69a1277ea9c8490279a2a39a855b1b6cc9d9",
+        "size_bytes": 16657
+      },
+      {
+        "declared_path": "/home/bluestar/.cache/hol-hearth/project-bases/.automatic/eeb68a673a14b0ad0e7037a3427261d2439da61fcc34fe88a23c78035fb552a2/dependencies.ml",
+        "declaring_file": null,
+        "loader": "loadt",
+        "package_path": "eeb68a673a14b0ad0e7037a3427261d2439da61fcc34fe88a23c78035fb552a2/dependencies.ml",
+        "path": "/home/bluestar/.cache/hol-hearth/project-bases/.automatic/eeb68a673a14b0ad0e7037a3427261d2439da61fcc34fe88a23c78035fb552a2/dependencies.ml",
+        "resolution": "source_local",
+        "role": "dependency",
+        "sha256": "eeb68a673a14b0ad0e7037a3427261d2439da61fcc34fe88a23c78035fb552a2",
+        "size_bytes": 373
+      },
+      {
+        "declared_path": "/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c8/proj/tasks/bubble-echo/vortex/proofs/chain_c6a_host.ml",
+        "declaring_file": "/home/bluestar/.cache/hol-hearth/project-bases/.automatic/eeb68a673a14b0ad0e7037a3427261d2439da61fcc34fe88a23c78035fb552a2/dependencies.ml",
+        "loader": "needs",
+        "package_path": "c4964f228472591332cbf9a822f1933e7cf9e4c472704111b2d8db36b5a45fa1/chain_c6a_host.ml",
+        "path": "/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c8/proj/tasks/bubble-echo/vortex/proofs/chain_c6a_host.ml",
+        "resolution": "source_local",
+        "role": "dependency",
+        "sha256": "c4964f228472591332cbf9a822f1933e7cf9e4c472704111b2d8db36b5a45fa1",
+        "size_bytes": 25843
+      },
+      {
+        "declared_path": "/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c8/proj/tasks/bubble-echo/vortex/proofs/chain_c5p_rules.ml",
+        "declaring_file": "/home/bluestar/.cache/hol-hearth/project-bases/.automatic/eeb68a673a14b0ad0e7037a3427261d2439da61fcc34fe88a23c78035fb552a2/dependencies.ml",
+        "loader": "needs",
+        "package_path": "1718107cfa8422d493030477dae0ddb3661ac7cfc6527a1a6b745fad673f7448/chain_c5p_rules.ml",
+        "path": "/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c8/proj/tasks/bubble-echo/vortex/proofs/chain_c5p_rules.ml",
+        "resolution": "source_local",
+        "role": "dependency",
+        "sha256": "1718107cfa8422d493030477dae0ddb3661ac7cfc6527a1a6b745fad673f7448",
+        "size_bytes": 11375
+      },
+      {
+        "declared_path": "/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c8/proj/tasks/bubble-echo/vortex/proofs/c8p_leaves2_defs.ml",
+        "declaring_file": "/home/bluestar/.cache/hol-hearth/project-bases/.automatic/eeb68a673a14b0ad0e7037a3427261d2439da61fcc34fe88a23c78035fb552a2/dependencies.ml",
+        "loader": "needs",
+        "package_path": "2e59424f3ce91b3b9a642afae93b81d4e2fec93a5926f3178f9ef3b25fc74d73/c8p_leaves2_defs.ml",
+        "path": "/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c8/proj/tasks/bubble-echo/vortex/proofs/c8p_leaves2_defs.ml",
+        "resolution": "source_local",
+        "role": "dependency",
+        "sha256": "2e59424f3ce91b3b9a642afae93b81d4e2fec93a5926f3178f9ef3b25fc74d73",
+        "size_bytes": 4305
+      },
+      {
+        "declared_path": "/home/bluestar/.cache/hol-hearth/project-bases/.automatic/1f5bd27df225adf2d6bb96b8fa7c612f0eba67c321b4239ea1244a60f5a382ab/dependencies.ml",
+        "declaring_file": null,
+        "loader": "loadt",
+        "package_path": "1f5bd27df225adf2d6bb96b8fa7c612f0eba67c321b4239ea1244a60f5a382ab/dependencies.ml",
+        "path": "/home/bluestar/.cache/hol-hearth/project-bases/.automatic/1f5bd27df225adf2d6bb96b8fa7c612f0eba67c321b4239ea1244a60f5a382ab/dependencies.ml",
+        "resolution": "source_local",
+        "role": "dependency",
+        "sha256": "1f5bd27df225adf2d6bb96b8fa7c612f0eba67c321b4239ea1244a60f5a382ab",
+        "size_bytes": 531
+      },
+      {
+        "declared_path": "/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c8/proj/tasks/bubble-echo/vortex/proofs/chain_c3b_pure.ml",
+        "declaring_file": "/home/bluestar/.cache/hol-hearth/project-bases/.automatic/1f5bd27df225adf2d6bb96b8fa7c612f0eba67c321b4239ea1244a60f5a382ab/dependencies.ml",
+        "loader": "needs",
+        "package_path": "8da5d87be35b4a035bf20d0b612121faeb733e5afe5639172c6914217b67ea05/chain_c3b_pure.ml",
+        "path": "/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c8/proj/tasks/bubble-echo/vortex/proofs/chain_c3b_pure.ml",
+        "resolution": "source_local",
+        "role": "dependency",
+        "sha256": "8da5d87be35b4a035bf20d0b612121faeb733e5afe5639172c6914217b67ea05",
+        "size_bytes": 21403
+      },
+      {
+        "declared_path": "/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c8/proj/tasks/bubble-echo/vortex/proofs/chain_c5_punct_c.ml",
+        "declaring_file": "/home/bluestar/.cache/hol-hearth/project-bases/.automatic/1f5bd27df225adf2d6bb96b8fa7c612f0eba67c321b4239ea1244a60f5a382ab/dependencies.ml",
+        "loader": "needs",
+        "package_path": "982fdb797b0ea7d88b27f34fbd20d4bd0074e755dcdfde5d32307b69507bf091/chain_c5_punct_c.ml",
+        "path": "/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c8/proj/tasks/bubble-echo/vortex/proofs/chain_c5_punct_c.ml",
+        "resolution": "source_local",
+        "role": "dependency",
+        "sha256": "982fdb797b0ea7d88b27f34fbd20d4bd0074e755dcdfde5d32307b69507bf091",
+        "size_bytes": 11309
+      },
+      {
+        "declared_path": "/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c8/proj/tasks/bubble-echo/vortex/proofs/chain_c5_punct_b.ml",
+        "declaring_file": "/home/bluestar/.cache/hol-hearth/project-bases/.automatic/1f5bd27df225adf2d6bb96b8fa7c612f0eba67c321b4239ea1244a60f5a382ab/dependencies.ml",
+        "loader": "needs",
+        "package_path": "85754d120c6e24b357aa46f764ae3494baeb841227154efc68f24d1c6070126f/chain_c5_punct_b.ml",
+        "path": "/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c8/proj/tasks/bubble-echo/vortex/proofs/chain_c5_punct_b.ml",
+        "resolution": "source_local",
+        "role": "dependency",
+        "sha256": "85754d120c6e24b357aa46f764ae3494baeb841227154efc68f24d1c6070126f",
+        "size_bytes": 28458
+      },
+      {
+        "declared_path": "/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c8/proj/tasks/bubble-echo/vortex/proofs/chain_c5_punct_a.ml",
+        "declaring_file": "/home/bluestar/.cache/hol-hearth/project-bases/.automatic/1f5bd27df225adf2d6bb96b8fa7c612f0eba67c321b4239ea1244a60f5a382ab/dependencies.ml",
+        "loader": "needs",
+        "package_path": "be71a3e867dc3ee87d8f81b105cd1fc77d724c8093f4042e7029ad20ed34a99b/chain_c5_punct_a.ml",
+        "path": "/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c8/proj/tasks/bubble-echo/vortex/proofs/chain_c5_punct_a.ml",
+        "resolution": "source_local",
+        "role": "dependency",
+        "sha256": "be71a3e867dc3ee87d8f81b105cd1fc77d724c8093f4042e7029ad20ed34a99b",
+        "size_bytes": 12641
+      },
+      {
+        "declared_path": "/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c8/proj/tasks/bubble-echo/vortex/proofs/chain_c5_leaves.ml",
+        "declaring_file": "/home/bluestar/.cache/hol-hearth/project-bases/.automatic/1f5bd27df225adf2d6bb96b8fa7c612f0eba67c321b4239ea1244a60f5a382ab/dependencies.ml",
+        "loader": "needs",
+        "package_path": "49ee0ba11c073f5f33c7955ecea383064030cb44447750c1fd5af74431dced47/chain_c5_leaves.ml",
+        "path": "/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c8/proj/tasks/bubble-echo/vortex/proofs/chain_c5_leaves.ml",
+        "resolution": "source_local",
+        "role": "dependency",
+        "sha256": "49ee0ba11c073f5f33c7955ecea383064030cb44447750c1fd5af74431dced47",
+        "size_bytes": 12085
+      },
+      {
+        "declared_path": "/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c8/proj/tasks/bubble-echo/vortex/proofs/chain_c5_tacs.ml",
+        "declaring_file": "/home/bluestar/.cache/hol-hearth/project-bases/.automatic/1f5bd27df225adf2d6bb96b8fa7c612f0eba67c321b4239ea1244a60f5a382ab/dependencies.ml",
+        "loader": "needs",
+        "package_path": "27f68fd3f702ab3cc8a1f28e5c79378311c97030d6300f68ed29cfe21fcfccd8/chain_c5_tacs.ml",
+        "path": "/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c8/proj/tasks/bubble-echo/vortex/proofs/chain_c5_tacs.ml",
+        "resolution": "source_local",
+        "role": "dependency",
+        "sha256": "27f68fd3f702ab3cc8a1f28e5c79378311c97030d6300f68ed29cfe21fcfccd8",
+        "size_bytes": 5398
+      },
+      {
+        "declared_path": "/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c8/proj/tasks/bubble-echo/vortex/proofs/chain_c5_dec.ml",
+        "declaring_file": "/home/bluestar/.cache/hol-hearth/project-bases/.automatic/1f5bd27df225adf2d6bb96b8fa7c612f0eba67c321b4239ea1244a60f5a382ab/dependencies.ml",
+        "loader": "needs",
+        "package_path": "83a78c373756a2696993a445be7b12ea46680cf8c2112c97e65ec3a7d8483457/chain_c5_dec.ml",
+        "path": "/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c8/proj/tasks/bubble-echo/vortex/proofs/chain_c5_dec.ml",
+        "resolution": "source_local",
+        "role": "dependency",
+        "sha256": "83a78c373756a2696993a445be7b12ea46680cf8c2112c97e65ec3a7d8483457",
+        "size_bytes": 1138
+      },
+      {
+        "declared_path": "/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c8/proj/tasks/bubble-echo/capillary/proofs/wasm_fastdec.ml",
+        "declaring_file": "/home/bluestar/.cache/hol-hearth/project-bases/.automatic/1f5bd27df225adf2d6bb96b8fa7c612f0eba67c321b4239ea1244a60f5a382ab/dependencies.ml",
+        "loader": "needs",
+        "package_path": "b344f84e62d202c8ead3aac89b89b06c651dc08480bc9a24589157ac9dd02020/wasm_fastdec.ml",
+        "path": "/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c8/proj/tasks/bubble-echo/capillary/proofs/wasm_fastdec.ml",
+        "resolution": "source_local",
+        "role": "dependency",
+        "sha256": "b344f84e62d202c8ead3aac89b89b06c651dc08480bc9a24589157ac9dd02020",
+        "size_bytes": 3952
+      },
+      {
+        "declared_path": "/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c8/proj/tasks/bubble-echo/vortex/proofs/wasm_call.ml",
+        "declaring_file": "/home/bluestar/.cache/hol-hearth/project-bases/.automatic/1f5bd27df225adf2d6bb96b8fa7c612f0eba67c321b4239ea1244a60f5a382ab/dependencies.ml",
+        "loader": "needs",
+        "package_path": "091a90570461d0d37fe4a22e46a139d4cfee0398233a49624cc0e385a6d6944c/wasm_call.ml",
+        "path": "/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c8/proj/tasks/bubble-echo/vortex/proofs/wasm_call.ml",
+        "resolution": "source_local",
+        "role": "dependency",
+        "sha256": "091a90570461d0d37fe4a22e46a139d4cfee0398233a49624cc0e385a6d6944c",
+        "size_bytes": 23503
+      },
+      {
+        "declared_path": "/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c8/proj/tasks/bubble-echo/vortex/proofs/va1_code.ml",
+        "declaring_file": "/home/bluestar/.cache/hol-hearth/project-bases/.automatic/1f5bd27df225adf2d6bb96b8fa7c612f0eba67c321b4239ea1244a60f5a382ab/dependencies.ml",
+        "loader": "needs",
+        "package_path": "955a61286f64b9b4c83f2e3a723945d2ae619f208480ad6028d61e691128bd8a/va1_code.ml",
+        "path": "/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c8/proj/tasks/bubble-echo/vortex/proofs/va1_code.ml",
+        "resolution": "source_local",
+        "role": "dependency",
+        "sha256": "955a61286f64b9b4c83f2e3a723945d2ae619f208480ad6028d61e691128bd8a",
+        "size_bytes": 5714
+      },
+      {
+        "declared_path": "/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c8/proj/tasks/bubble-echo/vortex/proofs/chain_c5p_frames.ml",
+        "declaring_file": "/home/bluestar/.cache/hol-hearth/project-bases/.automatic/1f5bd27df225adf2d6bb96b8fa7c612f0eba67c321b4239ea1244a60f5a382ab/dependencies.ml",
+        "loader": "needs",
+        "package_path": "f809937836ffbb129c8d43f433a51168fcc26c80722bd534bccf0f526f57c41e/chain_c5p_frames.ml",
+        "path": "/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c8/proj/tasks/bubble-echo/vortex/proofs/chain_c5p_frames.ml",
+        "resolution": "source_local",
+        "role": "dependency",
+        "sha256": "f809937836ffbb129c8d43f433a51168fcc26c80722bd534bccf0f526f57c41e",
+        "size_bytes": 70331
+      },
+      {
+        "declared_path": "wasm/proofs/wasm_tactics.ml",
+        "declaring_file": "/home/bluestar/.cache/hol-hearth/project-bases/.automatic/1f5bd27df225adf2d6bb96b8fa7c612f0eba67c321b4239ea1244a60f5a382ab/dependencies.ml",
+        "loader": "needs",
+        "package_path": "7e5c9f84995b5483b7b5eee04d1e012d229b0f9807edb0bdbe322d430cf47692/wasm_tactics.ml",
+        "path": "/home/bluestar/.cache/hol-workbench/source-generations/wasm/fb0bf26395fa1513752a026e45d76ca12159c44f37bfd10e8e285a790084e78f/tree/proofs/wasm_tactics.ml",
+        "resolution": "mounted_source",
+        "role": "dependency",
+        "sha256": "7e5c9f84995b5483b7b5eee04d1e012d229b0f9807edb0bdbe322d430cf47692",
+        "size_bytes": 49833
+      },
+      {
+        "declared_path": "/home/bluestar/.cache/hol-hearth/project-bases/.automatic/59a8afdbbccad71d98e67a57061a37944df6578de613b41bbdbb7358e4cf9175/dependencies.ml",
+        "declaring_file": null,
+        "loader": "loadt",
+        "package_path": "59a8afdbbccad71d98e67a57061a37944df6578de613b41bbdbb7358e4cf9175/dependencies.ml",
+        "path": "/home/bluestar/.cache/hol-hearth/project-bases/.automatic/59a8afdbbccad71d98e67a57061a37944df6578de613b41bbdbb7358e4cf9175/dependencies.ml",
+        "resolution": "source_local",
+        "role": "dependency",
+        "sha256": "59a8afdbbccad71d98e67a57061a37944df6578de613b41bbdbb7358e4cf9175",
+        "size_bytes": 1869
+      },
+      {
+        "declared_path": "/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c8/proj/tasks/bubble-echo/vortex/proofs/ve_vort.ml",
+        "declaring_file": "/home/bluestar/.cache/hol-hearth/project-bases/.automatic/59a8afdbbccad71d98e67a57061a37944df6578de613b41bbdbb7358e4cf9175/dependencies.ml",
+        "loader": "needs",
+        "package_path": "028a9f3910386a0325946726205d365fe4bd72af90bb67d6af4adc6a2ae407ea/ve_vort.ml",
+        "path": "/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c8/proj/tasks/bubble-echo/vortex/proofs/ve_vort.ml",
+        "resolution": "source_local",
+        "role": "dependency",
+        "sha256": "028a9f3910386a0325946726205d365fe4bd72af90bb67d6af4adc6a2ae407ea",
+        "size_bytes": 6119
+      },
+      {
+        "declared_path": "/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c8/proj/tasks/bubble-echo/vortex/proofs/ve_tick.ml",
+        "declaring_file": "/home/bluestar/.cache/hol-hearth/project-bases/.automatic/59a8afdbbccad71d98e67a57061a37944df6578de613b41bbdbb7358e4cf9175/dependencies.ml",
+        "loader": "needs",
+        "package_path": "62f9e551cb2187ffc165f143bc35969be449b2fd6b7535f1306d288b444a3ef6/ve_tick.ml",
+        "path": "/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c8/proj/tasks/bubble-echo/vortex/proofs/ve_tick.ml",
+        "resolution": "source_local",
+        "role": "dependency",
+        "sha256": "62f9e551cb2187ffc165f143bc35969be449b2fd6b7535f1306d288b444a3ef6",
+        "size_bytes": 1667
+      },
+      {
+        "declared_path": "/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c8/proj/tasks/bubble-echo/vortex/proofs/ve_vk.ml",
+        "declaring_file": "/home/bluestar/.cache/hol-hearth/project-bases/.automatic/59a8afdbbccad71d98e67a57061a37944df6578de613b41bbdbb7358e4cf9175/dependencies.ml",
+        "loader": "needs",
+        "package_path": "6115f7611cc0f32f5794d98ce4183cb90ba205e7eda710131abe7bb6c203d5dd/ve_vk.ml",
+        "path": "/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c8/proj/tasks/bubble-echo/vortex/proofs/ve_vk.ml",
+        "resolution": "source_local",
+        "role": "dependency",
+        "sha256": "6115f7611cc0f32f5794d98ce4183cb90ba205e7eda710131abe7bb6c203d5dd",
+        "size_bytes": 5070
+      },
+      {
+        "declared_path": "/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c8/proj/tasks/bubble-echo/vortex/proofs/va1_seq_final2.ml",
+        "declaring_file": "/home/bluestar/.cache/hol-hearth/project-bases/.automatic/59a8afdbbccad71d98e67a57061a37944df6578de613b41bbdbb7358e4cf9175/dependencies.ml",
+        "loader": "needs",
+        "package_path": "c8f457d460fc2ddb6f6c0c8049651528190ca9e96caeabc1043d45d93686b6d1/va1_seq_final2.ml",
+        "path": "/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c8/proj/tasks/bubble-echo/vortex/proofs/va1_seq_final2.ml",
+        "resolution": "source_local",
+        "role": "dependency",
+        "sha256": "c8f457d460fc2ddb6f6c0c8049651528190ca9e96caeabc1043d45d93686b6d1",
+        "size_bytes": 35157
+      },
+      {
+        "declared_path": "/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c8/proj/tasks/bubble-echo/vortex/proofs/pop_design_defs.ml",
+        "declaring_file": "/home/bluestar/.cache/hol-hearth/project-bases/.automatic/59a8afdbbccad71d98e67a57061a37944df6578de613b41bbdbb7358e4cf9175/dependencies.ml",
+        "loader": "needs",
+        "package_path": "fd88e0a49765ccb7c1e3a9afa5a9a024f46fdb128726b8a0e0de4a34236df6c3/pop_design_defs.ml",
+        "path": "/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c8/proj/tasks/bubble-echo/vortex/proofs/pop_design_defs.ml",
+        "resolution": "source_local",
+        "role": "dependency",
+        "sha256": "fd88e0a49765ccb7c1e3a9afa5a9a024f46fdb128726b8a0e0de4a34236df6c3",
+        "size_bytes": 28550
+      },
+      {
+        "declared_path": "/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c8/proj/tasks/bubble-echo/vortex/proofs/pop_design_stmts.ml",
+        "declaring_file": "/home/bluestar/.cache/hol-hearth/project-bases/.automatic/59a8afdbbccad71d98e67a57061a37944df6578de613b41bbdbb7358e4cf9175/dependencies.ml",
+        "loader": "needs",
+        "package_path": "97f899dc4d04ec5a65b6469fcd6918bad5c732ddf3f43c5465d3c84703750e30/pop_design_stmts.ml",
+        "path": "/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c8/proj/tasks/bubble-echo/vortex/proofs/pop_design_stmts.ml",
+        "resolution": "source_local",
+        "role": "dependency",
+        "sha256": "97f899dc4d04ec5a65b6469fcd6918bad5c732ddf3f43c5465d3c84703750e30",
+        "size_bytes": 35745
+      },
+      {
+        "declared_path": "/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c8/proj/tasks/bubble-echo/vortex/proofs/chain_c3b_dec.ml",
+        "declaring_file": "/home/bluestar/.cache/hol-hearth/project-bases/.automatic/59a8afdbbccad71d98e67a57061a37944df6578de613b41bbdbb7358e4cf9175/dependencies.ml",
+        "loader": "needs",
+        "package_path": "1ecc41875282192bd0e6c2752401a35a7e332bf00f52ac1e224bd0b10d0661f8/chain_c3b_dec.ml",
+        "path": "/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c8/proj/tasks/bubble-echo/vortex/proofs/chain_c3b_dec.ml",
+        "resolution": "source_local",
+        "role": "dependency",
+        "sha256": "1ecc41875282192bd0e6c2752401a35a7e332bf00f52ac1e224bd0b10d0661f8",
+        "size_bytes": 543
+      },
+      {
+        "declared_path": "/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c8/proj/tasks/bubble-echo/vortex/proofs/chain_c3b_defs.ml",
+        "declaring_file": "/home/bluestar/.cache/hol-hearth/project-bases/.automatic/59a8afdbbccad71d98e67a57061a37944df6578de613b41bbdbb7358e4cf9175/dependencies.ml",
+        "loader": "needs",
+        "package_path": "0b2cb40eabb04138282f82ee77fc4e947bac75a88d7e4e02118a9f4937448df1/chain_c3b_defs.ml",
+        "path": "/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c8/proj/tasks/bubble-echo/vortex/proofs/chain_c3b_defs.ml",
+        "resolution": "source_local",
+        "role": "dependency",
+        "sha256": "0b2cb40eabb04138282f82ee77fc4e947bac75a88d7e4e02118a9f4937448df1",
+        "size_bytes": 3793
+      },
+      {
+        "declared_path": "/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c8/proj/tasks/bubble-echo/vortex/proofs/chain_c3b_l1.ml",
+        "declaring_file": "/home/bluestar/.cache/hol-hearth/project-bases/.automatic/59a8afdbbccad71d98e67a57061a37944df6578de613b41bbdbb7358e4cf9175/dependencies.ml",
+        "loader": "needs",
+        "package_path": "e1777abaad5a546d71a73a48f805386cb73511b85d8f1ed08169f2f9ed586a41/chain_c3b_l1.ml",
+        "path": "/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c8/proj/tasks/bubble-echo/vortex/proofs/chain_c3b_l1.ml",
+        "resolution": "source_local",
+        "role": "dependency",
+        "sha256": "e1777abaad5a546d71a73a48f805386cb73511b85d8f1ed08169f2f9ed586a41",
+        "size_bytes": 54149
+      },
+      {
+        "declared_path": "/home/bluestar/.cache/hol-hearth/project-bases/.automatic/5ae90c0e2eed7df80572de32d5122297b9afa2765fcfe568b6db4ffd7aec4198/dependencies.ml",
+        "declaring_file": null,
+        "loader": "loadt",
+        "package_path": "5ae90c0e2eed7df80572de32d5122297b9afa2765fcfe568b6db4ffd7aec4198/dependencies.ml",
+        "path": "/home/bluestar/.cache/hol-hearth/project-bases/.automatic/5ae90c0e2eed7df80572de32d5122297b9afa2765fcfe568b6db4ffd7aec4198/dependencies.ml",
+        "resolution": "source_local",
+        "role": "dependency",
+        "sha256": "5ae90c0e2eed7df80572de32d5122297b9afa2765fcfe568b6db4ffd7aec4198",
+        "size_bytes": 1717
+      },
+      {
+        "declared_path": "/home/bluestar/.cache/hol-hearth/project-bases/.automatic/b05011e08a6b4094b685907ca9abe6931baa5a52815208174f2d7fb36e9a5ec8/dependencies.ml",
+        "declaring_file": null,
+        "loader": "loadt",
+        "package_path": "b05011e08a6b4094b685907ca9abe6931baa5a52815208174f2d7fb36e9a5ec8/dependencies.ml",
+        "path": "/home/bluestar/.cache/hol-hearth/project-bases/.automatic/b05011e08a6b4094b685907ca9abe6931baa5a52815208174f2d7fb36e9a5ec8/dependencies.ml",
+        "resolution": "source_local",
+        "role": "dependency",
+        "sha256": "b05011e08a6b4094b685907ca9abe6931baa5a52815208174f2d7fb36e9a5ec8",
+        "size_bytes": 1415
+      },
+      {
+        "declared_path": "/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c8/proj/tasks/bubble-echo/vortex/proofs/ve_vk_tacs.ml",
+        "declaring_file": "/home/bluestar/.cache/hol-hearth/project-bases/.automatic/b05011e08a6b4094b685907ca9abe6931baa5a52815208174f2d7fb36e9a5ec8/dependencies.ml",
+        "loader": "needs",
+        "package_path": "6acadda6839e8a306d557303534cfb5fe0aeb58fee412145f06e771cffda9ef0/ve_vk_tacs.ml",
+        "path": "/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c8/proj/tasks/bubble-echo/vortex/proofs/ve_vk_tacs.ml",
+        "resolution": "source_local",
+        "role": "dependency",
+        "sha256": "6acadda6839e8a306d557303534cfb5fe0aeb58fee412145f06e771cffda9ef0",
+        "size_bytes": 74443
+      },
+      {
+        "declared_path": "/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c8/proj/tasks/bubble-echo/vortex/proofs/ve_vk_stmts.ml",
+        "declaring_file": "/home/bluestar/.cache/hol-hearth/project-bases/.automatic/b05011e08a6b4094b685907ca9abe6931baa5a52815208174f2d7fb36e9a5ec8/dependencies.ml",
+        "loader": "needs",
+        "package_path": "4d5fbd180b3ed99db4d070fde9b1e3a093e04f000e776ca12b6293768e6f78f7/ve_vk_stmts.ml",
+        "path": "/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c8/proj/tasks/bubble-echo/vortex/proofs/ve_vk_stmts.ml",
+        "resolution": "source_local",
+        "role": "dependency",
+        "sha256": "4d5fbd180b3ed99db4d070fde9b1e3a093e04f000e776ca12b6293768e6f78f7",
+        "size_bytes": 6250
+      },
+      {
+        "declared_path": "/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c8/proj/tasks/bubble-echo/vortex/proofs/ve_vk_g1.ml",
+        "declaring_file": "/home/bluestar/.cache/hol-hearth/project-bases/.automatic/b05011e08a6b4094b685907ca9abe6931baa5a52815208174f2d7fb36e9a5ec8/dependencies.ml",
+        "loader": "needs",
+        "package_path": "1f0e41d485ac5de911286c9896fe209a6beb77263798c5f8c5a351121d25216e/ve_vk_g1.ml",
+        "path": "/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c8/proj/tasks/bubble-echo/vortex/proofs/ve_vk_g1.ml",
+        "resolution": "source_local",
+        "role": "dependency",
+        "sha256": "1f0e41d485ac5de911286c9896fe209a6beb77263798c5f8c5a351121d25216e",
+        "size_bytes": 577
+      },
+      {
+        "declared_path": "/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c8/proj/tasks/bubble-echo/vortex/proofs/ve_vk_g3.ml",
+        "declaring_file": "/home/bluestar/.cache/hol-hearth/project-bases/.automatic/b05011e08a6b4094b685907ca9abe6931baa5a52815208174f2d7fb36e9a5ec8/dependencies.ml",
+        "loader": "needs",
+        "package_path": "5031dd1468192e4dbc6c05c699a21e867291ba37f9ab9b38367c3a9f022a1e89/ve_vk_g3.ml",
+        "path": "/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c8/proj/tasks/bubble-echo/vortex/proofs/ve_vk_g3.ml",
+        "resolution": "source_local",
+        "role": "dependency",
+        "sha256": "5031dd1468192e4dbc6c05c699a21e867291ba37f9ab9b38367c3a9f022a1e89",
+        "size_bytes": 427
+      },
+      {
+        "declared_path": "/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c8/proj/tasks/bubble-echo/vortex/proofs/ve_vk_g2a.ml",
+        "declaring_file": "/home/bluestar/.cache/hol-hearth/project-bases/.automatic/b05011e08a6b4094b685907ca9abe6931baa5a52815208174f2d7fb36e9a5ec8/dependencies.ml",
+        "loader": "needs",
+        "package_path": "725124536ec768bfedbfad7931e0bd160b3bcee3ae5309b082213bc33900ba95/ve_vk_g2a.ml",
+        "path": "/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c8/proj/tasks/bubble-echo/vortex/proofs/ve_vk_g2a.ml",
+        "resolution": "source_local",
+        "role": "dependency",
+        "sha256": "725124536ec768bfedbfad7931e0bd160b3bcee3ae5309b082213bc33900ba95",
+        "size_bytes": 5522
+      },
+      {
+        "declared_path": "/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c8/proj/tasks/bubble-echo/vortex/proofs/ve_vk_g2b.ml",
+        "declaring_file": "/home/bluestar/.cache/hol-hearth/project-bases/.automatic/b05011e08a6b4094b685907ca9abe6931baa5a52815208174f2d7fb36e9a5ec8/dependencies.ml",
+        "loader": "needs",
+        "package_path": "c7aa23da9ebb55230ee391138dfee7b67e414e7e91d52529b2cb4717b50e031c/ve_vk_g2b.ml",
+        "path": "/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c8/proj/tasks/bubble-echo/vortex/proofs/ve_vk_g2b.ml",
+        "resolution": "source_local",
+        "role": "dependency",
+        "sha256": "c7aa23da9ebb55230ee391138dfee7b67e414e7e91d52529b2cb4717b50e031c",
+        "size_bytes": 666
+      },
+      {
+        "declared_path": "/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c8/proj/tasks/bubble-echo/vortex/proofs/ve_vk_g2.ml",
+        "declaring_file": "/home/bluestar/.cache/hol-hearth/project-bases/.automatic/b05011e08a6b4094b685907ca9abe6931baa5a52815208174f2d7fb36e9a5ec8/dependencies.ml",
+        "loader": "needs",
+        "package_path": "30ccccc8fa26da0a8b9fda9679649d92d91b242a7aa6202a29d6f5251efd7a44/ve_vk_g2.ml",
+        "path": "/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c8/proj/tasks/bubble-echo/vortex/proofs/ve_vk_g2.ml",
+        "resolution": "source_local",
+        "role": "dependency",
+        "sha256": "30ccccc8fa26da0a8b9fda9679649d92d91b242a7aa6202a29d6f5251efd7a44",
+        "size_bytes": 3469
+      },
+      {
+        "declared_path": "/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c8/proj/tasks/bubble-echo/vortex/proofs/ve_vk_g4a.ml",
+        "declaring_file": "/home/bluestar/.cache/hol-hearth/project-bases/.automatic/b05011e08a6b4094b685907ca9abe6931baa5a52815208174f2d7fb36e9a5ec8/dependencies.ml",
+        "loader": "needs",
+        "package_path": "f6831c9276ead882d5408493dd490ea59ba6c9b659bfd61fc370327e7bca8701/ve_vk_g4a.ml",
+        "path": "/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c8/proj/tasks/bubble-echo/vortex/proofs/ve_vk_g4a.ml",
+        "resolution": "source_local",
+        "role": "dependency",
+        "sha256": "f6831c9276ead882d5408493dd490ea59ba6c9b659bfd61fc370327e7bca8701",
+        "size_bytes": 1006
+      },
+      {
+        "declared_path": "/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c8/proj/tasks/bubble-echo/vortex/proofs/ve_vk_g4.ml",
+        "declaring_file": "/home/bluestar/.cache/hol-hearth/project-bases/.automatic/b05011e08a6b4094b685907ca9abe6931baa5a52815208174f2d7fb36e9a5ec8/dependencies.ml",
+        "loader": "needs",
+        "package_path": "6bf102524eae6771cc3fe86b206e337de463b0288600aeca05e64e4816be4acd/ve_vk_g4.ml",
+        "path": "/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c8/proj/tasks/bubble-echo/vortex/proofs/ve_vk_g4.ml",
+        "resolution": "source_local",
+        "role": "dependency",
+        "sha256": "6bf102524eae6771cc3fe86b206e337de463b0288600aeca05e64e4816be4acd",
+        "size_bytes": 491
+      },
+      {
+        "declared_path": "/home/bluestar/.cache/hol-hearth/project-bases/.automatic/931b36cb3e7eef77a59c961c7f6e1816d0c43cf38dae893ea7fafcc460bf11ae/dependencies.ml",
+        "declaring_file": null,
+        "loader": "loadt",
+        "package_path": "931b36cb3e7eef77a59c961c7f6e1816d0c43cf38dae893ea7fafcc460bf11ae/dependencies.ml",
+        "path": "/home/bluestar/.cache/hol-hearth/project-bases/.automatic/931b36cb3e7eef77a59c961c7f6e1816d0c43cf38dae893ea7fafcc460bf11ae/dependencies.ml",
+        "resolution": "source_local",
+        "role": "dependency",
+        "sha256": "931b36cb3e7eef77a59c961c7f6e1816d0c43cf38dae893ea7fafcc460bf11ae",
+        "size_bytes": 1252
+      },
+      {
+        "declared_path": "/home/bluestar/.cache/hol-hearth/project-bases/.automatic/6206e228bb1e97cfb1339eb1f56026fcf068cc12a085879f9a865b0fc4f02083/dependencies.ml",
+        "declaring_file": null,
+        "loader": "loadt",
+        "package_path": "6206e228bb1e97cfb1339eb1f56026fcf068cc12a085879f9a865b0fc4f02083/dependencies.ml",
+        "path": "/home/bluestar/.cache/hol-hearth/project-bases/.automatic/6206e228bb1e97cfb1339eb1f56026fcf068cc12a085879f9a865b0fc4f02083/dependencies.ml",
+        "resolution": "source_local",
+        "role": "dependency",
+        "sha256": "6206e228bb1e97cfb1339eb1f56026fcf068cc12a085879f9a865b0fc4f02083",
+        "size_bytes": 1105
+      },
+      {
+        "declared_path": "/home/bluestar/.cache/hol-hearth/project-bases/.automatic/fef71dde60d3bcce3f123e55e3b9d971b06686df9f9ae8b4c4a349efe00d1c2a/dependencies.ml",
+        "declaring_file": null,
+        "loader": "loadt",
+        "package_path": "fef71dde60d3bcce3f123e55e3b9d971b06686df9f9ae8b4c4a349efe00d1c2a/dependencies.ml",
+        "path": "/home/bluestar/.cache/hol-hearth/project-bases/.automatic/fef71dde60d3bcce3f123e55e3b9d971b06686df9f9ae8b4c4a349efe00d1c2a/dependencies.ml",
+        "resolution": "source_local",
+        "role": "dependency",
+        "sha256": "fef71dde60d3bcce3f123e55e3b9d971b06686df9f9ae8b4c4a349efe00d1c2a",
+        "size_bytes": 813
+      },
+      {
+        "declared_path": "/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c8/proj/tasks/bubble-echo/vortex/proofs/ve_vort_code.ml",
+        "declaring_file": "/home/bluestar/.cache/hol-hearth/project-bases/.automatic/fef71dde60d3bcce3f123e55e3b9d971b06686df9f9ae8b4c4a349efe00d1c2a/dependencies.ml",
+        "loader": "needs",
+        "package_path": "af474a71d7c2fa057ec18e557b9f2208fd3596793727303e581bbd00d752026e/ve_vort_code.ml",
+        "path": "/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c8/proj/tasks/bubble-echo/vortex/proofs/ve_vort_code.ml",
+        "resolution": "source_local",
+        "role": "dependency",
+        "sha256": "af474a71d7c2fa057ec18e557b9f2208fd3596793727303e581bbd00d752026e",
+        "size_bytes": 19692
+      },
+      {
+        "declared_path": "/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c8/proj/tasks/bubble-echo/onefilm2/proofs/of2_dec.ml",
+        "declaring_file": "/home/bluestar/.cache/hol-hearth/project-bases/.automatic/fef71dde60d3bcce3f123e55e3b9d971b06686df9f9ae8b4c4a349efe00d1c2a/dependencies.ml",
+        "loader": "needs",
+        "package_path": "73b71297fc9a833fec1a243e8988a212f69f1a18da9e3195cc4ce3b79a43525d/of2_dec.ml",
+        "path": "/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c8/proj/tasks/bubble-echo/onefilm2/proofs/of2_dec.ml",
+        "resolution": "source_local",
+        "role": "dependency",
+        "sha256": "73b71297fc9a833fec1a243e8988a212f69f1a18da9e3195cc4ce3b79a43525d",
+        "size_bytes": 3792
+      },
+      {
+        "declared_path": "/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c8/proj/tasks/bubble-echo/capillary/proofs/cap_helpers.ml",
+        "declaring_file": "/home/bluestar/.cache/hol-hearth/project-bases/.automatic/fef71dde60d3bcce3f123e55e3b9d971b06686df9f9ae8b4c4a349efe00d1c2a/dependencies.ml",
+        "loader": "needs",
+        "package_path": "80a4e15532c89627d919b7615c2c634f86af3867073682a7e8a0aaa03e94b3c6/cap_helpers.ml",
+        "path": "/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c8/proj/tasks/bubble-echo/capillary/proofs/cap_helpers.ml",
+        "resolution": "source_local",
+        "role": "dependency",
+        "sha256": "80a4e15532c89627d919b7615c2c634f86af3867073682a7e8a0aaa03e94b3c6",
+        "size_bytes": 10688
+      },
+      {
+        "declared_path": "/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c8/proj/tasks/bubble-echo/vortex/proofs/ve_generic.ml",
+        "declaring_file": "/home/bluestar/.cache/hol-hearth/project-bases/.automatic/fef71dde60d3bcce3f123e55e3b9d971b06686df9f9ae8b4c4a349efe00d1c2a/dependencies.ml",
+        "loader": "needs",
+        "package_path": "44fc59913c0ddeddf26440ca61ac99e53d819f121fd9244b84694cf4d0ee3319/ve_generic.ml",
+        "path": "/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c8/proj/tasks/bubble-echo/vortex/proofs/ve_generic.ml",
+        "resolution": "source_local",
+        "role": "dependency",
+        "sha256": "44fc59913c0ddeddf26440ca61ac99e53d819f121fd9244b84694cf4d0ee3319",
+        "size_bytes": 20309
+      },
+      {
+        "declared_path": "/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c8/proj/tasks/bubble-echo/vortex/proofs/ve_generic_defs.ml",
+        "declaring_file": "/home/bluestar/.cache/hol-hearth/project-bases/.automatic/fef71dde60d3bcce3f123e55e3b9d971b06686df9f9ae8b4c4a349efe00d1c2a/dependencies.ml",
+        "loader": "needs",
+        "package_path": "177a14916f5fe23c6fe159cb0ee4a139a90b83d8d23c9c622b8b0430786a9976/ve_generic_defs.ml",
+        "path": "/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c8/proj/tasks/bubble-echo/vortex/proofs/ve_generic_defs.ml",
+        "resolution": "source_local",
+        "role": "dependency",
+        "sha256": "177a14916f5fe23c6fe159cb0ee4a139a90b83d8d23c9c622b8b0430786a9976",
+        "size_bytes": 20320
+      },
+      {
+        "declared_path": "/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c8/proj/tasks/bubble-echo/vortex/proofs/ve_generic_stmts.ml",
+        "declaring_file": "/home/bluestar/.cache/hol-hearth/project-bases/.automatic/fef71dde60d3bcce3f123e55e3b9d971b06686df9f9ae8b4c4a349efe00d1c2a/dependencies.ml",
+        "loader": "needs",
+        "package_path": "527d667e2781ba24fed3cc3cb4204a162f42f5dd212b183619ba749ae98dd696/ve_generic_stmts.ml",
+        "path": "/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c8/proj/tasks/bubble-echo/vortex/proofs/ve_generic_stmts.ml",
+        "resolution": "source_local",
+        "role": "dependency",
+        "sha256": "527d667e2781ba24fed3cc3cb4204a162f42f5dd212b183619ba749ae98dd696",
+        "size_bytes": 4417
+      },
+      {
+        "declared_path": "/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c8/proj/tasks/bubble-echo/vortex/proofs/ve_vort_defs.ml",
+        "declaring_file": "/home/bluestar/.cache/hol-hearth/project-bases/.automatic/fef71dde60d3bcce3f123e55e3b9d971b06686df9f9ae8b4c4a349efe00d1c2a/dependencies.ml",
+        "loader": "needs",
+        "package_path": "e667ae7d3b08953ed57dfacbd84729c6dcbc20aef64f5130a36d27d7eeceb9c6/ve_vort_defs.ml",
+        "path": "/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c8/proj/tasks/bubble-echo/vortex/proofs/ve_vort_defs.ml",
+        "resolution": "source_local",
+        "role": "dependency",
+        "sha256": "e667ae7d3b08953ed57dfacbd84729c6dcbc20aef64f5130a36d27d7eeceb9c6",
+        "size_bytes": 4992
+      },
+      {
+        "declared_path": "/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c8/proj/tasks/bubble-echo/vortex/proofs/ve_vort_tacs.ml",
+        "declaring_file": "/home/bluestar/.cache/hol-hearth/project-bases/.automatic/fef71dde60d3bcce3f123e55e3b9d971b06686df9f9ae8b4c4a349efe00d1c2a/dependencies.ml",
+        "loader": "needs",
+        "package_path": "962a3fed9aa125ca4222f93696f4566c20ea52f84da5ff0f138bb73986b883b9/ve_vort_tacs.ml",
+        "path": "/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c8/proj/tasks/bubble-echo/vortex/proofs/ve_vort_tacs.ml",
+        "resolution": "source_local",
+        "role": "dependency",
+        "sha256": "962a3fed9aa125ca4222f93696f4566c20ea52f84da5ff0f138bb73986b883b9",
+        "size_bytes": 11824
+      },
+      {
+        "declared_path": "/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c8/proj/tasks/bubble-echo/vortex/proofs/ve_vort_stmts.ml",
+        "declaring_file": "/home/bluestar/.cache/hol-hearth/project-bases/.automatic/fef71dde60d3bcce3f123e55e3b9d971b06686df9f9ae8b4c4a349efe00d1c2a/dependencies.ml",
+        "loader": "needs",
+        "package_path": "cd3543084032fbce5a4f2d12360392779bce129875e516be1cf7968dd8ea7044/ve_vort_stmts.ml",
+        "path": "/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c8/proj/tasks/bubble-echo/vortex/proofs/ve_vort_stmts.ml",
+        "resolution": "source_local",
+        "role": "dependency",
+        "sha256": "cd3543084032fbce5a4f2d12360392779bce129875e516be1cf7968dd8ea7044",
+        "size_bytes": 11664
+      },
+      {
+        "declared_path": "/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c8/proj/tasks/bubble-echo/vortex/proofs/ve_tick_code.ml",
+        "declaring_file": "/home/bluestar/.cache/hol-hearth/project-bases/.automatic/fef71dde60d3bcce3f123e55e3b9d971b06686df9f9ae8b4c4a349efe00d1c2a/dependencies.ml",
+        "loader": "needs",
+        "package_path": "fba24f0f7f1543982ed380148eeb47f338d0a1e0857651cfa5275ff2f023db83/ve_tick_code.ml",
+        "path": "/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c8/proj/tasks/bubble-echo/vortex/proofs/ve_tick_code.ml",
+        "resolution": "source_local",
+        "role": "dependency",
+        "sha256": "fba24f0f7f1543982ed380148eeb47f338d0a1e0857651cfa5275ff2f023db83",
+        "size_bytes": 915
+      },
+      {
+        "declared_path": "/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c8/proj/tasks/bubble-echo/vortex/proofs/ve_tick_stmts.ml",
+        "declaring_file": "/home/bluestar/.cache/hol-hearth/project-bases/.automatic/fef71dde60d3bcce3f123e55e3b9d971b06686df9f9ae8b4c4a349efe00d1c2a/dependencies.ml",
+        "loader": "needs",
+        "package_path": "64d1c0f0b47b950b6e7cb63d07349e0f439d8a38f73a1032c47709e063ba353e/ve_tick_stmts.ml",
+        "path": "/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c8/proj/tasks/bubble-echo/vortex/proofs/ve_tick_stmts.ml",
+        "resolution": "source_local",
+        "role": "dependency",
+        "sha256": "64d1c0f0b47b950b6e7cb63d07349e0f439d8a38f73a1032c47709e063ba353e",
+        "size_bytes": 1924
+      },
+      {
+        "declared_path": "/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c8/proj/tasks/bubble-echo/vortex/proofs/ve_vk_code.ml",
+        "declaring_file": "/home/bluestar/.cache/hol-hearth/project-bases/.automatic/fef71dde60d3bcce3f123e55e3b9d971b06686df9f9ae8b4c4a349efe00d1c2a/dependencies.ml",
+        "loader": "needs",
+        "package_path": "90186f2e2c5e79e85497b080c2a1d930c2943629ef7905ad5d22f6279eb774d6/ve_vk_code.ml",
+        "path": "/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c8/proj/tasks/bubble-echo/vortex/proofs/ve_vk_code.ml",
+        "resolution": "source_local",
+        "role": "dependency",
+        "sha256": "90186f2e2c5e79e85497b080c2a1d930c2943629ef7905ad5d22f6279eb774d6",
+        "size_bytes": 555
+      },
+      {
+        "declared_path": "/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c8/proj/tasks/bubble-echo/vortex/proofs/ve_vk_defs.ml",
+        "declaring_file": "/home/bluestar/.cache/hol-hearth/project-bases/.automatic/fef71dde60d3bcce3f123e55e3b9d971b06686df9f9ae8b4c4a349efe00d1c2a/dependencies.ml",
+        "loader": "needs",
+        "package_path": "dac973d148ddf037a0868a12ad626942f5176e96afa20e477cfec6cc65130a79/ve_vk_defs.ml",
+        "path": "/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c8/proj/tasks/bubble-echo/vortex/proofs/ve_vk_defs.ml",
+        "resolution": "source_local",
+        "role": "dependency",
+        "sha256": "dac973d148ddf037a0868a12ad626942f5176e96afa20e477cfec6cc65130a79",
+        "size_bytes": 6184
+      },
+      {
+        "declared_path": "/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c8/proj/tasks/bubble-echo/vortex/purist/vortex_a1.wasm",
+        "declaring_file": "/home/bluestar/.cache/hol-hearth/project-bases/.automatic/1f5bd27df225adf2d6bb96b8fa7c612f0eba67c321b4239ea1244a60f5a382ab/dependencies.ml",
+        "loader": "define_from_wasm",
+        "package_path": "a3cf8c821534dd1613e2c6c6251a003320c40d5eb2dfc8e16a871c59636aede6/vortex_a1.wasm",
+        "path": "/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c8/proj/tasks/bubble-echo/vortex/purist/vortex_a1.wasm",
+        "resolution": "source_local",
+        "role": "artifact",
+        "sha256": "a3cf8c821534dd1613e2c6c6251a003320c40d5eb2dfc8e16a871c59636aede6",
+        "size_bytes": 30548
+      },
+      {
+        "declared_path": "/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c8/proj/tasks/bubble-echo/vortex/core/ve_core.wasm",
+        "declaring_file": "/home/bluestar/.cache/hol-hearth/project-bases/.automatic/fef71dde60d3bcce3f123e55e3b9d971b06686df9f9ae8b4c4a349efe00d1c2a/dependencies.ml",
+        "loader": "define_from_wasm",
+        "package_path": "72fe0ba28aed1a62c0cfb6912f3747c72845e09801ba3cc047a3c718f1f6ae29/ve_core.wasm",
+        "path": "/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c8/proj/tasks/bubble-echo/vortex/core/ve_core.wasm",
+        "resolution": "source_local",
+        "role": "artifact",
+        "sha256": "72fe0ba28aed1a62c0cfb6912f3747c72845e09801ba3cc047a3c718f1f6ae29",
+        "size_bytes": 24052
+      }
+    ],
+    "resolved_literal_closure": true,
+    "root": "/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c8/proj",
+    "schema": "hearth.observed-inputs.v1",
+    "semantic_identity_complete": true,
+    "sha256": "173109bd6b5b748a55a716f796961a22d47a166f57278e1c124c50717b154c2d"
+  },
+  "eval_seconds": 7.522183100983966,
+  "evidence_boundary": "exact nonce-bound source completion and named theorem binding checks over raw transcript bytes; advisory runtime logical-foundation registry cardinality deltas; kernel-checked in a fresh child of the published warm profile, whose recipe and loaded-file inventory are hash-verified; a cold replay of the same recipe adds independence from the profile image, not a stronger theorem",
+  "foundation_delta": {
+    "boundary": "cardinality delta relative to the restored warm basis only; does not inventory pre-existing basis axioms, identify declarations, or detect arbitrary hostile OCaml runtime mutation",
+    "deltas": {
+      "axioms": 0,
+      "constants": 0,
+      "definitions": 0,
+      "types": 0
+    },
+    "new_axiom_count": 0,
+    "status": "observed"
+  },
+  "hearth": {
+    "client_checkout": "/home/bluestar/src/.hol-hearth.controllers/6adb41ce24fa3e62faa14013ed79bef5dd87ec26",
+    "client_clean": true,
+    "client_revision": "6adb41ce24fa3e62faa14013ed79bef5dd87ec26",
+    "shelf_build_revision": "6adb41ce24fa3e62faa14013ed79bef5dd87ec26"
+  },
+  "hol_light": {
+    "architecture": "x86_64",
+    "camlp5": "Camlp5 version 8.04.00 (ocaml 5.4.0)",
+    "cold_replay_pin": {
+      "remote": "https://github.com/jrh13/hol-light.git",
+      "revision": "2a1cea8f1cb7f3885a60d947ba06eabac6ec1d32",
+      "source": "dev/setup-lock.json in this checkout; the pin for new setups and the cold checker, not a record of the profile's HOL"
+    },
+    "commit": "2a1cea8f1cb7f3885a60d947ba06eabac6ec1d32",
+    "commit_clean": true,
+    "dir": "/home/bluestar/hearth/data/hol-light",
+    "ocaml": "The OCaml runtime, version 5.4.0",
+    "source_tree_files": 597,
+    "source_tree_scope": "sha256 of the sorted lines '<sha256>  <path>' over every regular *.ml file below the HOL directory (skipping the top-level _opam switch and dot directories) and hol.sh",
+    "source_tree_sha256": "6eb0ed2f9a96f649816817b29e60ae368df947b46163e84b92041b9c454d0884"
+  },
+  "profile": {
+    "basis_id": "hol.s2n.wasm.v1",
+    "broker_runtime_origin": "receipt",
+    "broker_runtime_sha256": "792145423401b1d77436d2a2318497791cccf0b8ab84a66166ab10ad6a41fdcb",
+    "cwd": "/home/bluestar/hearth/data/shelves/src/s2n-bignum@51d1db8f05df6855b54b08debff0e4a863708b81",
+    "logical_source_roots": [
+      {
+        "alias": "s2n_bignum",
+        "execution_role": "profile_cwd",
+        "remote": "https://github.com/BenKnill/s2n-bignum.git",
+        "revision": "51d1db8f05df6855b54b08debff0e4a863708b81",
+        "source_role": "managed_mirror",
+        "tree": "f5f46329026cd052aa7f0afa35f67f3db1bcbdf2"
+      },
+      {
+        "alias": "wasm",
+        "execution_role": "profile_recipe",
+        "path": "profiles/roots/wasm",
+        "source_role": "bundled",
+        "tree": "fb0bf26395fa1513752a026e45d76ca12159c44f37bfd10e8e285a790084e78f"
+      }
+    ],
+    "name": "wasm",
+    "physical": "wasm",
+    "recipe": {
+      "checked_in": "profiles/wasm.ml",
+      "path": "/home/bluestar/.cache/hol-workbench/warmup-profiles/hol.s2n.wasm.v1-47b0e1f8e004.ml",
+      "provenance": "match",
+      "provenance_sha256": "47b0e1f8e004e34a9229a113daa3c4b203c27090da3a84123cc7fa31406ad2b7",
+      "sha256": "47b0e1f8e004e34a9229a113daa3c4b203c27090da3a84123cc7fa31406ad2b7"
+    },
+    "shelf": {
+      "loaded_closure_sha256": "44cdfc83fb9aa092d86ffaaf34f99bfde01868bdcba4d1de741443ef3c531682",
+      "manifest": "/home/bluestar/hearth/data/shelves/criu-warm-profiles-20261113T003738Z/wasm/snapshot-manifest.json",
+      "manifest_check": "sha256 matched",
+      "manifest_sha256": "d41cb861e5f8f8da581b8d6a359636633a1fb3fa3e6146eb277a0345afa844a8",
+      "recorded_in": "shelf_identity",
+      "snapshot_environment_sha256": "fb9d1826a145275e218fc16622f9894c6c2ad5e96d77e52e130eff6af579d05f"
+    }
+  },
+  "receipt": {
+    "evidence": "recorded_warm_replay",
+    "path": "/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c8/official-runs/20261116T035439Z-3750969-c8p_f33_final-dbb095/transcript.log.json",
+    "schema": "hol-workbench.warm-vanilla-artifact.v1",
+    "sha256": "732770a6fb4d54527151ab6c4ed21467f4f7fa831ad132f6500eae8e4ecad9d7"
+  },
+  "reproduce": {
+    "cold_check": "/home/bluestar/src/.hol-hearth.controllers/6adb41ce24fa3e62faa14013ed79bef5dd87ec26/dev/cold-check /home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c8/official-runs/20261116T035439Z-3750969-c8p_f33_final-dbb095",
+    "export_replay": "/home/bluestar/src/hol-hearth/hearth export-replay /home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c8/official-runs/20261116T035439Z-3750969-c8p_f33_final-dbb095 --out /home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c8/official-runs/20261116T035439Z-3750969-c8p_f33_final-dbb095/replay.sh",
+    "run_replay": "bash /home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c8/official-runs/20261116T035439Z-3750969-c8p_f33_final-dbb095/replay.sh 2>&1 | tee /home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c8/official-runs/20261116T035439Z-3750969-c8p_f33_final-dbb095/replay.sh.log"
+  },
+  "source": {
+    "path": "/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c8/proj/tasks/bubble-echo/vortex/proofs/c8p_f33_final.ml",
+    "sha256": "3f602660628a8f60ee8c723591539711d0d6a727dabd192835ee05f1952f2ed9"
+  },
+  "unrecorded": [],
+  "verdict": {
+    "basis": "/home/bluestar/.cache/hol-hearth/project-bases/.automatic/5a234839f50c865c118e7cc57ab28e898038478de2a2e2c1c1adf260f9c4f6f0/dependencies.ml",
+    "binding_counts": {
+      "failed": 0,
+      "missing": 0,
+      "printed_unprobed": 0,
+      "proved": 1,
+      "unknown": 0
+    },
+    "bindings": [
+      {
+        "detail": "source conclusion matched; hypotheses empty",
+        "line": 7,
+        "name": "VA1_F33_TO_F25_V",
+        "recorded_status": "proved",
+        "status": "proved"
+      }
+    ],
+    "bindings_proved": 1,
+    "bindings_total": 1,
+    "closure_sha256": "173109bd6b5b748a55a716f796961a22d47a166f57278e1c124c50717b154c2d",
+    "eval_seconds": 7.522183100983966,
+    "failing_binding": null,
+    "failing_step": null,
+    "first_failure": null,
+    "first_failure_transcript_line": null,
+    "inputs": 68,
+    "label": "c8fin-f33",
+    "line": "PASSED c8p_f33_final.ml: 1/1 bindings proved, 1/1 spec bindings matched, 92/92 spec pins matched, 0 new axioms, eval 7.5s (wasm)",
+    "new_axioms": 0,
+    "next": null,
+    "phase_timings": {
+      "child_clock": "Unix.gettimeofday",
+      "child_cpu_seconds": 6.75949,
+      "cpu_clock": "Unix.times (proof child user+sys)",
+      "cpu_status": "observed",
+      "evaluation_cpu_seconds": 0.098537,
+      "evaluation_cpu_system_seconds": 0.00779,
+      "evaluation_cpu_user_seconds": 0.090747,
+      "evaluation_seconds": 0.18071985244750977,
+      "lifecycle_clock": "monotonic",
+      "preparation_seconds": 9.513454500993248,
+      "probe_seconds": 6.657700061798096,
+      "probe_status": "completed",
+      "request_overhead_seconds": 0.6837631867383607,
+      "restore_seconds": 1.2114065010100603,
+      "status": "observed"
+    },
+    "profile": "wasm",
+    "reason": null,
+    "receipt": "/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c8/official-runs/20261116T035439Z-3750969-c8p_f33_final-dbb095/transcript.log.json",
+    "replay": {
+      "checkpoint_mode": "automatic",
+      "dependency": null,
+      "leaf_timeout_seconds": 1800.0,
+      "preparation_request": null,
+      "preparation_timeout_seconds": 2400.0
+    },
+    "schema": "hol-hearth.receipt-summary.v1",
+    "search_usage": {
+      "counts": {},
+      "first_use": null,
+      "status": "counted",
+      "strict": false,
+      "total": 0
+    },
+    "source": "/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c8/proj/tasks/bubble-echo/vortex/proofs/c8p_f33_final.ml",
+    "source_name": "c8p_f33_final.ml",
+    "source_sha256": "3f602660628a8f60ee8c723591539711d0d6a727dabd192835ee05f1952f2ed9",
+    "spec": {
+      "benchmark": false,
+      "bindings": {
+        "VA1_F33_TO_F25_V": "matched"
+      },
+      "file": "/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c8/proj/tasks/bubble-echo/vortex/proofs/c8p_f33.spec",
+      "outcome": "satisfied",
+      "pins": {
+        "va1_f32_mc": "pinned",
+        "va1_f32cos": "pinned",
+        "va1_f32n": "pinned",
+        "va1_f32r": "pinned",
+        "va1_f32sin": "pinned",
+        "va1_f32v": "pinned",
+        "va1_f32y": "pinned",
+        "va1_f32z": "pinned",
+        "va1_f33_frame": "pinned",
+        "va1_f33_pre": "pinned",
+        "va1_f34_mc": "pinned",
+        "va1_f34c0": "pinned",
+        "va1_f34c1": "pinned",
+        "va1_f34c2": "pinned",
+        "va1_f34e1x": "pinned",
+        "va1_f34e1y": "pinned",
+        "va1_f34e1z": "pinned",
+        "va1_f34e2x": "pinned",
+        "va1_f34e2y": "pinned",
+        "va1_f34e2z": "pinned",
+        "va1_f34nrm": "pinned",
+        "va1_f34u0": "pinned",
+        "va1_f34u1": "pinned",
+        "va1_pc28": "pinned",
+        "va1_pc29": "pinned",
+        "va1_pc30": "pinned",
+        "va1_pc31": "pinned",
+        "va1_pc7": "pinned",
+        "va1_pcc": "pinned",
+        "va1_pcell": "pinned",
+        "va1_pch": "pinned",
+        "va1_pcl": "pinned",
+        "va1_pcn": "pinned",
+        "va1_pcnt": "pinned",
+        "va1_pcp": "pinned",
+        "va1_pcs": "pinned",
+        "va1_pct": "pinned",
+        "va1_pd28": "pinned",
+        "va1_pd29": "pinned",
+        "va1_pd30": "pinned",
+        "va1_pd5": "pinned",
+        "va1_pd5b": "pinned",
+        "va1_pd6": "pinned",
+        "va1_pe1x": "pinned",
+        "va1_pe1y": "pinned",
+        "va1_pe1z": "pinned",
+        "va1_pe2x": "pinned",
+        "va1_pe2y": "pinned",
+        "va1_pe2z": "pinned",
+        "va1_pg12": "pinned",
+        "va1_pg13": "pinned",
+        "va1_pg14": "pinned",
+        "va1_pg15": "pinned",
+        "va1_pnrm": "pinned",
+        "va1_pr24": "pinned",
+        "va1_pr25": "pinned",
+        "va1_pr26": "pinned",
+        "va1_prc": "pinned",
+        "va1_prs": "pinned",
+        "va1_prt": "pinned",
+        "va1_ptbl": "pinned",
+        "va1_pu0": "pinned",
+        "va1_pu1": "pinned",
+        "va1_pu2": "pinned",
+        "va1_puncture_mc": "pinned",
+        "va1_pw": "pinned",
+        "va1_w32s": "pinned",
+        "wasm_call": "pinned",
+        "wasm_decl_vals": "pinned",
+        "wasmc": "pinned",
+        "wcall_entry": "pinned",
+        "wcall_locals": "pinned",
+        "wcall_return": "pinned",
+        "wf_ebits": "pinned",
+        "wf_exp": "pinned",
+        "wf_fbits": "pinned",
+        "wf_frac": "pinned",
+        "wf_inf": "pinned",
+        "wf_key": "pinned",
+        "wf_mag": "pinned",
+        "wf_nan": "pinned",
+        "wf_sign": "pinned",
+        "wf_tbits": "pinned",
+        "wf_thi": "pinned",
+        "wf_tidx": "pinned",
+        "wf_tlo": "pinned",
+        "wf_trunc": "pinned",
+        "wfbin": "pinned",
+        "wfcvt": "pinned",
+        "wfrel": "pinned",
+        "wfun": "pinned",
+        "wzero_of": "pinned"
+      },
+      "reason": null,
+      "sha256": "2b662bc4db92bd84957805c74d2513770820abe978876b586a5bd185e016c110",
+      "unpinned": []
+    },
+    "transcript": "/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c8/official-runs/20261116T035439Z-3750969-c8p_f33_final-dbb095/transcript.log",
+    "verdict": "passed",
+    "wait_seconds": 12.061
+  },
+  "verdict_origin": "recorded"
+}

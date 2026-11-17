@@ -1,0 +1,42 @@
+PASSED c8p_leaves2_final.ml: 3/3 bindings proved, 3/3 spec bindings matched, 39/39 spec pins matched, 0 new axioms, eval 3.5s (wasm)
+budgets: leaf=1800s preparation=2400s (separate)
+source: /home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c8/proj/tasks/bubble-echo/vortex/proofs/c8p_leaves2_final.ml sha=79e25536e121
+  VA1_F32_VALUE: proved source_line=6
+  VA1_F34_VALUE: proved source_line=15
+  VA1_F34V_PRE_SAT: proved source_line=36
+binding_counts: proved=3 failed=0 printed_unprobed=0 missing=0 unknown=0
+successful_probe_counts: conclusion_checked=3 thm_type_only=0 unknown=0
+spec: satisfied 3/3 bindings match, 39/39 pins match sha=1000b32bb899 file=/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c8/proj/tasks/bubble-echo/vortex/proofs/c8p_leaves2.spec
+  spec VA1_F32_VALUE: matched (|- forall x k. ensures wasm (\s. read wcode s = va1_f32_mc /\ read wpc s = word 5 /\ read wstatus s = WRunning /\ read wstack s = [] /\ read wlabels s = [] /\ read warity s = 1 /\ read (wlocal 0) s = F64 x /\ read (wlocal 1) s = I32 k) (\s. read wstatus s = WDone /\ read wstack s = [F64 (va1_f32v x ...)
+  spec VA1_F34_VALUE: matched (|- forall a0 a1 a2. ensures wasm (\s. read wcode s = va1_f34_mc /\ read wpc s = word 7 /\ read wstatus s = WRunning /\ read wstack s = [] /\ read wlabels s = [] /\ read warity s = 0 /\ read wmemsize s = 4194304 /\ read (wlocal 0) s = I32 (word 16352) /\ read (wlocal 1) s = I32 (word 16320) /\ read (...)
+  spec VA1_F34V_PRE_SAT: matched (|- forall a0 a1 a2. exists s. (\s. read wcode s = va1_f34_mc /\ read wpc s = word 7 /\ read wstatus s = WRunning /\ read wstack s = [] /\ read wlabels s = [] /\ read warity s = 0 /\ read wmemsize s = 4194304 /\ read (wlocal 0) s = I32 (word 16352) /\ read (wlocal 1) s = I32 (word 16320) /\ read (wlo...)
+  spec definition va1_f32r: pinned (|- va1_f32r = (\x. wfun 156 (wfbin 160 (wfbin 162 x (word 4603909380684499075)) (word 4602678819172646912))))
+  spec definition va1_f32y: pinned (|- va1_f32y = (\x. wfbin 160 (wfbin 160 x (wfbin 162 (va1_f32r x) (word 13833125093779177472))) (wfbin 162 (va1_f32r x) (word 13677630397471679281))))
+  spec definition va1_f32n: pinned (|- va1_f32n = (\x. if wfrel 99 (word_and (va1_f32r x) (word 9223372036854775807)) (word 4890909195324358656) then wfcvt 176 (va1_f32r x) else word 9223372036854775808))
+  spec definition va1_f32z: pinned (|- va1_f32z = (\x. wfbin 162 (va1_f32y x) (va1_f32y x)))
+  spec definition va1_f32sin: pinned (|- va1_f32sin = (\y z. wfbin 160 y (wfbin 162 (wfbin 162 y z) (wfbin 160 (wfbin 162 z (wfbin 160 (wfbin 162 z (wfbin 160 (wfbin 162 z (wfbin 160 (wfbin 162 z (wfbin 160 (wfbin 162 z (word 4460209850635244924)) (word 13716528393433619691))) (word 4523617212983017085))) (word 13774824197404582357))) (...)
+  spec definition va1_f32cos: pinned (|- va1_f32cos = (\z. wfbin 160 (wfbin 160 (wfbin 162 z (word 13826050856027422720)) (word 4607182418800017408)) (wfbin 162 (wfbin 162 z z) (wfbin 160 (wfbin 162 z (wfbin 160 (wfbin 162 z (wfbin 160 (wfbin 162 z (wfbin 160 (wfbin 162 z (wfbin 160 (wfbin 162 z (word 13666448951086692564)) (word 447712...)
+  spec definition va1_f32v: pinned (|- va1_f32v = (\x k. let q = word_and (word_add k (word_zx (va1_f32n x))) (word 3) in if q = word 0 then va1_f32sin (va1_f32y x) (va1_f32z x) else if q = word 1 then va1_f32cos (va1_f32z x) else if q = word 2 then word_xor (va1_f32sin (va1_f32y x) (va1_f32z x)) (word 9223372036854775808) else word_x...)
+  spec definition va1_f34u1: pinned (|- va1_f34u1 = (\a0 a1 a2. if wfrel 99 (word_and a1 (word 9223372036854775807)) (word 4606732058837280358) then word 0 else word 4607182418800017408))
+  spec definition va1_f34u0: pinned (|- va1_f34u0 = (\a0 a1 a2. if wfrel 99 (word_and a1 (word 9223372036854775807)) (word 4606732058837280358) then word 4607182418800017408 else word 0))
+  spec definition va1_f34c0: pinned (|- va1_f34c0 = (\a0 a1 a2. wfbin 161 (wfbin 162 a1 (va1_f34u1 a0 a1 a2)) (wfbin 162 a0 (va1_f34u0 a0 a1 a2))))
+  spec definition va1_f34c1: pinned (|- va1_f34c1 = (\a0 a1 a2. wfbin 161 (wfbin 162 a2 (va1_f34u0 a0 a1 a2)) (wfbin 162 a1 (word 0))))
+  spec definition va1_f34c2: pinned (|- va1_f34c2 = (\a0 a1 a2. wfbin 161 (wfbin 162 a0 (word 0)) (wfbin 162 a2 (va1_f34u1 a0 a1 a2))))
+  ... 27 more; use --json --verbose
+spec_foundation: 0 new axioms; no new definitions, types or constants
+phases: preparation=63.089s restore=0.890s evaluation=0.276s probe=2.649s request_overhead=0.602s evaluation_cpu=0.223s (observed)
+label: c8fin-leaves2
+inputs: 57 files; closure_sha=dfcbc6563142
+inherited_project_basis: /home/bluestar/.cache/hol-hearth/project-bases/.automatic/e3c078caf441cb36abcf8b7f8b188997b5aee2cc87d8afd48614d4c16a775ec7/dependencies.ml sha=e3c078caf441
+basis_preparation_receipt: /home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c8/official-runs/20261116T033513Z-3711700-dependencies-f3d478/transcript.log.json
+basis_layer 1/8: c5015d5f69a5 /home/bluestar/.cache/hol-hearth/project-bases/.automatic/fef71dde60d3bcce3f123e55e3b9d971b06686df9f9ae8b4c4a349efe00d1c2a/dependencies.ml receipt=/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c8/official-runs/20261116T000210Z-3433566-dependencies-6f7334/transcript.log.json
+basis_layer 2/8: cfc71a3e09fb /home/bluestar/.cache/hol-hearth/project-bases/.automatic/6206e228bb1e97cfb1339eb1f56026fcf068cc12a085879f9a865b0fc4f02083/dependencies.ml receipt=/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c8/official-runs/20261116T001010Z-3439804-dependencies-beaf20/transcript.log.json
+basis_layer 3/8: 17344ab0e4ca /home/bluestar/.cache/hol-hearth/project-bases/.automatic/931b36cb3e7eef77a59c961c7f6e1816d0c43cf38dae893ea7fafcc460bf11ae/dependencies.ml receipt=/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c8/official-runs/20261116T002119Z-3448458-dependencies-35b178/transcript.log.json
+basis_layer 4/8: 9d769d248600 /home/bluestar/.cache/hol-hearth/project-bases/.automatic/b05011e08a6b4094b685907ca9abe6931baa5a52815208174f2d7fb36e9a5ec8/dependencies.ml receipt=/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c8/official-runs/20261116T031913Z-3701053-dependencies-a9da7e/transcript.log.json
+basis_layer 5/8: a70f03077b24 /home/bluestar/.cache/hol-hearth/project-bases/.automatic/5ae90c0e2eed7df80572de32d5122297b9afa2765fcfe568b6db4ffd7aec4198/dependencies.ml receipt=/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c8/official-runs/20261116T032159Z-3702863-dependencies-ddb8a9/transcript.log.json
+basis_layer 6/8: ddad8b8a57b9 /home/bluestar/.cache/hol-hearth/project-bases/.automatic/59a8afdbbccad71d98e67a57061a37944df6578de613b41bbdbb7358e4cf9175/dependencies.ml receipt=/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c8/official-runs/20261116T032502Z-3705079-dependencies-19cdda/transcript.log.json
+basis_layer 7/8: f86e56534b84 /home/bluestar/.cache/hol-hearth/project-bases/.automatic/1f5bd27df225adf2d6bb96b8fa7c612f0eba67c321b4239ea1244a60f5a382ab/dependencies.ml receipt=/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c8/official-runs/20261116T032533Z-3705513-dependencies-b42afc/transcript.log.json
+basis_layer 8/8: 6e3f4a14263f /home/bluestar/.cache/hol-hearth/project-bases/.automatic/e3c078caf441cb36abcf8b7f8b188997b5aee2cc87d8afd48614d4c16a775ec7/dependencies.ml receipt=/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c8/official-runs/20261116T033513Z-3711700-dependencies-f3d478/transcript.log.json
+basis_scope: preparation was checked separately; this attempt checks the full leaf in a fresh child
+receipt: /home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c8/official-runs/20261116T033510Z-3711700-c8p_leaves2_final-4deec3/transcript.log.json
+NEXT: /home/bluestar/src/hol-hearth/hearth inspect /home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c8/official-runs/20261116T033510Z-3711700-c8p_leaves2_final-4deec3

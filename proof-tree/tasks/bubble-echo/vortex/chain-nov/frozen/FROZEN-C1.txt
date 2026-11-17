@@ -1,0 +1,7 @@
+2026-11-11 17:05:35 EST (2026-11-11T22:05:35Z) FROZEN chain_c1_final.spec sha256 3b62701f116daa7ece2861951037593c16e71e78892706a46579cf17194a0621
+  path bluestar26 /home/bluestar/lanes/demo1-wave-20261110-141705/vortex/proj/tasks/bubble-echo/vortex/proofs/chain_c1_final.spec (untracked, chmod 444); copies spec-c1/chain_c1_final.spec (Mac + bluestar role dirs)
+  27 theorems, 40 definition pins, 2 allows (va1_cmds_ok, va1_cmds_end: pinned by VA1_CMDS_OK_CLAUSES / VA1_CMDS_END_CLAUSES)
+  review: GPT-6.1 Sol 20261111-164405-vortex-chain-c1-spec-chain-c-b202 round 1 = 9/10 accept (faithfulness 9, non-vacuity 10, provability 9; 0 must-fix), accepted exactly this sha
+  typecheck: Hearth session-3a08fbac54e1184533bbc487 on basis 41135709563d, 2026-11-11T21:42:30Z-21:42:44Z (parse/type only, no proofs)
+  INVOCATION MODE (Sol should-fix): prove with plain --spec, NOT --benchmark; under --benchmark lint reports benchmark-unpinned for va1_cmds_ok and va1_cmds_end. If --benchmark is ever needed, that is a new spec file with stored-form pins, disclosed.
+  no proving run has used this spec before this line. Frozen by SPEC-C1 (Claude Opus 5.5).

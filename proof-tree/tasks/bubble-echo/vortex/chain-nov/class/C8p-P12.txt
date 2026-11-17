@@ -1,0 +1,10 @@
+C8p rows P1+P2 class sentence (2026-11-14; Sol 20261114-154030-vortex-chain-c8p-proof-p1-p2-69d8 r1 9/10, must-fix applied):
+On the exact bytes of vortex_a1.wasm (sha256 a3cf8c82...), in hol-hearth's model of WebAssembly with 0 new axioms (spec-locked
+receipt, check-rung PASS), and under the entry conditions of VA1_F32_VALUE and VA1_F34_VALUE: the internal helper f32 (the
+sin/cos routine the puncture calls), entered with an f64 x and an i32 k, returns exactly the named term va1_f32v x k; and the
+helper f34, called as f34(16352, 16320, 16288) with a 4194304-byte memory, stores into 16320..16343 and 16288..16311 six f64
+words that are named terms of the three f64 words at 16352..16375 on entry. The model leaves the rounding float operations as
+fixed but unspecified functions, so "named term" means a function of the inputs for each fixed choice of those operations;
+compares, truncation, abs and neg are exact on the bits. Not covered here: what the numbers mean (no claim of closeness to sin
+or cos), f34 called with other pointers, the speed table f33 builds and the 21 header words f25 writes (rows P3-P5), and the
+click and auto puncture compositions (P6, P7).

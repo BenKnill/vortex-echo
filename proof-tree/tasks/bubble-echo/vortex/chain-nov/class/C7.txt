@@ -1,0 +1,31 @@
+C7 class sentences (draft by C7, Claude Opus 5.5, 2026-11-14; for Sol review with the proof)
+
+C7b (the page's default pop film, auto puncture). For the exact bytes of vortex_a1.wasm (sha256 a3cf8c82...6aede6), in
+hol-hearth's frame-stack call model wasmn on runtime 6adb41ce (float compares and float-to-integer traps defined exactly on the
+bits; rounding operations left as fixed but unspecified functions, and the theorem holds for every choice of them), it is PROVED
+(spec chain_c7b_final.spec 5243b2ea, frozen before its receipted run; 0 new axioms, attest transitive 0) that from a start state
+of C4's shape (clock 0, no pop, auto-pop word K with 1 <= K and K + 520 < 2^32, 1 <= N <= 640 vortices, the pop work areas
+and header words 6..31 clear) whose auto-puncture argument words at 16516, 16520, 16524 are not all zero, with global 0 = 16384
+and the call table mapping indices 9..28 and 25, 32, 33, 34 to the module's own bodies, the host's K + n calls of tick_forward
+(n <= 520; the K-th is the automatic puncture: swirl tick, then the floating-point speed table and the pop set-up) followed by
+n + K calls of tick_backward all terminate on every run without trapping, and leave the module back at its start: same globals,
+clock 0, no pop, same auto-pop word, model and vortex positions, the pop work areas clear, the error counter unchanged, and
+every byte of the 4 MiB memory equal to the start except three regions that are not pinned: a 96-byte stack area
+[16288, 16384) below the shadow-stack top that the puncture uses, the unused vortex slots (VA/VB words 3N..2047) and the
+scratch area [1966080, 2039808). A second theorem covers the film run to the end of the pop (one more forward call returns 0
+and changes nothing) and all the way back. No step is abstract: every call is a proved tick or puncture theorem; no
+va1_trunc_guard_ok premise appears (it is PROVED on this runtime since PR #179's exact f64 operations). Non-vacuity is PROVED
+(VA1_C7B_SAT): for every K and n a call table, globals, model and start memory meeting every premise exist. Assumed, not
+proved: host non-interference (between and during calls the host writes neither the module's memory nor its globals, and
+memory does not grow; not a WebAssembly guarantee), and that the page's init leaves the start state (TESTED: node, exact bytes,
+c7_hdr.mjs 24/24 + 24 mutants; C4's film matrix on the real bytes). Not covered: init, refused or other calls, the values of
+the speed table and of the intermediate states, the click film's other uses. To load the two proved chains together, the
+C3b-side files were used as renamed copies (four identifiers renamed, byte-exact round trip); the bridge PROVES va1_rbinit_b =
+va1_rbinit and va1_zpseed_b = va1_zpseed (C7_RBINIT_B, C7_ZPSEED_B) and then va1_c6a_rel ==> va1_punct_rel (C7_C6A_REL_PUNCT);
+va1_bad_b is loaded but not used by any C7 statement or bridge.
+
+C7a (the click film). The same, in the one-level call model wasmc, for the film in which the host calls tick_forward K times
+(auto-pop word 0 or above K), then the export puncture once with arguments not all zero, then tick_forward n times and
+tick_backward n + K times (call table 9..28 and 25, 32, 34): every call terminates on every run, the puncture call returns 0,
+and the module ends back at its start with the same three unpinned regions (spec chain_c7a_final.spec 47cae0ea; 0 new axioms;
+non-vacuity VA1_C7A_SAT PROVED; same assumptions and exclusions).

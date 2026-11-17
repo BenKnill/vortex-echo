@@ -1,0 +1,57 @@
+PASSED chain_c5p_final.ml: 31/31 bindings proved, 31/31 spec bindings matched, 17/17 spec pins matched, 0 new axioms, eval 4.4s (wasm)
+budgets: leaf=1800s preparation=3600s (separate)
+source: /home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c5/proj/tasks/bubble-echo/vortex/proofs/chain_c5p_final.ml sha=d372a74be9f7
+  VA1_C5P_ENSURES_WASMN: proved source_line=4
+  VA1_C5P_EVENTUALLY_WASMN: proved source_line=7
+  VA1_F33_WFSUM: proved source_line=10
+  VA1_CALL33_WASMN: proved source_line=20
+  VA1_CALL33_FROM_WASMC: proved source_line=36
+  VA1_TF_CALL33_SITE: proved source_line=53
+  VA1_C5P_SITE_SAT: proved source_line=70
+  WASMF_DET: proved source_line=76
+  WASMF_LIFT: proved source_line=79
+  WASMN_TO_WASMF: proved source_line=86
+  WASMN_TO_WFSUM: proved source_line=93
+  WASM_TO_WFSUM: proved source_line=96
+  ... 19 more (19 proved); use --verbose or --binding NAME
+binding_counts: proved=31 failed=0 printed_unprobed=0 missing=0 unknown=0
+successful_probe_counts: conclusion_checked=31 thm_type_only=0 unknown=0
+spec: satisfied 31/31 bindings match, 17/17 pins match sha=3a6487ee0488 file=/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c5/proj/tasks/bubble-echo/vortex/proofs/chain_c5p.spec
+  spec VA1_C5P_ENSURES_WASMN: matched (|- forall fs P Q C. ensures (wasmc fs) P Q C ==> ensures (wasmn fs) P Q C)
+  spec VA1_C5P_EVENTUALLY_WASMN: matched (|- forall fs P s. eventually (wasmc fs) P s ==> eventually (wasmn fs) P s)
+  spec VA1_F33_WFSUM: matched (|- forall fs a0 a1 a2 m Q. (forall s. Q s ==> read (wglobal 0) s = I32 (word 16384)) /\ ensures (wasmc fs) (va1_f33_pre a0 a1 a2 m) Q (MAYCHANGE [wpc] ,, MAYCHANGE [wstack] ,, MAYCHANGE [wlabels] ,, MAYCHANGE [wstatus] ,, MAYCHANGE [wlocals] ,, MAYCHANGE [wglobal 0] ,, MAYCHANGE [wmem]) ==> wfsum fs...)
+  spec VA1_CALL33_WASMN: matched (|- forall fs mc pc a0 a1 a2 rest m r R Q. fs 33 = va1_puncture_mc,3,1 /\ pc < 2 EXP 64 /\ wasm_decode mc pc = SOME (Wcall 33,6) /\ wfsum fs (va1_f33_pre a0 a1 a2 m) Q (MAYCHANGE [wpc] ,, MAYCHANGE [wstack] ,, MAYCHANGE [wlabels] ,, MAYCHANGE [wstatus] ,, MAYCHANGE [wlocals] ,, MAYCHANGE [wmem]) /\ (...)
+  spec VA1_CALL33_FROM_WASMC: matched (|- forall fs mc pc a0 a1 a2 rest m r R Q. fs 33 = va1_puncture_mc,3,1 /\ pc < 2 EXP 64 /\ wasm_decode mc pc = SOME (Wcall 33,6) /\ ensures (wasmc fs) (va1_f33_pre a0 a1 a2 m) Q (MAYCHANGE [wpc] ,, MAYCHANGE [wstack] ,, MAYCHANGE [wlabels] ,, MAYCHANGE [wstatus] ,, MAYCHANGE [wlocals] ,, MAYCHANGE [w...)
+  spec VA1_TF_CALL33_SITE: matched (|- forall fs a0 a1 a2 rest m r R Q. fs 33 = va1_puncture_mc,3,1 /\ ensures (wasmc fs) (va1_f33_pre a0 a1 a2 m) Q (MAYCHANGE [wpc] ,, MAYCHANGE [wstack] ,, MAYCHANGE [wlabels] ,, MAYCHANGE [wstatus] ,, MAYCHANGE [wlocals] ,, MAYCHANGE [wglobal 0] ,, MAYCHANGE [wmem]) /\ (forall c. Q c ==> read wstatu...)
+  spec VA1_C5P_SITE_SAT: matched (|- forall a0 a1 a2 rest m. exists s. read wcode s = va1_tick_forward_mc /\ read wpc s = word 309 /\ read wstatus s = WRunning /\ read wstack s = CONS (I32 a2) (CONS (I32 a1) (CONS (I32 a0) rest)) /\ read wmemsize s = 4194304 /\ read (wglobal 0) s = I32 (word 16384) /\ read wmem s = m)
+  spec WASMF_DET: matched (|- forall fs x y z. wasmf fs x y /\ wasmf fs x z ==> y = z)
+  spec WASMF_LIFT: matched (|- forall fs P Q C. ensures wasm P Q C ==> (forall k. ensures (wasmf fs) (\x. P (FST x) /\ SND x = k) (\x. Q (FST x) /\ SND x = k) (\x y. C (FST x) (FST y))))
+  spec WASMN_TO_WASMF: matched (|- forall fs P Q C. ensures (wasmn fs) P Q C ==> (forall k. ensures (wasmf fs) (\x. P (FST x) /\ SND x = k) (\x. Q (FST x) /\ SND x = k) (\x y. C (FST x) (FST y))))
+  spec WASMN_TO_WFSUM: matched (|- forall fs P Q C. ensures (wasmn fs) P Q C ==> wfsum fs P Q C)
+  spec WASM_TO_WFSUM: matched (|- forall fs P Q C. ensures wasm P Q C ==> wfsum fs P Q C)
+  ... 19 more; use --json --verbose
+  spec definition wzero_of: pinned (|- wzero_of = (\t. if t = 126 then I64 (word 0) else if t = 125 then F32 (word 0) else if t = 124 then F64 (word 0) else I32 (word 0)))
+  spec definition wasm_decl_vals: pinned (|- wasm_decl_vals = (\code. wobind (wuleb code) (\p. wdecl_vals (FST p) code (SND p))))
+  spec definition wcall_locals: pinned (|- wcall_locals = (\args decls k. if k < LENGTH args then EL (LENGTH args - 1 - k) args else if k - LENGTH args < LENGTH decls then EL (k - LENGTH args) decls else I32 (word 0)))
+  spec definition wcall_entry: pinned (|- wcall_entry = (\code np nr stk e decls s. write wcode code (write wpc (word e) (write wstack [] (write wlocals (wcall_locals (wtake np stk) decls) (write wlabels [] (write warity nr (write wstatus WRunning s))))))))
+  spec definition wcall_return: pinned (|- wcall_return = (\npc np c1 s. if read wstatus c1 = WDone then write wpc (word npc) (write wstack (APPEND (read wstack c1) (wdrop np (read wstack s))) (write wmem (read wmem c1) (write wmemsize (read wmemsize c1) (write wglobals (read wglobals c1) s)))) else write wstatus WTrapped (write wmem (rea...)
+  spec definition wasm_call: pinned (|- wasm_call = (\fs f npc s s'. exists code np nr e decls c1. fs f = code,np,nr /\ np <= LENGTH (read wstack s) /\ wasm_entry code = SOME e /\ wasm_decl_vals code = SOME decls /\ RTC wasm (wcall_entry code np nr (read wstack s) e decls s) c1 /\ ~(read wstatus c1 = WRunning) /\ s' = wcall_return npc ...)
+  spec definition wasmc: pinned (|- wasmc = (\fs s s'. wasm s s' \/ read wstatus s = WRunning /\ (exists f n. wasm_decode (read wcode s) (val (read wpc s)) = SOME (Wcall f,n) /\ wasm_call fs f (val (read wpc s) + n) s s')))
+  spec definition wasmf: pinned (|- wasmf = (\fs x y. wasm (FST x) (FST y) /\ SND y = SND x \/ read wstatus (FST x) = WRunning /\ (exists f n code np nr e decls. wasm_decode (read wcode (FST x)) (val (read wpc (FST x))) = SOME (Wcall f,n) /\ fs f = code,np,nr /\ np <= LENGTH (read wstack (FST x)) /\ wasm_entry code = SOME e /\ wasm...)
+  spec definition wfsum: pinned (|- wfsum = (\fs P Q C. ensures (wasmf fs) (\x. P (FST x) /\ SND x = []) (\x. Q (FST x) /\ SND x = []) (\x y. C (FST x) (FST y))))
+  spec definition wasm_calln: pinned (|- wasm_calln = (\fs f npc s s'. exists code np nr e decls c1. fs f = code,np,nr /\ np <= LENGTH (read wstack s) /\ wasm_entry code = SOME e /\ wasm_decl_vals code = SOME decls /\ RTC (wasmf fs) (wcall_entry code np nr (read wstack s) e decls s,[]) (c1,[]) /\ ~(read wstatus c1 = WRunning) /\ s' = wc...)
+  spec definition wasmn: pinned (|- wasmn = (\fs s s'. wasm s s' \/ read wstatus s = WRunning /\ (exists f n. wasm_decode (read wcode s) (val (read wpc s)) = SOME (Wcall f,n) /\ wasm_calln fs f (val (read wpc s) + n) s s')))
+  spec definition div3: pinned (|- div3 = (\x y. x = 0 /\ y = 1 \/ x = 0 /\ y = 2 \/ x = 2 /\ y = 2))
+  ... 5 more; use --json --verbose
+spec_unpinned: wdecl_vals (allowed by name only; meaning not checked)
+spec_foundation: 0 new axioms; no new definitions, types or constants
+phases: preparation=0.000s restore=0.000s evaluation=0.439s probe=3.317s request_overhead=0.658s evaluation_cpu=0.421s (observed)
+label: c5fin-c5p
+inputs: 13 files; closure_sha=dad58b31273f
+inherited_project_basis: /home/bluestar/.cache/hol-hearth/project-bases/.automatic/6ed998e960ca8598605356abc5c202b13a4dba0363b44b828df01d6c8abcc04a/dependencies.ml sha=6ed998e960ca
+basis_preparation_receipt: /home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c5/official-runs/20261113T210601Z-2304869-dependencies-973513/transcript.log.json
+basis_layer 1/2: 37cdecb513e5 /home/bluestar/.cache/hol-hearth/project-bases/.automatic/f9c27d585d1ab59808a2bdee920867fb30a957e049f4db119fb37e6936ce1abb/dependencies.ml receipt=/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c5/official-runs/20261113T165515Z-2043982-dependencies-fe27fa/transcript.log.json
+basis_layer 2/2: c1adb0ad1dbb /home/bluestar/.cache/hol-hearth/project-bases/.automatic/6ed998e960ca8598605356abc5c202b13a4dba0363b44b828df01d6c8abcc04a/dependencies.ml receipt=/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c5/official-runs/20261113T210601Z-2304869-dependencies-973513/transcript.log.json
+basis_scope: preparation was checked separately; this attempt checks the full leaf in a fresh child
+receipt: /home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c5/official-runs/20261113T210754Z-2306016-chain_c5p_final-6c8f8d/transcript.log.json
+NEXT: /home/bluestar/src/hol-hearth/hearth inspect /home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c5/official-runs/20261113T210754Z-2306016-chain_c5p_final-6c8f8d

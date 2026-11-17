@@ -1,0 +1,43 @@
+PASSED c8p_f33_final.ml: 1/1 bindings proved, 1/1 spec bindings matched, 92/92 spec pins matched, 0 new axioms, eval 7.5s (wasm)
+budgets: leaf=1800s preparation=2400s (separate)
+source: /home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c8/proj/tasks/bubble-echo/vortex/proofs/c8p_f33_final.ml sha=3f602660628a
+  VA1_F33_TO_F25_V: proved source_line=7
+binding_counts: proved=1 failed=0 printed_unprobed=0 missing=0 unknown=0
+successful_probe_counts: conclusion_checked=1 thm_type_only=0 unknown=0
+spec: satisfied 1/1 bindings match, 92/92 pins match sha=2b662bc4db92 file=/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c8/proj/tasks/bubble-echo/vortex/proofs/c8p_f33.spec
+  spec VA1_F33_TO_F25_V: matched (|- forall fs a0 a1 a2 m. fs 32 = va1_f32_mc,2,1 /\ fs 34 = va1_f34_mc,3,0 /\ read (bytes32 (word 16396)) m = word 4294967295 /\ ~(read (bytes32 (word 16392)) m = word 0) /\ ~(a0 = word 0 /\ a1 = word 0 /\ a2 = word 0) ==> ensures (wasmc fs) (va1_f33_pre a0 a1 a2 m) (\s. read wcode s = va1_puncture_m...)
+  spec definition va1_pnrm: pinned (|- va1_pnrm = (\a0 a1 a2. wfun 159 (wfbin 160 (wfbin 160 (wfbin 162 (wfcvt 183 a0) (wfcvt 183 a0)) (wfbin 162 (wfcvt 183 a1) (wfcvt 183 a1))) (wfbin 162 (wfcvt 183 a2) (wfcvt 183 a2)))))
+  spec definition va1_pu0: pinned (|- va1_pu0 = (\a0 a1 a2. wfbin 163 (wfcvt 183 a0) (va1_pnrm a0 a1 a2)))
+  spec definition va1_pu1: pinned (|- va1_pu1 = (\a0 a1 a2. wfbin 163 (wfcvt 183 a1) (va1_pnrm a0 a1 a2)))
+  spec definition va1_pu2: pinned (|- va1_pu2 = (\a0 a1 a2. wfbin 163 (wfcvt 183 a2) (va1_pnrm a0 a1 a2)))
+  spec definition va1_pe1x: pinned (|- va1_pe1x = (\a0 a1 a2. va1_f34e1x (va1_pu0 a0 a1 a2) (va1_pu1 a0 a1 a2) (va1_pu2 a0 a1 a2)))
+  spec definition va1_pe1y: pinned (|- va1_pe1y = (\a0 a1 a2. va1_f34e1y (va1_pu0 a0 a1 a2) (va1_pu1 a0 a1 a2) (va1_pu2 a0 a1 a2)))
+  spec definition va1_pe1z: pinned (|- va1_pe1z = (\a0 a1 a2. va1_f34e1z (va1_pu0 a0 a1 a2) (va1_pu1 a0 a1 a2) (va1_pu2 a0 a1 a2)))
+  spec definition va1_pe2x: pinned (|- va1_pe2x = (\a0 a1 a2. va1_f34e2x (va1_pu0 a0 a1 a2) (va1_pu1 a0 a1 a2) (va1_pu2 a0 a1 a2)))
+  spec definition va1_pe2y: pinned (|- va1_pe2y = (\a0 a1 a2. va1_f34e2y (va1_pu0 a0 a1 a2) (va1_pu1 a0 a1 a2) (va1_pu2 a0 a1 a2)))
+  spec definition va1_pe2z: pinned (|- va1_pe2z = (\a0 a1 a2. va1_f34e2z (va1_pu0 a0 a1 a2) (va1_pu1 a0 a1 a2) (va1_pu2 a0 a1 a2)))
+  spec definition va1_pw: pinned (|- va1_pw = (\w. wfcvt 184 (word_udiv (word_add w (word 4294942995)) (word 977))))
+  spec definition va1_pg12: pinned (|- va1_pg12 = (\w. va1_f32v (wfbin 162 (va1_pw w) (word 4606281698874543309)) (word 1)))
+  ... 80 more; use --json --verbose
+spec_foundation: 0 new axioms; no new definitions, types or constants
+phases: preparation=9.513s restore=1.211s evaluation=0.181s probe=6.658s request_overhead=0.684s evaluation_cpu=0.099s (observed)
+label: c8fin-f33
+inputs: 68 files; closure_sha=173109bd6b5b
+inherited_project_basis: /home/bluestar/.cache/hol-hearth/project-bases/.automatic/5a234839f50c865c118e7cc57ab28e898038478de2a2e2c1c1adf260f9c4f6f0/dependencies.ml sha=5a234839f50c
+basis_preparation_receipt: /home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c8/official-runs/20261116T035442Z-3750969-dependencies-216904/transcript.log.json
+basis_layer 1/13: c5015d5f69a5 /home/bluestar/.cache/hol-hearth/project-bases/.automatic/fef71dde60d3bcce3f123e55e3b9d971b06686df9f9ae8b4c4a349efe00d1c2a/dependencies.ml receipt=/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c8/official-runs/20261116T000210Z-3433566-dependencies-6f7334/transcript.log.json
+basis_layer 2/13: cfc71a3e09fb /home/bluestar/.cache/hol-hearth/project-bases/.automatic/6206e228bb1e97cfb1339eb1f56026fcf068cc12a085879f9a865b0fc4f02083/dependencies.ml receipt=/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c8/official-runs/20261116T001010Z-3439804-dependencies-beaf20/transcript.log.json
+basis_layer 3/13: 17344ab0e4ca /home/bluestar/.cache/hol-hearth/project-bases/.automatic/931b36cb3e7eef77a59c961c7f6e1816d0c43cf38dae893ea7fafcc460bf11ae/dependencies.ml receipt=/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c8/official-runs/20261116T002119Z-3448458-dependencies-35b178/transcript.log.json
+basis_layer 4/13: 9d769d248600 /home/bluestar/.cache/hol-hearth/project-bases/.automatic/b05011e08a6b4094b685907ca9abe6931baa5a52815208174f2d7fb36e9a5ec8/dependencies.ml receipt=/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c8/official-runs/20261116T031913Z-3701053-dependencies-a9da7e/transcript.log.json
+basis_layer 5/13: a70f03077b24 /home/bluestar/.cache/hol-hearth/project-bases/.automatic/5ae90c0e2eed7df80572de32d5122297b9afa2765fcfe568b6db4ffd7aec4198/dependencies.ml receipt=/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c8/official-runs/20261116T032159Z-3702863-dependencies-ddb8a9/transcript.log.json
+basis_layer 6/13: ddad8b8a57b9 /home/bluestar/.cache/hol-hearth/project-bases/.automatic/59a8afdbbccad71d98e67a57061a37944df6578de613b41bbdbb7358e4cf9175/dependencies.ml receipt=/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c8/official-runs/20261116T032502Z-3705079-dependencies-19cdda/transcript.log.json
+basis_layer 7/13: f86e56534b84 /home/bluestar/.cache/hol-hearth/project-bases/.automatic/1f5bd27df225adf2d6bb96b8fa7c612f0eba67c321b4239ea1244a60f5a382ab/dependencies.ml receipt=/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c8/official-runs/20261116T032533Z-3705513-dependencies-b42afc/transcript.log.json
+basis_layer 8/13: 84c571c06683 /home/bluestar/.cache/hol-hearth/project-bases/.automatic/eeb68a673a14b0ad0e7037a3427261d2439da61fcc34fe88a23c78035fb552a2/dependencies.ml receipt=/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c8/official-runs/20261116T034020Z-3738945-dependencies-f0a399/transcript.log.json
+basis_layer 9/13: c576ebcc2521 /home/bluestar/.cache/hol-hearth/project-bases/.automatic/73758a5cc28c96572b5f9a528b59562c77c3008ba64c748595597e25cd3ddf9f/dependencies.ml receipt=/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c8/official-runs/20261116T034241Z-3741738-dependencies-337b79/transcript.log.json
+basis_layer 10/13: 3eda3dae2daa /home/bluestar/.cache/hol-hearth/project-bases/.automatic/759803a40e9c6f2f3308b1faabadcf7c54262a4f59696079545f78cc9060b8fd/dependencies.ml receipt=/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c8/official-runs/20261116T034959Z-3747454-dependencies-df220d/transcript.log.json
+basis_layer 11/13: 0234f44dacb4 /home/bluestar/.cache/hol-hearth/project-bases/.automatic/49dc5ff181d4e888ed8930d9dcd456e03d5bb58dde38c4df283bb5effed55f07/dependencies.ml receipt=/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c8/official-runs/20261116T035109Z-3748263-dependencies-30815a/transcript.log.json
+basis_layer 12/13: 80d75ad772dc /home/bluestar/.cache/hol-hearth/project-bases/.automatic/5b23363a2f88fb30d23300237ea658b1da37672e709332174e57eb0952dfb2ae/dependencies.ml receipt=/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c8/official-runs/20261116T035238Z-3749270-dependencies-ee5df7/transcript.log.json
+basis_layer 13/13: aa74a8910b85 /home/bluestar/.cache/hol-hearth/project-bases/.automatic/5a234839f50c865c118e7cc57ab28e898038478de2a2e2c1c1adf260f9c4f6f0/dependencies.ml receipt=/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c8/official-runs/20261116T035442Z-3750969-dependencies-216904/transcript.log.json
+basis_scope: preparation was checked separately; this attempt checks the full leaf in a fresh child
+receipt: /home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c8/official-runs/20261116T035439Z-3750969-c8p_f33_final-dbb095/transcript.log.json
+NEXT: /home/bluestar/src/hol-hearth/hearth inspect /home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c8/official-runs/20261116T035439Z-3750969-c8p_f33_final-dbb095

@@ -1,0 +1,25 @@
+# rung	case	official run dir (relative to bluestar26 /home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342)
+C1	chain_c1_final	finish-c1/official-runs/20261111T230145Z-182646-chain_c1_final-8e8d37
+C2	chain_c2_final	finish-c2/official-runs/20261112T021725Z-232506-chain_c2_final-aa9485
+C3a	chain_c3a_final	finish-c3/official-runs/20261113T164323Z-2023970-chain_c3a_final-4abf03
+C3b	chain_c3b_final	finish-c3/official-runs/20261113T083834Z-1392598-chain_c3b_final-395646
+C4	chain_c4_final	finish-c4/official-runs/20261113T200833Z-2266653-chain_c4_final-94e1ae
+C5	chain_c5_leaves_final	finish-c5/official-runs/20261113T175846Z-2126091-chain_c5_leaves_final-8c62cf
+C5	chain_c5_punct_final	finish-c5/official-runs/20261113T201025Z-2268690-chain_c5_punct_final-3aab26
+C5	chain_c5_tof25_final	finish-c5/official-runs/20261113T203724Z-2286666-chain_c5_tof25_final-5c887c
+C5p	chain_c5p_final	finish-c5/official-runs/20261113T210754Z-2306016-chain_c5p_final-6c8f8d
+C6a	chain_c6a_final	c6a/runs/20261113T093222Z-1518944-chain_c6a_final-12cd59
+C6b	chain_c6b_final	finish-c6b/official-runs/20261113T202905Z-2281029-chain_c6b_final-076d02
+C7b	chain_c7b_final	finish-c7/official-runs/20261114T180514Z-2467216-chain_c7b_final-ba9127
+C7a	chain_c7a_final	finish-c7/official-runs/20261114T193245Z-2534227-chain_c7a_final-f46d4f
+C8b	c8b_final	finish-c8b/official-runs/20261114T230057Z-2694409-c8b_final-5fb501
+C8a	c8a_born_probe	finish-c8/official-runs/20261116T024428Z-3650961-c8a_born_probe-ad3144
+C8a	c8a_birth_final	finish-c8/official-runs/20261116T031102Z-3681140-c8a_birth_final-f78237
+C8a	c8a_r4n	finish-c8/official-runs/20261116T021430Z-3552800-c8a_r4n-37eba9
+C8p	c8p_leaves2_final	finish-c8/official-runs/20261116T033510Z-3711700-c8p_leaves2_final-4deec3
+C8p	c8p_f25h2_final	finish-c8/official-runs/20261116T033646Z-3724298-c8p_f25h2_final-607397
+C8p	c8p_f33_final	finish-c8/official-runs/20261116T035439Z-3750969-c8p_f33_final-dbb095
+C8p	c8p_nu_final	finish-c8/official-runs/20261116T023207Z-3588786-c8p_nu_final-b30afb
+C8e	c8e_defs_probe	finish-c8/official-runs/20261116T013716Z-3505941-c8e_defs_probe-d8a888
+C8e	c8e_final	finish-c8/official-runs/20261116T024052Z-3620671-c8e_final-ba2924
+C8f	c8f_final	finish-c8f/official-runs/20261116T201033Z-4075631-c8f_final-655f67

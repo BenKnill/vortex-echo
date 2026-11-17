@@ -1,0 +1,18 @@
+C5 class sentence (all of C5, parts 1 and 2; round 2):
+
+PROVED (spec-locked Hearth receipts on the shared runtime, hol-hearth main 6adb41ce, wasm profile; 0 new axioms, hr attest
+transitive axioms 0) for the exact bytes of vortex_a1.wasm (sha256 a3cf8c82...): part 1, chain_c5_leaves.spec 610c0d63 (14
+theorems: the f64 trunc guard VA1_TRUNC_GUARD_OK; f32 from its entry state reaches WDone with one f64 result and no trap for
+every x and k, touching no memory or global; f34 called as f33 calls it, f34(16352, 16320, 16288) with memory size 4194304,
+reaches WDone with no trap, writing memory only in its six f64 words at 16288, 16296, 16304, 16320, 16328 and 16336; entry and
+non-vacuity lemmas); part 2a, chain_c5_punct.spec de4ae155 (7 theorems: f33's host entry state satisfies va1_f33_pre, the
+three early exits that return 1, 3 or 2, the epilogue after call 25, and non-vacuity); part 2b, chain_c5_tof25.spec 1a2897e0
+(VA1_F33_TO_F25: from va1_f33_pre, the specified host entry with memory size 4194304, global 0 = 16384, empty stack and labels
+and arguments a0, a1, a2 in locals 0..2, under wasmc with fs 32 and fs 34 the exact f32 and f34 bodies, when no early exit
+applies (pop word at 16396 is -1, clock word at 16392 is nonzero, arguments not all zero), f33 runs its prologue and the full
+2048 x 128 table loops without trapping and stops at its `call 25` instruction (pc 1232) with exactly
+[I32 a2; I32 a1; I32 a0] on the stack, global 0 = local 3 = 16288, memory size unchanged and every byte below 4194304 outside
+[16288,16384) and [65536,1114112) unchanged). The execution contracts are total-correctness ensures. Float compares and
+trapping truncs are exact on the bits; rounding operations (wfbin, wfun, other wfcvt) are fixed but unspecified, so NO float
+value or table entry is claimed. Not claimed: the values written to the table, f25 itself (C3b) and the composition through
+call 25 (C6a, which must also supply fs 25 = (va1_f25_mc,3,1)).

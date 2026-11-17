@@ -1,0 +1,48 @@
+receipt /home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c8/official-runs/20261116T013716Z-3505941-c8e_defs_probe-d8a888/transcript.log.json sha256 759b2a247fb74ce3019481f51e487ba1a7f82b84511ffb5ea594f81d9729bedb
+OK   [receipt] verdict passed | PASSED c8e_defs_probe.ml: 16/16 bindings proved, 16/16 spec bindings matched, 214/214 spec pins matched, 0 new axioms, eval 67.7s (wasm)
+OK   [receipt] exit 0, semantic succeeded, source completed, completion marker valid
+OK   [receipt] binding counts: 0 failed/missing/unknown/unprobed, >0 proved | {'failed': 0, 'missing': 0, 'printed_unprobed': 0, 'proved': 16, 'unknown': 0}
+OK   [spec] receipt is spec-locked (has a spec block)
+OK   [receipt] verdict line counts agree with 16 binding and 214 pin records | 16/16 bindings proved, 16/16 spec bindings matched, 214/214 spec pins matched, 0 new axioms
+OK   [axioms] verdict new_axioms 0
+OK   [axioms] leaf foundation delta: observed, 0 new axioms | {'axioms': 0, 'constants': 0, 'definitions': 0, 'types': 0}
+OK   [axioms] spec foundation axioms 0, unallowed [], status ok | {'axioms': 0, 'unallowed': [], 'status': 'ok'}
+OK   [spec] receipt spec sha256 == sha256(/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c8/proj/tasks/bubble-echo/vortex/proofs/c8e_defs.spec) | 36ef6d6a5261170e0f31e3464dad2448ec8c65ebb4e87a8b248fd1ef954e5a57
+OK   [spec] spec outcome satisfied | satisfied
+OK   [spec] parser context unchanged, no reasons
+OK   [spec] receipt allow list == the spec file's allow lines
+OK   [pins] unpinned names are only allowed ones
+OK   [frozen] /home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/FROZEN-C8E.txt has a line with spec sha256 36ef6d6a5261 | line 2
+OK   [frozen] that line is a freeze-spec v1 record | kind freeze-spec
+OK   [frozen] every receipt under the run roots is readable and every run with this spec has a start time
+NOTE 2 receipted run(s) with this spec sha under /home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/c8e/runs, /home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c8/official-runs; first /home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/c8e/runs/20261115T181850Z-3026799-c8e_defs_probe-5080e0 at 2026-11-15T18:18:52Z
+OK   [frozen] freeze time 2026-11-15T18:18:06Z (line 2) is before the first receipted run | first run 2026-11-15T18:18:52Z
+OK   [spec] spec parse: 16 theorems, 214 definitions, no duplicates, raw count 230 agrees
+OK   [bindings] one binding record per spec theorem (16)
+OK   [pins] one pin record per spec definition (214)
+OK   [bindings] all 16 bindings matched, proved, 0 hypotheses, conclusion == spec conclusion, spec term == file
+OK   [pins] all 214 pins pinned, defined == spec conclusion, spec term == file
+OK   [attest] attest output is for this receipt (sha256 759b2a247fb7) | 759b2a247fb7
+OK   [attest] attest verdict passed
+OK   [attest] attest transitive_foundation axioms=0 | transitive_foundation: axioms=0
+OK   [closure] closure project files == commit blobs (97/97 under /home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c8/proj; 14 outside root)
+OK   [closure] closure files outside the project root are only Hearth basis layer files (.automatic/<sha256>/dependencies.ml) or profile-relative (14)
+NOTE closure files outside the project root (not checked against commits): dependencies.ml, wasm_tactics.ml
+OK   [closure] execution.ml == executed_source_sha256, original.ml == source_sha256
+OK   [closure] leaf tied together: source == closure entrypoint (under the root), source_sha256 == entrypoint sha256 == its commit blob, original.ml text inside execution.ml | source /home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c8/proj/tasks/bubble-echo/vortex/proofs/c8e_defs_probe.ml entrypoint /home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c8/proj/tasks/bubble-echo/vortex/proofs/c8e_defs_probe.ml
+OK   [cheat] no new_axiom / mk_thm / CHEAT_TAC / cheat / Obj.magic outside comments and strings (107 .ml files + execution.ml)
+OK   mutant identity (control: must PASS)            exit 0 (want 0)
+OK   mutant verdict new_axioms=1                     exit 1 (want 1), target [axioms] failed
+OK   mutant spec foundation axioms=1                 exit 1 (want 1), target [axioms] failed
+OK   mutant leaf foundation delta axioms=1           exit 1 (want 1), target [axioms] failed
+OK   mutant attest transitive axioms=1               exit 1 (want 1), target [attest] failed
+OK   mutant receipt spec sha flipped                 exit 1 (want 1), target [spec] failed
+OK   mutant FROZEN sha flipped                       exit 1 (want 1), target [frozen] failed
+OK   mutant freeze time moved after the run          exit 1 (want 1), target [frozen] failed
+OK   mutant pin dropped                              exit 1 (want 1), target [pins] failed
+OK   mutant binding with 1 hypothesis                exit 1 (want 1), target [bindings] failed
+OK   mutant binding not proved                       exit 1 (want 1), target [bindings] failed
+OK   mutant closure sha flipped                      exit 1 (want 1), target [closure] failed
+OK   mutant new_axiom planted in execution.ml        exit 1 (want 1), target [cheat] failed
+MUTANTS: all caught, control passed
+RESULT: PASS check-rung (30 checks, 0 failed)

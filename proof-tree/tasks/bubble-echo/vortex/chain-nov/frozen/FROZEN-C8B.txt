@@ -1,0 +1,1 @@
+2026-11-14 15:30:03 EST (2026-11-14T20:30:03Z) FROZEN c8b_final.spec sha256 25612b2d505d45fd7fee1fb00ece6c5c6699f9df6c9aa95c24b0c25b48e9b1b3 sol 20261114-151636-vortex-chain-c8b-spec-unused-5999 round 2 score 10/10 accept; by C8b prover (Claude Opus 5.5); freeze-spec v1; bluestar c8b/runs grep: 0 receipts carry this sha before the freeze

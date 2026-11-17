@@ -1,0 +1,1 @@
+2026-11-13 07:44:53 EST (2026-11-13T12:44:53Z) FROZEN chain_c7b_final.spec sha256 5243b2ead4aaacff38f2c487d8e41e65c35cf16751316103553b61af0bcd92b9 sol 20261113-073230-vortex-chain-c7-specs-c7b-au-d67a round 2 score 10/10 accept; by C7 (Claude Opus 5.5); freeze-spec v1

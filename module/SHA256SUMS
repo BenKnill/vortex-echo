@@ -1,0 +1,4 @@
+a3cf8c821534dd1613e2c6c6251a003320c40d5eb2dfc8e16a871c59636aede6  vortex_a1.wasm
+71e04cbde3e09e9cb3b41b333d0ec9c2dd0615859a56dc8f15b35e0775834dde  src/vortex.c
+5ffcecd4cbc172e13af72aa15745ec3fcdf73041a3766dcaeaef95fd2bba6d07  src/ve_core.c
+46b22c62b48a3b699cff1881bc46eb96dbcad4176bd34ddd2261a3c300451f00  src/drop_exports.py

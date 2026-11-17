@@ -1,0 +1,9 @@
+2026-11-11 18:15:38 EST (2026-11-11T23:15:38Z) FROZEN chain_c2_final.spec sha256 c7a0c0a83fdde45279afc2c17d5eec1e9345934bda0189696861600242439fb8
+  path bluestar26 /home/bluestar/lanes/demo1-wave-20261110-141705/vortex/proj/tasks/bubble-echo/vortex/proofs/chain_c2_final.spec (untracked, chmod 444); copies spec-c2/chain_c2_final.spec (Mac + bluestar role dirs)
+  33 theorems (11 new + 22 copied verbatim), 83 definition pins (5 new + 78 copied verbatim), 3 allows (va1_pop_reach, va1_cmds_ok, va1_cmds_end: pinned by VA1_POP_REACH_CLAUSES / VA1_CMDS_OK_CLAUSES / VA1_CMDS_END_CLAUSES); no theorem or definition mentions va1_birth_ok (R4c's VA1_TICK_FORWARD_POP_R5C used directly)
+  copied from frozen chain_c1_final.spec 3b62701f, pop_r5_r4c.spec 9b8aab73, pop_design_r0_end.spec a58767df; byte-identity asserted by spec-c2/tools/gen_c2.py (regenerates the spec byte for byte from build/header.txt + build/new_c2.part + the three inputs)
+  review: GPT-6.1 Sol 20261111-180922-vortex-chain-c2-spec-pop-cha-9815 round 1 = 9/10 accept (0 must-fix; 2 should-fix, both in the checking tools, not the spec: gen_check_c2.py projection line, scrubprobe.mjs perturbed-R0 memory check), accepted exactly this sha
+  typecheck: Hearth session-fd69e22ca8d93320ac878a2a on basis layer 984c79de32dd, 2026-11-11T23:03:01Z-23:04:18Z (parse/type only, no proofs)
+  basis for the prover: layer 984c79de32dd (stage run with no spec, chain_c2s_stage.ml f6a85de3: R4c basis febd5e13d4f6 + pop_s0_end.ml + pop_r5_r4c_final.ml + chain_c1_host.ml; receipt spec-c2/runs/20261111T225334Z-175709-chain_c2s_stage-844b83); plan spec-c2/PLAN-PROVER-C2.md
+  INVOCATION MODE: prove with plain --spec, NOT --benchmark (allows for define'd constants, as for C1).
+  no proving run has used this spec before this line. Frozen by SPEC-C2 (Claude Opus 5.5).

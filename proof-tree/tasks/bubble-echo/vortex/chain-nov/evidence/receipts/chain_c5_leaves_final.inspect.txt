@@ -1,0 +1,56 @@
+PASSED chain_c5_leaves_final.ml: 14/14 bindings proved, 14/14 spec bindings matched, 24/24 spec pins matched, 0 new axioms, eval 7.3s (wasm)
+budgets: leaf=1800s preparation=3600s (separate)
+source: /home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c5/proj/tasks/bubble-echo/vortex/proofs/chain_c5_leaves_final.ml sha=dc7cc8b0d191
+  VA1_C5_WDECL_VALS_CLAUSES: proved source_line=3
+  VA1_F64G_MAG_LT: proved source_line=11
+  VA1_F64G_SPLIT: proved source_line=19
+  VA1_F64_TRUNC_GUARD: proved source_line=23
+  VA1_TRUNC_GUARD_OK: proved source_line=27
+  VA1_F32_CALLEE: proved source_line=30
+  VA1_F34_CALLEE: proved source_line=34
+  VA1_PUNCTURE_CALLEE: proved source_line=39
+  VA1_F32_CORRECT: proved source_line=44
+  VA1_F32_ENTRY: proved source_line=53
+  VA1_F32_PRE_SAT: proved source_line=60
+  VA1_F34_CORRECT: proved source_line=65
+  ... 2 more (2 proved); use --verbose or --binding NAME
+binding_counts: proved=14 failed=0 printed_unprobed=0 missing=0 unknown=0
+successful_probe_counts: conclusion_checked=14 thm_type_only=0 unknown=0
+spec: satisfied 14/14 bindings match, 24/24 pins match sha=610c0d63e262 file=/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c5/proj/tasks/bubble-echo/vortex/proofs/chain_c5_leaves.spec
+  spec VA1_C5_WDECL_VALS_CLAUSES: matched (|- (forall code pc. wdecl_vals 0 code pc = SOME []) /\ (forall k code pc. wdecl_vals (SUC k) code pc = wobind (wuleb (wdrop pc code)) (\p. wobind (whd (wdrop (pc + SND p) code)) (\t. wobind (wdecl_vals k code (pc + SND p + 1)) (\r. SOME (APPEND (REPLICATE (FST p) (wzero_of (val t))) r))))))
+  spec VA1_F64G_MAG_LT: matched (|- forall E Fr. E <= 1085 /\ Fr < 4503599627370496 ==> (if 1075 <= (if E = 0 then 1 else E) then (if E = 0 then Fr else Fr + 4503599627370496) * 2 EXP ((if E = 0 then 1 else E) - 1075) else (if E = 0 then Fr else Fr + 4503599627370496) DIV 2 EXP (1075 - (if E = 0 then 1 else E))) < 9223372036854775808)
+  spec VA1_F64G_SPLIT: matched (|- forall x. x MOD 9223372036854775808 = (x DIV 4503599627370496) MOD 2048 * 4503599627370496 + x MOD 4503599627370496)
+  spec VA1_F64_TRUNC_GUARD: matched (|- forall v. wfrel 99 (word_and v (word 9223372036854775807)) (word 4890909195324358656) ==> ~wftrap 176 v)
+  spec VA1_TRUNC_GUARD_OK: matched (|- va1_trunc_guard_ok)
+  spec VA1_F32_CALLEE: matched (|- wasm_entry va1_f32_mc = SOME 5 /\ wasm_decl_vals va1_f32_mc = SOME [F64 (word 0); I64 (word 0)])
+  spec VA1_F34_CALLEE: matched (|- wasm_entry va1_f34_mc = SOME 7 /\ wasm_decl_vals va1_f34_mc = SOME [F64 (word 0); I32 (word 0); F64 (word 0); F64 (word 0); F64 (word 0); F64 (word 0); F64 (word 0)])
+  spec VA1_PUNCTURE_CALLEE: matched (|- wasm_entry va1_puncture_mc = SOME 17 /\ wasm_decl_vals va1_puncture_mc = SOME [I32 (word 0); I32 (word 0); F64 (word 0); F64 (word 0); F64 (word 0); F64 (word 0); F64 (word 0); F64 (word 0); I32 (word 0); F64 (word 0); F64 (word 0); F64 (word 0); F64 (word 0); F64 (word 0); F64 (word 0); F64 (wor...)
+  spec VA1_F32_CORRECT: matched (|- forall x k. ensures wasm (\s. read wcode s = va1_f32_mc /\ read wpc s = word 5 /\ read wstatus s = WRunning /\ read wstack s = [] /\ read wlabels s = [] /\ read warity s = 1 /\ read (wlocal 0) s = F64 x /\ read (wlocal 1) s = I32 k) (\s. read wstatus s = WDone /\ (exists r. read wstack s = [F64 r...)
+  spec VA1_F32_ENTRY: matched (|- forall x k rest s. (\s. read wcode s = va1_f32_mc /\ read wpc s = word 5 /\ read wstatus s = WRunning /\ read wstack s = [] /\ read wlabels s = [] /\ read warity s = 1 /\ read (wlocal 0) s = F64 x /\ read (wlocal 1) s = I32 k) (wcall_entry va1_f32_mc 2 1 (CONS (I32 k) (CONS (F64 x) rest)) 5 [F64 ...)
+  spec VA1_F32_PRE_SAT: matched (|- forall x k. exists s. (\s. read wcode s = va1_f32_mc /\ read wpc s = word 5 /\ read wstatus s = WRunning /\ read wstack s = [] /\ read wlabels s = [] /\ read warity s = 1 /\ read (wlocal 0) s = F64 x /\ read (wlocal 1) s = I32 k) s)
+  spec VA1_F34_CORRECT: matched (|- ensures wasm (\s. read wcode s = va1_f34_mc /\ read wpc s = word 7 /\ read wstatus s = WRunning /\ read wstack s = [] /\ read wlabels s = [] /\ read warity s = 0 /\ read wmemsize s = 4194304 /\ read (wlocal 0) s = I32 (word 16352) /\ read (wlocal 1) s = I32 (word 16320) /\ read (wlocal 2) s = I32...)
+  ... 2 more; use --json --verbose
+  spec definition va1_f32_mc: pinned (|- va1_f32_mc = [word 2; word 1; word 124; word 1; word 126; word 32; word 0; word 32; word 0; word 68; word 131; word 200; word 201; word 109; word 48; word 95; word 228; word 63; word 162; word 68; word 0; word 0; word 0; word 0; word 0; word 0; word 224; word 63; word 160; word 156; word 34; word...)
+  spec definition va1_f34_mc: pinned (|- va1_f34_mc = [word 3; word 1; word 124; word 1; word 127; word 5; word 124; word 32; word 1; word 32; word 0; word 43; word 3; word 8; word 34; word 3; word 68; word 0; word 0; word 0; word 0; word 0; word 0; word 0; word 0; word 68; word 0; word 0; word 0; word 0; word 0; word 0; word 240; word ...)
+  spec definition va1_puncture_mc: pinned (|- va1_puncture_mc = [word 8; word 2; word 127; word 6; word 124; word 1; word 127; word 11; word 124; word 1; word 127; word 8; word 124; word 1; word 127; word 1; word 126; word 35; word 128; word 128; word 128; word 128; word 0; word 65; word 224; word 0; word 107; word 34; word 3; word 36; word ...)
+  spec definition wzero_of: pinned (|- wzero_of = (\t. if t = 126 then I64 (word 0) else if t = 125 then F32 (word 0) else if t = 124 then F64 (word 0) else I32 (word 0)))
+  spec definition wasm_decl_vals: pinned (|- wasm_decl_vals = (\code. wobind (wuleb code) (\p. wdecl_vals (FST p) code (SND p))))
+  spec definition wcall_locals: pinned (|- wcall_locals = (\args decls k. if k < LENGTH args then EL (LENGTH args - 1 - k) args else if k - LENGTH args < LENGTH decls then EL (k - LENGTH args) decls else I32 (word 0)))
+  spec definition wcall_entry: pinned (|- wcall_entry = (\code np nr stk e decls s. write wcode code (write wpc (word e) (write wstack [] (write wlocals (wcall_locals (wtake np stk) decls) (write wlabels [] (write warity nr (write wstatus WRunning s))))))))
+  spec definition wf_ebits: pinned (|- wf_ebits = (\a. if dimindex (:N) = 32 then 8 else 11))
+  spec definition wf_fbits: pinned (|- wf_fbits = (\a. dimindex (:N) - 1 - wf_ebits a))
+  spec definition wf_exp: pinned (|- wf_exp = (\a. (val a DIV 2 EXP wf_fbits a) MOD 2 EXP wf_ebits a))
+  spec definition wf_frac: pinned (|- wf_frac = (\a. val a MOD 2 EXP wf_fbits a))
+  spec definition wf_sign: pinned (|- wf_sign = (\a. val a DIV 2 EXP (dimindex (:N) - 1) = 1))
+  ... 12 more; use --json --verbose
+spec_foundation: 0 new axioms; no new definitions, types or constants
+phases: preparation=0.000s restore=1.257s evaluation=0.545s probe=5.860s request_overhead=0.941s evaluation_cpu=0.519s (observed)
+label: c5fin-leaves
+inputs: 9 files; closure_sha=68939b810623
+inherited_project_basis: /home/bluestar/.cache/hol-hearth/project-bases/.automatic/03a1071c1461252762d722bfa4e9e6085289ec756906a4b28e475bf53cd8f0f1/dependencies.ml sha=03a1071c1461
+basis_preparation_receipt: /home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c5/official-runs/20261113T175752Z-2045149-dependencies-5ce83f/transcript.log.json
+basis_layer 1/2: 37cdecb513e5 /home/bluestar/.cache/hol-hearth/project-bases/.automatic/f9c27d585d1ab59808a2bdee920867fb30a957e049f4db119fb37e6936ce1abb/dependencies.ml receipt=/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c5/official-runs/20261113T165515Z-2043982-dependencies-fe27fa/transcript.log.json
+basis_layer 2/2: 9221650db283 /home/bluestar/.cache/hol-hearth/project-bases/.automatic/03a1071c1461252762d722bfa4e9e6085289ec756906a4b28e475bf53cd8f0f1/dependencies.ml receipt=/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c5/official-runs/20261113T175752Z-2045149-dependencies-5ce83f/transcript.log.json
+basis_scope: preparation was checked separately; this attempt checks the full leaf in a fresh child
+receipt: /home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c5/official-runs/20261113T175846Z-2126091-chain_c5_leaves_final-8c62cf/transcript.log.json
+NEXT: /home/bluestar/src/hol-hearth/hearth inspect /home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c5/official-runs/20261113T175846Z-2126091-chain_c5_leaves_final-8c62cf

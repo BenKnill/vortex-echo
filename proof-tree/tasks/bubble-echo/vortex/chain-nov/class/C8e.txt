@@ -1,0 +1,21 @@
+C8e class sentence (rows E1-E4; spec c8e.spec 582a9f15, frozen 2026-11-15; C8e PROVER, Claude Opus 5.5):
+On the exact bytes of vortex_a1.wasm (sha256 a3cf8c82...), in hol-hearth's model of WebAssembly (wasmn) with 0 new axioms
+(spec-locked receipt, attest, check-rung): for every memory whose snapshot (the 487424 i32 words at bytes [16384, 1966080)) is in
+the domain va1_dom (1 <= N <= 640, T >= P when P is not the sentinel -1, and by kind: no clock wrap; a births log of the shape the pop theorems need; a
+clean auto puncture whose new P is not the sentinel -1), one host call of tick_forward, with the module's functions in place
+(va1_fs_all) and global 0 = 16384, ends with the same globals and a snapshot equal to va1_fwd of the old one: a named function
+of the snapshot alone, covering plain, pop (with the births named) and auto-puncture ticks (with C8p's named speed table), and
+returning 0 exactly at the end state, where nothing changes (VA1_FWD_FUNCTION). For every snapshot in the image va1_imgt PT,
+one call of tick_backward returns 1 and leaves va1_bwd of the snapshot (VA1_BWD_FUNCTION). In pure HOL, on va1_dom minus the
+end state, va1_bwd undoes va1_fwdt PT word for word, va1_fwdt PT is injective and the image is exactly the set of forward
+results (VA1_BWD_FWD, VA1_FWD_BWD, VA1_FWD_INJ, VA1_IMG_EXISTS), for every table function PT (va1_bwd takes no PT argument and uses the table stored in the
+snapshot; the auto-puncture inverse restores the zero table that va1_dom requires); each of the four kinds has a domain memory
+(VA1_DOM_SAT). The host theorems hold for every byte outside the snapshot region, so the snapshot after a call depends on the
+snapshot alone.
+Not covered: host non-interference (built into va1_hcall: nothing else touches memory or globals during a call); that init
+produces a domain state (tested, not proved); the trusted base (Hearth's wasm model, the float rounding functions inside the
+table term, which stay fixed but unspecified, va1_fs_all, global 0 = 16384, the HOL kernel); states outside va1_dom (clock
+wrap, T < P with P not the sentinel, an unclean puncture, an auto puncture at T + 1 = 0xffffffff, N outside 1..640, a births log violating
+va1_log_ok); the bytes outside the snapshot region beyond their not influencing it; va1_bwd outside the image; undoing the
+end call; the click form ("tick_forward; puncture" inverted by one tick_backward) and the films (rung C8f); any meaning of
+the floats.

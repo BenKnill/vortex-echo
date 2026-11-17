@@ -1,0 +1,62 @@
+PASSED c8a_birth_final.ml: 14/14 bindings proved, 14/14 spec bindings matched, 68/68 spec pins matched, 0 new axioms, eval 30.9s (wasm)
+budgets: leaf=2400s preparation=2400s (separate)
+source: /home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c8/proj/tasks/bubble-echo/vortex/proofs/c8a_birth_final.ml sha=62d5b1b99cc3
+  VA1_FWDN_CLAUSES: thm bound (conclusion and hypotheses not checked)
+  VA1_BWDN_CLAUSES: thm bound (conclusion and hypotheses not checked)
+  VA1_ISQ_CLAUSES: thm bound (conclusion and hypotheses not checked)
+  VA1_VK_RS_CLAUSES: thm bound (conclusion and hypotheses not checked)
+  VA1_VK_ACC_CLAUSES: thm bound (conclusion and hypotheses not checked)
+  VA1_WDECL_VALS_CLAUSES: thm bound (conclusion and hypotheses not checked)
+  VA1_BIRTH_EQ: proved source_line=46
+  VA1_BORN_SHAPE: proved source_line=74
+  VA1_BIRTH_EQ_OK: proved source_line=77
+  VA1_FOLD1_CLAUSES: proved source_line=78
+  VA1_FOLD2_CLAUSES: proved source_line=81
+  VA1_FOLD3_CLAUSES: proved source_line=84
+  ... 2 more (2 proved); use --verbose or --binding NAME
+binding_counts: proved=14 failed=0 printed_unprobed=0 missing=0 unknown=0
+successful_probe_counts: conclusion_checked=7 thm_type_only=7 unknown=0
+spec: satisfied 14/14 bindings match, 68/68 pins match sha=45a80dc63554 file=/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c8/proj/tasks/bubble-echo/vortex/proofs/c8a_birth.spec
+  spec VA1_BIRTH_EQ: matched (|- va1_birth_eq)
+  spec VA1_BORN_SHAPE: matched (|- forall mdl hp tbl t ra rb zq zp nd. val nd <= 16384 ==> ALL (\r. r 6 = word_add t (word 1) /\ r 10 = word 0 /\ r 11 = word 0) (va1_born mdl hp tbl t ra rb zq zp nd) /\ val nd + LENGTH (va1_born mdl hp tbl t ra rb zq zp nd) <= 16384)
+  spec VA1_BIRTH_EQ_OK: matched (|- va1_birth_eq ==> va1_birth_ok)
+  spec VA1_FOLD1_CLAUSES: matched (|- (forall mdl hp tbl t rb nd0 st. va1_fold1 mdl hp tbl t rb nd0 0 st = st) /\ (forall mdl hp tbl t rb nd0 k st. va1_fold1 mdl hp tbl t rb nd0 (SUC k) st = va1_step1 mdl hp tbl t rb nd0 k (va1_fold1 mdl hp tbl t rb nd0 k st)))
+  spec VA1_FOLD2_CLAUSES: matched (|- (forall mdl hp tbl t rb nd0 L. va1_fold2 mdl hp tbl t rb nd0 0 L = L) /\ (forall mdl hp tbl t rb nd0 k L. va1_fold2 mdl hp tbl t rb nd0 (SUC k) L = va1_step2 mdl hp tbl t rb nd0 k (va1_fold2 mdl hp tbl t rb nd0 k L)))
+  spec VA1_FOLD3_CLAUSES: matched (|- (forall mdl hp tbl t ra rb nd0 L. va1_fold3 mdl hp tbl t ra rb nd0 0 L = L) /\ (forall mdl hp tbl t ra rb nd0 k L. va1_fold3 mdl hp tbl t ra rb nd0 (SUC k) L = va1_step3 mdl hp tbl t ra rb nd0 k (va1_fold3 mdl hp tbl t ra rb nd0 k L)))
+  spec VA1_F13_ENTRY: matched (|- wasm_entry va1_f13_mc = SOME 13)
+  spec VA1_PUSH_CLAUSES: matched (|- (forall bs. va1_push [] bs = bs) /\ (forall r rs bs. va1_push (CONS r rs) bs = va1_push rs (va1_push1 r bs)))
+  spec VA1_FWDN_CLAUSES: matched (|- (forall f s. ve_fredkin_fwdn f 0 s = s) /\ (forall f n s. ve_fredkin_fwdn f (SUC n) s = ve_fredkin_fwd (f n) (ve_fredkin_fwdn f n s)))
+  spec VA1_BWDN_CLAUSES: matched (|- (forall f s. ve_fredkin_bwdn f 0 s = s) /\ (forall f n s. ve_fredkin_bwdn f (SUC n) s = ve_fredkin_bwdn f n (ve_fredkin_bwd (f n) s)))
+  spec VA1_ISQ_CLAUSES: matched (|- (forall x. ve_isq 0 x = x) /\ (forall k x. ve_isq (SUC k) x = ve_isq_step (ve_isq k x)))
+  spec VA1_VK_RS_CLAUSES: matched (|- (forall X C i c. ve_vk_rs X C i 0 c = word 0) /\ (forall X C i k c. ve_vk_rs X C i (SUC k) c = word_add (ve_vk_ti X C i (i + 1 + k) c) (ve_vk_rs X C i k c)))
+  ... 2 more; use --json --verbose
+  spec definition va1_rec12: pinned (|- va1_rec12 = (\w0 w1 w2 w3 w4 w5 w6 w7 w8 w9 i. if i = 0 then w0 else if i = 1 then w1 else if i = 2 then w2 else if i = 3 then w3 else if i = 4 then w4 else if i = 5 then w5 else if i = 6 then w6 else if i = 7 then w7 else if i = 8 then w8 else if i = 9 then w9 else word 0))
+  spec definition va1_b_sinf: pinned (|- va1_b_sinf = (\ff. let x = word_ushr (word_mul (word_zx ff) (word 1686629713)) 30 in let x2 = word_ushr (word_mul x x) 30 in let t1 = word_sub (word 1073741824) (word_ushr (word_mul x2 (word 6882960)) 30) in let t6 = va1_ck_tstep x2 178956971 (va1_ck_tstep x2 53687091 (va1_ck_tstep x2 25565282 (v...)
+  spec definition va1_b_bsin: pinned (|- va1_b_bsin = (\pk qb. let fa = word_and pk (word 1071644672) in let m = va1_b_sinf (if ~(qb = word 0) then word_sub (word 1073741824) fa else fa) in if ival pk < &0 then word_sub (word 0) m else m))
+  spec definition va1_b_bcos: pinned (|- va1_b_bcos = (\pk qb. let fa = word_and pk (word 1071644672) in let m = va1_b_sinf (if ~(qb = word 0) then fa else word_sub (word 1073741824) fa) in if ival (word_add pk (word 1073741824)) < &0 then word_sub (word 0) m else m))
+  spec definition va1_b_rsinm: pinned (|- va1_b_rsinm = (\pr. let fa = word_and pr (word 1073741823) in va1_b_sinf (if ~(word_and pr (word 1073741824) = word 0) then word_sub (word 1073741824) fa else fa)))
+  spec definition va1_b_rcos: pinned (|- va1_b_rcos = (\pr. let fa = word_and pr (word 1073741823) in let m = va1_b_sinf (if ~(word_and pr (word 1073741824) = word 0) then fa else word_sub (word 1073741824) fa) in if ival (word_add pr (word 1073741824)) < &0 then word_sub (word 0) m else m))
+  spec definition va1_b_isqrt: pinned (|- va1_b_isqrt = (\v. FST (SND (ve_isq 32 (v,word 0,word 4611686018427387904)))))
+  spec definition va1_b_tubearg: pinned (|- va1_b_tubearg = (\r spd. let bq = iword (wtdiv (&11651972255721782) (ival (word_mul spd spd))) in let aq = word_udiv (word_mul r (word 5)) (word 1536) in word_mul (if ival bq < &163840 then bq else word 163840) (word_zx (if val aq < 98304 then aq else word 98304))))
+  spec definition va1_b1_ok: pinned (|- va1_b1_ok = (\mdl tbl rb zq k. ~(val (word_add (rb k) (word 4244776699)) < 4248132142) /\ ~(ival (zq k) <= ival (zq ((k + 2047) MOD 2048))) /\ ~(ival (zq k) < ival (zq ((k + 1) MOD 2048))) /\ ~(ival (va1_ck_zpq mdl (va1_ck_spd tbl (rb k) k) k) > ival (word_sx (zq k)))))
+  spec definition va1_b1_rec: pinned (|- va1_b1_rec = (\mdl hp tbl t rb zq zp k. let r = rb k in let spd = va1_ck_spd tbl r k in let zz = word_sx (zq k) in let sq1 = va1_b_isqrt (va1_b_tubearg r spd) in let h3 = word_sx (hp 3) in let h4 = word_sx (hp 4) in let h5 = word_sx (hp 5) in let h6 = word_sx (hp 6) in let h7 = word_sx (hp 7) in ...)
+  spec definition va1_b2_ok: pinned (|- va1_b2_ok = (\mdl tbl t rb k. ~(val (word_add (rb k) (word 4245615560)) < 4249809864) /\ ~(val (word_ushr (word_mul (va1_ck_spd tbl (rb k) k) (word 801053)) 16) <= val (word_zx (va1_ck_hfin (word_xor (word_mul (word_xor (word k) (word_xor (word_mul (mdl 2) (word 3)) (word 2654435769))) (word 2246...)
+  spec definition va1_b2_rec: pinned (|- va1_b2_rec = (\mdl hp tbl t rb k. let r = rb k in let spd = va1_ck_spd tbl r k in let tube = word_add (word_ishr (word_mul (va1_b_isqrt (va1_b_tubearg r spd)) (word 5905580)) 16) (word 1076963049) in let h3 = word_sx (hp 3) in let h4 = word_sx (hp 4) in let h5 = word_sx (hp 5) in let h6 = word_sx...)
+  ... 56 more; use --json --verbose
+spec_foundation: 0 new axioms; no new definitions, types or constants
+phases: preparation=416.733s restore=1.520s evaluation=2.130s probe=27.950s request_overhead=0.825s evaluation_cpu=1.415s (observed)
+label: c8fin-birth
+inputs: 73 files; closure_sha=9929ea5e8a24
+inherited_project_basis: /home/bluestar/.cache/hol-hearth/project-bases/.automatic/adc49f49ed0f9b1db64885b210d9ce03f06fdf03fb17b875d6f38f894a63dc60/dependencies.ml sha=adc49f49ed0f
+basis_preparation_receipt: /home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c8/official-runs/20261116T031105Z-3681140-dependencies-6aa6a2/transcript.log.json
+basis_layer 1/8: c5015d5f69a5 /home/bluestar/.cache/hol-hearth/project-bases/.automatic/fef71dde60d3bcce3f123e55e3b9d971b06686df9f9ae8b4c4a349efe00d1c2a/dependencies.ml receipt=/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c8/official-runs/20261116T000210Z-3433566-dependencies-6f7334/transcript.log.json
+basis_layer 2/8: cfc71a3e09fb /home/bluestar/.cache/hol-hearth/project-bases/.automatic/6206e228bb1e97cfb1339eb1f56026fcf068cc12a085879f9a865b0fc4f02083/dependencies.ml receipt=/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c8/official-runs/20261116T001010Z-3439804-dependencies-beaf20/transcript.log.json
+basis_layer 3/8: 17344ab0e4ca /home/bluestar/.cache/hol-hearth/project-bases/.automatic/931b36cb3e7eef77a59c961c7f6e1816d0c43cf38dae893ea7fafcc460bf11ae/dependencies.ml receipt=/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c8/official-runs/20261116T002119Z-3448458-dependencies-35b178/transcript.log.json
+basis_layer 4/8: f530baaa2e98 /home/bluestar/.cache/hol-hearth/project-bases/.automatic/13d377c3161d6f219ae4667fc0f2a9c4bb6c1b78685a1460e05547808bf6d690/dependencies.ml receipt=/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c8/official-runs/20261116T003200Z-3455684-dependencies-bbbbf9/transcript.log.json
+basis_layer 5/8: 12ff2910e8b5 /home/bluestar/.cache/hol-hearth/project-bases/.automatic/19259abc2e81c885d2d092c668c2d37d7581c3ea4c839979733ea9ded42a9ec3/dependencies.ml receipt=/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c8/official-runs/20261116T024552Z-3665154-dependencies-430e8c/transcript.log.json
+basis_layer 6/8: dc8f5083a608 /home/bluestar/.cache/hol-hearth/project-bases/.automatic/916ba5d7b383aaddcd9cb2be5ec9f7970e0f1b0b2a2949a552ad9691d8b370db/dependencies.ml receipt=/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c8/official-runs/20261116T025353Z-3670070-dependencies-b0d828/transcript.log.json
+basis_layer 7/8: 69c93143996b /home/bluestar/.cache/hol-hearth/project-bases/.automatic/21da9e17b7522beff5f9ac701aa2dff57085de8631abe599d0ccdbb1273c83e8/dependencies.ml receipt=/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c8/official-runs/20261116T030341Z-3676653-dependencies-48de79/transcript.log.json
+basis_layer 8/8: 9b2ae05ad4e0 /home/bluestar/.cache/hol-hearth/project-bases/.automatic/adc49f49ed0f9b1db64885b210d9ce03f06fdf03fb17b875d6f38f894a63dc60/dependencies.ml receipt=/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c8/official-runs/20261116T031105Z-3681140-dependencies-6aa6a2/transcript.log.json
+basis_scope: preparation was checked separately; this attempt checks the full leaf in a fresh child
+receipt: /home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c8/official-runs/20261116T031102Z-3681140-c8a_birth_final-f78237/transcript.log.json
+NEXT: /home/bluestar/src/hol-hearth/hearth inspect /home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c8/official-runs/20261116T031102Z-3681140-c8a_birth_final-f78237

@@ -1,0 +1,20 @@
+Class sentence, rung C3b (r2, after Sol r1 8/10; Claude Opus 5.5, 2026-11-13)
+
+On the exact bytes of the Vortex Echo module (vortex_a1.wasm), the integer half of the puncture, ve_puncture, is proved
+in HOL Light: started with no pop in progress and a direction that is not all zeros, it always finishes without
+trapping and returns 0. It sets the pop word to the current tick and stores the three direction numbers; for all 2048
+beads it sets the first rim ring to its start value 251658 and the second from the speed table (two table words per
+bead), zeroes both wobble rings and the first ripple ring, and seeds the second ripple ring from the model's seed word;
+it clears all droplets; and it changes no memory outside the pop word, the droplet count, a 96-byte header block and
+the pop arrays (rings and droplets). Inside that header block only the three direction words are pinned; the other 21
+words (a fixed-point frame and hash values) are written but not described. With the pop word different from -1 it returns 1. With the pop word equal to -1 and an all-zero direction it returns 2.
+Both guard exits preserve memory, locals, and globals.
+Also proved, as pure logic: starting from clean pop memory (pop word -1, droplet count zero, header words 6..29 zero,
+and all ring and droplet words zero), with a current tick other than 0xffffffff and a nonzero direction, puncture
+followed immediately by an un-puncture satisfying va1_unpunct_post and va1_unpunct_frame (add the mismatch count to
+healErr, then clear the pop state) restores every byte of the 4 MiB memory, including healErr, for any speed table and
+model. That description of the un-puncture is checked against its bytes by tests
+(2596 runs, 0 failures), not by this proof; its byte-level proof is rung C3a, and joining the two theorems still needs one
+renaming step because both rungs used the same names for their own definitions.
+Not covered: the floating-point speed-table build and the rest of the puncture (f33, f32, f34), and tick_forward's
+puncture branch.

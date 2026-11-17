@@ -1,0 +1,14 @@
+{
+ "schema": "bubble-echo.vortex-cold-record.v1",
+ "leaf": "chain_c2_final",
+ "outcome": "reproduced",
+ "headline": "COLD CHECK: reproduced chain_c2_final.ml: 33/33 spec theorems matched, 83/83 pins matched, 0 new axioms; 33 bindings re-run (33 against the spec, 0 matched their quotations, 0 type-checked only)",
+ "exit": 0,
+ "mode": "reproduce",
+ "receipt": "/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c2/official-runs/20261112T021725Z-232506-chain_c2_final-aa9485/transcript.log.json",
+ "receipt_sha256": "c918e027be24f1e17fa3ea7415c7ffd6a44d1d2bb7ac01bbb534e2839a7958a4",
+ "hearth_revision": "81c0fa6cc525038547bf3bd143be519d0cd31a59",
+ "prepared_utc": "2026-11-12T02:18:29Z",
+ "context": "/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c2/official-cold/c2-ctx-021827",
+ "cold_verdict_sha256": "8f09862dd97314b648c4e0459614bba07b1f1e16c61692be6a5a321f009bf521"
+}

@@ -1,0 +1,54 @@
+PASSED c8b_final.ml: 29/29 bindings proved, 29/29 spec bindings matched, 112/112 spec pins matched, 0 new axioms, eval 71.4s (wasm)
+budgets: leaf=1800s preparation=10800s (separate)
+source: /home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c8b/proj/tasks/bubble-echo/vortex/proofs/c8b_final.ml sha=e1d805a6f956
+  VE_VORT_APPLY_LOOP_CORRECT_U: thm bound (conclusion and hypotheses not checked) source_line=67
+  VE_VORT_UNAPPLY_LOOP_CORRECT_U: thm bound (conclusion and hypotheses not checked) source_line=68
+  VE_VORT_APPLY_FREDKIN_U: thm bound (conclusion and hypotheses not checked) source_line=69
+  VE_VORT_UNAPPLY_FREDKIN_U: thm bound (conclusion and hypotheses not checked) source_line=70
+  VA1_TICK_FORWARD_NOPOP_VK_U: thm bound (conclusion and hypotheses not checked) source_line=71
+  VA1_TICK_BACKWARD_NOPOP_VK_U: thm bound (conclusion and hypotheses not checked) source_line=72
+  VA1P_CALL_F9_U: thm bound (conclusion and hypotheses not checked) source_line=73
+  VA1P_CALL_F10_U: thm bound (conclusion and hypotheses not checked) source_line=74
+  VA1_TICK_POP_INVERSE_COND_U: thm bound (conclusion and hypotheses not checked) source_line=75
+  VA1_TICK_FORWARD_POP_COND_U: thm bound (conclusion and hypotheses not checked) source_line=76
+  VA1_TICK_POP_INVERSE_U: thm bound (conclusion and hypotheses not checked) source_line=77
+  VA1_TICK_FORWARD_POP_U: thm bound (conclusion and hypotheses not checked) source_line=78
+  ... 17 more (17 proved); use --verbose or --binding NAME
+binding_counts: proved=29 failed=0 printed_unprobed=0 missing=0 unknown=0
+successful_probe_counts: conclusion_checked=0 thm_type_only=29 unknown=0
+spec: satisfied 29/29 bindings match, 112/112 pins match sha=25612b2d505d file=/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c8b/proj/tasks/bubble-echo/vortex/proofs/c8b_final.spec
+  spec VE_VORT_APPLY_LOOP_CORRECT_U: matched (|- forall N va vb vd uw. 1 <= N /\ N <= 640 ==> ensures wasm (\s. read wcode s = ve_vort_apply_mc /\ read wpc s = word 1305 /\ read wstatus s = WRunning /\ read wstack s = [] /\ read wlabels s = [] /\ read warity s = 0 /\ read wmemsize s = 4194304 /\ read (wmem :> bytes32 (word 16644)) s = word N /\...)
+  spec VE_VORT_UNAPPLY_LOOP_CORRECT_U: matched (|- forall N va vb vd uw. 1 <= N /\ N <= 640 ==> ensures wasm (\s. read wcode s = ve_vort_unapply_mc /\ read wpc s = word 1305 /\ read wstatus s = WRunning /\ read wstack s = [] /\ read wlabels s = [] /\ read warity s = 0 /\ read wmemsize s = 4194304 /\ read (wmem :> bytes32 (word 16644)) s = word N ...)
+  spec VE_VORT_APPLY_FREDKIN_U: matched (|- forall VK. ve_vk_ok VK ==> (forall N mdl va vb uw. mdl 1 = word N /\ 1 <= N /\ N <= 640 ==> ensures wasm (\s. read wcode s = ve_vort_apply_mc /\ read wpc s = word 21 /\ read wstatus s = WRunning /\ read wstack s = [] /\ read wlabels s = [] /\ read warity s = 0 /\ read wmemsize s = 4194304 /\ (for...)
+  spec VE_VORT_UNAPPLY_FREDKIN_U: matched (|- forall VK. ve_vk_ok VK ==> (forall N mdl va vb uw. mdl 1 = word N /\ 1 <= N /\ N <= 640 ==> ensures wasm (\s. read wcode s = ve_vort_unapply_mc /\ read wpc s = word 21 /\ read wstatus s = WRunning /\ read wstack s = [] /\ read wlabels s = [] /\ read warity s = 0 /\ read wmemsize s = 4194304 /\ (f...)
+  spec VA1_TICK_FORWARD_NOPOP_VK_U: matched (|- forall fs gl t ap mdl N x uw. mdl 1 = word N /\ 1 <= N /\ N <= 640 /\ fs 9 = va1_f9_mc,0,0 /\ fs 27 = va1_f27_mc,0,0 /\ (ap = word 0 \/ ~(ap = word_add t (word 1))) ==> ensures (wasmc fs) (\s. read wcode s = va1_tick_forward_mc /\ read wpc s = word 3 /\ read wstatus s = WRunning /\ read wstack s ...)
+  spec VA1_TICK_BACKWARD_NOPOP_VK_U: matched (|- forall fs gl u ap mdl N y uw. mdl 1 = word N /\ 1 <= N /\ N <= 640 /\ fs 10 = va1_f10_mc,0,0 /\ fs 28 = va1_f28_mc,0,0 /\ ~(u = word 0) ==> ensures (wasmc fs) (\s. read wcode s = va1_tick_backward_mc /\ read wpc s = word 3 /\ read wstatus s = WRunning /\ read wstack s = [] /\ read wlabels s = [] ...)
+  spec VA1P_CALL_F9_U: matched (|- forall fs mc cp gl t p ap mdl N x hp tbl ra rb jq jp di zq zp nd uw. fs 9 = va1_f9_mc,0,0 /\ cp < 2 EXP 64 /\ N <= 640 /\ mdl 1 = word N /\ 1 <= N /\ wasm_decode mc cp = SOME (Wcall 9,6) ==> ensures (wasmc fs) (\s. read wcode s = mc /\ read wpc s = word cp /\ read wstatus s = WRunning /\ read wme...)
+  spec VA1P_CALL_F10_U: matched (|- forall fs mc cp gl t p ap mdl N x hp tbl ra rb jq jp di zq zp nd uw. fs 10 = va1_f10_mc,0,0 /\ cp < 2 EXP 64 /\ N <= 640 /\ mdl 1 = word N /\ 1 <= N /\ wasm_decode mc cp = SOME (Wcall 10,6) ==> ensures (wasmc fs) (\s. read wcode s = mc /\ read wpc s = word cp /\ read wstatus s = WRunning /\ read ...)
+  spec VA1_TICK_POP_INVERSE_COND_U: matched (|- forall CK JK fs gl t p ap mdl N x hp tbl ra rb jq jp di zq zp nd L uw. va1_rim_ok /\ va1_cdrift_ok /\ va1_jdrift_ok /\ va1_drop_ok /\ va1_unbirth_ok /\ va1_corrk_ok CK /\ va1_jigk_ok JK /\ mdl 1 = word N /\ 1 <= N /\ N <= 640 /\ fs 10 = va1_f10_mc,0,0 /\ fs 12 = va1_f12_mc,0,0 /\ fs 14 = va1_f14_...)
+  spec VA1_TICK_FORWARD_POP_COND_U: matched (|- forall CK JK fs gl t p ap mdl N x hp tbl ra rb jq jp di zq zp nd uw. va1_rim_ok /\ va1_cdrift_ok /\ va1_jdrift_ok /\ va1_drop_ok /\ va1_birth_ok /\ va1_corrk_ok CK /\ va1_jigk_ok JK /\ mdl 1 = word N /\ 1 <= N /\ N <= 640 /\ fs 9 = va1_f9_mc,0,0 /\ fs 11 = va1_f11_mc,0,0 /\ fs 13 = va1_f13_mc,0,1...)
+  spec VA1_TICK_POP_INVERSE_U: matched (|- forall CK JK fs gl t p ap mdl N x hp tbl ra rb jq jp di zq zp nd L uw. va1_corrk_ok CK /\ va1_jigk_ok JK /\ mdl 1 = word N /\ 1 <= N /\ N <= 640 /\ fs 10 = va1_f10_mc,0,0 /\ fs 12 = va1_f12_mc,0,0 /\ fs 14 = va1_f14_mc,0,1 /\ fs 16 = va1_f16_mc,0,0 /\ fs 18 = va1_f18_mc,1,0 /\ fs 20 = va1_f20_mc,...)
+  spec VA1_TICK_FORWARD_POP_U: matched (|- forall CK JK fs gl t p ap mdl N x hp tbl ra rb jq jp di zq zp nd uw. va1_birth_ok /\ va1_corrk_ok CK /\ va1_jigk_ok JK /\ mdl 1 = word N /\ 1 <= N /\ N <= 640 /\ fs 9 = va1_f9_mc,0,0 /\ fs 11 = va1_f11_mc,0,0 /\ fs 13 = va1_f13_mc,0,1 /\ fs 15 = va1_f15_mc,0,0 /\ fs 17 = va1_f17_mc,1,0 /\ fs 19 =...)
+  ... 17 more; use --json --verbose
+  spec definition va1_vabu: pinned (|- va1_vabu = (\N u m. (forall j. 3 * N <= j /\ j < 2048 ==> read (bytes32 (word (1114112 + 4 * j))) m = FST u j) /\ (forall j. 3 * N <= j /\ j < 2048 ==> read (bytes32 (word (1122304 + 4 * j))) m = SND u j)))
+  spec definition va1_bad: pinned (|- va1_bad = (\mdl tbl q. word_add (SND (SND (SND (SND (SND (SND q)))))) (word (nsum (0..2047) (\k. va1_mis mdl tbl (FST q, FST (SND q), FST (SND (SND q)), FST (SND (SND (SND q))), FST (SND (SND (SND (SND q)))), FST (SND (SND (SND (SND (SND q)))))) k)))))
+  spec definition va1_birth_ok: pinned (|- va1_birth_ok <=> (forall mdl hp tbl t p ap ra rb di zq zp nd decls. va1_pop_window t p /\ va1_log_ok t di nd /\ wasm_decl_vals va1_f13_mc = SOME decls ==> ensures wasm (\s. read wcode s = va1_f13_mc /\ read wpc s = word 13 /\ read wstatus s = WRunning /\ read wstack s = [] /\ read wlabels s = [] ...)
+  spec definition va1_bs: pinned (|- va1_bs = (\bs m. va1_w32s 1179648 196608 (FST bs) m /\ va1_w32s 1163264 2048 (FST (SND bs)) m /\ va1_w32s 1171456 2048 (FST (SND (SND bs))) m /\ read (bytes32 (word 16400)) m = SND (SND (SND bs))))
+  spec definition va1_c6a_frame: pinned (|- va1_c6a_frame = (\m0 m. forall a. a < 4194304 /\ ~(16288 <= a /\ a < 16384) /\ ~(16396 <= a /\ a < 16404) /\ ~(16408 <= a /\ a < 16504) /\ ~(65536 <= a /\ a < 1114112) /\ ~(1130496 <= a /\ a < 1966080) ==> read (bytes8 (word a)) m = read (bytes8 (word a)) m0))
+  spec definition va1_c6a_mem: pinned (|- va1_c6a_mem = (\mdl m m'. read (bytes32 (word 16396)) m' = read (bytes32 (word 16392)) m /\ read (bytes32 (word 16400)) m' = word 0 /\ (exists tbl. va1_w32s 65536 262144 tbl m' /\ va1_w32s 1138688 2048 (va1_rbinit_b tbl) m') /\ va1_w32s 1130496 2048 (\k. word 251658) m' /\ va1_w32s 1146880 2048 (...)
+  spec definition va1_cdrift: pinned (|- va1_cdrift = (\rb zp k. if ival (rb k) > &52371633 then word 0 else word_zx (word_ushr (word_add (word_sx (zp k)) (word 2)) 2)))
+  spec definition va1_cdrift_ok: pinned (|- va1_cdrift_ok <=> (forall rb zq zp decls. wasm_decl_vals va1_f19_mc = SOME decls ==> ensures wasm (\s. read wcode s = va1_f19_mc /\ read wpc s = word 3 /\ read wstatus s = WRunning /\ read wstack s = [] /\ read wlabels s = [] /\ read warity s = 0 /\ read wmemsize s = 4194304 /\ read wlocals s = w...)
+  spec definition va1_ck: pinned (|- va1_ck = (\mdl hp tbl t p sub rb zq k. va1_ck_kk mdl tbl t p sub rb zq (va1_ck_lap rb zq) k))
+  spec definition va1_ck_hfin: pinned (|- va1_ck_hfin = (\h. let h1 = word_mul (word_xor (word_ushr h 15) h) (word 739982445) in word_xor (word_ushr h1 12) h1))
+  spec definition va1_ck_hj: pinned (|- va1_ck_hj = (\mdl t p sub k. va1_ck_hfin (word_xor (word_mul (word_xor (word k) (word_xor (mdl 2) (word 2654435769))) (word 2246822507)) (word_add (word_mul (word_add (word_shl (word_sub t p) 3) (word sub)) (word 3266489909)) (word 2769733223)))))
+  spec definition va1_ck_kk: pinned (|- va1_ck_kk = (\mdl tbl t p sub rb zq lap k. let r = rb k in if val (word_add r (word 4293289574)) > 50693911 then word 0 else let spd = va1_ck_spd tbl r k in let sq13 = word_mul (word_mul spd spd) (word 13107) in let am = word_ishr sq13 24 in let jit = word_ishr (word_mul (word_ishr (word_mul am (...)
+  ... 100 more; use --json --verbose
+spec_foundation: 0 new axioms; no new definitions, types or constants
+phases: preparation=6722.762s restore=1.323s evaluation=4.099s probe=66.447s request_overhead=0.875s evaluation_cpu=2.943s (observed)
+label: c8bfin-c8bfinal
+inputs: 91 files; closure_sha=1b229d050a71
+inherited_project_basis: /home/bluestar/.cache/hol-hearth/project-bases/.automatic/6493bee6ab56da9af066caace952c9f75f13199b628a24df565292241aabe837/dependencies.ml sha=6493bee6ab56
+basis_preparation_receipt: /home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c8b/official-runs/20261114T230059Z-2694409-dependencies-52ea54/transcript.log.json
+basis_scope: preparation was checked separately; this attempt checks the full leaf in a fresh child
+receipt: /home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c8b/official-runs/20261114T230057Z-2694409-c8b_final-5fb501/transcript.log.json
+NEXT: /home/bluestar/src/hol-hearth/hearth inspect /home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c8b/official-runs/20261114T230057Z-2694409-c8b_final-5fb501

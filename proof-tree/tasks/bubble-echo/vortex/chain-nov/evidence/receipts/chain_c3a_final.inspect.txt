@@ -1,0 +1,58 @@
+PASSED chain_c3a_final.ml: 15/15 bindings proved, 15/15 spec bindings matched, 42/42 spec pins matched, 0 new axioms, eval 10.7s (wasm)
+budgets: leaf=1800s preparation=3600s (separate)
+source: /home/bluestar/lanes/demo1-wave-20261110-141705/vortex-pop/assembly/proj/tasks/bubble-echo/vortex/proofs/chain_c3a_final.ml sha=2bdacc72019a
+  VA1_F26_CALLEE: proved source_line=49
+  VA1_F26_OK: proved source_line=54
+  VA1_TICK_UNPUNCT: proved source_line=79
+  VA1_HCALL_UNPUNCT: proved source_line=101
+  VA1_BAD_PUNCT: proved source_line=116
+  VA1_BAD_COUNT: proved source_line=121
+  VA1_BAD_ZERO_IFF: proved source_line=127
+  VA1_UNPUNCT_SAT: proved source_line=136
+  VA1_F26_SAT: proved source_line=147
+  VA1_TICKB_CALLEE: proved source_line=161
+  VA1_BWDN_CLAUSES: proved source_line=166
+  VA1_ISQ_CLAUSES: proved source_line=171
+  ... 3 more (3 proved); use --verbose or --binding NAME
+binding_counts: proved=15 failed=0 printed_unprobed=0 missing=0 unknown=0
+successful_probe_counts: conclusion_checked=15 thm_type_only=0 unknown=0
+spec: satisfied 15/15 bindings match, 42/42 pins match sha=bdd326f9bf97 file=/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-pop/assembly/proj/tasks/bubble-echo/vortex/proofs/chain_c3a_final2.spec
+  spec VA1_F26_CALLEE: matched (|- wasm_entry va1_f26_mc = SOME 5 /\ wasm_decl_vals va1_f26_mc = SOME [I32 (word 0); I32 (word 0); I32 (word 0); I32 (word 0); I32 (word 0); I64 (word 0)])
+  spec VA1_F26_OK: matched (|- forall p ap mdl hp tbl ra rb jq jp di zq zp nd h decls. ~(p = word 4294967295) /\ wasm_decl_vals va1_f26_mc = SOME decls ==> ensures wasm (\s. read wcode s = va1_f26_mc /\ read wpc s = word 5 /\ read wstatus s = WRunning /\ read wstack s = [] /\ read wlabels s = [] /\ read warity s = 1 /\ read wm...)
+  spec VA1_TICK_UNPUNCT: matched (|- forall fs gl p ap mdl N y hp tbl ra rb jq jp di zq zp nd h. mdl 1 = word N /\ 1 <= N /\ N <= 640 /\ fs 10 = va1_f10_mc,0,0 /\ fs 26 = va1_f26_mc,0,1 /\ fs 28 = va1_f28_mc,0,0 /\ ~(p = word 4294967295) /\ ~(p = word 0) ==> ensures (wasmc fs) (\s. read wcode s = va1_tick_backward_mc /\ read wpc s =...)
+  spec VA1_HCALL_UNPUNCT: matched (|- forall fs gl p ap mdl N y hp tbl ra rb jq jp di zq zp nd h m. mdl 1 = word N /\ 1 <= N /\ N <= 640 /\ fs 10 = va1_f10_mc,0,0 /\ fs 26 = va1_f26_mc,0,1 /\ fs 28 = va1_f28_mc,0,0 /\ ~(p = word 4294967295) /\ ~(p = word 0) /\ va1_st p p ap mdl N y hp tbl (ra,rb,jq,jp,di,zq,zp,nd) m /\ read (bytes32 ...)
+  spec VA1_BAD_PUNCT: matched (|- forall mdl tbl. va1_bad mdl tbl ((\k. word 251658), va1_rbinit tbl, (\k. word 0), (\k. word 0), (\k. word 0), va1_zpseed mdl, word 0) = word 0)
+  spec VA1_BAD_COUNT: matched (|- forall mdl tbl ra rb jq jp zq zp nd. val nd <= 16384 ==> val (va1_bad mdl tbl (ra,rb,jq,jp,zq,zp,nd)) = val nd + nsum (0..2047) (\k. va1_mis mdl tbl (ra,rb,jq,jp,zq,zp) k))
+  spec VA1_BAD_ZERO_IFF: matched (|- forall mdl tbl ra rb jq jp zq zp nd. val nd <= 16384 ==> (va1_bad mdl tbl (ra,rb,jq,jp,zq,zp,nd) = word 0 <=> nd = word 0 /\ (forall k. k < 2048 ==> ra k = word 251658 /\ rb k = va1_rbinit tbl k /\ jq k = word 0 /\ jp k = word 0 /\ zq k = word 0 /\ zp k = va1_zpseed mdl k)))
+  spec VA1_UNPUNCT_SAT: matched (|- (exists fs. fs 10 = va1_f10_mc,0,0 /\ fs 26 = va1_f26_mc,0,1 /\ fs 28 = va1_f28_mc,0,0) /\ (forall gl p ap mdl N y hp tbl ra rb jq jp di zq zp nd h. N <= 640 ==> (exists s. read wcode s = va1_tick_backward_mc /\ read wpc s = word 3 /\ read wstatus s = WRunning /\ read wstack s = [] /\ read wlabel...)
+  spec VA1_F26_SAT: matched (|- forall p ap mdl hp tbl ra rb jq jp di zq zp nd h. exists s. read wcode s = va1_f26_mc /\ read wpc s = word 5 /\ read wstatus s = WRunning /\ read wstack s = [] /\ read wlabels s = [] /\ read warity s = 1 /\ read wmemsize s = 4194304 /\ read wlocals s = wcall_locals [] [I32 (word 0); I32 (word 0);...)
+  spec VA1_TICKB_CALLEE: matched (|- wasm_entry va1_tick_backward_mc = SOME 3 /\ wasm_decl_vals va1_tick_backward_mc = SOME [I32 (word 0); I32 (word 0)])
+  spec VA1_BWDN_CLAUSES: matched (|- (forall f s. ve_fredkin_bwdn f 0 s = s) /\ (forall f n s. ve_fredkin_bwdn f (SUC n) s = ve_fredkin_bwdn f n (ve_fredkin_bwd (f n) s)))
+  spec VA1_ISQ_CLAUSES: matched (|- (forall x. ve_isq 0 x = x) /\ (forall k x. ve_isq (SUC k) x = ve_isq_step (ve_isq k x)))
+  ... 3 more; use --json --verbose
+  spec definition va1_f26_mc: pinned (|- va1_f26_mc = [word 2; word 5; word 127; word 1; word 126; word 65; word 0; word 33; word 0; word 2; word 64; word 65; word 0; word 40; word 2; word 140; word 128; word 1; word 65; word 127; word 70; word 13; word 0; word 65; word 0; word 40; word 2; word 136; word 130; word 1; word 65; word 181; ...)
+  spec definition va1_rbv: pinned (|- va1_rbv = (\tbl k. word_add (word_ishr (word_add (word_mul (word_sub (word_sx (tbl (128 * k + 1))) (word_sx (tbl (128 * k)))) (word 251658)) (word 262144)) 19) (word_sx (tbl (128 * k)))))
+  spec definition va1_rbinit: pinned (|- va1_rbinit = (\tbl k. word_add (word_zx (word_ushr (word_add (if ival (va1_rbv tbl k) > &1 then va1_rbv tbl k else word 1) (word 1)) 1)) (word 251658)))
+  spec definition va1_zpx0: pinned (|- va1_zpx0 = (\mdl k. word_xor (word_add (word_mul (mdl 2) (word 3266489909)) (word 2769733223)) (word_mul (word_xor (word k) (word 2654435769)) (word 2246822507))))
+  spec definition va1_zpx1: pinned (|- va1_zpx1 = (\mdl k. word_mul (word_xor (word_ushr (va1_zpx0 mdl k) 15) (va1_zpx0 mdl k)) (word 739982445)))
+  spec definition va1_zpseed: pinned (|- va1_zpseed = (\mdl k. word_zx (word_ishr (word_add (word_mul (word_zx (word_xor (word_ushr (va1_zpx1 mdl k) 12) (va1_zpx1 mdl k))) (word 329853)) (word 18446176457274163200)) 48)))
+  spec definition va1_mis: pinned (|- va1_mis = (\mdl tbl q k. bitval (~(FST q k = word 251658)) + bitval (~(FST (SND (SND q)) k = word 0)) + bitval (~(FST (SND (SND (SND q))) k = word 0)) + bitval (~(FST (SND (SND (SND (SND q)))) k = word 0)) + bitval (~(FST (SND q) k = va1_rbinit tbl k)) + bitval (~(SND (SND (SND (SND (SND q)))) k ...)
+  spec definition va1_bad: pinned (|- va1_bad = (\mdl tbl q. word_add (SND (SND (SND (SND (SND (SND q)))))) (word (nsum (0..2047) (\k. va1_mis mdl tbl (FST q, FST (SND q), FST (SND (SND q)), FST (SND (SND (SND q))), FST (SND (SND (SND (SND q)))), FST (SND (SND (SND (SND (SND q)))))) k)))))
+  spec definition va1_unp_frame: pinned (|- va1_unp_frame = (\m0 m. forall a. a < 4194304 /\ ~(16392 <= a /\ a < 16512) /\ ~(65536 <= a /\ a < 2039808) ==> read (bytes8 (word a)) m = read (bytes8 (word a)) m0))
+  spec definition va1_hcall: pinned (|- va1_hcall = (\step code args r Q gl m. exists e decls. wasm_entry code = SOME e /\ wasm_decl_vals code = SOME decls /\ (forall s0. read wmemsize s0 = 4194304 /\ read wglobals s0 = gl /\ read wmem s0 = m ==> eventually step (\s. read wstatus s = WDone /\ read wstack s = [I32 r] /\ read wmemsize s ...)
+  spec definition ve_fredkin_bwd: pinned (|- ve_fredkin_bwd = (\f s. (\m. word_sub (SND s m) (f (FST s) m)),FST s))
+  spec definition ve_vk_sx: pinned (|- ve_vk_sx = (\S i c. word_sx (S (3 * i + c))))
+  ... 30 more; use --json --verbose
+spec_foundation: 0 new axioms; no new definitions, types or constants
+phases: preparation=0.000s restore=0.000s evaluation=1.718s probe=8.263s request_overhead=0.760s evaluation_cpu=0.885s (observed)
+label: c3fin-c3afinal
+inputs: 69 files; closure_sha=627447d6f207
+inherited_project_basis: /home/bluestar/.cache/hol-hearth/project-bases/.automatic/443b91bc5bd200b0e905ddb5ecc9a0ceeb9392bc205a8d523a2b929a1415c0eb/dependencies.ml sha=443b91bc5bd2
+basis_preparation_receipt: /home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c3/official-runs/20261113T155157Z-1961494-dependencies-f84732/transcript.log.json
+basis_layer 1/4: e60a863a2982 /home/bluestar/.cache/hol-hearth/project-bases/.automatic/3df62bb3dfb6149d794bb61cab4a35c5a861432261ab0a8f4e4acc3cd4eed02a/dependencies.ml receipt=/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c3/official-runs/20261113T073230Z-1304231-dependencies-4b42ed/transcript.log.json
+basis_layer 2/4: 632f8862e62e /home/bluestar/.cache/hol-hearth/project-bases/.automatic/f9a100dd17d25b22c45b0e993b49bd8406bb4cec351bb6ca146f364d7cf75ebc/dependencies.ml receipt=/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c3/official-runs/20261113T074102Z-1313422-dependencies-1566fa/transcript.log.json
+basis_layer 3/4: ea724158ec3f /home/bluestar/.cache/hol-hearth/project-bases/.automatic/4c50881608e41764676abbc9a17087594ec06e48026b96a45c0025bed74b31b3/dependencies.ml receipt=/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c3/official-runs/20261113T080627Z-1327634-dependencies-d7f5e3/transcript.log.json
+basis_layer 4/4: d55838f0e450 /home/bluestar/.cache/hol-hearth/project-bases/.automatic/443b91bc5bd200b0e905ddb5ecc9a0ceeb9392bc205a8d523a2b929a1415c0eb/dependencies.ml receipt=/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c3/official-runs/20261113T155157Z-1961494-dependencies-f84732/transcript.log.json
+basis_scope: preparation was checked separately; this attempt checks the full leaf in a fresh child
+receipt: /home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c3/official-runs/20261113T164323Z-2023970-chain_c3a_final-4abf03/transcript.log.json
+NEXT: /home/bluestar/src/hol-hearth/hearth inspect /home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c3/official-runs/20261113T164323Z-2023970-chain_c3a_final-4abf03

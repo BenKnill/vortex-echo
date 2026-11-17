@@ -1,0 +1,20 @@
+C6b class sentence (draft by C6b, Claude Opus 5.5, 2026-11-13; for Sol review with the proof)
+
+For the exact bytes of vortex_a1.wasm (sha256 a3cf8c82...6aede6), in hol-hearth's frame-stack call model wasmn (a call
+runs its callee to completion as one step and callees may call again; the plain one-level model wasmc cannot finish this
+branch), it is PROVED (spec chain_c6b_final.spec 667b4b91, frozen before its receipted run; 0 new axioms) that one run of
+tick_forward from its first instruction on the auto-pop branch (pop word P = -1, auto-pop word = T + 1 <> 0, model word
+1 = N with 1 <= N <= 640, global 0 = 16384, header words 16516..16524 not all zero, memory size 4 MiB, and the call table
+mapping 9, 27, 33, 25, 32, 34 to the module's own bodies) always finishes, without trapping, returning 1 with all
+globals as they were; and that its memory is C6a's puncture result taken from an intermediate memory m1 that equals the
+start memory except that the clock is T + 1, the vortex words VA/VB j < 3N are the 16 Fredkin forward steps of the
+no-pop tick, and the vort scratch area [1966080, 2039808) and the unused vortex slots (VA/VB words 3N..2047) are
+unconstrained. So, relative to the start memory, the run changes at most the clock word, VA/VB [1114112, 1130496), the
+scratch area, the f33 stack frame [16288, 16384) (part of the shadow stack below 16384), P and the droplet count, header
+words 6..29, the sine/cosine table [65536, 1114112) and RA..DI [1130496, 1966080), with P, the count, header words 6..8,
+RA, RB (from the table), JQ, JP, ZQ, ZP and DI given exactly; the table's values, header words 9..29, the stack-frame bytes
+and the scratch are not specified. Non-vacuity is PROVED (VA1_C6B_SAT): for every allowed T, model and arguments a
+memory and state meeting every premise exist. Not covered: the other branches of tick_forward, a host-call (wcall_entry)
+form and the transfer of the C1 host layer (left to C7b), and the un-puncture/inverse. Host non-interference (the host
+writes neither memory nor globals during the call and memory does not grow) is an ASSUMPTION of the host model, not a
+WebAssembly guarantee. TESTED separately (node, exact bytes, 2000 random host calls, 10/10 planted mutants caught).

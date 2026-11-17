@@ -1,0 +1,1 @@
+2026-11-13 06:17:41 EST (2026-11-13T11:17:41Z) FROZEN chain_c6b_final.spec sha256 667b4b91e6e07060ae79bd6864c09cbfc241e8a7dd5dd2bef5cccf9f4ee5d4b5 sol 20261113-061247-vortex-chain-c6b-spec-auto-p-fc4e round 1 score 10/10 accept; by C6b (Claude Opus 5.5); freeze-spec v1; receipted runs go to bluestar c6b/runs (grep for 667b4b91 there before this freeze: 0 files)

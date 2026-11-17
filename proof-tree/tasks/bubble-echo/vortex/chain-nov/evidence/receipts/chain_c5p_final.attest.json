@@ -1,0 +1,658 @@
+{
+  "basis_chain": {
+    "basis_foundation": {
+      "axioms": 0,
+      "constants": 28,
+      "definitions": 28,
+      "types": 0
+    },
+    "every_layer_zero_axioms": true,
+    "layers": [
+      {
+        "captured_input_count": 6,
+        "checkpoint": {
+          "image_dir": "/home/bluestar/.cache/hol-hearth/project-bases/7b799f878df351d3a219a1cf4f04d2c2d873a95703bdb9c2d2e2299e2a7afb53/generations/38fecc308f526c1d195a7d97cb289fb72b077c1fd6ec5b4e/checkpoint-a14129913399bd31",
+          "image_inventory_sha256": "47c45a8d3fe0c863028234c0bf3183d0e19340e4fa00364bc0a51d341d1a56cd"
+        },
+        "closure_sha256": "06aae4b77a3276b9a6b0eea73ab164fbb4bc58beef97bf7ffb901229e9790daa",
+        "foundation": {
+          "axioms": 0,
+          "constants": 11,
+          "definitions": 11,
+          "status": "observed",
+          "types": 0
+        },
+        "key": "37cdecb513e5f134cd21381fb008f234eba85c8cf1147673e063b05daf657fb7",
+        "preparation_receipt": "/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c5/official-runs/20261113T165515Z-2043982-dependencies-fe27fa/transcript.log.json",
+        "preparation_receipt_sha256": "d8cb19ad1ceeadb5ade121a020d0dd065706120b8e675030bccfda7aa1ff0260",
+        "selection": "automatic",
+        "source": "/home/bluestar/.cache/hol-hearth/project-bases/.automatic/f9c27d585d1ab59808a2bdee920867fb30a957e049f4db119fb37e6936ce1abb/dependencies.ml",
+        "source_sha256": "f9c27d585d1ab59808a2bdee920867fb30a957e049f4db119fb37e6936ce1abb"
+      },
+      {
+        "captured_input_count": 13,
+        "checkpoint": {
+          "image_dir": "/home/bluestar/.cache/hol-hearth/project-bases/eddb362e47705b6af162d626379ab7c20174b3625dc21792011df88c93d88a4d/generations/d1a2ccbb11ffdb159657f9f2e8965b2f0ea483434d16588e/checkpoint-a4de47acc3f69cce",
+          "image_inventory_sha256": "d5402ebbe34e0003ffa0af2fdd227433bb97d65a7ace9607cd034bc71fd152d4"
+        },
+        "closure_sha256": "e6efe825e359a6360ac7ecc06db9e38897680a68b8f8cf072fd2569df357d895",
+        "foundation": {
+          "axioms": 0,
+          "constants": 17,
+          "definitions": 17,
+          "status": "observed",
+          "types": 0
+        },
+        "key": "c1adb0ad1dbbf56cf2d7497293ff33ac790afd7026ba03e4be343094e48bd0e7",
+        "preparation_receipt": "/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c5/official-runs/20261113T210601Z-2304869-dependencies-973513/transcript.log.json",
+        "preparation_receipt_sha256": "6d0a725cd4e0187061f7a3dd211c811c196d8d8e275cd01658ffa73cb06281b4",
+        "selection": "automatic",
+        "source": "/home/bluestar/.cache/hol-hearth/project-bases/.automatic/6ed998e960ca8598605356abc5c202b13a4dba0363b44b828df01d6c8abcc04a/dependencies.ml",
+        "source_sha256": "6ed998e960ca8598605356abc5c202b13a4dba0363b44b828df01d6c8abcc04a"
+      }
+    ],
+    "transitive_foundation": {
+      "axioms": 0,
+      "constants": 28,
+      "definitions": 28,
+      "types": 0
+    }
+  },
+  "closure": {
+    "files": [
+      {
+        "package_path": "execution.ml",
+        "path": "/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c5/proj/tasks/bubble-echo/vortex/proofs/chain_c5p_final.ml",
+        "role": "entrypoint",
+        "sha256": "d372a74be9f7fbeae7ec75b2111b84e3ca38cc5681f36254580d45dd0e703729",
+        "size_bytes": 10914
+      },
+      {
+        "declared_path": "/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c5/proj/tasks/bubble-echo/vortex/proofs/chain_c5p_rules.ml",
+        "declaring_file": "/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c5/proj/tasks/bubble-echo/vortex/proofs/chain_c5p_final.ml",
+        "loader": "needs",
+        "package_path": "1718107cfa8422d493030477dae0ddb3661ac7cfc6527a1a6b745fad673f7448/chain_c5p_rules.ml",
+        "path": "/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c5/proj/tasks/bubble-echo/vortex/proofs/chain_c5p_rules.ml",
+        "resolution": "source_local",
+        "role": "dependency",
+        "sha256": "1718107cfa8422d493030477dae0ddb3661ac7cfc6527a1a6b745fad673f7448",
+        "size_bytes": 11375
+      },
+      {
+        "declared_path": "/home/bluestar/.cache/hol-hearth/project-bases/.automatic/6ed998e960ca8598605356abc5c202b13a4dba0363b44b828df01d6c8abcc04a/dependencies.ml",
+        "declaring_file": null,
+        "loader": "loadt",
+        "package_path": "6ed998e960ca8598605356abc5c202b13a4dba0363b44b828df01d6c8abcc04a/dependencies.ml",
+        "path": "/home/bluestar/.cache/hol-hearth/project-bases/.automatic/6ed998e960ca8598605356abc5c202b13a4dba0363b44b828df01d6c8abcc04a/dependencies.ml",
+        "resolution": "source_local",
+        "role": "dependency",
+        "sha256": "6ed998e960ca8598605356abc5c202b13a4dba0363b44b828df01d6c8abcc04a",
+        "size_bytes": 379
+      },
+      {
+        "declared_path": "/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c5/proj/tasks/bubble-echo/vortex/proofs/chain_c5_punct_a.ml",
+        "declaring_file": "/home/bluestar/.cache/hol-hearth/project-bases/.automatic/6ed998e960ca8598605356abc5c202b13a4dba0363b44b828df01d6c8abcc04a/dependencies.ml",
+        "loader": "needs",
+        "package_path": "be71a3e867dc3ee87d8f81b105cd1fc77d724c8093f4042e7029ad20ed34a99b/chain_c5_punct_a.ml",
+        "path": "/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c5/proj/tasks/bubble-echo/vortex/proofs/chain_c5_punct_a.ml",
+        "resolution": "source_local",
+        "role": "dependency",
+        "sha256": "be71a3e867dc3ee87d8f81b105cd1fc77d724c8093f4042e7029ad20ed34a99b",
+        "size_bytes": 12641
+      },
+      {
+        "declared_path": "/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c5/proj/tasks/bubble-echo/vortex/proofs/chain_c5_leaves.ml",
+        "declaring_file": "/home/bluestar/.cache/hol-hearth/project-bases/.automatic/6ed998e960ca8598605356abc5c202b13a4dba0363b44b828df01d6c8abcc04a/dependencies.ml",
+        "loader": "needs",
+        "package_path": "49ee0ba11c073f5f33c7955ecea383064030cb44447750c1fd5af74431dced47/chain_c5_leaves.ml",
+        "path": "/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c5/proj/tasks/bubble-echo/vortex/proofs/chain_c5_leaves.ml",
+        "resolution": "source_local",
+        "role": "dependency",
+        "sha256": "49ee0ba11c073f5f33c7955ecea383064030cb44447750c1fd5af74431dced47",
+        "size_bytes": 12085
+      },
+      {
+        "declared_path": "/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c5/proj/tasks/bubble-echo/vortex/proofs/chain_c5_tacs.ml",
+        "declaring_file": "/home/bluestar/.cache/hol-hearth/project-bases/.automatic/6ed998e960ca8598605356abc5c202b13a4dba0363b44b828df01d6c8abcc04a/dependencies.ml",
+        "loader": "needs",
+        "package_path": "27f68fd3f702ab3cc8a1f28e5c79378311c97030d6300f68ed29cfe21fcfccd8/chain_c5_tacs.ml",
+        "path": "/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c5/proj/tasks/bubble-echo/vortex/proofs/chain_c5_tacs.ml",
+        "resolution": "source_local",
+        "role": "dependency",
+        "sha256": "27f68fd3f702ab3cc8a1f28e5c79378311c97030d6300f68ed29cfe21fcfccd8",
+        "size_bytes": 5398
+      },
+      {
+        "declared_path": "/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c5/proj/tasks/bubble-echo/vortex/proofs/chain_c5_dec.ml",
+        "declaring_file": "/home/bluestar/.cache/hol-hearth/project-bases/.automatic/6ed998e960ca8598605356abc5c202b13a4dba0363b44b828df01d6c8abcc04a/dependencies.ml",
+        "loader": "needs",
+        "package_path": "83a78c373756a2696993a445be7b12ea46680cf8c2112c97e65ec3a7d8483457/chain_c5_dec.ml",
+        "path": "/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c5/proj/tasks/bubble-echo/vortex/proofs/chain_c5_dec.ml",
+        "resolution": "source_local",
+        "role": "dependency",
+        "sha256": "83a78c373756a2696993a445be7b12ea46680cf8c2112c97e65ec3a7d8483457",
+        "size_bytes": 1138
+      },
+      {
+        "declared_path": "/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c5/proj/tasks/bubble-echo/vortex/proofs/va1_code.ml",
+        "declaring_file": "/home/bluestar/.cache/hol-hearth/project-bases/.automatic/6ed998e960ca8598605356abc5c202b13a4dba0363b44b828df01d6c8abcc04a/dependencies.ml",
+        "loader": "needs",
+        "package_path": "955a61286f64b9b4c83f2e3a723945d2ae619f208480ad6028d61e691128bd8a/va1_code.ml",
+        "path": "/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c5/proj/tasks/bubble-echo/vortex/proofs/va1_code.ml",
+        "resolution": "source_local",
+        "role": "dependency",
+        "sha256": "955a61286f64b9b4c83f2e3a723945d2ae619f208480ad6028d61e691128bd8a",
+        "size_bytes": 5714
+      },
+      {
+        "declared_path": "/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c5/proj/tasks/bubble-echo/capillary/proofs/wasm_fastdec.ml",
+        "declaring_file": "/home/bluestar/.cache/hol-hearth/project-bases/.automatic/6ed998e960ca8598605356abc5c202b13a4dba0363b44b828df01d6c8abcc04a/dependencies.ml",
+        "loader": "needs",
+        "package_path": "b344f84e62d202c8ead3aac89b89b06c651dc08480bc9a24589157ac9dd02020/wasm_fastdec.ml",
+        "path": "/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c5/proj/tasks/bubble-echo/capillary/proofs/wasm_fastdec.ml",
+        "resolution": "source_local",
+        "role": "dependency",
+        "sha256": "b344f84e62d202c8ead3aac89b89b06c651dc08480bc9a24589157ac9dd02020",
+        "size_bytes": 3952
+      },
+      {
+        "declared_path": "/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c5/proj/tasks/bubble-echo/vortex/proofs/wasm_call.ml",
+        "declaring_file": "/home/bluestar/.cache/hol-hearth/project-bases/.automatic/6ed998e960ca8598605356abc5c202b13a4dba0363b44b828df01d6c8abcc04a/dependencies.ml",
+        "loader": "needs",
+        "package_path": "091a90570461d0d37fe4a22e46a139d4cfee0398233a49624cc0e385a6d6944c/wasm_call.ml",
+        "path": "/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c5/proj/tasks/bubble-echo/vortex/proofs/wasm_call.ml",
+        "resolution": "source_local",
+        "role": "dependency",
+        "sha256": "091a90570461d0d37fe4a22e46a139d4cfee0398233a49624cc0e385a6d6944c",
+        "size_bytes": 23503
+      },
+      {
+        "declared_path": "/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c5/proj/tasks/bubble-echo/vortex/proofs/chain_c5p_frames.ml",
+        "declaring_file": "/home/bluestar/.cache/hol-hearth/project-bases/.automatic/6ed998e960ca8598605356abc5c202b13a4dba0363b44b828df01d6c8abcc04a/dependencies.ml",
+        "loader": "needs",
+        "package_path": "f809937836ffbb129c8d43f433a51168fcc26c80722bd534bccf0f526f57c41e/chain_c5p_frames.ml",
+        "path": "/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c5/proj/tasks/bubble-echo/vortex/proofs/chain_c5p_frames.ml",
+        "resolution": "source_local",
+        "role": "dependency",
+        "sha256": "f809937836ffbb129c8d43f433a51168fcc26c80722bd534bccf0f526f57c41e",
+        "size_bytes": 70331
+      },
+      {
+        "declared_path": "wasm/proofs/wasm_tactics.ml",
+        "declaring_file": "/home/bluestar/.cache/hol-hearth/project-bases/.automatic/6ed998e960ca8598605356abc5c202b13a4dba0363b44b828df01d6c8abcc04a/dependencies.ml",
+        "loader": "needs",
+        "package_path": "7e5c9f84995b5483b7b5eee04d1e012d229b0f9807edb0bdbe322d430cf47692/wasm_tactics.ml",
+        "path": "/home/bluestar/.cache/hol-workbench/source-generations/wasm/fb0bf26395fa1513752a026e45d76ca12159c44f37bfd10e8e285a790084e78f/tree/proofs/wasm_tactics.ml",
+        "resolution": "mounted_source",
+        "role": "dependency",
+        "sha256": "7e5c9f84995b5483b7b5eee04d1e012d229b0f9807edb0bdbe322d430cf47692",
+        "size_bytes": 49833
+      },
+      {
+        "declared_path": "/home/bluestar/.cache/hol-hearth/project-bases/.automatic/f9c27d585d1ab59808a2bdee920867fb30a957e049f4db119fb37e6936ce1abb/dependencies.ml",
+        "declaring_file": null,
+        "loader": "loadt",
+        "package_path": "f9c27d585d1ab59808a2bdee920867fb30a957e049f4db119fb37e6936ce1abb/dependencies.ml",
+        "path": "/home/bluestar/.cache/hol-hearth/project-bases/.automatic/f9c27d585d1ab59808a2bdee920867fb30a957e049f4db119fb37e6936ce1abb/dependencies.ml",
+        "resolution": "source_local",
+        "role": "dependency",
+        "sha256": "f9c27d585d1ab59808a2bdee920867fb30a957e049f4db119fb37e6936ce1abb",
+        "size_bytes": 376
+      },
+      {
+        "declared_path": "/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c5/proj/tasks/bubble-echo/vortex/purist/vortex_a1.wasm",
+        "declaring_file": "/home/bluestar/.cache/hol-hearth/project-bases/.automatic/6ed998e960ca8598605356abc5c202b13a4dba0363b44b828df01d6c8abcc04a/dependencies.ml",
+        "loader": "define_from_wasm",
+        "package_path": "a3cf8c821534dd1613e2c6c6251a003320c40d5eb2dfc8e16a871c59636aede6/vortex_a1.wasm",
+        "path": "/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c5/proj/tasks/bubble-echo/vortex/purist/vortex_a1.wasm",
+        "resolution": "source_local",
+        "role": "artifact",
+        "sha256": "a3cf8c821534dd1613e2c6c6251a003320c40d5eb2dfc8e16a871c59636aede6",
+        "size_bytes": 30548
+      }
+    ],
+    "resolved_literal_closure": true,
+    "root": "/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c5/proj",
+    "schema": "hearth.observed-inputs.v1",
+    "semantic_identity_complete": true,
+    "sha256": "dad58b31273f321c91a027cbff01de811a16d746675d6414d9ff74de2161abc8"
+  },
+  "eval_seconds": 4.4141998879786115,
+  "evidence_boundary": "exact nonce-bound source completion and named theorem binding checks over raw transcript bytes; advisory runtime logical-foundation registry cardinality deltas; kernel-checked in a fresh child of the published warm profile, whose recipe and loaded-file inventory are hash-verified; a cold replay of the same recipe adds independence from the profile image, not a stronger theorem",
+  "foundation_delta": {
+    "boundary": "cardinality delta relative to the restored warm basis only; does not inventory pre-existing basis axioms, identify declarations, or detect arbitrary hostile OCaml runtime mutation",
+    "deltas": {
+      "axioms": 0,
+      "constants": 0,
+      "definitions": 0,
+      "types": 0
+    },
+    "new_axiom_count": 0,
+    "status": "observed"
+  },
+  "hearth": {
+    "client_checkout": "/home/bluestar/src/.hol-hearth.controllers/6adb41ce24fa3e62faa14013ed79bef5dd87ec26",
+    "client_clean": true,
+    "client_revision": "6adb41ce24fa3e62faa14013ed79bef5dd87ec26",
+    "shelf_build_revision": "6adb41ce24fa3e62faa14013ed79bef5dd87ec26"
+  },
+  "hol_light": {
+    "architecture": "x86_64",
+    "camlp5": "Camlp5 version 8.04.00 (ocaml 5.4.0)",
+    "cold_replay_pin": {
+      "remote": "https://github.com/jrh13/hol-light.git",
+      "revision": "2a1cea8f1cb7f3885a60d947ba06eabac6ec1d32",
+      "source": "dev/setup-lock.json in this checkout; the pin for new setups and the cold checker, not a record of the profile's HOL"
+    },
+    "commit": "2a1cea8f1cb7f3885a60d947ba06eabac6ec1d32",
+    "commit_clean": true,
+    "dir": "/home/bluestar/hearth/data/hol-light",
+    "ocaml": "The OCaml runtime, version 5.4.0",
+    "source_tree_files": 597,
+    "source_tree_scope": "sha256 of the sorted lines '<sha256>  <path>' over every regular *.ml file below the HOL directory (skipping the top-level _opam switch and dot directories) and hol.sh",
+    "source_tree_sha256": "6eb0ed2f9a96f649816817b29e60ae368df947b46163e84b92041b9c454d0884"
+  },
+  "profile": {
+    "basis_id": "hol.s2n.wasm.v1",
+    "broker_runtime_origin": "receipt",
+    "broker_runtime_sha256": "792145423401b1d77436d2a2318497791cccf0b8ab84a66166ab10ad6a41fdcb",
+    "cwd": "/home/bluestar/hearth/data/shelves/src/s2n-bignum@51d1db8f05df6855b54b08debff0e4a863708b81",
+    "logical_source_roots": [
+      {
+        "alias": "s2n_bignum",
+        "execution_role": "profile_cwd",
+        "remote": "https://github.com/BenKnill/s2n-bignum.git",
+        "revision": "51d1db8f05df6855b54b08debff0e4a863708b81",
+        "source_role": "managed_mirror",
+        "tree": "f5f46329026cd052aa7f0afa35f67f3db1bcbdf2"
+      },
+      {
+        "alias": "wasm",
+        "execution_role": "profile_recipe",
+        "path": "profiles/roots/wasm",
+        "source_role": "bundled",
+        "tree": "fb0bf26395fa1513752a026e45d76ca12159c44f37bfd10e8e285a790084e78f"
+      }
+    ],
+    "name": "wasm",
+    "physical": "wasm",
+    "recipe": {
+      "checked_in": "profiles/wasm.ml",
+      "path": "/home/bluestar/.cache/hol-workbench/warmup-profiles/hol.s2n.wasm.v1-47b0e1f8e004.ml",
+      "provenance": "match",
+      "provenance_sha256": "47b0e1f8e004e34a9229a113daa3c4b203c27090da3a84123cc7fa31406ad2b7",
+      "sha256": "47b0e1f8e004e34a9229a113daa3c4b203c27090da3a84123cc7fa31406ad2b7"
+    },
+    "shelf": {
+      "loaded_closure_sha256": "44cdfc83fb9aa092d86ffaaf34f99bfde01868bdcba4d1de741443ef3c531682",
+      "manifest": "/home/bluestar/hearth/data/shelves/criu-warm-profiles-20261113T003738Z/wasm/snapshot-manifest.json",
+      "manifest_check": "sha256 matched",
+      "manifest_sha256": "d41cb861e5f8f8da581b8d6a359636633a1fb3fa3e6146eb277a0345afa844a8",
+      "recorded_in": "shelf_identity",
+      "snapshot_environment_sha256": "fb9d1826a145275e218fc16622f9894c6c2ad5e96d77e52e130eff6af579d05f"
+    }
+  },
+  "receipt": {
+    "evidence": "recorded_warm_replay",
+    "path": "/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c5/official-runs/20261113T210754Z-2306016-chain_c5p_final-6c8f8d/transcript.log.json",
+    "schema": "hol-workbench.warm-vanilla-artifact.v1",
+    "sha256": "25b1ea0418fc4a49374c00fdd2b56292eabb1856614733efdbb8d1652f3a383a"
+  },
+  "reproduce": {
+    "cold_check": "/home/bluestar/src/.hol-hearth.controllers/6adb41ce24fa3e62faa14013ed79bef5dd87ec26/dev/cold-check /home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c5/official-runs/20261113T210754Z-2306016-chain_c5p_final-6c8f8d",
+    "export_replay": "/home/bluestar/src/hol-hearth/hearth export-replay /home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c5/official-runs/20261113T210754Z-2306016-chain_c5p_final-6c8f8d --out /home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c5/official-runs/20261113T210754Z-2306016-chain_c5p_final-6c8f8d/replay.sh",
+    "run_replay": "bash /home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c5/official-runs/20261113T210754Z-2306016-chain_c5p_final-6c8f8d/replay.sh 2>&1 | tee /home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c5/official-runs/20261113T210754Z-2306016-chain_c5p_final-6c8f8d/replay.sh.log"
+  },
+  "source": {
+    "path": "/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c5/proj/tasks/bubble-echo/vortex/proofs/chain_c5p_final.ml",
+    "sha256": "d372a74be9f7fbeae7ec75b2111b84e3ca38cc5681f36254580d45dd0e703729"
+  },
+  "unrecorded": [],
+  "verdict": {
+    "basis": "/home/bluestar/.cache/hol-hearth/project-bases/.automatic/6ed998e960ca8598605356abc5c202b13a4dba0363b44b828df01d6c8abcc04a/dependencies.ml",
+    "binding_counts": {
+      "failed": 0,
+      "missing": 0,
+      "printed_unprobed": 0,
+      "proved": 31,
+      "unknown": 0
+    },
+    "bindings": [
+      {
+        "detail": "source conclusion matched; hypotheses empty",
+        "line": 4,
+        "name": "VA1_C5P_ENSURES_WASMN",
+        "recorded_status": "proved",
+        "status": "proved"
+      },
+      {
+        "detail": "source conclusion matched; hypotheses empty",
+        "line": 7,
+        "name": "VA1_C5P_EVENTUALLY_WASMN",
+        "recorded_status": "proved",
+        "status": "proved"
+      },
+      {
+        "detail": "source conclusion matched; hypotheses empty",
+        "line": 10,
+        "name": "VA1_F33_WFSUM",
+        "recorded_status": "proved",
+        "status": "proved"
+      },
+      {
+        "detail": "source conclusion matched; hypotheses empty",
+        "line": 20,
+        "name": "VA1_CALL33_WASMN",
+        "recorded_status": "proved",
+        "status": "proved"
+      },
+      {
+        "detail": "source conclusion matched; hypotheses empty",
+        "line": 36,
+        "name": "VA1_CALL33_FROM_WASMC",
+        "recorded_status": "proved",
+        "status": "proved"
+      },
+      {
+        "detail": "source conclusion matched; hypotheses empty",
+        "line": 53,
+        "name": "VA1_TF_CALL33_SITE",
+        "recorded_status": "proved",
+        "status": "proved"
+      },
+      {
+        "detail": "source conclusion matched; hypotheses empty",
+        "line": 70,
+        "name": "VA1_C5P_SITE_SAT",
+        "recorded_status": "proved",
+        "status": "proved"
+      },
+      {
+        "detail": "source conclusion matched; hypotheses empty",
+        "line": 76,
+        "name": "WASMF_DET",
+        "recorded_status": "proved",
+        "status": "proved"
+      },
+      {
+        "detail": "source conclusion matched; hypotheses empty",
+        "line": 79,
+        "name": "WASMF_LIFT",
+        "recorded_status": "proved",
+        "status": "proved"
+      },
+      {
+        "detail": "source conclusion matched; hypotheses empty",
+        "line": 86,
+        "name": "WASMN_TO_WASMF",
+        "recorded_status": "proved",
+        "status": "proved"
+      },
+      {
+        "detail": "source conclusion matched; hypotheses empty",
+        "line": 93,
+        "name": "WASMN_TO_WFSUM",
+        "recorded_status": "proved",
+        "status": "proved"
+      },
+      {
+        "detail": "source conclusion matched; hypotheses empty",
+        "line": 96,
+        "name": "WASM_TO_WFSUM",
+        "recorded_status": "proved",
+        "status": "proved"
+      },
+      {
+        "detail": "source conclusion matched; hypotheses empty",
+        "line": 99,
+        "name": "WASMN_CALL_ENSURES",
+        "recorded_status": "proved",
+        "status": "proved"
+      },
+      {
+        "detail": "source conclusion matched; hypotheses empty",
+        "line": 114,
+        "name": "WASMN_CALL_STEP",
+        "recorded_status": "proved",
+        "status": "proved"
+      },
+      {
+        "detail": "source conclusion matched; hypotheses empty",
+        "line": 128,
+        "name": "WCALL_RETURN_TRAP_OBS",
+        "recorded_status": "proved",
+        "status": "proved"
+      },
+      {
+        "detail": "source conclusion matched; hypotheses empty",
+        "line": 132,
+        "name": "WASMF_TRAPPED_STEP",
+        "recorded_status": "proved",
+        "status": "proved"
+      },
+      {
+        "detail": "source conclusion matched; hypotheses empty",
+        "line": 136,
+        "name": "WASMF_TRAPPED_RTC",
+        "recorded_status": "proved",
+        "status": "proved"
+      },
+      {
+        "detail": "source conclusion matched; hypotheses empty",
+        "line": 142,
+        "name": "EVENTUALLY_RTC_DET",
+        "recorded_status": "proved",
+        "status": "proved"
+      },
+      {
+        "detail": "source conclusion matched; hypotheses empty",
+        "line": 147,
+        "name": "DIV3_BIG_HIDES_LOOP",
+        "recorded_status": "proved",
+        "status": "proved"
+      },
+      {
+        "detail": "source conclusion matched; hypotheses empty",
+        "line": 150,
+        "name": "DIV3_NONDETERMINISTIC",
+        "recorded_status": "proved",
+        "status": "proved"
+      },
+      {
+        "detail": "source conclusion matched; hypotheses empty",
+        "line": 153,
+        "name": "RTC_WASM_WASMF",
+        "recorded_status": "proved",
+        "status": "proved"
+      },
+      {
+        "detail": "source conclusion matched; hypotheses empty",
+        "line": 156,
+        "name": "WASMC_WASMN",
+        "recorded_status": "proved",
+        "status": "proved"
+      },
+      {
+        "detail": "source conclusion matched; hypotheses empty",
+        "line": 159,
+        "name": "RTC_DET_FINAL",
+        "recorded_status": "proved",
+        "status": "proved"
+      },
+      {
+        "detail": "source conclusion matched; hypotheses empty",
+        "line": 165,
+        "name": "WASM_CALLN_DET",
+        "recorded_status": "proved",
+        "status": "proved"
+      },
+      {
+        "detail": "source conclusion matched; hypotheses empty",
+        "line": 169,
+        "name": "WASMN_DET",
+        "recorded_status": "proved",
+        "status": "proved"
+      },
+      {
+        "detail": "source conclusion matched; hypotheses empty",
+        "line": 172,
+        "name": "EVENTUALLY_SUBREL_DET",
+        "recorded_status": "proved",
+        "status": "proved"
+      },
+      {
+        "detail": "source conclusion matched; hypotheses empty",
+        "line": 177,
+        "name": "EVENTUALLY_WASMC_WASMN",
+        "recorded_status": "proved",
+        "status": "proved"
+      },
+      {
+        "detail": "source conclusion matched; hypotheses empty",
+        "line": 180,
+        "name": "ENSURES_WASMC_WASMN",
+        "recorded_status": "proved",
+        "status": "proved"
+      },
+      {
+        "detail": "source conclusion matched; hypotheses empty",
+        "line": 183,
+        "name": "MAYCHANGE_RESTORED",
+        "recorded_status": "proved",
+        "status": "proved"
+      },
+      {
+        "detail": "source conclusion matched; hypotheses empty",
+        "line": 188,
+        "name": "ENSURES_MAYCHANGE_RESTORED",
+        "recorded_status": "proved",
+        "status": "proved"
+      },
+      {
+        "detail": "source conclusion matched; hypotheses empty",
+        "line": 195,
+        "name": "WASM_ENSURES_GLOBAL_RESTORED",
+        "recorded_status": "proved",
+        "status": "proved"
+      }
+    ],
+    "bindings_proved": 31,
+    "bindings_total": 31,
+    "closure_sha256": "dad58b31273f321c91a027cbff01de811a16d746675d6414d9ff74de2161abc8",
+    "eval_seconds": 4.4141998879786115,
+    "failing_binding": null,
+    "failing_step": null,
+    "first_failure": null,
+    "first_failure_transcript_line": null,
+    "inputs": 13,
+    "label": "c5fin-c5p",
+    "line": "PASSED chain_c5p_final.ml: 31/31 bindings proved, 31/31 spec bindings matched, 17/17 spec pins matched, 0 new axioms, eval 4.4s (wasm)",
+    "new_axioms": 0,
+    "next": null,
+    "phase_timings": {
+      "child_clock": "Unix.gettimeofday",
+      "child_cpu_seconds": 3.740896,
+      "cpu_clock": "Unix.times (proof child user+sys)",
+      "cpu_status": "observed",
+      "evaluation_cpu_seconds": 0.42103,
+      "evaluation_cpu_system_seconds": 0.011933,
+      "evaluation_cpu_user_seconds": 0.409097,
+      "evaluation_seconds": 0.43932294845581055,
+      "lifecycle_clock": "monotonic",
+      "preparation_seconds": 0.0,
+      "probe_seconds": 3.317183017730713,
+      "probe_status": "completed",
+      "request_overhead_seconds": 0.6576939217920881,
+      "restore_seconds": 0.0,
+      "status": "observed"
+    },
+    "profile": "wasm",
+    "reason": null,
+    "receipt": "/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c5/official-runs/20261113T210754Z-2306016-chain_c5p_final-6c8f8d/transcript.log.json",
+    "replay": {
+      "checkpoint_mode": "automatic",
+      "dependency": null,
+      "leaf_timeout_seconds": 1800.0,
+      "preparation_request": null,
+      "preparation_timeout_seconds": 3600.0
+    },
+    "schema": "hol-hearth.receipt-summary.v1",
+    "search_usage": {
+      "counts": {},
+      "first_use": null,
+      "status": "counted",
+      "strict": false,
+      "total": 0
+    },
+    "source": "/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c5/proj/tasks/bubble-echo/vortex/proofs/chain_c5p_final.ml",
+    "source_name": "chain_c5p_final.ml",
+    "source_sha256": "d372a74be9f7fbeae7ec75b2111b84e3ca38cc5681f36254580d45dd0e703729",
+    "spec": {
+      "benchmark": false,
+      "bindings": {
+        "DIV3_BIG_HIDES_LOOP": "matched",
+        "DIV3_NONDETERMINISTIC": "matched",
+        "ENSURES_MAYCHANGE_RESTORED": "matched",
+        "ENSURES_WASMC_WASMN": "matched",
+        "EVENTUALLY_RTC_DET": "matched",
+        "EVENTUALLY_SUBREL_DET": "matched",
+        "EVENTUALLY_WASMC_WASMN": "matched",
+        "MAYCHANGE_RESTORED": "matched",
+        "RTC_DET_FINAL": "matched",
+        "RTC_WASM_WASMF": "matched",
+        "VA1_C5P_ENSURES_WASMN": "matched",
+        "VA1_C5P_EVENTUALLY_WASMN": "matched",
+        "VA1_C5P_SITE_SAT": "matched",
+        "VA1_CALL33_FROM_WASMC": "matched",
+        "VA1_CALL33_WASMN": "matched",
+        "VA1_F33_WFSUM": "matched",
+        "VA1_TF_CALL33_SITE": "matched",
+        "WASMC_WASMN": "matched",
+        "WASMF_DET": "matched",
+        "WASMF_LIFT": "matched",
+        "WASMF_TRAPPED_RTC": "matched",
+        "WASMF_TRAPPED_STEP": "matched",
+        "WASMN_CALL_ENSURES": "matched",
+        "WASMN_CALL_STEP": "matched",
+        "WASMN_DET": "matched",
+        "WASMN_TO_WASMF": "matched",
+        "WASMN_TO_WFSUM": "matched",
+        "WASM_CALLN_DET": "matched",
+        "WASM_ENSURES_GLOBAL_RESTORED": "matched",
+        "WASM_TO_WFSUM": "matched",
+        "WCALL_RETURN_TRAP_OBS": "matched"
+      },
+      "file": "/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c5/proj/tasks/bubble-echo/vortex/proofs/chain_c5p.spec",
+      "outcome": "satisfied",
+      "pins": {
+        "div3": "pinned",
+        "div3_big": "pinned",
+        "va1_f33_pre": "pinned",
+        "va1_puncture_mc": "pinned",
+        "va1_tick_forward_mc": "pinned",
+        "wasm_call": "pinned",
+        "wasm_calln": "pinned",
+        "wasm_decl_vals": "pinned",
+        "wasmc": "pinned",
+        "wasmf": "pinned",
+        "wasmn": "pinned",
+        "wcall_entry": "pinned",
+        "wcall_locals": "pinned",
+        "wcall_return": "pinned",
+        "wdecl_vals": "unpinned",
+        "wfsum": "pinned",
+        "wtrap_obs": "pinned",
+        "wzero_of": "pinned"
+      },
+      "reason": null,
+      "sha256": "3a6487ee0488b851acfa788ce9bd774b569765fd7d0d66fcc85b0e4fe6611908",
+      "unpinned": [
+        "wdecl_vals"
+      ]
+    },
+    "transcript": "/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c5/official-runs/20261113T210754Z-2306016-chain_c5p_final-6c8f8d/transcript.log",
+    "verdict": "passed",
+    "wait_seconds": 0.3
+  },
+  "verdict_origin": "recorded"
+}

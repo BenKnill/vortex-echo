@@ -1,0 +1,11 @@
+C5' class sentence (c5p, Claude Opus 5.5, 2026-11-13):
+"On the vortex proof chain, hol-hearth's reference model of nested Wasm calls (main 6adb41ce, loaded on the chain as a
+verbatim project copy, with no change to the prover) is now available, with a proof that every result the chain
+already has in the one-level call model (wasmc) still holds in the nested model (wasmn). On top of it, two rules are
+proved: the puncture function, which moves the stack pointer global and puts it back, can be used as a summary that
+leaves the caller's globals unchanged; and the exact `call 33` instruction inside the shipped tick_forward
+(byte offset 309) then becomes one proof step, from a state whose stack holds the three arguments, memory size is
+4194304 and global 0 is 16384, to the next instruction with the puncture's result and memory. These are rules, not
+the auto-puncture tick itself: their premise is the puncture's own contract (rung C6a, in progress), and the steps
+before and after the call are rung C6b's work. As in every rung, the model assumes the host writes neither the
+module's memory nor its globals between calls, and models an unbounded call stack (the auto path is two calls deep)."

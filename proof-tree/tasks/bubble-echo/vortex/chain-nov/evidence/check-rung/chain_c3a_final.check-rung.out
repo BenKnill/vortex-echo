@@ -1,0 +1,48 @@
+receipt /home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c3/official-runs/20261113T164323Z-2023970-chain_c3a_final-4abf03/transcript.log.json sha256 0969334a89b5ee2fa54a83f6d7baf385b3427c3f8a017e6a6898236fb5380a7c
+OK   [receipt] verdict passed | PASSED chain_c3a_final.ml: 15/15 bindings proved, 15/15 spec bindings matched, 42/42 spec pins matched, 0 new axioms, eval 10.7s (wasm)
+OK   [receipt] exit 0, semantic succeeded, source completed, completion marker valid
+OK   [receipt] binding counts: 0 failed/missing/unknown/unprobed, >0 proved | {'failed': 0, 'missing': 0, 'printed_unprobed': 0, 'proved': 15, 'unknown': 0}
+OK   [spec] receipt is spec-locked (has a spec block)
+OK   [receipt] verdict line counts agree with 15 binding and 42 pin records | 15/15 bindings proved, 15/15 spec bindings matched, 42/42 spec pins matched, 0 new axioms
+OK   [axioms] verdict new_axioms 0
+OK   [axioms] leaf foundation delta: observed, 0 new axioms | {'axioms': 0, 'constants': 0, 'definitions': 0, 'types': 0}
+OK   [axioms] spec foundation axioms 0, unallowed [], status ok | {'axioms': 0, 'unallowed': [], 'status': 'ok'}
+OK   [spec] receipt spec sha256 == sha256(/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-pop/assembly/proj/tasks/bubble-echo/vortex/proofs/chain_c3a_final2.spec) | bdd326f9bf975facb7c4f5979b24515c86830936a8656d1d004cb2ba19dd6ee6
+OK   [spec] spec outcome satisfied | satisfied
+OK   [spec] parser context unchanged, no reasons
+OK   [spec] receipt allow list == the spec file's allow lines
+OK   [pins] unpinned names are only allowed ones
+OK   [frozen] /home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/FROZEN-C3A.txt has a line with spec sha256 bdd326f9bf97 | line 2
+OK   [frozen] that line is a freeze-spec v1 record | kind freeze-spec
+OK   [frozen] every receipt under the run roots is readable and every run with this spec has a start time
+NOTE 4 receipted run(s) with this spec sha under /home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/c3a/runs, /home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/c3a/verify-runs, /home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c3/official-runs; first /home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/c3a/runs/20261113T070635Z-1267164-chain_c3a_final-49cdc4 at 2026-11-13T07:06:35Z
+OK   [frozen] freeze time 2026-11-13T07:06:24Z (line 2) is before the first receipted run | first run 2026-11-13T07:06:35Z
+OK   [spec] spec parse: 15 theorems, 42 definitions, no duplicates, raw count 57 agrees
+OK   [bindings] one binding record per spec theorem (15)
+OK   [pins] one pin record per spec definition (42)
+OK   [bindings] all 15 bindings matched, proved, 0 hypotheses, conclusion == spec conclusion, spec term == file
+OK   [pins] all 42 pins pinned, defined == spec conclusion, spec term == file
+OK   [attest] attest output is for this receipt (sha256 0969334a89b5) | 0969334a89b5
+OK   [attest] attest verdict passed
+OK   [attest] attest transitive_foundation axioms=0 | transitive_foundation: axioms=0
+OK   [closure] closure project files == commit blobs (67/67 under /home/bluestar/lanes/demo1-wave-20261110-141705/vortex-pop/assembly/proj; 5 outside root)
+OK   [closure] closure files outside the project root are only Hearth basis layer files (.automatic/<sha256>/dependencies.ml) or profile-relative (5)
+NOTE closure files outside the project root (not checked against commits): dependencies.ml, wasm_tactics.ml
+OK   [closure] execution.ml == executed_source_sha256, original.ml == source_sha256
+OK   [closure] leaf tied together: source == closure entrypoint (under the root), source_sha256 == entrypoint sha256 == its commit blob, original.ml text inside execution.ml | source /home/bluestar/lanes/demo1-wave-20261110-141705/vortex-pop/assembly/proj/tasks/bubble-echo/vortex/proofs/chain_c3a_final.ml entrypoint /home/bluestar/lanes/demo1-wave-20261110-141705/vortex-pop/assembly/proj/tasks/bubble-echo/vortex/proofs/chain_c3a_final.ml
+OK   [cheat] no new_axiom / mk_thm / CHEAT_TAC / cheat / Obj.magic outside comments and strings (68 .ml files + execution.ml)
+OK   mutant identity (control: must PASS)            exit 0 (want 0)
+OK   mutant verdict new_axioms=1                     exit 1 (want 1), target [axioms] failed
+OK   mutant spec foundation axioms=1                 exit 1 (want 1), target [axioms] failed
+OK   mutant leaf foundation delta axioms=1           exit 1 (want 1), target [axioms] failed
+OK   mutant attest transitive axioms=1               exit 1 (want 1), target [attest] failed
+OK   mutant receipt spec sha flipped                 exit 1 (want 1), target [spec] failed
+OK   mutant FROZEN sha flipped                       exit 1 (want 1), target [frozen] failed
+OK   mutant freeze time moved after the run          exit 1 (want 1), target [frozen] failed
+OK   mutant pin dropped                              exit 1 (want 1), target [pins] failed
+OK   mutant binding with 1 hypothesis                exit 1 (want 1), target [bindings] failed
+OK   mutant binding not proved                       exit 1 (want 1), target [bindings] failed
+OK   mutant closure sha flipped                      exit 1 (want 1), target [closure] failed
+OK   mutant new_axiom planted in execution.ml        exit 1 (want 1), target [cheat] failed
+MUTANTS: all caught, control passed
+RESULT: PASS check-rung (30 checks, 0 failed)

@@ -1,0 +1,40 @@
+PASSED chain_c6a_final.ml: 4/4 bindings proved, 4/4 spec bindings matched, 36/36 spec pins matched, 0 new axioms, eval 9.5s (wasm)
+budgets: leaf=900s preparation=1700s (separate)
+source: /home/bluestar/lanes/demo1-wave-20261110-141705/vortex-pop/assembly/proj/tasks/bubble-echo/vortex/proofs/chain_c6a_final.ml sha=ef4b1092a5c3
+  VA1_PUNCTURE_OK: proved source_line=4
+  VA1_HCALL_PUNCTURE: proved source_line=17
+  VA1_PUNCTURE_RUNS: proved source_line=33
+  VA1_C6A_SAT: proved source_line=50
+binding_counts: proved=4 failed=0 printed_unprobed=0 missing=0 unknown=0
+successful_probe_counts: conclusion_checked=4 thm_type_only=0 unknown=0
+spec: satisfied 4/4 bindings match, 36/36 pins match sha=4082be069ba5 file=/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-pop/assembly/proj/tasks/bubble-echo/vortex/proofs/chain_c6a_final.spec
+  spec VA1_PUNCTURE_OK: matched (|- forall fs t mdl a0 a1 a2 m. fs 25 = va1_f25_mc,3,1 /\ fs 32 = va1_f32_mc,2,1 /\ fs 34 = va1_f34_mc,3,0 /\ read (bytes32 (word 16396)) m = word 4294967295 /\ va1_tick t m /\ ~(t = word 0) /\ va1_mdl mdl m /\ ~(a0 = word 0 /\ a1 = word 0 /\ a2 = word 0) ==> ensures (wasmc fs) (va1_f33_pre a0 a1 a2 ...)
+  spec VA1_HCALL_PUNCTURE: matched (|- forall fs gl t mdl a0 a1 a2 m. fs 25 = va1_f25_mc,3,1 /\ fs 32 = va1_f32_mc,2,1 /\ fs 34 = va1_f34_mc,3,0 /\ read (bytes32 (word 16396)) m = word 4294967295 /\ va1_tick t m /\ ~(t = word 0) /\ va1_mdl mdl m /\ ~(a0 = word 0 /\ a1 = word 0 /\ a2 = word 0) /\ gl 0 = I32 (word 16384) ==> (exists e d...)
+  spec VA1_PUNCTURE_RUNS: matched (|- forall fs gl t mdl a0 a1 a2 m s0. fs 25 = va1_f25_mc,3,1 /\ fs 32 = va1_f32_mc,2,1 /\ fs 34 = va1_f34_mc,3,0 /\ read (bytes32 (word 16396)) m = word 4294967295 /\ va1_tick t m /\ ~(t = word 0) /\ va1_mdl mdl m /\ ~(a0 = word 0 /\ a1 = word 0 /\ a2 = word 0) /\ gl 0 = I32 (word 16384) /\ read wmem...)
+  spec VA1_C6A_SAT: matched (|- forall t mdl a0 a1 a2. ~(t = word 0) /\ ~(a0 = word 0 /\ a1 = word 0 /\ a2 = word 0) ==> (exists fs gl m s0. fs 25 = va1_f25_mc,3,1 /\ fs 32 = va1_f32_mc,2,1 /\ fs 34 = va1_f34_mc,3,0 /\ read (bytes32 (word 16396)) m = word 4294967295 /\ va1_tick t m /\ va1_mdl mdl m /\ gl 0 = I32 (word 16384) /\...)
+  spec definition va1_c6a_frame: pinned (|- va1_c6a_frame = (\m0 m. forall a. a < 4194304 /\ ~(16288 <= a /\ a < 16384) /\ ~(16396 <= a /\ a < 16404) /\ ~(16408 <= a /\ a < 16504) /\ ~(65536 <= a /\ a < 1114112) /\ ~(1130496 <= a /\ a < 1966080) ==> read (bytes8 (word a)) m = read (bytes8 (word a)) m0))
+  spec definition va1_c6a_mem: pinned (|- va1_c6a_mem = (\mdl m m'. read (bytes32 (word 16396)) m' = read (bytes32 (word 16392)) m /\ read (bytes32 (word 16400)) m' = word 0 /\ (exists tbl. va1_w32s 65536 262144 tbl m' /\ va1_w32s 1138688 2048 (va1_rbinit tbl) m') /\ va1_w32s 1130496 2048 (\k. word 251658) m' /\ va1_w32s 1146880 2048 (\k...)
+  spec definition va1_c6a_rel: pinned (|- va1_c6a_rel = (\mdl gl m gl' m'. gl' = gl /\ va1_c6a_mem mdl m m'))
+  spec definition va1_f32_mc: pinned (|- va1_f32_mc = [word 2; word 1; word 124; word 1; word 126; word 32; word 0; word 32; word 0; word 68; word 131; word 200; word 201; word 109; word 48; word 95; word 228; word 63; word 162; word 68; word 0; word 0; word 0; word 0; word 0; word 0; word 224; word 63; word 160; word 156; word 34; word...)
+  spec definition va1_f34_mc: pinned (|- va1_f34_mc = [word 3; word 1; word 124; word 1; word 127; word 5; word 124; word 32; word 1; word 32; word 0; word 43; word 3; word 8; word 34; word 3; word 68; word 0; word 0; word 0; word 0; word 0; word 0; word 0; word 0; word 68; word 0; word 0; word 0; word 0; word 0; word 0; word 240; word ...)
+  spec definition va1_puncture_mc: pinned (|- va1_puncture_mc = [word 8; word 2; word 127; word 6; word 124; word 1; word 127; word 11; word 124; word 1; word 127; word 8; word 124; word 1; word 127; word 1; word 126; word 35; word 128; word 128; word 128; word 128; word 0; word 65; word 224; word 0; word 107; word 34; word 3; word 36; word ...)
+  spec definition va1_f25_mc: pinned (|- va1_f25_mc = [word 6; word 5; word 126; word 1; word 127; word 2; word 126; word 1; word 127; word 3; word 126; word 1; word 127; word 2; word 64; word 65; word 0; word 40; word 2; word 140; word 128; word 1; word 65; word 127; word 70; word 13; word 0; word 65; word 1; word 15; word 11; word 2; ...)
+  spec definition wzero_of: pinned (|- wzero_of = (\t. if t = 126 then I64 (word 0) else if t = 125 then F32 (word 0) else if t = 124 then F64 (word 0) else I32 (word 0)))
+  spec definition wasm_decl_vals: pinned (|- wasm_decl_vals = (\code. wobind (wuleb code) (\p. wdecl_vals (FST p) code (SND p))))
+  spec definition wcall_locals: pinned (|- wcall_locals = (\args decls k. if k < LENGTH args then EL (LENGTH args - 1 - k) args else if k - LENGTH args < LENGTH decls then EL (k - LENGTH args) decls else I32 (word 0)))
+  spec definition wcall_entry: pinned (|- wcall_entry = (\code np nr stk e decls s. write wcode code (write wpc (word e) (write wstack [] (write wlocals (wcall_locals (wtake np stk) decls) (write wlabels [] (write warity nr (write wstatus WRunning s))))))))
+  spec definition wcall_return: pinned (|- wcall_return = (\npc np c1 s. if read wstatus c1 = WDone then write wpc (word npc) (write wstack (APPEND (read wstack c1) (wdrop np (read wstack s))) (write wmem (read wmem c1) (write wmemsize (read wmemsize c1) (write wglobals (read wglobals c1) s)))) else write wstatus WTrapped (write wmem (rea...)
+  ... 24 more; use --json --verbose
+spec_foundation: 0 new axioms; no new definitions, types or constants
+phases: preparation=1056.864s restore=1.395s evaluation=0.451s probe=8.357s request_overhead=0.714s evaluation_cpu=0.430s (observed)
+label: c6a-final
+inputs: 48 files; closure_sha=dc8b55f8a374
+inherited_project_basis: /home/bluestar/.cache/hol-hearth/project-bases/.automatic/71cf9cb4cab17ed099b989da8785ef1f9f6a95c0325083a2af2666b64ab31401/dependencies.ml sha=71cf9cb4cab1
+basis_preparation_receipt: /home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/c6a/runs/20261113T093226Z-1518944-dependencies-7e6779/transcript.log.json
+basis_layer 1/4: e60a863a2982 /home/bluestar/.cache/hol-hearth/project-bases/.automatic/3df62bb3dfb6149d794bb61cab4a35c5a861432261ab0a8f4e4acc3cd4eed02a/dependencies.ml receipt=/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c3/official-runs/20261113T073230Z-1304231-dependencies-4b42ed/transcript.log.json
+basis_layer 2/4: 632f8862e62e /home/bluestar/.cache/hol-hearth/project-bases/.automatic/f9a100dd17d25b22c45b0e993b49bd8406bb4cec351bb6ca146f364d7cf75ebc/dependencies.ml receipt=/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c3/official-runs/20261113T074102Z-1313422-dependencies-1566fa/transcript.log.json
+basis_layer 3/4: ea724158ec3f /home/bluestar/.cache/hol-hearth/project-bases/.automatic/4c50881608e41764676abbc9a17087594ec06e48026b96a45c0025bed74b31b3/dependencies.ml receipt=/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/finish-c3/official-runs/20261113T080627Z-1327634-dependencies-d7f5e3/transcript.log.json
+basis_layer 4/4: 63e75e469675 /home/bluestar/.cache/hol-hearth/project-bases/.automatic/71cf9cb4cab17ed099b989da8785ef1f9f6a95c0325083a2af2666b64ab31401/dependencies.ml receipt=/home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/c6a/runs/20261113T093226Z-1518944-dependencies-7e6779/transcript.log.json
+basis_scope: preparation was checked separately; this attempt checks the full leaf in a fresh child
+receipt: /home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/c6a/runs/20261113T093222Z-1518944-chain_c6a_final-12cd59/transcript.log.json
+NEXT: /home/bluestar/src/hol-hearth/hearth inspect /home/bluestar/lanes/demo1-wave-20261110-141705/vortex-chain-20261111-142342/c6a/runs/20261113T093222Z-1518944-chain_c6a_final-12cd59

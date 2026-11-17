@@ -1,0 +1,11 @@
+C8p row P5 class sentence (2026-11-14):
+On the exact bytes of vortex_a1.wasm (sha256 a3cf8c82...), in hol-hearth's model of WebAssembly with 0 new axioms (spec-locked
+receipt, check-rung), and under exactly the entry conditions of C3b's VA1_F25_OK (f25 called as f25(a0, a1, a2) with not all
+three zero, the puncture guard word 16396 = -1, a 4194304-byte memory): f25 still does everything VA1_F25_OK says, and in
+addition the 21 i32 words it writes at 16420, 16424, ..., 16500 (header words 9..29) are the named integer terms
+va1_phdr a0 a1 a2 0..20: the low 32 bits of a fixed-point frame (two bit-by-bit 32-step integer square roots, six signed
+divisions with the bytes' divisor clamp, a select on |n1|, three cross words) and twelve hash words from a seed
+((a1*7) ^ (a2*13) ^ a0) + 1831565813 stepped by -631835670 mod 2^32. These words depend only on a0, a1, a2 (not on the tick,
+the model words, the table or the rest of memory). Not covered here: what the frame means (no claim that it is orthonormal
+or that the hashes are uniform), the 96-byte stack area and every address outside the conjuncts named (VA1_F25_OK's frame
+applies unchanged), the speed table f33 builds (rows P3/P4) and the click and auto puncture compositions (P6, P7).

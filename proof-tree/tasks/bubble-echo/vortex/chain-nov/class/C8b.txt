@@ -1,0 +1,12 @@
+C8b class sentence (draft, vortex-chain-20261111-142342 c8b, Claude Opus 5.5, 2026-11-14; for Sol proof+class review):
+
+On the exact bytes of vortex_a1.wasm, in Hearth's model of WebAssembly (0 new axioms; floating-point rounding left as
+fixed but unspecified functions), every tick theorem of the chain (a plain tick forward and backward, a pop tick forward
+and backward, the un-puncture tick and the automatic puncture tick) now also says that the vortex slots the model does
+not use (VA and VB words 3N to 2047, at [1114112, 1130496)) hold after the tick exactly what they held before it, whatever
+that was. This closes one of the four gaps that the earlier tick theorems left inside the snapshot region
+[16384, 1966080) (C8-DESIGN section 0, gap G2); the other three stay open. Not covered: which droplets a pop tick
+gives birth to (still "some list"), the speed table and 21 header words the puncture writes, the scratch area and the
+stack area below 16384, and the host-call and film forms (the films were not re-run). Assumed, not proved: the host
+writes neither memory nor globals between or during calls, and the call table maps each index to the module's own
+function bodies.
