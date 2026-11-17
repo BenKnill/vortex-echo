@@ -1,0 +1,22 @@
+C8b class sentence, r2 (2026-11-17, corrected by the Vortex Echo correction agent, Claude Opus 5.5; spec c8b_final.spec 25612b2d,
+frozen). The r1 sentence (c8b/CLASS-SENTENCE.txt; class/C8b.txt in the published tree) is kept unchanged as it was reviewed.
+ERRATUM (r1 -> r2): r1 said "every tick theorem of the chain" now also preserves the unused vortex slots. C8b strengthens the 11
+tick contracts named below. The chain's other form of the plain backward tick, VA1_TICK_INVERSE_VK (va1_seq_final.spec), was not
+strengthened. Each strengthened contract keeps its original entry conditions: for example the plain backward tick needs a nonzero
+clock, so a tick_backward at clock 0 is outside it. Found by GPT-6.2 Sol (review 20261117-132439-vortex-chain-c8b-proof-class-4d27,
+must-fix 1) and checked against c8b_final.spec. The theorems, spec, receipts and cold replay are unchanged; only the wording is
+corrected.
+
+On the exact bytes of vortex_a1.wasm, in Hearth's model of WebAssembly (0 new axioms; floating-point rounding left as
+fixed but unspecified functions), the 11 tick contracts of c8b_final.spec, for the successful ticks that return 1, now also say,
+under their original preconditions (among them 1 <= N <= 640), that the vortex slots the model does not use (VA and VB words 3N
+to 2047, at [1114112, 1130496)) hold after the tick exactly what they held before it, whatever that was: the plain (no-pop) tick
+forward and backward (VA1_TICK_FORWARD_NOPOP_VK_U, VA1_TICK_BACKWARD_NOPOP_VK_U), the pop tick forward
+(VA1_TICK_FORWARD_POP_COND_U, VA1_TICK_FORWARD_POP_U, VA1_TICK_FORWARD_POP_R5_U, VA1_TICK_FORWARD_POP_R5C_U) and backward
+(VA1_TICK_POP_INVERSE_COND_U, VA1_TICK_POP_INVERSE_U, VA1_TICK_POP_INVERSE_R5_U), the un-puncture tick (VA1_TICK_UNPUNCT_U) and the
+automatic puncture tick (VA1_TICK_FORWARD_PUNCT_U). This closes one of the four gaps that the earlier tick theorems left inside
+the snapshot region [16384, 1966080) (C8-DESIGN section 0, gap G2); the other three stay open. Not covered: VA1_TICK_INVERSE_VK
+and any tick outside the original preconditions; which droplets a pop tick gives birth to (still "some list"), the speed table
+and 21 header words the puncture writes, the scratch area and the stack area below 16384, and the host-call and film forms (the
+films were not re-run). Assumed, not proved: the host writes neither memory nor globals between or during calls, and the call
+table maps each index to the module's own function bodies.

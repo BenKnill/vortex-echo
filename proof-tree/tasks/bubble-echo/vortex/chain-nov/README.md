@@ -2,6 +2,11 @@
 
 > Published copy, edited 2026-11-17 from VAB a70e29d0: the six deferred C8 cold replays are now done (Status below),
 > and the two driver records `recipe/*.sh.txt` are not published here (their per-stage timeouts are given in step 2).
+> Edited again 2026-11-17: two class sentences said more than their theorems. Corrected versions sit beside the reviewed
+> originals, each with an erratum at the top: `class/C8f-r2.txt` and `class/C8b-r2.txt`. The row labels in `claims.json`
+> were corrected too (`wording_correction_note`). In this public repository, the tree root of the commands in step 2
+> below is `proof-tree/`: instead of a worktree, use a copy of `proof-tree/` with this directory's `overlay/.` copied
+> over it, and run the commands from that copy. Step 1 uses files that are not published here.
 
 Imported 2026-11-16 on the private feature branch `vortex-chain-nov-20261116` (not merged to main).
 These are HOL Light proofs, run through hol-hearth's Wasm model, about the exact bytes of
@@ -39,7 +44,7 @@ The October v1 engine results (`ve_core.wasm`, PRs #72/#76) are separate rows an
 | `evidence/RUNS.tsv` | official run directory of every case (bluestar26 provenance) |
 | `recipe/finish-c8-stages.json` | the layered proving order of the finish-c8 tree (45 stages: 35 stage leaves + the 9 C8 finals + the C8f final), each with its basis parent and flag (`--basis-parent`, or `--basis` for the C8f final), official run, receipt sha256, verdict line and the closure files it read (all in the tree or overlay); the stage leaves are imported under `../proofs/` |
 | `frozen/FROZEN-*.txt` | spec freeze records: spec sha256, time, Sol review id and score |
-| `class/*.txt` | the reviewed class sentences |
+| `class/*.txt` | the reviewed class sentences; `C8f-r2.txt` and `C8b-r2.txt` are the corrected versions (2026-11-17) |
 
 Host paths inside the attest files (bluestar26 `/home/bluestar/lanes/demo1-wave-20261110-141705/...`) are provenance.
 They are not inputs. Every closure file a receipt read under its proving tree is in this repository with the recorded

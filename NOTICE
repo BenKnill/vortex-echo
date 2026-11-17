@@ -1,6 +1,7 @@
 Vortex Echo: notices for material that comes from elsewhere
 
-Everything in this repository is covered by the MIT license in LICENSE, with these notes.
+The first-party material in this repository is covered by the MIT license in LICENSE. The material listed below
+comes from elsewhere; its own terms, given with each item, apply to it.
 
 1. hol-hearth (https://github.com/BenKnill/hol-hearth, MIT, Copyright (c) 2026 Ben Knill).
    Some proof files are copies of hol-hearth code (all under proof-tree/tasks/bubble-echo/vortex/proofs/):

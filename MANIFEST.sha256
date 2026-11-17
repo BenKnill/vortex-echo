@@ -1,8 +1,8 @@
 e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855  ./.nojekyll
 be5248c102666878f7f4e07694f33c139f49539f4dcab88c1ea6c97f91825839  ./LICENSE
-eaaed7cb050a66ca0a5eea69d82b2ccab72b9a369c5e4a6939b96a14caf8a558  ./NOTICE
-28931c09d468ccd1d2557059ef504613474e420bc188f2ba2e7c1d3b7f16a32b  ./README.md
-65d6e4d69c20beb31fab24111f7fe37d57dc10b9b0de39fb5bbd3ada16442f2e  ./claims.json
+202f934ee183b39a69e051b55dff4728ac149e000cc5f2e73b0e5b3652879889  ./NOTICE
+ab970b66f2c5e897b627022ad0e1da3c3f5b1ec3705083583100ed6943d71012  ./README.md
+d3894e17a4f9ae6db8a9d475bdcf08de213fbbc341563872deec5ce0665194f3  ./claims.json
 d7a2c5a32c198eb4716664bc4911966b9e53a6dad460ca57e567bef68343bd4c  ./demo/filmcolor.js
 6d5639dffb7fba79b2aa4f7c35a4b2683064ac91c365e107923f2e40ec610fc5  ./demo/index.html
 ca163dc7bda9c75f000d3bdb0aa7e547ff2ef2d29aed158a87e6a2ecd599aaf1  ./demo/ui.js
@@ -10,7 +10,7 @@ ca163dc7bda9c75f000d3bdb0aa7e547ff2ef2d29aed158a87e6a2ecd599aaf1  ./demo/ui.js
 7cb971d7cd796fd81034a6bcdca633c75983607bd53955c24c31a8ba7c938227  ./demo/vortex.js
 a3cf8c821534dd1613e2c6c6251a003320c40d5eb2dfc8e16a871c59636aede6  ./demo/vortex_a1.wasm
 899864fc94855ed70b224c60a07d420e2fa9a44155e86709a1591822522c1e01  ./img/demo.jpg
-93c59da844b196e2eb545abdeea29e8e85a4c3fcd9697c4d3cffcc3fb2c63f7e  ./index.html
+aca0cd2050045e7dd5e0086d4920a66580174d3bb59c52c575877090405a52c9  ./index.html
 9bdeb4b9aa34cfaee9ae29339466747ab8c5ca857a507ec74ad1b4c52d6a6946  ./module/BUILD.md
 1a1f66a3b5051c2ced3696023bcc334eddd19da2d8448ecf840d05067d5ab506  ./module/SHA256SUMS
 46b22c62b48a3b699cff1881bc46eb96dbcad4176bd34ddd2261a3c300451f00  ./module/src/drop_exports.py
@@ -21,7 +21,7 @@ a3cf8c821534dd1613e2c6c6251a003320c40d5eb2dfc8e16a871c59636aede6  ./module/vorte
 b344f84e62d202c8ead3aac89b89b06c651dc08480bc9a24589157ac9dd02020  ./proof-tree/tasks/bubble-echo/capillary/proofs/wasm_fastdec.ml
 73b71297fc9a833fec1a243e8988a212f69f1a18da9e3195cc4ce3b79a43525d  ./proof-tree/tasks/bubble-echo/onefilm2/proofs/of2_dec.ml
 0a796dfd1798254cd044b3bdc0522a48c5495193debc7aaa29963c9930a29009  ./proof-tree/tasks/bubble-echo/vortex/SPEC.md
-79dcfa135a39cc1a6942545409f485037d193c3d2fb38d06780b3a2d993f52e6  ./proof-tree/tasks/bubble-echo/vortex/chain-nov/README.md
+710f736a0ef10eae822ff21af96f308ec3951788e2f1962ceda996a80d73af06  ./proof-tree/tasks/bubble-echo/vortex/chain-nov/README.md
 3be7c29be90f6410fcb72da63c2a3b97a136c98766b8ac62b215ded6641c2df4  ./proof-tree/tasks/bubble-echo/vortex/chain-nov/class/C1.txt
 ca06d950a32d695f5997baea0114e589f724bb56744dea5cc7adcf63a49c7045  ./proof-tree/tasks/bubble-echo/vortex/chain-nov/class/C2.txt
 2f3c208c1e81bef4bb36cfffc48d5258b39a611055cfa9718c4eaf741e5dc16b  ./proof-tree/tasks/bubble-echo/vortex/chain-nov/class/C3a.txt
@@ -34,8 +34,10 @@ ed753f9f63bbfa16683e2a11d2ccda55fcd67ea540e2880e696d8439dc500338  ./proof-tree/t
 cef8fc93592f293b07e9fccc47ae4fd6ebf41c832bf21c0108d603b4c7e28ba5  ./proof-tree/tasks/bubble-echo/vortex/chain-nov/class/C7.txt
 04f643bb41f6a04d10fd132e62364bd0308b42c2e16f0dd804764a9566cf2de4  ./proof-tree/tasks/bubble-echo/vortex/chain-nov/class/C8a-births.txt
 385d9032ed43cecc2932f4825c29ebd4b90f4afcda372c9234d6656ab2d43163  ./proof-tree/tasks/bubble-echo/vortex/chain-nov/class/C8a-tick.txt
+24c03c2d18951a069952d30c56d2d128dc79c97d02f4f59301dede41d02580bf  ./proof-tree/tasks/bubble-echo/vortex/chain-nov/class/C8b-r2.txt
 8bf40e07386cd4a7340a9d56d4ef310cc68223ddbdd174cd92d3257ea4777186  ./proof-tree/tasks/bubble-echo/vortex/chain-nov/class/C8b.txt
 47c3301725a783cf7fbcc9a62a32929f7aa2c7069845af5d3346709589f3ec1e  ./proof-tree/tasks/bubble-echo/vortex/chain-nov/class/C8e.txt
+e255c9863711ca5ecf5d2a974bd46092b123edfe84487862853f63ecc9aaff3b  ./proof-tree/tasks/bubble-echo/vortex/chain-nov/class/C8f-r2.txt
 6503c24de931148e2a2b116811c09aa68ce1d9a85179a5fb2143efaf1b50e32f  ./proof-tree/tasks/bubble-echo/vortex/chain-nov/class/C8f.txt
 68a82bf8189e0e215e6a1611d93bb97b908fec4bfec89cb05b2d69e1530f6d64  ./proof-tree/tasks/bubble-echo/vortex/chain-nov/class/C8p-P12.txt
 e2bf04fa581552639a799d0c92f3b1965d010ea1dcddbb54d4ac67f9f0eb2393  ./proof-tree/tasks/bubble-echo/vortex/chain-nov/class/C8p-P34.txt

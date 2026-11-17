@@ -1,0 +1,58 @@
+C8f class sentence, r2 (2026-11-17, corrected by the Vortex Echo correction agent, Claude Opus 5.5; spec c8f.spec 231a26c4,
+frozen 2026-11-16 13:48:48 EST). The r1 sentence (CLASS-SENTENCE-C8F.txt; class/C8f.txt in the published tree) is kept unchanged as
+it was reviewed.
+ERRATUM (r1 -> r2): r1 said the films hold "with every intermediate snapshot ... NAMED as an iterate of C8e's snapshot step
+va1_fwd". The theorems name the snapshot only at the points listed below. In the auto and click films the snapshots during the
+backward run are not named (only the end-of-film byte statement is proved), and in the auto film neither are those after fewer
+than K forward calls. In the click film the snapshot after the puncture is not an iterate of va1_fwd from the start: it is
+va1_clk a0 a1 a2 of the iterate after K forward calls (the click sets P := T with no tick, which no va1_fwd step does from a
+start whose automatic puncture is off or later), and the later forward snapshots are iterates from that clicked snapshot.
+r1 also said the click pair "is undone by ONE tick_backward" before giving the pure HOL equation; what is
+proved is that equation about the snapshot functions, not a separate host-call theorem. Found by GPT-6.2 Sol (review
+20261117-132437-vortex-chain-c8f-spec-c8f-sp-5111, must-fix 1) and checked against c8f.spec. The theorems, spec, receipts and cold
+replay are unchanged; only the wording is corrected. The frozen c8f.spec is unchanged too, so its comment header (lines 4-6 and
+19-23) still repeats r1's wording; its theorem statements are the authority. Its TESTED note says PTCHECK compares the table with
+va1_ptbl: that check sampled 32 cells per table (4 fixed, 28 random; 256 cells in run m1/r2), and the full-snapshot comparisons
+used the table the module wrote, so exact table equality rests on the proof, not the test (5111 must-fix 3).
+
+On the exact bytes of vortex_a1.wasm (sha256 a3cf8c82...), in hol-hearth's model of WebAssembly with 0 new axioms (spec-locked
+final receipt, which matched every headline binding against the frozen spec; attest; check-rung), the three films of rungs C2, C4/C7b and C4/C7a hold again with the snapshot
+(the 487424 i32 words at bytes [16384, 1966080)) NAMED at the points below, as an iterate of C8e's snapshot step va1_fwd (which
+names the births, C8a's va1_born, and the puncture's speed table, C8p's va1_ptbl) from a named point or, after the click, through
+the click step va1_clk:
+ - pop window (C2, wasmc): from a kind-1 snapshot sg0 in C8e's domain va1_dom with P + 520 < 2^32 and T + K <= P + 520, every host
+   sequence of tick_forward and tick_backward calls whose planned clock offset (+1 per forward call, -1 per backward call; C2's
+   va1_cmds_ok) stays in [0, K] has every call return 1, keeps the globals and ends with the snapshot ITER e va1_fwd sg0, where e
+   is the final planned offset (VA1_POP_SCRUB_N; every prefix of such a sequence is again such a sequence, so the snapshot after each of
+   its calls is named); so k forward then k backward calls with T + k <= P + 520 restore the whole snapshot, births, rings and unused vortex words
+   included (VA1_POP_CHAIN_N); from the first pop tick (T = P), 520 forward calls, one forward call that returns 0 and changes neither
+   globals nor memory, then 520 backward calls (VA1_POP_CHAIN_TO_END_N);
+ - auto film (C7b's premises, wasmn): after the K + n forward calls (the K-th the auto puncture) the snapshot is ITER (K + n)
+   va1_fwd of the start snapshot (for every n <= 520, so after each forward call from the K-th on), and after the n + K backward
+   calls every byte below 4194304 equals the start except the 96-byte shadow-stack area [16288, 16384) and the vort scratch area
+   [1966080, 2039808) (va1_film_bytes_s): C7b's exclusion of the unused vortex slots is gone (VA1_FILM_AUTO_N; to the end state
+   and back, with one extra tick_forward call at the end that returns 0 and leaves globals and memory unchanged:
+   VA1_FILM_AUTO_TO_END_N; the browser page stops at the end tick and does not make that extra call). The snapshots after fewer than K forward calls and during the backward run are not named;
+ - click film (C7a's premises plus the true call-table fact fs 33 = puncture, wasmc): after K forward calls the snapshot is
+   ITER K va1_fwd of the start; the puncture export with arguments a0 a1 a2 returns 0 and leaves va1_clk a0 a1 a2 of it (P := T, the
+   header, C8p's table and rings named, no swirl tick); n forward calls leave ITER n va1_fwd of that; the n + K backward calls end
+   in va1_film_bytes_s of the start (VA1_FILM_CLICK_N; VA1_FILM_CLICK_TO_END_N adds the same extra end call). The snapshots during the backward run are not
+   named. In pure HOL, the snapshot step of tick_backward undoes the click pair "tick_forward; puncture":
+   va1_bwd (va1_clk a0 a1 a2 (va1_fwd sg)) = sg for clean kind-0 sg in va1_dom whose clock does not reach 0xffffffff
+   (VA1_CLICK_PAIR_INV). This is an equation about the snapshot functions; as host calls, the pair and its undo are covered only
+   inside the click film above.
+For every K and n in range, inputs meeting the auto and click premises exist, and a memory meeting the pop-window premises with
+T = P exists (VA1_C8F_SAT).
+Not covered: host non-interference (an assumption built into va1_hcall: nothing else touches memory or globals between or during
+calls, memory does not grow); that init produces the start states (premises; tested after init by C4/C7, not proved); the two
+named byte regions at the end of a film (left free by the theorems; they changed in the recorded test runs) and bytes outside the
+snapshot at intermediate points of a film beyond what C7/C2 already state; the snapshots at the film points not listed above;
+apart from the return-0 call of VA1_POP_CHAIN_TO_END_N, which leaves the whole memory unchanged, the pop-window theorems here say
+nothing outside the snapshot (for C2's separate frame see the last paragraph); any float value (the table is the named term va1_ptbl over
+fixed but unspecified rounding functions; every theorem holds for every choice); refused calls, other exports, states outside the
+premises and C8e's va1_dom boundary cases; the trusted base (Hearth's wasm model incl. wasmn's one-step calls, the call-table
+premises, global 0 = 16384, the HOL kernel).
+C2's frame (not re-proved here): C2's theorems VA1_POP_SCRUB_FRAME and VA1_POP_CHAIN_BYTES, under C2's own premises, state
+va1_pop_frame: every byte below 4194304 is unchanged except the clock word [16392, 16396), the droplet-count word
+[16400, 16404) and [1114112, 2039808). That excluded range runs past the snapshot's end at 1966080, so C2's frame leaves the
+scratch area [1966080, 2039808) free too; it does not cover every byte outside the snapshot.
