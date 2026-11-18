@@ -80,16 +80,17 @@
   // ---------- vortex scene (fixed seed) ----------
   // ---------- vortex scene: built by the module (init(seed, 120)); the page reads N and the circulations back ----------
   const AUTO = 120;
-  { const v = window.VE_MOD && window.VE_MOD.e ? window.VE_MOD.e.init(SEED, AUTO) : -1; if (v !== 0) fail('init refused: ' + v); }
+  // 2026-11-17 fix batch: the digest is checked before anything calls the module (ve_load.js does not instantiate it on a
+  // mismatch either); a missing or mismatched module stops the page here, before init
+  const VEC = window.VE_MOD;
+  if (!VEC || !VEC.e || !VEC.ok) { fail(VEC && VEC.sha ? 'vortex_a1.wasm digest ' + VEC.sha + ' is not the expected ' + VEC.want + '; not run' : 'vortex_a1.wasm not loaded'); return; }
+  { const v = VEC.e.init(SEED, AUTO); if (v !== 0) fail('init refused: ' + v); }
   const NV = window.VE_MOD.e.nvort() >>> 0;
   if (NV > NVMAX) fail('too many vortices');
   const G4 = [];   // circulation per 4 pi, from the model words CW_j = round(G4_j KV 2^20) (drawing: tracer field, vortex colours)
   { const MW = new Int32Array(window.VE_MOD.e.memory.buffer, 0x4100, 1024), kv = 2 * (DT / 16) * SV * 1048576; for (let j = 0; j < NV; j++) G4.push(MW[16 + j] / kv); }
 
   // ---------- integer state: views into vortex_a1.wasm memory (vortex/SPEC.md section 2; fixed memory, never grown) ----------
-  const VEC = window.VE_MOD;
-  if (!VEC || !VEC.e) { fail('vortex_a1.wasm not loaded'); return; }
-  if (!VEC.ok) fail('vortex_a1.wasm digest ' + VEC.sha + ' is not the expected ' + VEC.want);
   const vex = VEC.e, VBUF = vex.memory.buffer, HP = vex.hdr_ptr() >>> 0;
   if (HP !== 0x4000 || (vex.va_ptr() >>> 0) !== 0x110000 || (vex.ra_ptr() >>> 0) !== 0x114000 || (vex.di_ptr() >>> 0) !== 0x120000) fail('unexpected vortex_a1 layout');
   const va = new Int32Array(VBUF, vex.va_ptr() >>> 0, 3 * NV), vb = new Int32Array(VBUF, vex.vb_ptr() >>> 0, 3 * NV), U = new Float64Array(3 * NV), XN = new Float64Array(3 * NV);
@@ -653,13 +654,21 @@ void main() { float lon = (vUV.x - 0.5) * 6.2831853, lat = (vUV.y - 0.5) * 3.141
   function phase() { if (popTick < 0 || tick < popTick) return 'swirl'; let done = true; for (let k = 0; k < M; k += 8) if ((reff(ra, k) + reff(rb, k)) / 2 < PI - 0.08) { done = false; break; } return done ? 'after' : 'pop'; }
 
   // ---------- full-state snapshot for the reversal check ----------
-  function readTracers(i) { const buf = new Int32Array(TW * TH * 4); gl.bindFramebuffer(gl.FRAMEBUFFER, T[i].f); gl.readPixels(0, 0, TW, TH, gl.RGBA_INTEGER, gl.INT, buf); return buf; }
+  // 2026-11-17 fix batch: buf.ok records whether the read really happened (no lost context, no GL error); a failed read
+  // leaves the zero-filled buffer, so diffSplit then gives no GPU tracer count at all
+  function readTracers(i) { const buf = new Int32Array(TW * TH * 4); for (let k = 0; k < 16 && gl.getError() !== gl.NO_ERROR; k++);
+    gl.bindFramebuffer(gl.FRAMEBUFFER, T[i].f); gl.readPixels(0, 0, TW, TH, gl.RGBA_INTEGER, gl.INT, buf);
+    buf.ok = !gl.isContextLost() && gl.getError() === gl.NO_ERROR; return buf; }
   function snapshot() {
     const parts = [CANON, readTracers(ib)];
-    const n = parts.reduce((s, p) => s + p.length, 0), out = new Int32Array(n); let o = 0; out.bounds = []; for (const p of parts) { out.set(p, o); out.bounds.push(o); o += p.length; } return out; }
+    const n = parts.reduce((s, p) => s + p.length, 0), out = new Int32Array(n); let o = 0; out.bounds = []; out.trOk = parts[1].ok; for (const p of parts) { out.set(p, o); out.bounds.push(o); o += p.length; } return out; }
   const PART_NAMES = ['module state [0x4000, 0x1E0000)', 'tracers'];
-  function diffParts(a, b) { const r = []; const bd = a.bounds.concat([a.length]); for (let p = 0; p < PART_NAMES.length; p++) { let d = 0, first = -1; for (let i = bd[p]; i < bd[p + 1]; i++) if (a[i] !== b[i]) { d++; if (first < 0) first = i - bd[p]; } if (d) r.push(`${PART_NAMES[p]}: ${d} words differ (first at ${first})`); } return r.join('; '); }
-  function diffBytes(a, b) { const A = new Uint8Array(a.buffer), B = new Uint8Array(b.buffer); let d = Math.abs(A.length - B.length); const n = Math.min(A.length, B.length); for (let i = 0; i < n; i++) if (A[i] !== B[i]) d++; return { bytes: A.length, diff: d }; }
+  function diffParts(a, b) { const r = []; const bd = a.bounds.concat([a.length]); for (let p = 0; p < PART_NAMES.length; p++) { if (p === 1 && !(a.trOk && b.trOk)) { r.push('tracers: not compared (a read failed)'); continue; } let d = 0, first = -1; for (let i = bd[p]; i < bd[p + 1]; i++) if (a[i] !== b[i]) { d++; if (first < 0) first = i - bd[p]; } if (d) r.push(`${PART_NAMES[p]}: ${d} words differ (first at ${first})`); } return r.join('; '); }
+  // 2026-11-17 fix batch: the module snapshot and the GPU tracers are counted separately (different evidence: the module
+  // snapshot is what the proofs are about; the tracers are a browser measurement of drawing state, nothing proved)
+  function diffSplit(a, b) { const bd = a.bounds.concat([a.length]), r = [];
+    for (let p = 0; p < 2; p++) { const A = new Uint8Array(a.buffer, 4 * bd[p], 4 * (bd[p + 1] - bd[p])), B = new Uint8Array(b.buffer, 4 * bd[p], 4 * (bd[p + 1] - bd[p])); let d = 0; for (let i = 0; i < A.length; i++) if (A[i] !== B[i]) d++; r.push({ bytes: A.length, diff: d }); }
+    return { mod: r[0], tr: a.trOk && b.trOk ? r[1] : null }; }   // tr null: a tracer read failed, no GPU count
   function fnv(a) { const B = new Uint8Array(a.buffer); let h = 0x811c9dc5; for (let i = 0; i < B.length; i += 1) { h ^= B[i]; h = Math.imul(h, 0x01000193); } return (h >>> 0).toString(16).padStart(8, '0'); }
 
   // ---------- rendering ----------
@@ -1370,8 +1379,9 @@ void main(){ vec3 h = texture(uA, vUV).rgb + uW * texture(uB, vUV).rgb; h = h / 
   // ---------- UI / loop ----------
   let running = !MANUAL, dir = 1, speed = 1, acc = 0, last = performance.now(), demoState = DEMO ? 'fwd' : null, holdUntil = 0;
   const fpsT = []; let fps = 0, busy = false;
-  function checkAtZero(label) {
-    const s = snapshot(), d = diffBytes(s, snap0); lastCheck = { ticks: label, bytes: d.bytes, diff: d.diff, hash: fnv(s), hash0 };
+  function checkAtZero(label, steps) {   // compare with the load-time state; steps = backward calls that brought us here
+    if (!steps) { lastCheck = { kind: 'none', ticks: 'no ticks tested: already at tick 0' }; return lastCheck; }   // 2026-11-17: zero steps is not a reversal
+    const s = snapshot(), d = diffSplit(snap0, s); lastCheck = { kind: 'tested', ticks: label, mod: d.mod, tr: d.tr, hash: fnv(s), hash0 };
     return lastCheck; }
   function setDir(d) { dir = d; $('rev').classList.toggle('on', dir < 0); }
   const setHtml = (el, h) => { if (el.__h !== h) { el.__h = h; el.innerHTML = h; } };   // v5.7: touch the DOM only on a change
@@ -1381,8 +1391,12 @@ void main(){ vec3 h = texture(uA, vUV).rgb + uW * texture(uB, vUV).rgb; h = h / 
     if (popped) { const tphys = (tick - popTick) / 60 / SLOWMO * 1000; slow.style.display = 'block'; setHtml(slow, `slow motion &times;${SLOWMO} <span>t = ${tphys.toFixed(2)} ms after puncture &middot; Taylor-Culick rim, 4 cm bubble &middot; </span><span>swirl clock ${PSUB}/${QSUB} during the pop (stylised: in real time the swirl is frozen)</span>`); }
     else { slow.style.display = 'none'; }
     let rev = '';
-    if (lastCheck) rev = `state: vortex_a1.wasm ${VEC.sha.slice(0, 8)}${VEC.ok ? ' (digest ok)' : ' (DIGEST MISMATCH)'} · reversal check (${lastCheck.ticks}): <b class="${lastCheck.diff === 0 ? 'ok' : 'bad'}">${lastCheck.diff} differing bytes</b> of ${(lastCheck.bytes / 1e6).toFixed(2)} MB integer state`;
-    else rev = `state: vortex_a1.wasm ${VEC.sha.slice(0, 8)}${VEC.ok ? ' (digest ok)' : ' (DIGEST MISMATCH)'} · state hash at tick 0: ${hash0}`;
+    const head = `state: vortex_a1.wasm ${VEC.sha.slice(0, 8)} (digest ok)`, mb = n => (n / 1e6).toFixed(2);
+    if (!lastCheck) rev = `${head} · state hash at tick 0: ${hash0}`;
+    else if (lastCheck.kind === 'tested') rev = `${head} · reversal check (${lastCheck.ticks}): module snapshot <b class="${lastCheck.mod.diff === 0 ? 'ok' : 'bad'}">${lastCheck.mod.diff} bytes of ${mb(lastCheck.mod.bytes)} MB differ</b>` +
+      (lastCheck.tr ? ` · GPU tracers (browser measurement, not proved) <b class="${lastCheck.tr.diff === 0 ? 'ok' : 'bad'}">${lastCheck.tr.diff} bytes of ${mb(lastCheck.tr.bytes)} MB differ</b>`
+        : ' · GPU tracer comparison unavailable (WebGL context lost or the read failed)');
+    else rev = `${head} · <b>${lastCheck.ticks}</b>`;   // no ticks tested: no reversal verdict
     setHtml($('read'), `tick ${tick} · ${ph}${dir < 0 ? ' · reversing' : ''}${MANUAL ? '' : ` · ${fps.toFixed(0)} fps`} · seed ${SEED} · ${NV} vortices · ${(NVERT / 1000).toFixed(0)}k tracers · ${nd} droplets<br>${rev}`);
     $('play').textContent = running ? 'pause' : 'run';
   }
@@ -1405,7 +1419,7 @@ void main(){ vec3 h = texture(uA, vUV).rgb + uW * texture(uB, vUV).rgb; h = h / 
   }
   let lastSig = '', forceRender = true;
   function onEnd() {
-    if (dir < 0 && tick === 0) { checkAtZero(`${maxTickSeen} ticks forward, ${maxTickSeen} back to tick 0`); setDir(1); }   // v4.5.1: leave 'reversing' at tick 0
+    if (dir < 0 && tick === 0) { checkAtZero(`${maxTickSeen} ticks forward, ${maxTickSeen} back to tick 0`, maxTickSeen); setDir(1); }   // v4.5.1: leave 'reversing' at tick 0
     if (demoState) { running = false; demoState = 'hold'; holdUntil = performance.now() + (tick === 0 ? 2500 : 1200); }
     else running = false;
   }
@@ -1438,13 +1452,15 @@ void main(){ vec3 h = texture(uA, vUV).rgb + uW * texture(uB, vUV).rgb; h = h / 
   $('vort').classList.toggle('on', view.vort);
   $('speed').onchange = e => { speed = +e.target.value; };
   $('verify').onclick = () => verify(Math.max(200, Math.min(1200, (popTick >= 0 ? popTick + AFTER : AUTO + AFTER) - tick)));
-  async function resetAll() { busy = true; let i = 0; while (tick > 0 && stepB()) { if (++i % 20 === 0) { $('read').innerHTML = $('read').__h = `playing back to tick 0: ${tick}…`; await new Promise(r => setTimeout(r, 0)); } } busy = false; setDir(1); event = null; checkAtZero('reset: reversed back to tick 0'); running = !MANUAL; }
+  async function resetAll() { busy = true; let i = 0; while (tick > 0 && stepB()) { if (++i % 20 === 0) { $('read').innerHTML = $('read').__h = `playing back to tick 0: ${tick}…`; await new Promise(r => setTimeout(r, 0)); } } busy = false; setDir(1); event = null; checkAtZero(`reset: ${i} ticks back to tick 0`, i); running = !MANUAL; }
   async function verify(N) {
     busy = true; const t0 = tick, s0 = snapshot(); let n = 0;
     $('verify').disabled = true;
     for (let i = 0; i < N; i++) { if (!stepFT()) break; n++; if (i % 25 === 24) { $('read').innerHTML = $('read').__h = `verifying: forward ${i + 1}/${N}…`; await new Promise(r => setTimeout(r, 0)); } }
     for (let i = 0; i < n; i++) { stepB(); if (i % 25 === 24) { $('read').innerHTML = $('read').__h = `verifying: back ${i + 1}/${n}…`; await new Promise(r => setTimeout(r, 0)); } }
-    const s1 = snapshot(), d = diffBytes(s0, s1); lastCheck = { ticks: `${n} ticks forward from tick ${t0}, ${n} back`, bytes: d.bytes, diff: d.diff, hash: fnv(s1), hash0: fnv(s0), where: diffParts(s0, s1), healErr, unpunctureWordsOff: lastHeal };
+    const atEnd = popTick >= 0 && tick >= popTick + AFTER;   // 2026-11-17: zero ticks run is no reversal, and says so
+    if (n === 0) lastCheck = { kind: 'none', ticks: atEnd ? `no ticks tested: tick ${t0} is the end of the pop, where the page stops going forward; reverse some way first, then verify` : `no ticks tested: the page could not go forward from tick ${t0}` };
+    else { const s1 = snapshot(), d = diffSplit(s0, s1); lastCheck = { kind: 'tested', ticks: `${n} ticks forward from tick ${t0}, ${n} back`, mod: d.mod, tr: d.tr, hash: fnv(s1), hash0: fnv(s0), where: diffParts(s0, s1), healErr, unpunctureWordsOff: lastHeal }; }
     busy = false; $('verify').disabled = false; return lastCheck;
   }
   // capture hooks
@@ -1470,7 +1486,7 @@ void main(){ vec3 h = texture(uA, vUV).rgb + uW * texture(uB, vUV).rgb; h = h / 
     // v4.5.1, for tools/multicycle.mjs: rev0 = the page's reverse loop (step back until it stops), check0 = the byte
     // compare with the initial state that the page shows after a reversal, with the parts that differ
     rev0() { let n = 0; while (stepB()) n++; return n; },
-    check0() { const s = snapshot(), d = diffBytes(s, snap0); return { tick, bytes: d.bytes, diff: d.diff, where: diffParts(snap0, s), hash: fnv(s), hash0 }; },
+    check0() { const s = snapshot(), d = diffSplit(snap0, s); return { tick, mod: d.mod, tr: d.tr, where: diffParts(snap0, s), hash: fnv(s), hash0 }; },   // 2026-11-17: mod and tr counted separately
     // v4.2, read-only: fraction of the film gone (mean over bead pairs of the cap area swept), for picking comparison phases
     rimGone() { if (popTick < 0 || tick < popTick) return 0; let g = 0; for (let k = 0; k < M; k++) g += (1 - Math.cos(Math.min(PI, reff(ra, k) * 1))) / 2; return g / M; },
     capDir() { if (popTick < 0 || tick < popTick) return null; const P = new Float64Array(6); let x = 0, y = 0, z = 0;   // read-only: centroid of the rim loop

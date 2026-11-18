@@ -1,6 +1,7 @@
 // purist round 2 loader: fetch vortex_a1.wasm (the one state engine: scene, vortices, pop, auto puncture), check its
-// SHA-256 against the expected digest, instantiate it (no imports), then run vortex.js (drawing + GPU film tracers) and
-// the page controls. crypto.subtle needs a secure context (http://127.0.0.1 is one), so a plain-JS SHA-256 is the fallback.
+// SHA-256 against the expected digest, and only if it matches instantiate it (no imports) and run vortex.js (drawing +
+// GPU film tracers) and the page controls. On a mismatch nothing is instantiated or run (2026-11-17 fix batch).
+// crypto.subtle needs a secure context (http://127.0.0.1 is one), so a plain-JS SHA-256 is the fallback.
 'use strict';
 (async function () {
   const WANT = 'a3cf8c821534dd1613e2c6c6251a003320c40d5eb2dfc8e16a871c59636aede6';
@@ -25,11 +26,12 @@
     let sha;
     if (window.crypto && crypto.subtle) sha = Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256', buf)), b => b.toString(16).padStart(2, '0')).join('');
     else sha = sha256js(buf);
+    if (sha !== want) throw new Error(file + ' digest ' + sha + ' is not the expected ' + want + '; not instantiated, page not started');
     const { instance } = await WebAssembly.instantiate(buf, {});
-    return { e: instance.exports, sha, want, ok: sha === want, file };
+    return { e: instance.exports, sha, want, ok: true, file };
   }
   try {
     window.VE_MOD = await load('vortex_a1.wasm', WANT);
-  } catch (err) { const e = document.getElementById('err'); e.textContent += 'wasm: ' + err + '\n'; e.style.display = 'block'; return; }
-  await add('vortex.js'); await add('ui.js');
+  } catch (err) { const e = document.getElementById('err'); e.textContent += 'wasm: ' + err.message + '\n'; e.style.display = 'block'; return; }
+  await add('vortex.js'); if (window.PROTO) await add('ui.js');   // 2026-11-17: the lighting controls only after the controller started
 })();
