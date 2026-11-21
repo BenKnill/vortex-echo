@@ -37,13 +37,18 @@ defined below) and, separately, the active GPU tracer buffer with where they sta
 differing bytes separately: the module snapshot is what the proofs are about, while the tracers are drawing state, a
 browser measurement about which nothing is proved. The stack and scratch areas are not compared. At the end of the pop
 the page cannot go forward, so the button reports "no ticks tested" instead of a result; reverse some way first. That
-check is a test in your browser, not a proof. Known limitation: while a check runs, only the verify button is
-disabled. Pressing reset, clicking the bubble or using the other controls during a check can disturb it, and the result
-it then shows is not a valid test. Starting a check while a reset is still playing back can disturb it too. So let a
-reset finish before pressing verify, and leave the controls and the bubble alone until the check ends (a note above the
-demo's controls says so too).
-A fix is being reviewed. If a GPU tracer read fails (for example after the browser loses the WebGL context), the check
-shows "GPU tracer comparison unavailable" instead of a tracer count.
+check is a test in your browser, not a proof. While a check or a reset runs, it alone moves the simulation and both
+buttons are disabled. Up to 64 other commands can wait and take effect in order, starting on the frame after the job
+finishes. A film takes one puncture: a click (or pop request) on a bubble that is already punctured, or
+while a puncture is already waiting for tick 1, is refused with a message; rewind to before the puncture, or reset, to
+puncture elsewhere. If the queue is full, the demo shows when it refuses a control input so you can try again. The last Verify
+result stays on screen through playback until another Verify or Reset starts. A check that does not come back to its
+starting tick reports no verdict. If a GPU tracer read fails (for example after the browser loses the WebGL context),
+the check shows "GPU tracer comparison unavailable" instead of a tracer count.
+
+For capture tools, `PROTO.goTo(tick)` resolves with the reached state after drawing it and synchronizing WebGL.
+`PROTO.timing()` reads and clears timing counters, and `PROTO.light(mode)` is a synchronous drawing control.
+`PROTO.light()` without an argument reads the current mode.
 
 ## The result in plain words
 
@@ -300,10 +305,9 @@ Checked on 2026-11-17:
   chain README's "Start here" points to this repository's `claims.json`; the demo checks the module's SHA-256 before
   instantiating it (on a mismatch nothing runs), reports "no ticks tested" at the end of the pop, counts the module
   snapshot and the GPU tracers separately and gives no tracer count when a tracer read fails, and its status line
-  now sits above the control row. Astra's finding B.3 (other controls used during a check can disturb it) is not
-  fixed in this update; see the known limitation under [The demo](#the-demo). No theorem, spec, receipt or module
-  byte changed. GPT-6.2 Sol
-  reviewed these changes and the list of published files before publication.
+  now sits above the control row. No theorem, spec, receipt or module byte changed. GPT-6.2 Sol reviewed that
+  fix batch and the list of published files before publication. A later controller update addressed Astra's finding
+  B.3 about controls disturbing a check (see [The demo](#the-demo)).
 - **Who did the work.** The proofs, specs, class sentences and this page were written by AI agents (the records
   name Anthropic's Claude Opus 5.5) working for Ben Knill, and reviewed as above.
 

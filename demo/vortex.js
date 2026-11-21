@@ -523,6 +523,7 @@ void main() { float lon = (vUV.x - 0.5) * 6.2831853, lat = (vUV.y - 0.5) * 3.141
     readHmap(); forceRender = true;
   }
   function applyPuncture() {
+    event.fresh = false;
     const c = event.c, r = vex.puncture(c[0] >>> 0, c[1] >>> 0, c[2] >>> 0); if (r !== 0) { fail('puncture refused: ' + r); return; }
     sync2(); onPunctured();
   }
@@ -1374,57 +1375,205 @@ void main(){ vec3 h = texture(uA, vUV).rgb + uW * texture(uB, vUV).rgb; h = h / 
   // ---------- init ----------
   vortexInit(); uploadVortices(); tracerPass(0, 0);
   const snap0 = snapshot(), hash0 = fnv(snap0);
-  let lastCheck = null;
+  let lastCheck = null, lastVerify = null;
 
   // ---------- UI / loop ----------
+  // 2026-11-17 rework: ONE owner for every state change. The buttons, the click on the bubble and the PROTO tool hooks only
+  // put commands in a queue; the frame loop (pump, below) is the only code that runs them, steps the module (stepF, stepB,
+  // the puncture) or writes the controller state (running, dir, speed, the demo's hold, the check result, the playback
+  // bookkeeping). Verify and Reset are exclusive jobs: while one runs, each frame advances only that job by one slice,
+  // nothing else steps, and commands that arrive meanwhile wait and then run in order. A check's counts are therefore the
+  // steps it ran itself, and its verdict compares the module snapshot taken when it started with the one where it ended.
   let running = !MANUAL, dir = 1, speed = 1, acc = 0, last = performance.now(), demoState = DEMO ? 'fwd' : null, holdUntil = 0;
-  const fpsT = []; let fps = 0, busy = false;
-  function checkAtZero(label, steps) {   // compare with the load-time state; steps = backward calls that brought us here
-    if (!steps) { lastCheck = { kind: 'none', ticks: 'no ticks tested: already at tick 0' }; return lastCheck; }   // 2026-11-17: zero steps is not a reversal
-    const s = snapshot(), d = diffSplit(snap0, s); lastCheck = { kind: 'tested', ticks: label, mod: d.mod, tr: d.tr, hash: fnv(s), hash0 };
-    return lastCheck; }
+  const fpsT = []; let fps = 0, busy = false;   // busy: the running job's progress message (false: no job)
+  const queue = [], QMAX = 64;                  // pending commands { op, arg, res, rej }
+  let job = null;                               // the exclusive job: { name, gen, res }
+  let maxTickSeen = 0;                          // furthest tick since the state was last at tick 0 (a check's inner ticks not counted)
+  let queueNoticeUntil = 0;
+  let popNotice = '', popNoticeUntil = 0;       // a refused puncture request, shown in the HUD (counted from first display)
+  function send(op, arg, control = false) {
+    return new Promise((res, rej) => {
+      if (queue.length < QMAX) { queue.push({ op, arg, res, rej }); return; }
+      if (control) {
+        queueNoticeUntil = Infinity;   // start counting once the HUD actually displays the refusal
+        if (op === 'speed') $('speed').value = String(speed);
+      }
+      rej(new Error('command queue full'));
+    });
+  }
+  function sendControl(op, arg) { send(op, arg, true).catch(() => {}); }
+  function moved() { if (tick === 0) maxTickSeen = 0; else if (tick > maxTickSeen) maxTickSeen = tick; }   // after every state move
+  function setBusy(msg) { busy = msg; $('reset').disabled = !!msg; $('verify').disabled = !!msg; }
+  function freezeCheck(check) {
+    if (check.mod) Object.freeze(check.mod);
+    if (check.tr) Object.freeze(check.tr);
+    return Object.freeze(check);
+  }
+  function checkAtZero(label, steps, src) {   // compare with the load-time state; steps: backward steps that brought us here (0: none ran)
+    if (!steps) return { kind: 'none', src, ticks: 'no ticks tested: already at tick 0' };
+    try { const s = snapshot(), d = diffSplit(snap0, s); return { kind: 'tested', src, ticks: label, mod: d.mod, tr: d.tr, hash: fnv(s), hash0 }; }
+    catch (err) { return { kind: 'incomplete', src, ticks: `check failed (${err && err.message}) at tick 0: no reversal verdict` }; }
+  }
   function setDir(d) { dir = d; $('rev').classList.toggle('on', dir < 0); }
   const setHtml = (el, h) => { if (el.__h !== h) { el.__h = h; el.innerHTML = h; } };   // v5.7: touch the DOM only on a change
+  function checkHtml(check) {
+    const label = check.src === 'verify' ? 'verify reversal' : 'reversal check';
+    if (check.kind !== 'tested') return `${label} · <b>${check.ticks}</b>`;
+    const mb = n => (n / 1e6).toFixed(2);
+    return `${label} (${check.ticks}): module snapshot <b class="${check.mod.diff === 0 ? 'ok' : 'bad'}">${check.mod.diff} bytes of ${mb(check.mod.bytes)} MB differ</b>` +
+      (check.tr ? ` · GPU tracers (browser measurement, not proved) <b class="${check.tr.diff === 0 ? 'ok' : 'bad'}">${check.tr.diff} bytes of ${mb(check.tr.bytes)} MB differ</b>`
+        : ' · GPU tracer comparison unavailable (WebGL context lost or the read failed)');
+  }
   function updateHud() {
     const ph = phase(), popped = popTick >= 0 && tick >= popTick;
     const slow = $('slow');
     if (popped) { const tphys = (tick - popTick) / 60 / SLOWMO * 1000; slow.style.display = 'block'; setHtml(slow, `slow motion &times;${SLOWMO} <span>t = ${tphys.toFixed(2)} ms after puncture &middot; Taylor-Culick rim, 4 cm bubble &middot; </span><span>swirl clock ${PSUB}/${QSUB} during the pop (stylised: in real time the swirl is frozen)</span>`); }
     else { slow.style.display = 'none'; }
-    let rev = '';
-    const head = `state: vortex_a1.wasm ${VEC.sha.slice(0, 8)} (digest ok)`, mb = n => (n / 1e6).toFixed(2);
-    if (!lastCheck) rev = `${head} · state hash at tick 0: ${hash0}`;
-    else if (lastCheck.kind === 'tested') rev = `${head} · reversal check (${lastCheck.ticks}): module snapshot <b class="${lastCheck.mod.diff === 0 ? 'ok' : 'bad'}">${lastCheck.mod.diff} bytes of ${mb(lastCheck.mod.bytes)} MB differ</b>` +
-      (lastCheck.tr ? ` · GPU tracers (browser measurement, not proved) <b class="${lastCheck.tr.diff === 0 ? 'ok' : 'bad'}">${lastCheck.tr.diff} bytes of ${mb(lastCheck.tr.bytes)} MB differ</b>`
-        : ' · GPU tracer comparison unavailable (WebGL context lost or the read failed)');
-    else rev = `${head} · <b>${lastCheck.ticks}</b>`;   // no ticks tested: no reversal verdict
-    setHtml($('read'), `tick ${tick} · ${ph}${dir < 0 ? ' · reversing' : ''}${MANUAL ? '' : ` · ${fps.toFixed(0)} fps`} · seed ${SEED} · ${NV} vortices · ${(NVERT / 1000).toFixed(0)}k tracers · ${nd} droplets<br>${rev}`);
+    const head = `state: vortex_a1.wasm ${VEC.sha.slice(0, 8)} (digest ok)`;
+    let status = busy || (lastCheck ? checkHtml(lastCheck) : `state hash at tick 0: ${hash0}`);
+    if (lastVerify && lastVerify !== lastCheck) status = `${checkHtml(lastVerify)}<br>${status}`;
+    const now = performance.now();
+    if (queueNoticeUntil === Infinity) queueNoticeUntil = now + 3000;
+    if (queueNoticeUntil > now) status += '<br><b class="bad">Control queue full. Input refused. Try again in a moment.</b>';
+    if (popNoticeUntil === Infinity) popNoticeUntil = now + 3000;
+    if (popNoticeUntil > now) status += `<br><b class="bad">${popNotice}</b>` +   // worded as past: it stays true after the state moves on
+      (popTick >= 0 ? ` To puncture elsewhere, rewind to before tick ${popTick} or reset.` : '');   // advice only while it applies, from the current state
+    setHtml($('read'), `tick ${tick} · ${ph}${dir < 0 ? ' · reversing' : ''}${MANUAL ? '' : ` · ${fps.toFixed(0)} fps`} · seed ${SEED} · ${NV} vortices · ${(NVERT / 1000).toFixed(0)}k tracers · ${nd} droplets<br>${head} · ${status}`);
     $('play').textContent = running ? 'pause' : 'run';
+  }
+  function endRun() {   // playback stopped (end of the pop, tick 0, or a refused step): direction and the demo's hold
+    if (dir < 0 && tick === 0) setDir(1);
+    running = false; acc = 0;
+    if (demoState) { demoState = 'hold'; holdUntil = performance.now() + (tick === 0 ? 2500 : 1200); }
+  }
+  function playStep(dtms, now) {   // playback, run by pump only when no job is running and the queue is empty
+    if (!MANUAL && running) {
+      acc += speed * dtms / (1000 / 60); let n = 0;
+      while (acc >= 1 && n < 8) { acc -= 1; n++;
+        const was = maxTickSeen, ok = dir > 0 ? stepF() : stepB();
+        if (!ok) { endRun(); break; }
+        moved();
+        // a new result only from the playback step that itself arrives at tick 0
+        if (dir < 0 && tick === 0) { lastCheck = freezeCheck(checkAtZero(`back at tick 0 from tick ${was}, the furthest reached`, 1, 'playback')); endRun(); break; } }
+      if (acc > 4) acc = 0;
+    }
+    if (demoState === 'hold' && now > holdUntil) { if (tick > 0) { setDir(-1); demoState = 'rev'; } else { setDir(1); demoState = 'fwd'; } running = true; }
   }
   function frame(now) {
     const dtms = Math.min(100, now - last); last = now;
     fpsT.push(now); while (fpsT.length && fpsT[0] < now - 1000) fpsT.shift(); fps = fpsT.length;
-    if (!MANUAL && running && !busy) {
-      acc += speed * dtms / (1000 / 60); let n = 0;
-      while (acc >= 1 && n < 8) { acc -= 1; n++; const ok = dir > 0 ? stepFT() : stepB(); if (!ok) { acc = 0; onEnd(); break; } }
-      if (acc > 4) acc = 0;
-    }
-    if (demoState === 'hold' && now > holdUntil) { if (tick > 0) { setDir(-1); demoState = 'rev'; } else { setDir(1); demoState = 'fwd'; } running = true; }
-    // v5.7 (performance): draw only when the picture can have changed (a new tick, the canvas size, the lighting, a click).
-    // The image is a pure function of the state and the settings, so on a 120 Hz display (two frames per tick) or while
-    // paused the canvas keeps the last frame instead of drawing the same one again
-    const sig = tick + '|' + canvas.clientWidth + 'x' + canvas.clientHeight + '|' + devicePixelRatio + '|' + LIGHT.mode + '|' + popTick;
-    if (sig !== lastSig || forceRender) { lastSig = sig; forceRender = false; render(); }
+    try { pump(dtms, now); } catch (err) { fail('controller: ' + (err && err.message)); }
+    try { drawFrame(); } catch (err) { fail('drawing: ' + (err && err.message)); }
     updateHud();
     requestAnimationFrame(frame);
   }
   let lastSig = '', forceRender = true;
-  function onEnd() {
-    if (dir < 0 && tick === 0) { checkAtZero(`${maxTickSeen} ticks forward, ${maxTickSeen} back to tick 0`, maxTickSeen); setDir(1); }   // v4.5.1: leave 'reversing' at tick 0
-    if (demoState) { running = false; demoState = 'hold'; holdUntil = performance.now() + (tick === 0 ? 2500 : 1200); }
-    else running = false;
+  function drawFrame(force = false) {
+    // While paused or between ticks, reuse the last picture if its inputs are unchanged.
+    const sig = tick + '|' + canvas.clientWidth + 'x' + canvas.clientHeight + '|' + devicePixelRatio + '|' + LIGHT.mode + '|' + popTick;
+    if (force || forceRender || sig !== lastSig) { lastSig = sig; forceRender = false; render(); }
   }
-  let maxTickSeen = 0;
-  function stepFT() { const ok = stepF(); if (tick > maxTickSeen) maxTickSeen = tick; return ok; }
+  function pump(dtms, now) {
+    // A job owns its completion frame too, so the HUD can show the verdict before any further movement.
+    if (job) { stepJob(); return; }
+    while (!job && queue.length) {
+      const command = queue.shift();
+      runCommand(command);
+      if (command.op === 'goTo') return;   // leave the captured picture on screen for this frame
+    }
+    if (!job) playStep(dtms, now);
+  }
+  function startJob(name, gen, res, msg) { lastVerify = null; job = { name, gen, res }; setBusy(msg); }
+  function stepJob() {
+    let r;
+    try { r = job.gen.next(); }
+    catch (err) { moved(); r = { done: true, value: { kind: 'incomplete', src: job.name, ticks: `${job.name} failed (${err && err.message}) at tick ${tick}: no reversal verdict` } }; }
+    if (!r.done) { setBusy(r.value); return; }
+    const j = job; job = null; setBusy(false);
+    lastCheck = freezeCheck(r.value);
+    if (j.name === 'verify') lastVerify = lastCheck;
+    j.res(lastCheck);
+  }
+  const SLICE = 25, SLICE_MS = 30;   // a job runs at most SLICE module steps (or SLICE_MS) per frame, then the page draws
+  function* resetJob() {
+    demoState = null; setDir(1); event = null; running = !MANUAL; acc = 0;
+    let i = 0, t = performance.now();
+    while (tick > 0 && stepB()) { i++; if (i % SLICE === 0 || performance.now() - t > SLICE_MS) { yield `playing back to tick 0: ${tick}…`; t = performance.now(); } }
+    moved();
+    if (tick === 0) return checkAtZero(`reset: ${i} ticks back to tick 0`, i, 'reset');
+    return { kind: 'incomplete', src: 'reset', ticks: `reset stopped at tick ${tick} after ${i} ticks back: no reversal verdict` };
+  }
+  function* verifyJob(N) {   // N: forward tick budget; undefined = the button's (toward the end of the pop), fixed when the job starts
+    if (N === undefined) N = Math.max(200, Math.min(1200, (popTick >= 0 ? popTick + AFTER : AUTO + AFTER) - tick));
+    const t0 = tick; let s0, n = 0, m = 0, t = performance.now();
+    const slice = () => (n + m) % SLICE === 0 || performance.now() - t > SLICE_MS;
+    try {
+      s0 = snapshot();
+      for (let i = 0; i < N; i++) { if (!stepF()) break; n++; if (slice()) { yield `verifying: forward ${n}/${N}…`; t = performance.now(); } }
+      for (let i = 0; i < n; i++) { if (!stepB()) break; m++; if (slice()) { yield `verifying: back ${m}/${n}…`; t = performance.now(); } }
+    } catch (err) {
+      moved(); return { kind: 'incomplete', src: 'verify', ticks: `check failed (${err && err.message}) at tick ${tick}: no reversal verdict`, forward: n, back: m };
+    }
+    moved();
+    const atEnd = popTick >= 0 && tick >= popTick + AFTER;
+    if (n === 0) return { kind: 'none', src: 'verify', ticks: atEnd ? `no ticks tested: tick ${t0} is the end of the pop, where the page stops going forward; reverse some way first, then verify` : `no ticks tested: the page could not go forward from tick ${t0}`, forward: 0, back: 0 };
+    if (m !== n || tick !== t0) return { kind: 'incomplete', src: 'verify', ticks: `check incomplete (${n} forward from tick ${t0}, ${m} back, now at tick ${tick}): no reversal verdict`, forward: n, back: m };
+    try { const s1 = snapshot(), d = diffSplit(s0, s1); return { kind: 'tested', src: 'verify', ticks: `${n} ticks forward from tick ${t0}, ${m} back`, forward: n, back: m, mod: d.mod, tr: d.tr, hash: fnv(s1), hash0: fnv(s0), where: diffParts(s0, s1), healErr, unpunctureWordsOff: lastHeal }; }
+    catch (err) { return { kind: 'incomplete', src: 'verify', ticks: `check failed (${err && err.message}) reading the state back at tick ${tick}: no reversal verdict`, forward: n, back: m }; }
+  }
+  // v4.5.1: a click at tick 0 is scheduled for tick 1, right after the first swirl step, as in the engine's host order
+  // (SPEC 4: a puncture follows a swirl tick, so P >= 1). v4.5 applied it at tick 0, where no backward step reaches the
+  // un-puncture (stepB stops at tick 0): the pop state stayed at tick 0 (16,631 bytes off in Ben's report) and, with
+  // popTick stuck at 0, every later click was refused. A click elsewhere applies at once, as before.
+  // One puncture per film: a request is refused (false, and a HUD message) when the bubble is already punctured or a
+  // tick-0 request is still waiting for tick 1 (event.fresh). A remembered click from before a rewind is not fresh: a
+  // new click replaces it, and the remembered one replays on the way forward only if no new click came.
+  function refusePop(msg) { popNotice = msg; popNoticeUntil = Infinity; return false; }
+  function puncture(p) {
+    if (popTick >= 0) return refusePop(`Puncture request refused: the bubble had already been punctured at tick ${popTick}.`);
+    if (event && event.fresh) return refusePop('Puncture request refused: another request was already waiting for tick 1.');
+    const c = norm(p).map(v => Math.round(v * SV));
+    if (tick === 0) event = { tick: 1, c, fresh: true }; else { event = { tick, c }; applyPuncture(); }
+    if (dir < 0) setDir(1);
+    if (!MANUAL) { running = true; if (demoState) demoState = 'fwd'; }   // v4.5.1: a click starts the pop (ends the demo's hold)
+    return true; }
+  function goToNow(T) {
+    T = Math.max(0, Math.round(T)); let n = 0;
+    while (tick < T && stepF()) { if (++n % 64 === 0) gl.flush(); }
+    while (tick > T && stepB()) { if (++n % 64 === 0) gl.flush(); }
+    moved();
+    drawFrame(true);
+    gl.finish();
+    if (gl.isContextLost()) throw new Error('WebGL context lost during capture');
+    return info();
+  }
+  function benchNow() { const sync = () => { const b = new Int32Array(4); gl.bindFramebuffer(gl.FRAMEBUFFER, T[ib].f); gl.readPixels(0, 0, 1, 1, gl.RGBA_INTEGER, gl.INT, b); };
+    sync(); let t = performance.now(); for (let i = 0; i < 30; i++) { uploadVortices(); tracerPass(1); } sync(); const tp = (performance.now() - t) / 30;
+    for (let i = 0; i < 30; i++) { uploadVortices(); tracerPass(-1); } sync();
+    t = performance.now(); for (let i = 0; i < 10; i++) renderCube(); sync(); const tc = (performance.now() - t) / 10;
+    t = performance.now(); for (let i = 0; i < 30; i++) vortexVel(vb); const tv = (performance.now() - t) / 30;
+    t = performance.now(); for (let i = 0; i < 10; i++) render(); sync(); const tr = (performance.now() - t) / 10;
+    return `tracer ${tp.toFixed(2)} ms, cube ${tc.toFixed(2)} ms, vortexCPU ${tv.toFixed(2)} ms, render ${tr.toFixed(2)} ms @tick ${tick}`; }
+  function runCommand(c) {   // called only by pump; Verify and Reset start a job, everything else runs to completion here
+    try {
+      switch (c.op) {
+        case 'verify': if (c.arg !== undefined && !(c.arg >= 1)) { c.res(null); return; } startJob('verify', verifyJob(c.arg), c.res, 'verifying…'); return;
+        case 'reset': startJob('reset', resetJob(), c.res, 'playing back to tick 0…'); return;
+        case 'play': running = !running; demoState = null; break;
+        case 'rev': setDir(-dir); running = true; demoState = null; break;
+        case 'run': running = c.arg !== false; break;
+        case 'setDir': setDir(c.arg); break;
+        case 'speed': speed = c.arg; $('speed').value = String(speed); break;
+        case 'pop': c.res(puncture(c.arg)); return;
+        case 'goTo': c.res(goToNow(c.arg)); return;
+        case 'rev0': { let n = 0; while (stepB()) n++; moved(); c.res(n); return; }
+        case 'scan': { const out = []; while (tick < c.arg && stepF()) out.push([tick, +rimGone().toFixed(4)]); moved(); c.res(out); return; }
+        case 'bench': c.res(benchNow()); return;
+        default: throw new Error('unknown command ' + c.op);
+      }
+      c.res();
+    } catch (err) { moved(); c.rej(err); }
+  }
 
   // click to puncture
   canvas.addEventListener('pointerdown', ev => { forceRender = true;
@@ -1432,46 +1581,21 @@ void main(){ vec3 h = texture(uA, vUV).rgb + uW * texture(uB, vUV).rgb; h = h / 
     const pn = mulv(IVP, [x, y, -1, 1]), pf = mulv(IVP, [x, y, 1, 1]); const a = pn.map(v => v / pn[3]), b = pf.map(v => v / pf[3]);
     const rd = norm([b[0] - a[0], b[1] - a[1], b[2] - a[2]]), bb = dot(EYE, rd), cc = dot(EYE, EYE) - 1, disc = bb * bb - cc; if (disc <= 0) return;
     const t = -bb - Math.sqrt(disc), p = [EYE[0] + t * rd[0], EYE[1] + t * rd[1], EYE[2] + t * rd[2]];
-    punctureAt(p);
+    sendControl('pop', p);
   });
   function mulv(m, v) { const o = [0, 0, 0, 0]; for (let r = 0; r < 4; r++) for (let k = 0; k < 4; k++) o[r] += m[k * 4 + r] * v[k]; return o; }
-  // v4.5.1: a click at tick 0 is scheduled for tick 1, right after the first swirl step, as in the engine's host order
-  // (SPEC 4: a puncture follows a swirl tick, so P >= 1). v4.5 applied it at tick 0, where no backward step reaches the
-  // un-puncture (stepB stops at tick 0): the pop state stayed at tick 0 (16,631 bytes off in Ben's report) and, with
-  // popTick stuck at 0, every later click was refused. A click elsewhere applies at once, as before.
-  function punctureAt(p) { if (popTick >= 0) return false; const c = norm(p).map(v => Math.round(v * SV));
-    if (tick === 0) event = { tick: 1, c }; else { event = { tick, c }; applyPuncture(); }
-    if (dir < 0) setDir(1);
-    if (!MANUAL) { running = true; if (demoState) demoState = 'fwd'; }   // v4.5.1: a click starts the pop (ends the demo's hold)
-    return true; }
 
-  $('play').onclick = () => { running = !running; demoState = null; };
-  $('rev').onclick = () => { setDir(-dir); if (!running) running = true; demoState = null; };
-  $('reset').onclick = () => { demoState = null; resetAll(); };
-  $('vort').onclick = () => { view.vort = !view.vort; $('vort').classList.toggle('on', view.vort); };
+  $('play').onclick = () => sendControl('play');
+  $('rev').onclick = () => sendControl('rev');
+  $('reset').onclick = () => sendControl('reset');
+  $('vort').onclick = () => { view.vort = !view.vort; $('vort').classList.toggle('on', view.vort); forceRender = true; };   // drawing only (redraw even when paused)
   $('vort').classList.toggle('on', view.vort);
-  $('speed').onchange = e => { speed = +e.target.value; };
-  $('verify').onclick = () => verify(Math.max(200, Math.min(1200, (popTick >= 0 ? popTick + AFTER : AUTO + AFTER) - tick)));
-  async function resetAll() { busy = true; let i = 0; while (tick > 0 && stepB()) { if (++i % 20 === 0) { $('read').innerHTML = $('read').__h = `playing back to tick 0: ${tick}…`; await new Promise(r => setTimeout(r, 0)); } } busy = false; setDir(1); event = null; checkAtZero(`reset: ${i} ticks back to tick 0`, i); running = !MANUAL; }
-  async function verify(N) {
-    busy = true; const t0 = tick, s0 = snapshot(); let n = 0;
-    $('verify').disabled = true;
-    for (let i = 0; i < N; i++) { if (!stepFT()) break; n++; if (i % 25 === 24) { $('read').innerHTML = $('read').__h = `verifying: forward ${i + 1}/${N}…`; await new Promise(r => setTimeout(r, 0)); } }
-    for (let i = 0; i < n; i++) { stepB(); if (i % 25 === 24) { $('read').innerHTML = $('read').__h = `verifying: back ${i + 1}/${n}…`; await new Promise(r => setTimeout(r, 0)); } }
-    const atEnd = popTick >= 0 && tick >= popTick + AFTER;   // 2026-11-17: zero ticks run is no reversal, and says so
-    if (n === 0) lastCheck = { kind: 'none', ticks: atEnd ? `no ticks tested: tick ${t0} is the end of the pop, where the page stops going forward; reverse some way first, then verify` : `no ticks tested: the page could not go forward from tick ${t0}` };
-    else { const s1 = snapshot(), d = diffSplit(s0, s1); lastCheck = { kind: 'tested', ticks: `${n} ticks forward from tick ${t0}, ${n} back`, mod: d.mod, tr: d.tr, hash: fnv(s1), hash0: fnv(s0), where: diffParts(s0, s1), healErr, unpunctureWordsOff: lastHeal }; }
-    busy = false; $('verify').disabled = false; return lastCheck;
-  }
-  // capture hooks
-  let drawWaiters = [];
-  function goTo(T) {
-    T = Math.max(0, Math.round(T)); let n = 0;
-    while (tick < T && stepFT()) { if (++n % 64 === 0) gl.flush(); }
-    while (tick > T && stepB()) { if (++n % 64 === 0) gl.flush(); }
-    return new Promise(res => { requestAnimationFrame(() => { render(); updateHud(); gl.finish(); requestAnimationFrame(() => res(info())); }); });
-  }
-  function info() { return { tick, phase: phase(), popTick, droplets: nd, fps, vortices: NV, tracers: NVERT, dir, check: lastCheck, hash0, demo: demoState, eventTick: event ? event.tick : null, seed: SEED, clk: `${PSUB}/${QSUB}`, healErr, lastHeal }; }
+  $('speed').onchange = e => sendControl('speed', +e.target.value);
+  $('verify').onclick = () => sendControl('verify');
+  // State-changing hooks return promises and run in queue order. Queries answer synchronously.
+  // timing() reads and clears drawing/step counters; light(mode) changes the lighting and requests a redraw.
+  function rimGone() { if (popTick < 0 || tick < popTick) return 0; let g = 0; for (let k = 0; k < M; k++) g += (1 - Math.cos(Math.min(PI, reff(ra, k) * 1))) / 2; return g / M; }
+  function info() { return { tick, phase: phase(), popTick, droplets: nd, fps, vortices: NV, tracers: NVERT, dir, running, check: lastCheck, hash0, demo: demoState, busy: job ? job.name : null, queued: queue.length, eventTick: event ? event.tick : null, seed: SEED, clk: `${PSUB}/${QSUB}`, healErr, lastHeal }; }
   function stats() { const kinds = [0, 0, 0, 0, 0, 0]; for (let i = 0; i < nd; i++) kinds[DI[REC * i + 7] >>> 16]++;
     let crests = 0, zmax = 0; for (let k = 0; k < M; k++) { const z = ZQ[k]; if (z > zmax) zmax = z; if (z >= 0.0035 * SZ && z > ZQ[(k + M - 1) & (M - 1)] && z >= ZQ[(k + 1) & (M - 1)]) crests++; }
     let rv = 0, pool = 0, dv = 0, big = 0; for (let k = 0; k < M; k++) rv += RV[k]; for (let j = 0; j < NPOOL; j++) pool += POOL[j];
@@ -1481,14 +1605,14 @@ void main(){ vec3 h = texture(uA, vUV).rgb + uW * texture(uB, vUV).rgb; h = h / 
     // v5.8w2: ve2 canonical-memory digest (host/ve2_host.js; = core/ve2_run.c's) and the thickness map read at the last puncture
     canonHash, modTick: () => vex.tick() >>> 0, popTickRaw: () => vex.pop_tick() >>> 0, heal: () => vex.heal_err() >>> 0, sha: () => VEC.sha, shaOk: () => VEC.ok, hmapB64: () => { const b = new Uint8Array(HMAP.buffer); let s = ''; for (let i = 0; i < b.length; i += 32768) s += String.fromCharCode.apply(null, b.subarray(i, i + 32768)); return btoa(s); },
     ready: Promise.resolve(true),
-    goTo, info, verify, stats, timing() { const r = { pop: TM.pop / Math.max(1, TM.n), swirlCPU: TM.sw / Math.max(1, TM.n), buildPoints: TM.bp / Math.max(1, TM.nb) }; for (const k in TM) TM[k] = 0; return r; }, hash: () => fnv(snapshot()),
-    pop(lon, lat) { return punctureAt(sph(lon, lat)); },
+    goTo: T => send('goTo', T), info, verify: N => send('verify', N), reset: () => send('reset'), stats, timing() { const r = { pop: TM.pop / Math.max(1, TM.n), swirlCPU: TM.sw / Math.max(1, TM.n), buildPoints: TM.bp / Math.max(1, TM.nb) }; for (const k in TM) TM[k] = 0; return r; }, hash: () => fnv(snapshot()),
+    pop(lon, lat) { return send('pop', sph(lon, lat)); },
     // v4.5.1, for tools/multicycle.mjs: rev0 = the page's reverse loop (step back until it stops), check0 = the byte
     // compare with the initial state that the page shows after a reversal, with the parts that differ
-    rev0() { let n = 0; while (stepB()) n++; return n; },
+    rev0() { return send('rev0'); },   // 2026-11-17 rework: the hooks that step or change the controller state are commands (see pump)
     check0() { const s = snapshot(), d = diffSplit(snap0, s); return { tick, mod: d.mod, tr: d.tr, where: diffParts(snap0, s), hash: fnv(s), hash0 }; },   // 2026-11-17: mod and tr counted separately
     // v4.2, read-only: fraction of the film gone (mean over bead pairs of the cap area swept), for picking comparison phases
-    rimGone() { if (popTick < 0 || tick < popTick) return 0; let g = 0; for (let k = 0; k < M; k++) g += (1 - Math.cos(Math.min(PI, reff(ra, k) * 1))) / 2; return g / M; },
+    rimGone,
     capDir() { if (popTick < 0 || tick < popTick) return null; const P = new Float64Array(6); let x = 0, y = 0, z = 0;   // read-only: centroid of the rim loop
       for (let k = 0; k < M; k++) { rimPos((ra[k] + rb[k]) / (2 * SR), k, P); x += P[0]; y += P[1]; z += P[2]; } const l = Math.hypot(x, y, z) || 1; return [x / l, y / l, z / l]; },
     // v5.0, read-only: rim bead positions (live beads only, every step-th) for fitting the last cap's plane (framing)
@@ -1502,20 +1626,14 @@ void main(){ vec3 h = texture(uA, vUV).rgb + uW * texture(uB, vUV).rgb; h = h / 
       return `t ${tick} births ${b.join(',')} gap<.2 ${g20} <.1 ${g10} <.04 ${g04} min ${gmin.toFixed(3)} pools ${pool}`; },
     // v5.7, read-only: the large drops (birth tick, volume in units, pool), for tools that study the finale
     big() { const out = []; for (let i = 0; i < nd; i++) { const o = REC * i; if ((DI[o + 7] >>> 16) === 3) out.push([DI[o + 6], +(DI[o + 10] / VSC).toFixed(2), DI[o + 7] & 0xFFFF]); } return out; },
-    scan(T1) { const out = []; while (tick < T1 && stepFT()) out.push([tick, +this.rimGone().toFixed(4)]); return out; },
-    bench() { const sync = () => { const b = new Int32Array(4); gl.bindFramebuffer(gl.FRAMEBUFFER, T[ib].f); gl.readPixels(0, 0, 1, 1, gl.RGBA_INTEGER, gl.INT, b); };
-      sync(); let t = performance.now(); for (let i = 0; i < 30; i++) { uploadVortices(); tracerPass(1); } sync(); const tp = (performance.now() - t) / 30;
-      for (let i = 0; i < 30; i++) { uploadVortices(); tracerPass(-1); } sync();
-      t = performance.now(); for (let i = 0; i < 10; i++) renderCube(); sync(); const tc = (performance.now() - t) / 10;
-      t = performance.now(); for (let i = 0; i < 30; i++) vortexVel(vb); const tv = (performance.now() - t) / 30;
-      t = performance.now(); for (let i = 0; i < 10; i++) render(); sync(); const tr = (performance.now() - t) / 10;
-      return `tracer ${tp.toFixed(2)} ms, cube ${tc.toFixed(2)} ms, vortexCPU ${tv.toFixed(2)} ms, render ${tr.toFixed(2)} ms @tick ${tick}`; },
+    scan(T1) { return send('scan', T1); },
+    bench() { return send('bench'); },
     debug() { const A = readTracers(ia), B = readTracers(ib); const ds = []; for (let v = 0; v < NVERT; v++) { const dx = B[4*v]-A[4*v], dy = B[4*v+1]-A[4*v+1], dz = B[4*v+2]-A[4*v+2]; ds.push(Math.hypot(dx,dy,dz)/SV); }
       ds.sort((a,b)=>a-b); const vd = []; for (let i = 0; i < NV; i++) vd.push(Math.hypot(vb[3*i]-va[3*i], vb[3*i+1]-va[3*i+1], vb[3*i+2]-va[3*i+2])/SV); vd.sort((a,b)=>a-b);
       const q = (a, f) => a[Math.min(a.length-1, Math.floor(f*a.length))].toExponential(2);
       return `${tick}: ${q(ds,.99)} ${q(ds,.999)} ${q(ds,1)} V ${q(vd,1)}`; },
     light(m) { if (m !== undefined) forceRender = true; return m === undefined ? LIGHT.mode : setLight(m); },
-    setDir, run(on) { running = on !== false; }, render: () => { render(); updateHud(); }
+    setDir: d => send('setDir', d), run: on => send('run', on), render: () => { render(); updateHud(); }
   };
   requestAnimationFrame(frame);
 })();
