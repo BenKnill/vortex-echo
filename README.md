@@ -248,9 +248,25 @@ For every receipt this checks by SHA-256 that the proof source, the frozen spec,
 file the run read (its closure inventory) are the files published here. It needs only Python's standard library and
 re-runs no proof. Expected output: `24 receipts, 1607 file checks, 0 problems`.
 
-**Re-running a proof.** This needs a Linux host with [HOL Light](https://github.com/jrh13/hol-light) at `2a1cea8f`
+**Re-running a proof yourself.** Part 1 of C5 can be re-run on Linux, with the prerequisites in the replay guide, from public sources and the
+files in [`replay/`](replay/README.md): an exact copy of the WebAssembly model the proofs load (hol-hearth's `wasm`
+profile at `6adb41ce`) and a small checker. With OCaml 5.4.0 and Camlp5 8.04.00 installed (the replay guide, [`replay/README.md`](replay/README.md),
+lists every prerequisite and the opam commands), from the root of a checkout:
+
+```sh
+bash replay/setup.sh ../vortex-c5-build      # once: fetches and builds HOL Light 2a1cea8f, fetches s2n-bignum 51d1db8f
+python3 -I replay/c5.py ../vortex-c5-build   # the replay, a few minutes
+```
+
+It starts a fresh HOL Light, loads the model from source, runs the proof, and checks every theorem against the
+frozen spec, the 24 pinned definitions, and that no axiom was added. It checks the proof inputs it re-reads from the
+official run against the SHA-256 values in that run's receipt, and the files it opens from the model, HOL Light and
+s2n-bignum against their pinned versions; the OCaml toolchain and system files are trusted. It should end with the same `PASSED` line as below. [`replay/README.md`](replay/README.md) says what it checks
+and what it trusts.
+
+**Re-running the other proofs.** These need a Linux host with [HOL Light](https://github.com/jrh13/hol-light) at `2a1cea8f`
 and hol-hearth at the recorded revision (`6adb41ce`; `81c0fa6c` for C1 and C2) with its `wasm` profile.
-hol-hearth is not public yet, so for now only its maintainers can do this step. The quickest is part 1 of C5, whose files need no overlay. From `proof-tree/`:
+hol-hearth is not public yet, so for now only its maintainers can do this step. With hol-hearth, part 1 of C5, whose files need no overlay, runs from `proof-tree/` as:
 
 ```sh
 hearth prove tasks/bubble-echo/vortex/proofs/chain_c5_leaves_final.ml --profile wasm \
@@ -326,6 +342,7 @@ are not inputs.
 | [`…/chain-nov/class/`](https://github.com/BenKnill/vortex-echo/tree/main/proof-tree/tasks/bubble-echo/vortex/chain-nov/class) | the reviewed class sentences, plus the corrected `C8f-r2.txt` and `C8b-r2.txt` |
 | [`…/chain-nov/evidence/`](https://github.com/BenKnill/vortex-echo/tree/main/proof-tree/tasks/bubble-echo/vortex/chain-nov/evidence) | receipt attests, inspect listings, cold-replay records, check-rung outputs and closure inventories |
 | [`tools/check_tree.py`](tools/check_tree.py) | the hash check above |
+| [`replay/`](replay/README.md) | the standalone re-run of C5 part 1: scripts and an exact copy of hol-hearth's WebAssembly model |
 | `MANIFEST.sha256` | the SHA-256 of every other file here |
 
 Licence: see [LICENSE](LICENSE) and [NOTICE](NOTICE).

@@ -13,14 +13,18 @@ comes from elsewhere; its own terms, given with each item, apply to it.
      tactics.
    - chain_c5_tacs.ml, chain_c5_leaves.ml and chain_c5_punct_b.ml copy tactics or proofs from hol-hearth 6adb41ce
      (each says so in its header).
-   The base WebAssembly model (wasm/proofs/wasm.ml, wasm_tactics.ml, the loader) is not included; the proofs load it
-   from a hol-hearth installation.
+   The base WebAssembly model (wasm/proofs/base.ml, wasm.ml, wasm_tactics.ml, wasm_loader.ml, wasm_bigdecode.ml)
+   and the profile recipe profiles/wasm.ml are included, byte for byte as at hol-hearth 6adb41ce, under
+   replay/profile-wasm/ for the standalone replay (provenance and hashes: replay/profile-wasm/NOTICE.md and
+   SHA256SUMS there). The official C5 part 1 run (hol-hearth 6adb41ce) loaded these same files from a
+   hol-hearth installation; each other receipt records the profile revision and tree it used (C1 and C2: 81c0fa6c).
 
 2. s2n-bignum (https://github.com/awslabs/s2n-bignum; Apache-2.0 OR ISC OR MIT-0).
    hol-hearth's WebAssembly model and the code copied from it are written in the style of s2n-bignum's
    machine-code proofs, and some tactics follow s2n-bignum ones (for example WASMC_WHILE_UP_TAC follows
-   ENSURES_WHILE_UP_TAC). Any such portion is used under the MIT-0 option. No s2n-bignum file is included; the
-   proofs load s2n-bignum's common layer from an installation.
+   ENSURES_WHILE_UP_TAC). Any such portion is used under the MIT-0 option. replay/profile-wasm/wasm/proofs/base.ml adapts the load list
+   of s2n-bignum's x86/proofs/base.ml. No s2n-bignum source file is included (replay/profile-wasm/ carries its
+   LICENSE and NOTICE); the proofs load s2n-bignum's common layer from a checkout.
 
 3. HOL Light (https://github.com/jrh13/hol-light; BSD-style license).
    The proofs are HOL Light scripts and load HOL Light from an installation. No HOL Light file is included.

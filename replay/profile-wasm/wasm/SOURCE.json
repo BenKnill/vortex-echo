@@ -1,0 +1,41 @@
+{
+  "alias": "wasm",
+  "origin": {
+    "path": "wasm",
+    "repository": "https://github.com/BenKnill/hol-hearth.git",
+    "repository_path": "wasm",
+    "commit": "d51b4ef88960511dc189cf6aea2ef49c12e10a90",
+    "dirty": true
+  },
+  "vendored_on": "2026-11-12",
+  "include": [
+    "proofs/base.ml",
+    "proofs/wasm.ml",
+    "proofs/wasm_bigdecode.ml",
+    "proofs/wasm_loader.ml",
+    "proofs/wasm_tactics.ml"
+  ],
+  "tree": "fb0bf26395fa1513752a026e45d76ca12159c44f37bfd10e8e285a790084e78f",
+  "files": {
+    "proofs/base.ml": {
+      "sha256": "171278f75821c09c1339b832456bd9d4fdaf096956d6eb0bcb69bef44a9476ab",
+      "size_bytes": 1179
+    },
+    "proofs/wasm.ml": {
+      "sha256": "87cd9ee222f2a0fa35e2bc6a1ed0093ee6e1fe0eb8edc5be9a8cb68dd2825ad4",
+      "size_bytes": 68922
+    },
+    "proofs/wasm_bigdecode.ml": {
+      "sha256": "42d5fce0039982ce0b46eaa2e4538480a73cdacabbeb6a0e0379292cf9e7436a",
+      "size_bytes": 16317
+    },
+    "proofs/wasm_loader.ml": {
+      "sha256": "9dfb3827e6f16b842a7458c3126aefdf4d83805d592f8fbd4d1b317b8df12d72",
+      "size_bytes": 10280
+    },
+    "proofs/wasm_tactics.ml": {
+      "sha256": "7e5c9f84995b5483b7b5eee04d1e012d229b0f9807edb0bdbe322d430cf47692",
+      "size_bytes": 49833
+    }
+  }
+}
