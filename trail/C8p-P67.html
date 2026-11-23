@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Proof trail C8p-P67: Vortex Echo</title>
+<link rel="icon" href="data:,">
+<style>
+:root { --bg:#fbfbfa; --ink:#1d2129; --dim:#5b6372; --line:#e2e4e8; --acc:#2f5bb7; --code:#f1f2f4; --ok:#1d7a46; --hl:#fff3b8; }
+@media (prefers-color-scheme: dark) { :root { --bg:#0f1116; --ink:#dde1e8; --dim:#9aa3b3; --line:#2a2f3a; --acc:#8fb0ff; --code:#1a1e27; --ok:#5fd08e; --hl:#3d3615; } }
+html { background:var(--bg); color:var(--ink); }
+body { margin:0 auto; max-width:980px; padding:22px 22px 80px; font:16px/1.55 -apple-system,"Segoe UI",Helvetica,Arial,sans-serif; }
+h1 { font-size:26px; line-height:1.25; margin:6px 0 14px; }
+h2 { font-size:20px; margin:34px 0 10px; padding-top:10px; border-top:1px solid var(--line); }
+h3 { font-size:16px; margin:0 0 8px; }
+a { color:var(--acc); }
+code, pre { font:12.5px/1.45 ui-monospace,Menlo,Consolas,monospace; }
+code { background:var(--code); padding:1px 4px; border-radius:4px; }
+pre { background:var(--code); padding:10px 12px; border-radius:8px; overflow:auto; }
+pre code { background:none; padding:0; }
+pre.stmt { white-space:pre-wrap; word-break:break-all; max-height:28em; }
+.crumbs { font-size:14px; color:var(--dim); }
+.walk { display:flex; flex-wrap:wrap; gap:6px; align-items:center; font-size:14px; margin:10px 0 18px; }
+.walk a, .walk span.s { border:1px solid var(--line); border-radius:999px; padding:3px 10px; text-decoration:none; background:var(--code); }
+.walk .arr { color:var(--dim); }
+blockquote { margin:10px 0; padding:8px 14px; border-left:4px solid var(--acc); background:var(--code); border-radius:0 8px 8px 0; }
+.thm { border:1px solid var(--line); border-radius:10px; padding:14px 16px; margin:14px 0; }
+.thm:target, .step:target, .fn:target { outline:3px solid var(--acc); outline-offset:2px; }
+.thm, .step, .fn, .box, h2 { scroll-margin-top:70px; }
+.src div { scroll-margin-top:120px; }
+ol.steps { margin:6px 0 0; padding-left:22px; }
+ol.steps > li { margin:10px 0; }
+ol.steps > li > b { display:inline-block; min-width:5.5em; }
+.ok { color:var(--ok); font-weight:600; }
+.dim { color:var(--dim); font-size:14px; }
+.box { border:1px solid var(--line); border-radius:10px; padding:12px 16px; margin:12px 0; background:var(--code); }
+.box pre { background:var(--bg); }
+.replay { border-color:var(--ok); }
+table { border-collapse:collapse; font-size:13.5px; line-height:1.4; }
+th, td { border:1px solid var(--line); padding:5px 8px; vertical-align:top; text-align:left; }
+th { background:var(--code); }
+.tw { overflow-x:auto; margin:10px 0; }
+.src { font:12.5px/1.5 ui-monospace,Menlo,Consolas,monospace; background:var(--code); border-radius:8px; padding:8px 0; overflow-x:auto; }
+.src { counter-reset:ln; }
+.src div { white-space:pre; padding:0 12px 0 0; counter-increment:ln; }
+.src div::before { content:counter(ln); display:inline-block; width:4.5em; padding-right:1em; text-align:right; color:var(--dim); user-select:none; }
+.src div:target { background:var(--hl); }
+pre.hex { line-height:1.5; }
+.hex .o { color:var(--dim); }
+</style>
+</head>
+<body>
+<p class="crumbs"><a href="../index.html">Vortex Echo</a> · <a href="../trail/index.html">Proof trail</a> · C8p-P67</p>
+<h1>C8p-P67: auto puncture tick and click puncture, under the premises of the theorems they extend, with the named speed table and header</h1>
+<p class="walk"><a href="#sentence">sentence</a> <span class="arr">→</span> <a href="#VA1_TICK_FORWARD_PUNCT_NU-stmt">statement</a> <span class="arr">→</span> <a href="#VA1_TICK_FORWARD_PUNCT_NU-proof">proof line</a> <span class="arr">→</span> <a href="#VA1_TICK_FORWARD_PUNCT_NU-rcpt">receipt</a> <span class="arr">→</span> <a href="#VA1_TICK_FORWARD_PUNCT_NU-bytes">bytes</a> <span class="dim">(for <code>VA1_TICK_FORWARD_PUNCT_NU</code>)</span></p>
+<h2 id="sentence">The sentence</h2>
+<p>On the main page (<a href="../index.html#row-C8p-P67">results table</a>, row “tick: C8p-P67”):</p>
+<blockquote data-from="index.html">auto puncture tick and click puncture, under the premises of the theorems they extend, with the named speed table and header</blockquote>
+<details><summary>The reviewed wording of this result (its class sentence, <code>C8p-P67.txt</code>)</summary>
+<pre class="stmt" data-from="proof-tree/tasks/bubble-echo/vortex/chain-nov/class/C8p-P67.txt">C8p rows P6/P7 class sentence (2026-11-15; spec c8p_nu.spec 02b1240b, frozen):
+On the exact bytes of vortex_a1.wasm (sha256 a3cf8c82...), in hol-hearth&#x27;s model of WebAssembly with 0 new axioms (spec-locked
+receipt, check-rung), and under exactly the premises of the frozen theorems they extend (C8b&#x27;s VA1_TICK_FORWARD_PUNCT_U for
+the auto puncture, C6a&#x27;s VA1_HCALL_PUNCTURE and VA1_PUNCTURE_OK for the click, with C7&#x27;s renaming va1_rbinit_b, va1_zpseed_b,
+va1_bad_b): when the click call puncture(a0, a1, a2) returns (VA1_HCALL_PUNCTURE_N, VA1_PUNCTURE_OK_N), and when a tick_forward
+whose swirl tick reaches the auto puncture returns (VA1_TICK_FORWARD_PUNCT_NU, a0 a1 a2 = the words at 16516..16524 of the
+entry memory), everything the frozen theorem says still holds, and in addition the final memory holds the speed table named
+by row P4 (the i32 word at 65536 + 4 j is va1_ptbl a0 a1 a2 w j for every j &lt; 262144, w = the model word at byte 16648 of the
+entry memory, which the swirl tick keeps) and the 21 header words named by row P5 (the i32 word at 16420 + 4 k is
+va1_phdr a0 a1 a2 k for k &lt; 21). The proof composes rows P3/P4 and P5 (re-executed unchanged, apart from needs lines, in the
+C7/C8b context on C8a&#x27;s s5 layer, because layer P cannot stack with C8b&#x27;s) with the frames of f25, f33 after its call 25 and
+tick_forward after its call 33. Not covered here: what the table or the header mean (no float-accuracy or geometry claim; the
+float operations wfbin and wfun stay the model&#x27;s fixed but unspecified arithmetic, as in P4), memory words outside the two
+named ranges beyond what the frozen postconditions and frames already say, the tick_backward direction and the endpoint
+statements (rung C8e), and the films (rung C8f).</pre>
+<p><a href="../proof-tree/tasks/bubble-echo/vortex/chain-nov/class/C8p-P67.txt">file</a></p></details>
+<p class="dim">These sentences are summaries. Where they and the theorem statements below differ, the frozen statements are the authority.</p>
+<h2 id="theorems">The theorems</h2>
+<p><code>c8p_nu_final</code>: <a href="#VA1_TICK_FORWARD_PUNCT_NU" data-receipt="c8p_nu_final"><code>VA1_TICK_FORWARD_PUNCT_NU</code></a>, <a href="#VA1_HCALL_PUNCTURE_N" data-receipt="c8p_nu_final"><code>VA1_HCALL_PUNCTURE_N</code></a>, <a href="#VA1_PUNCTURE_OK_N" data-receipt="c8p_nu_final"><code>VA1_PUNCTURE_OK_N</code></a></p>
+<p class="dim">Each card below gives the statement exactly as frozen in the spec, the proof line, the receipt entry that recorded it, and the functions of <code>vortex_a1.wasm</code> it is about.</p>
+<h2>Receipt <code>c8p_nu_final</code>: 3 theorems</h2>
+
+<div class="box" id="r-c8p_nu_final">
+<p><strong>Receipt <code>c8p_nu_final</code></strong> (official run <code>20261116T023207Z-3588786-c8p_nu_final-b30afb</code>)</p>
+<pre data-attest="proof-tree/tasks/bubble-echo/vortex/chain-nov/evidence/receipts/c8p_nu_final.attest.json" data-line="verdict">PASSED c8p_nu_final.ml: 3/3 bindings proved, 3/3 spec bindings matched, 125/125 spec pins matched, 0 new axioms, eval 17.8s (wasm)</pre>
+<p>Proof file <a href="src/c8p_nu_final.ml.html"><code>proof-tree/tasks/bubble-echo/vortex/proofs/c8p_nu_final.ml</code></a> (SHA-256 <code>29275548…4338aa</code>), frozen spec <a href="../proof-tree/tasks/bubble-echo/vortex/proofs/c8p_nu.spec"><code>proof-tree/tasks/bubble-echo/vortex/proofs/c8p_nu.spec</code></a> (SHA-256 <code>02b1240b…ce9201</code>). Cold replay: COLD CHECK: reproduced c8p_nu_final.ml: 3/3 spec theorems matched, 125/125 pins matched, 0 new axioms; 3 bindings re-run (3 against the spec, 0 matched their quotations, 0 type-checked only). Check-rung: RESULT: PASS check-rung (30 checks, 0 failed).</p>
+<p class="dim">Freeze record: 2026-11-15 16:03:43 EST (2026-11-15T21:03:43Z) FROZEN c8p_nu.spec sha256 02b1240b252fa5493ad2a79c5270b110cbc84213a2e97e31e7ed11c29ece9201 sol 20261115-155318-vortex-chain-c8p-spec-nu-p6-6165 round 1 score 9/10 accept; by C8p (Claude Opus 5.5); freeze-spec v1; rows P6+P7; P6-only mutant receipts added after r1 (tests/out-nu/mut6-*.txt, 9/9 killed)</p>
+<p><a href="../proof-tree/tasks/bubble-echo/vortex/chain-nov/evidence/receipts/c8p_nu_final.attest.json">attest summary</a> · <a href="../proof-tree/tasks/bubble-echo/vortex/chain-nov/evidence/receipts/c8p_nu_final.inspect.txt">inspect listing</a> · <a href="../proof-tree/tasks/bubble-echo/vortex/chain-nov/evidence/receipts/c8p_nu_final.cold.json">cold replay record</a> · <a href="../proof-tree/tasks/bubble-echo/vortex/chain-nov/evidence/closures/c8p_nu_final.closure.json">closure inventory</a> · <a href="../proof-tree/tasks/bubble-echo/vortex/chain-nov/evidence/check-rung/c8p_nu_final.check-rung.out">check-rung output</a></p>
+<p>The spec fixes the exact bytes of these functions as definitions, and the receipt checked each definition against HOL Light's registry (7 of 7 recorded as <span class="ok">pinned</span>):</p>
+<ul>
+<li><a href="https://github.com/BenKnill/vortex-echo/blob/main/proof-tree/tasks/bubble-echo/vortex/proofs/c8p_nu.spec#L111">line 111</a>: <a href="../trail/bytes/vortex_a1.html#f25"><code>va1_f25_mc</code></a> = vortex_a1.wasm function 25 bytes <span data-def="va1_f25_mc" data-spec="proof-tree/tasks/bubble-echo/vortex/proofs/c8p_nu.spec" data-module="module/vortex_a1.wasm" data-start="22036" data-end="23082">[22036, 23082)</span>, 1046 B; <a href="../trail/bytes/ve_core.html#f25"><code>va1_f25_mc</code></a> = ve_core.wasm function 25 (export <code>ve_puncture</code>) bytes <span data-def="va1_f25_mc" data-spec="proof-tree/tasks/bubble-echo/vortex/proofs/c8p_nu.spec" data-module="proof-tree/tasks/bubble-echo/vortex/core/ve_core.wasm" data-start="22235" data-end="23281">[22235, 23281)</span>, 1046 B; receipt: <span data-attest="proof-tree/tasks/bubble-echo/vortex/chain-nov/evidence/receipts/c8p_nu_final.attest.json" data-pin="va1_f25_mc" data-pin-status="pinned">pinned</span></li>
+<li><a href="https://github.com/BenKnill/vortex-echo/blob/main/proof-tree/tasks/bubble-echo/vortex/proofs/c8p_nu.spec#L113">line 113</a>: <a href="../trail/bytes/vortex_a1.html#f27"><code>va1_f27_mc</code></a> = vortex_a1.wasm function 27 bytes <span data-def="va1_f27_mc" data-spec="proof-tree/tasks/bubble-echo/vortex/proofs/c8p_nu.spec" data-module="module/vortex_a1.wasm" data-start="23814" data-end="23833">[23814, 23833)</span>, 19 B; <a href="../trail/bytes/ve_core.html#f27"><code>va1_f27_mc</code></a> = ve_core.wasm function 27 (export <code>ve_tick_inc</code>) bytes <span data-def="va1_f27_mc" data-spec="proof-tree/tasks/bubble-echo/vortex/proofs/c8p_nu.spec" data-module="proof-tree/tasks/bubble-echo/vortex/core/ve_core.wasm" data-start="24013" data-end="24032">[24013, 24032)</span>, 19 B; receipt: <span data-attest="proof-tree/tasks/bubble-echo/vortex/chain-nov/evidence/receipts/c8p_nu_final.attest.json" data-pin="va1_f27_mc" data-pin-status="pinned">pinned</span></li>
+<li><a href="https://github.com/BenKnill/vortex-echo/blob/main/proof-tree/tasks/bubble-echo/vortex/proofs/c8p_nu.spec#L115">line 115</a>: <a href="../trail/bytes/vortex_a1.html#f32"><code>va1_f32_mc</code></a> = vortex_a1.wasm function 32 bytes <span data-def="va1_f32_mc" data-spec="proof-tree/tasks/bubble-echo/vortex/proofs/c8p_nu.spec" data-module="module/vortex_a1.wasm" data-start="27333" data-end="27846">[27333, 27846)</span>, 513 B; receipt: <span data-attest="proof-tree/tasks/bubble-echo/vortex/chain-nov/evidence/receipts/c8p_nu_final.attest.json" data-pin="va1_f32_mc" data-pin-status="pinned">pinned</span></li>
+<li><a href="https://github.com/BenKnill/vortex-echo/blob/main/proof-tree/tasks/bubble-echo/vortex/proofs/c8p_nu.spec#L149">line 149</a>: <a href="../trail/bytes/vortex_a1.html#f34"><code>va1_f34_mc</code></a> = vortex_a1.wasm function 34 bytes <span data-def="va1_f34_mc" data-spec="proof-tree/tasks/bubble-echo/vortex/proofs/c8p_nu.spec" data-module="module/vortex_a1.wasm" data-start="29106" data-end="29350">[29106, 29350)</span>, 244 B; receipt: <span data-attest="proof-tree/tasks/bubble-echo/vortex/chain-nov/evidence/receipts/c8p_nu_final.attest.json" data-pin="va1_f34_mc" data-pin-status="pinned">pinned</span></li>
+<li><a href="https://github.com/BenKnill/vortex-echo/blob/main/proof-tree/tasks/bubble-echo/vortex/proofs/c8p_nu.spec#L187">line 187</a>: <a href="../trail/bytes/vortex_a1.html#f9"><code>va1_f9_mc</code></a> = vortex_a1.wasm function 9 bytes <span data-def="va1_f9_mc" data-spec="proof-tree/tasks/bubble-echo/vortex/proofs/c8p_nu.spec" data-module="module/vortex_a1.wasm" data-start="4314" data-end="5827">[4314, 5827)</span>, 1513 B; <a href="../trail/bytes/ve_core.html#f9"><code>va1_f9_mc</code></a> = ve_core.wasm function 9 (export <code>ve_vort_apply</code>) bytes <span data-def="va1_f9_mc" data-spec="proof-tree/tasks/bubble-echo/vortex/proofs/c8p_nu.spec" data-module="proof-tree/tasks/bubble-echo/vortex/core/ve_core.wasm" data-start="4513" data-end="6026">[4513, 6026)</span>, 1513 B; receipt: <span data-attest="proof-tree/tasks/bubble-echo/vortex/chain-nov/evidence/receipts/c8p_nu_final.attest.json" data-pin="va1_f9_mc" data-pin-status="pinned">pinned</span></li>
+<li><a href="https://github.com/BenKnill/vortex-echo/blob/main/proof-tree/tasks/bubble-echo/vortex/proofs/c8p_nu.spec#L368">line 368</a>: <a href="../trail/bytes/vortex_a1.html#f33"><code>va1_puncture_mc</code></a> = vortex_a1.wasm function 33 (export <code>puncture</code>) bytes <span data-def="va1_puncture_mc" data-spec="proof-tree/tasks/bubble-echo/vortex/proofs/c8p_nu.spec" data-module="module/vortex_a1.wasm" data-start="27848" data-end="29104">[27848, 29104)</span>, 1256 B; receipt: <span data-attest="proof-tree/tasks/bubble-echo/vortex/chain-nov/evidence/receipts/c8p_nu_final.attest.json" data-pin="va1_puncture_mc" data-pin-status="pinned">pinned</span></li>
+<li><a href="https://github.com/BenKnill/vortex-echo/blob/main/proof-tree/tasks/bubble-echo/vortex/proofs/c8p_nu.spec#L389">line 389</a>: <a href="../trail/bytes/vortex_a1.html#f35"><code>va1_tick_forward_mc</code></a> = vortex_a1.wasm function 35 (export <code>tick_forward</code>) bytes <span data-def="va1_tick_forward_mc" data-spec="proof-tree/tasks/bubble-echo/vortex/proofs/c8p_nu.spec" data-module="module/vortex_a1.wasm" data-start="29352" data-end="29672">[29352, 29672)</span>, 320 B; receipt: <span data-attest="proof-tree/tasks/bubble-echo/vortex/chain-nov/evidence/receipts/c8p_nu_final.attest.json" data-pin="va1_tick_forward_mc" data-pin-status="pinned">pinned</span></li>
+</ul>
+</div>
+
+<article class="thm" id="VA1_TICK_FORWARD_PUNCT_NU">
+<h3><code>VA1_TICK_FORWARD_PUNCT_NU</code></h3>
+<ol class="steps">
+<li class="step" id="VA1_TICK_FORWARD_PUNCT_NU-stmt"><b>Statement</b> frozen spec <a href="https://github.com/BenKnill/vortex-echo/blob/main/proof-tree/tasks/bubble-echo/vortex/proofs/c8p_nu.spec#L38-L58"><code>c8p_nu.spec</code> lines 38–58</a> (<a href="../proof-tree/tasks/bubble-echo/vortex/proofs/c8p_nu.spec">file</a>; SHA-256 <code>02b1240b…ce9201</code>, the hash the receipt locks):
+<pre class="stmt" data-spec="proof-tree/tasks/bubble-echo/vortex/proofs/c8p_nu.spec" data-lines="38-58" data-name="VA1_TICK_FORWARD_PUNCT_NU">theorem VA1_TICK_FORWARD_PUNCT_NU
+ `!(fs:num-&gt;byte list#num#num) (gl:num-&gt;wval) (t:int32) (mdl:num-&gt;int32) (N:num) (x:(num-&gt;int32)#(num-&gt;int32)) (a0:int32) (a1:int32) (a2:int32) (m0:int64-&gt;byte) (uw:(num-&gt;int32)#(num-&gt;int32)).
+     fs 9 = (va1_f9_mc,0,0) /\ fs 27 = (va1_f27_mc,0,0) /\ fs 33 = (va1_puncture_mc,3,1) /\
+     fs 25 = (va1_f25_mc,3,1) /\ fs 32 = (va1_f32_mc,2,1) /\ fs 34 = (va1_f34_mc,3,0) /\
+     mdl 1 = word N /\ 1 &lt;= N /\ N &lt;= 640 /\ gl 0 = I32 (word 16384) /\ ~(word_add t (word 1) = word 0) /\
+     va1_tick t m0 /\ va1_pop (word 4294967295) (word_add t (word 1)) m0 /\ va1_mdl mdl m0 /\ va1_vab N x m0 /\
+     read (bytes32 (word 16516)) m0 = a0 /\ read (bytes32 (word 16520)) m0 = a1 /\ read (bytes32 (word 16524)) m0 = a2 /\
+     ~(a0 = word 0 /\ a1 = word 0 /\ a2 = word 0)
+     ==&gt; ensures (wasmn fs)
+          (\s. read wcode s = va1_tick_forward_mc /\ read wpc s = word 3 /\ read wstatus s = WRunning /\
+               read wstack s = [] /\ read wlabels s = [] /\ read warity s = 1 /\
+               read wmemsize s = 4194304 /\ read wglobals s = gl /\ read wmem s = m0 /\ va1_vabu N uw (read wmem s))
+          (\s. read wstatus s = WDone /\ read wstack s = [I32 (word 1)] /\
+               read wmemsize s = 4194304 /\ read wglobals s = gl /\
+               va1_w32s 65536 262144 (va1_ptbl a0 a1 a2 (mdl 2)) (read wmem s) /\
+               va1_w32s 16420 21 (va1_phdr a0 a1 a2) (read wmem s) /\
+               ?m1. va1_tf_mid N mdl t x m0 m1 /\ va1_c6a_mem mdl m1 (read wmem s) /\
+                    read (bytes32 (word 16408)) (read wmem s) = a0 /\ read (bytes32 (word 16412)) (read wmem s) = a1 /\
+                    read (bytes32 (word 16416)) (read wmem s) = a2 /\ va1_vabu N uw (read wmem s))
+          (MAYCHANGE [wpc] ,, MAYCHANGE [wstack] ,, MAYCHANGE [wlabels] ,, MAYCHANGE [wstatus] ,,
+           MAYCHANGE [wlocal 0; wlocal 1; wlocal 2] ,, MAYCHANGE [wmem])`;;</pre></li>
+<li class="step" id="VA1_TICK_FORWARD_PUNCT_NU-proof"><b>Proof</b> <a href="src/c8p_nu_final.ml.html#L90" data-src="proof-tree/tasks/bubble-echo/vortex/proofs/c8p_nu_final.ml" data-line="90" data-name="VA1_TICK_FORWARD_PUNCT_NU" data-how="receipt" data-attest="proof-tree/tasks/bubble-echo/vortex/chain-nov/evidence/receipts/c8p_nu_final.attest.json"><code>c8p_nu_final.ml</code> line 90</a> (<a href="https://github.com/BenKnill/vortex-echo/blob/main/proof-tree/tasks/bubble-echo/vortex/proofs/c8p_nu_final.ml#L90">on GitHub</a>), the line the receipt records. That line restates the theorem and closes it with <code>ACCEPT_TAC VA1_TICK_FORWARD_PUNCT_NU</code>, the theorem of that name proved in a file the run loaded: <a href="src/c8p_nu_pf.ml.html#L201" data-src="proof-tree/tasks/bubble-echo/vortex/proofs/c8p_nu_pf.ml" data-line="201" data-name="VA1_TICK_FORWARD_PUNCT_NU" data-how="accept" data-attest="proof-tree/tasks/bubble-echo/vortex/chain-nov/evidence/receipts/c8p_nu_final.attest.json"><code>c8p_nu_pf.ml</code> line 201</a> (<a href="https://github.com/BenKnill/vortex-echo/blob/main/proof-tree/tasks/bubble-echo/vortex/proofs/c8p_nu_pf.ml#L201">on GitHub</a>).</li>
+<li class="step" id="VA1_TICK_FORWARD_PUNCT_NU-rcpt"><b>Receipt</b> <span data-attest="proof-tree/tasks/bubble-echo/vortex/chain-nov/evidence/receipts/c8p_nu_final.attest.json" data-name="VA1_TICK_FORWARD_PUNCT_NU" data-status="proved" data-spec-status="matched"><span class="ok">proved</span> (thm bound (conclusion and hypotheses not checked)); statement against the frozen spec: <span class="ok">matched</span></span>. Receipt <a href="#r-c8p_nu_final"><code>c8p_nu_final</code></a>: PASSED c8p_nu_final.ml, 0 new axioms; cold replay: <a href="../proof-tree/tasks/bubble-echo/vortex/chain-nov/evidence/receipts/c8p_nu_final.cold.json">reproduced</a>.</li>
+<li class="step" id="VA1_TICK_FORWARD_PUNCT_NU-bytes"><b>Bytes</b> The statement names directly: <a href="../trail/bytes/vortex_a1.html#f25"><code>va1_f25_mc</code></a> = vortex_a1.wasm function 25 bytes <span data-def="va1_f25_mc" data-spec="proof-tree/tasks/bubble-echo/vortex/proofs/c8p_nu.spec" data-module="module/vortex_a1.wasm" data-start="22036" data-end="23082">[22036, 23082)</span>, 1046 B; <a href="../trail/bytes/ve_core.html#f25"><code>va1_f25_mc</code></a> = ve_core.wasm function 25 (export <code>ve_puncture</code>) bytes <span data-def="va1_f25_mc" data-spec="proof-tree/tasks/bubble-echo/vortex/proofs/c8p_nu.spec" data-module="proof-tree/tasks/bubble-echo/vortex/core/ve_core.wasm" data-start="22235" data-end="23281">[22235, 23281)</span>, 1046 B; <a href="../trail/bytes/vortex_a1.html#f27"><code>va1_f27_mc</code></a> = vortex_a1.wasm function 27 bytes <span data-def="va1_f27_mc" data-spec="proof-tree/tasks/bubble-echo/vortex/proofs/c8p_nu.spec" data-module="module/vortex_a1.wasm" data-start="23814" data-end="23833">[23814, 23833)</span>, 19 B; <a href="../trail/bytes/ve_core.html#f27"><code>va1_f27_mc</code></a> = ve_core.wasm function 27 (export <code>ve_tick_inc</code>) bytes <span data-def="va1_f27_mc" data-spec="proof-tree/tasks/bubble-echo/vortex/proofs/c8p_nu.spec" data-module="proof-tree/tasks/bubble-echo/vortex/core/ve_core.wasm" data-start="24013" data-end="24032">[24013, 24032)</span>, 19 B; <a href="../trail/bytes/vortex_a1.html#f32"><code>va1_f32_mc</code></a> = vortex_a1.wasm function 32 bytes <span data-def="va1_f32_mc" data-spec="proof-tree/tasks/bubble-echo/vortex/proofs/c8p_nu.spec" data-module="module/vortex_a1.wasm" data-start="27333" data-end="27846">[27333, 27846)</span>, 513 B; <a href="../trail/bytes/vortex_a1.html#f34"><code>va1_f34_mc</code></a> = vortex_a1.wasm function 34 bytes <span data-def="va1_f34_mc" data-spec="proof-tree/tasks/bubble-echo/vortex/proofs/c8p_nu.spec" data-module="module/vortex_a1.wasm" data-start="29106" data-end="29350">[29106, 29350)</span>, 244 B; <a href="../trail/bytes/vortex_a1.html#f9"><code>va1_f9_mc</code></a> = vortex_a1.wasm function 9 bytes <span data-def="va1_f9_mc" data-spec="proof-tree/tasks/bubble-echo/vortex/proofs/c8p_nu.spec" data-module="module/vortex_a1.wasm" data-start="4314" data-end="5827">[4314, 5827)</span>, 1513 B; <a href="../trail/bytes/ve_core.html#f9"><code>va1_f9_mc</code></a> = ve_core.wasm function 9 (export <code>ve_vort_apply</code>) bytes <span data-def="va1_f9_mc" data-spec="proof-tree/tasks/bubble-echo/vortex/proofs/c8p_nu.spec" data-module="proof-tree/tasks/bubble-echo/vortex/core/ve_core.wasm" data-start="4513" data-end="6026">[4513, 6026)</span>, 1513 B; <a href="../trail/bytes/vortex_a1.html#f33"><code>va1_puncture_mc</code></a> = vortex_a1.wasm function 33 (export <code>puncture</code>) bytes <span data-def="va1_puncture_mc" data-spec="proof-tree/tasks/bubble-echo/vortex/proofs/c8p_nu.spec" data-module="module/vortex_a1.wasm" data-start="27848" data-end="29104">[27848, 29104)</span>, 1256 B; <a href="../trail/bytes/vortex_a1.html#f35"><code>va1_tick_forward_mc</code></a> = vortex_a1.wasm function 35 (export <code>tick_forward</code>) bytes <span data-def="va1_tick_forward_mc" data-spec="proof-tree/tasks/bubble-echo/vortex/proofs/c8p_nu.spec" data-module="module/vortex_a1.wasm" data-start="29352" data-end="29672">[29352, 29672)</span>, 320 B. Module <a href="../trail/bytes/vortex_a1.html"><code>vortex_a1.wasm</code></a>, SHA-256 <code>a3cf8c82…6aede6</code>.</li>
+</ol>
+</article>
+<article class="thm" id="VA1_HCALL_PUNCTURE_N">
+<h3><code>VA1_HCALL_PUNCTURE_N</code></h3>
+<ol class="steps">
+<li class="step" id="VA1_HCALL_PUNCTURE_N-stmt"><b>Statement</b> frozen spec <a href="https://github.com/BenKnill/vortex-echo/blob/main/proof-tree/tasks/bubble-echo/vortex/proofs/c8p_nu.spec#L59-L76"><code>c8p_nu.spec</code> lines 59–76</a> (<a href="../proof-tree/tasks/bubble-echo/vortex/proofs/c8p_nu.spec">file</a>; SHA-256 <code>02b1240b…ce9201</code>, the hash the receipt locks):
+<pre class="stmt" data-spec="proof-tree/tasks/bubble-echo/vortex/proofs/c8p_nu.spec" data-lines="59-76" data-name="VA1_HCALL_PUNCTURE_N">theorem VA1_HCALL_PUNCTURE_N
+ `!(fs:num-&gt;byte list#num#num) (gl:num-&gt;wval) (t:int32) (mdl:num-&gt;int32) (a0:int32) (a1:int32) (a2:int32) (m:int64-&gt;byte).
+     fs 25 = (va1_f25_mc,3,1) /\ fs 32 = (va1_f32_mc,2,1) /\ fs 34 = (va1_f34_mc,3,0) /\
+     read (bytes32 (word 16396)) m = word 4294967295 /\ va1_tick t m /\ ~(t = word 0) /\ va1_mdl mdl m /\
+     ~(a0 = word 0 /\ a1 = word 0 /\ a2 = word 0) /\
+     gl 0 = I32 (word 16384)
+     ==&gt; ?e decls.
+           wasm_entry va1_puncture_mc = SOME e /\ wasm_decl_vals va1_puncture_mc = SOME decls /\
+           !s0. read wmemsize s0 = 4194304 /\ read wglobals s0 = gl /\ read wmem s0 = m
+                ==&gt; eventually (wasmc fs)
+                      (\s. read wstatus s = WDone /\ read wstack s = [I32 (word 0)] /\
+                           read wmemsize s = 4194304 /\
+                           va1_c6a_rel mdl gl m (read wglobals s) (read wmem s) /\
+                           read (bytes32 (word 16408)) (read wmem s) = a0 /\ read (bytes32 (word 16412)) (read wmem s) = a1 /\
+                           read (bytes32 (word 16416)) (read wmem s) = a2 /\
+                           va1_w32s 65536 262144 (va1_ptbl a0 a1 a2 (mdl 2)) (read wmem s) /\
+                           va1_w32s 16420 21 (va1_phdr a0 a1 a2) (read wmem s))
+                      (wcall_entry va1_puncture_mc (LENGTH [I32 a2; I32 a1; I32 a0]) 1 [I32 a2; I32 a1; I32 a0] e decls s0)`;;</pre></li>
+<li class="step" id="VA1_HCALL_PUNCTURE_N-proof"><b>Proof</b> <a href="src/c8p_nu_final.ml.html#L91" data-src="proof-tree/tasks/bubble-echo/vortex/proofs/c8p_nu_final.ml" data-line="91" data-name="VA1_HCALL_PUNCTURE_N" data-how="receipt" data-attest="proof-tree/tasks/bubble-echo/vortex/chain-nov/evidence/receipts/c8p_nu_final.attest.json"><code>c8p_nu_final.ml</code> line 91</a> (<a href="https://github.com/BenKnill/vortex-echo/blob/main/proof-tree/tasks/bubble-echo/vortex/proofs/c8p_nu_final.ml#L91">on GitHub</a>), the line the receipt records. That line restates the theorem and closes it with <code>ACCEPT_TAC VA1_HCALL_PUNCTURE_N</code>, the theorem of that name proved in a file the run loaded: <a href="src/c8p_nu_pf.ml.html#L136" data-src="proof-tree/tasks/bubble-echo/vortex/proofs/c8p_nu_pf.ml" data-line="136" data-name="VA1_HCALL_PUNCTURE_N" data-how="accept" data-attest="proof-tree/tasks/bubble-echo/vortex/chain-nov/evidence/receipts/c8p_nu_final.attest.json"><code>c8p_nu_pf.ml</code> line 136</a> (<a href="https://github.com/BenKnill/vortex-echo/blob/main/proof-tree/tasks/bubble-echo/vortex/proofs/c8p_nu_pf.ml#L136">on GitHub</a>).</li>
+<li class="step" id="VA1_HCALL_PUNCTURE_N-rcpt"><b>Receipt</b> <span data-attest="proof-tree/tasks/bubble-echo/vortex/chain-nov/evidence/receipts/c8p_nu_final.attest.json" data-name="VA1_HCALL_PUNCTURE_N" data-status="proved" data-spec-status="matched"><span class="ok">proved</span> (thm bound (conclusion and hypotheses not checked)); statement against the frozen spec: <span class="ok">matched</span></span>. Receipt <a href="#r-c8p_nu_final"><code>c8p_nu_final</code></a>: PASSED c8p_nu_final.ml, 0 new axioms; cold replay: <a href="../proof-tree/tasks/bubble-echo/vortex/chain-nov/evidence/receipts/c8p_nu_final.cold.json">reproduced</a>.</li>
+<li class="step" id="VA1_HCALL_PUNCTURE_N-bytes"><b>Bytes</b> The statement names directly: <a href="../trail/bytes/vortex_a1.html#f25"><code>va1_f25_mc</code></a> = vortex_a1.wasm function 25 bytes <span data-def="va1_f25_mc" data-spec="proof-tree/tasks/bubble-echo/vortex/proofs/c8p_nu.spec" data-module="module/vortex_a1.wasm" data-start="22036" data-end="23082">[22036, 23082)</span>, 1046 B; <a href="../trail/bytes/ve_core.html#f25"><code>va1_f25_mc</code></a> = ve_core.wasm function 25 (export <code>ve_puncture</code>) bytes <span data-def="va1_f25_mc" data-spec="proof-tree/tasks/bubble-echo/vortex/proofs/c8p_nu.spec" data-module="proof-tree/tasks/bubble-echo/vortex/core/ve_core.wasm" data-start="22235" data-end="23281">[22235, 23281)</span>, 1046 B; <a href="../trail/bytes/vortex_a1.html#f32"><code>va1_f32_mc</code></a> = vortex_a1.wasm function 32 bytes <span data-def="va1_f32_mc" data-spec="proof-tree/tasks/bubble-echo/vortex/proofs/c8p_nu.spec" data-module="module/vortex_a1.wasm" data-start="27333" data-end="27846">[27333, 27846)</span>, 513 B; <a href="../trail/bytes/vortex_a1.html#f34"><code>va1_f34_mc</code></a> = vortex_a1.wasm function 34 bytes <span data-def="va1_f34_mc" data-spec="proof-tree/tasks/bubble-echo/vortex/proofs/c8p_nu.spec" data-module="module/vortex_a1.wasm" data-start="29106" data-end="29350">[29106, 29350)</span>, 244 B; <a href="../trail/bytes/vortex_a1.html#f33"><code>va1_puncture_mc</code></a> = vortex_a1.wasm function 33 (export <code>puncture</code>) bytes <span data-def="va1_puncture_mc" data-spec="proof-tree/tasks/bubble-echo/vortex/proofs/c8p_nu.spec" data-module="module/vortex_a1.wasm" data-start="27848" data-end="29104">[27848, 29104)</span>, 1256 B. Module <a href="../trail/bytes/vortex_a1.html"><code>vortex_a1.wasm</code></a>, SHA-256 <code>a3cf8c82…6aede6</code>.</li>
+</ol>
+</article>
+<article class="thm" id="VA1_PUNCTURE_OK_N">
+<h3><code>VA1_PUNCTURE_OK_N</code></h3>
+<ol class="steps">
+<li class="step" id="VA1_PUNCTURE_OK_N-stmt"><b>Statement</b> frozen spec <a href="https://github.com/BenKnill/vortex-echo/blob/main/proof-tree/tasks/bubble-echo/vortex/proofs/c8p_nu.spec#L77-L91"><code>c8p_nu.spec</code> lines 77–91</a> (<a href="../proof-tree/tasks/bubble-echo/vortex/proofs/c8p_nu.spec">file</a>; SHA-256 <code>02b1240b…ce9201</code>, the hash the receipt locks):
+<pre class="stmt" data-spec="proof-tree/tasks/bubble-echo/vortex/proofs/c8p_nu.spec" data-lines="77-91" data-name="VA1_PUNCTURE_OK_N">theorem VA1_PUNCTURE_OK_N
+ `!(fs:num-&gt;byte list#num#num) (t:int32) (mdl:num-&gt;int32) (a0:int32) (a1:int32) (a2:int32) (m:int64-&gt;byte).
+     fs 25 = (va1_f25_mc,3,1) /\ fs 32 = (va1_f32_mc,2,1) /\ fs 34 = (va1_f34_mc,3,0) /\
+     read (bytes32 (word 16396)) m = word 4294967295 /\ va1_tick t m /\ ~(t = word 0) /\ va1_mdl mdl m /\
+     ~(a0 = word 0 /\ a1 = word 0 /\ a2 = word 0)
+     ==&gt; ensures (wasmc fs) (va1_f33_pre a0 a1 a2 m)
+          (\s. read wstatus s = WDone /\ read wstack s = [I32 (word 0)] /\
+               read (wglobal 0) s = I32 (word 16384) /\ read wmemsize s = 4194304 /\
+               va1_c6a_mem mdl m (read wmem s) /\
+               read (bytes32 (word 16408)) (read wmem s) = a0 /\ read (bytes32 (word 16412)) (read wmem s) = a1 /\
+               read (bytes32 (word 16416)) (read wmem s) = a2 /\
+               va1_w32s 65536 262144 (va1_ptbl a0 a1 a2 (mdl 2)) (read wmem s) /\
+               va1_w32s 16420 21 (va1_phdr a0 a1 a2) (read wmem s))
+          (MAYCHANGE [wpc] ,, MAYCHANGE [wstack] ,, MAYCHANGE [wlabels] ,, MAYCHANGE [wstatus] ,,
+           MAYCHANGE [wlocals] ,, MAYCHANGE [wglobal 0] ,, MAYCHANGE [wmem])`;;</pre></li>
+<li class="step" id="VA1_PUNCTURE_OK_N-proof"><b>Proof</b> <a href="src/c8p_nu_final.ml.html#L92" data-src="proof-tree/tasks/bubble-echo/vortex/proofs/c8p_nu_final.ml" data-line="92" data-name="VA1_PUNCTURE_OK_N" data-how="receipt" data-attest="proof-tree/tasks/bubble-echo/vortex/chain-nov/evidence/receipts/c8p_nu_final.attest.json"><code>c8p_nu_final.ml</code> line 92</a> (<a href="https://github.com/BenKnill/vortex-echo/blob/main/proof-tree/tasks/bubble-echo/vortex/proofs/c8p_nu_final.ml#L92">on GitHub</a>), the line the receipt records. That line restates the theorem and closes it with <code>ACCEPT_TAC VA1_PUNCTURE_OK_N</code>, the theorem of that name proved in a file the run loaded: <a href="src/c8p_nu_pf.ml.html#L105" data-src="proof-tree/tasks/bubble-echo/vortex/proofs/c8p_nu_pf.ml" data-line="105" data-name="VA1_PUNCTURE_OK_N" data-how="accept" data-attest="proof-tree/tasks/bubble-echo/vortex/chain-nov/evidence/receipts/c8p_nu_final.attest.json"><code>c8p_nu_pf.ml</code> line 105</a> (<a href="https://github.com/BenKnill/vortex-echo/blob/main/proof-tree/tasks/bubble-echo/vortex/proofs/c8p_nu_pf.ml#L105">on GitHub</a>).</li>
+<li class="step" id="VA1_PUNCTURE_OK_N-rcpt"><b>Receipt</b> <span data-attest="proof-tree/tasks/bubble-echo/vortex/chain-nov/evidence/receipts/c8p_nu_final.attest.json" data-name="VA1_PUNCTURE_OK_N" data-status="proved" data-spec-status="matched"><span class="ok">proved</span> (thm bound (conclusion and hypotheses not checked)); statement against the frozen spec: <span class="ok">matched</span></span>. Receipt <a href="#r-c8p_nu_final"><code>c8p_nu_final</code></a>: PASSED c8p_nu_final.ml, 0 new axioms; cold replay: <a href="../proof-tree/tasks/bubble-echo/vortex/chain-nov/evidence/receipts/c8p_nu_final.cold.json">reproduced</a>.</li>
+<li class="step" id="VA1_PUNCTURE_OK_N-bytes"><b>Bytes</b> The statement names directly: <a href="../trail/bytes/vortex_a1.html#f25"><code>va1_f25_mc</code></a> = vortex_a1.wasm function 25 bytes <span data-def="va1_f25_mc" data-spec="proof-tree/tasks/bubble-echo/vortex/proofs/c8p_nu.spec" data-module="module/vortex_a1.wasm" data-start="22036" data-end="23082">[22036, 23082)</span>, 1046 B; <a href="../trail/bytes/ve_core.html#f25"><code>va1_f25_mc</code></a> = ve_core.wasm function 25 (export <code>ve_puncture</code>) bytes <span data-def="va1_f25_mc" data-spec="proof-tree/tasks/bubble-echo/vortex/proofs/c8p_nu.spec" data-module="proof-tree/tasks/bubble-echo/vortex/core/ve_core.wasm" data-start="22235" data-end="23281">[22235, 23281)</span>, 1046 B; <a href="../trail/bytes/vortex_a1.html#f32"><code>va1_f32_mc</code></a> = vortex_a1.wasm function 32 bytes <span data-def="va1_f32_mc" data-spec="proof-tree/tasks/bubble-echo/vortex/proofs/c8p_nu.spec" data-module="module/vortex_a1.wasm" data-start="27333" data-end="27846">[27333, 27846)</span>, 513 B; <a href="../trail/bytes/vortex_a1.html#f34"><code>va1_f34_mc</code></a> = vortex_a1.wasm function 34 bytes <span data-def="va1_f34_mc" data-spec="proof-tree/tasks/bubble-echo/vortex/proofs/c8p_nu.spec" data-module="module/vortex_a1.wasm" data-start="29106" data-end="29350">[29106, 29350)</span>, 244 B. It also reaches, through definitions in its spec: <a href="../trail/bytes/vortex_a1.html#f33"><code>va1_puncture_mc</code></a>. Module <a href="../trail/bytes/vortex_a1.html"><code>vortex_a1.wasm</code></a>, SHA-256 <code>a3cf8c82…6aede6</code>.</li>
+</ol>
+</article>
+<p class="dim">Generated by <code>tools/build_trail.py</code> from the published files; checked by <code>tools/check_trail.py</code>.</p>
+</body>
+</html>

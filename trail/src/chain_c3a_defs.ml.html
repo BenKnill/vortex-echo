@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>chain_c3a_defs.ml: Vortex Echo proof trail</title>
+<link rel="icon" href="data:,">
+<style>
+:root { --bg:#fbfbfa; --ink:#1d2129; --dim:#5b6372; --line:#e2e4e8; --acc:#2f5bb7; --code:#f1f2f4; --ok:#1d7a46; --hl:#fff3b8; }
+@media (prefers-color-scheme: dark) { :root { --bg:#0f1116; --ink:#dde1e8; --dim:#9aa3b3; --line:#2a2f3a; --acc:#8fb0ff; --code:#1a1e27; --ok:#5fd08e; --hl:#3d3615; } }
+html { background:var(--bg); color:var(--ink); }
+body { margin:0 auto; max-width:980px; padding:22px 22px 80px; font:16px/1.55 -apple-system,"Segoe UI",Helvetica,Arial,sans-serif; }
+h1 { font-size:26px; line-height:1.25; margin:6px 0 14px; }
+h2 { font-size:20px; margin:34px 0 10px; padding-top:10px; border-top:1px solid var(--line); }
+h3 { font-size:16px; margin:0 0 8px; }
+a { color:var(--acc); }
+code, pre { font:12.5px/1.45 ui-monospace,Menlo,Consolas,monospace; }
+code { background:var(--code); padding:1px 4px; border-radius:4px; }
+pre { background:var(--code); padding:10px 12px; border-radius:8px; overflow:auto; }
+pre code { background:none; padding:0; }
+pre.stmt { white-space:pre-wrap; word-break:break-all; max-height:28em; }
+.crumbs { font-size:14px; color:var(--dim); }
+.walk { display:flex; flex-wrap:wrap; gap:6px; align-items:center; font-size:14px; margin:10px 0 18px; }
+.walk a, .walk span.s { border:1px solid var(--line); border-radius:999px; padding:3px 10px; text-decoration:none; background:var(--code); }
+.walk .arr { color:var(--dim); }
+blockquote { margin:10px 0; padding:8px 14px; border-left:4px solid var(--acc); background:var(--code); border-radius:0 8px 8px 0; }
+.thm { border:1px solid var(--line); border-radius:10px; padding:14px 16px; margin:14px 0; }
+.thm:target, .step:target, .fn:target { outline:3px solid var(--acc); outline-offset:2px; }
+.thm, .step, .fn, .box, h2 { scroll-margin-top:70px; }
+.src div { scroll-margin-top:120px; }
+ol.steps { margin:6px 0 0; padding-left:22px; }
+ol.steps > li { margin:10px 0; }
+ol.steps > li > b { display:inline-block; min-width:5.5em; }
+.ok { color:var(--ok); font-weight:600; }
+.dim { color:var(--dim); font-size:14px; }
+.box { border:1px solid var(--line); border-radius:10px; padding:12px 16px; margin:12px 0; background:var(--code); }
+.box pre { background:var(--bg); }
+.replay { border-color:var(--ok); }
+table { border-collapse:collapse; font-size:13.5px; line-height:1.4; }
+th, td { border:1px solid var(--line); padding:5px 8px; vertical-align:top; text-align:left; }
+th { background:var(--code); }
+.tw { overflow-x:auto; margin:10px 0; }
+.src { font:12.5px/1.5 ui-monospace,Menlo,Consolas,monospace; background:var(--code); border-radius:8px; padding:8px 0; overflow-x:auto; }
+.src { counter-reset:ln; }
+.src div { white-space:pre; padding:0 12px 0 0; counter-increment:ln; }
+.src div::before { content:counter(ln); display:inline-block; width:4.5em; padding-right:1em; text-align:right; color:var(--dim); user-select:none; }
+.src div:target { background:var(--hl); }
+pre.hex { line-height:1.5; }
+.hex .o { color:var(--dim); }
+</style>
+</head>
+<body>
+<p class="crumbs"><a href="../../index.html">Vortex Echo</a> · <a href="../../trail/index.html">Proof trail</a> · <code>chain_c3a_defs.ml</code></p>
+<h1><code>chain_c3a_defs.ml</code></h1>
+<p>A file loaded by a proof run. Published at <a href="../../proof-tree/tasks/bubble-echo/vortex/proofs/chain_c3a_defs.ml"><code>proof-tree/tasks/bubble-echo/vortex/proofs/chain_c3a_defs.ml</code></a> (SHA-256 <code>7ceffd4f66d88dd83266e36ffb7f4a7cd60971e7386397c401d65683835c7c41</code>; <a href="https://github.com/BenKnill/vortex-echo/blob/main/proof-tree/tasks/bubble-echo/vortex/proofs/chain_c3a_defs.ml">on GitHub</a>). Line N has the anchor <code>#LN</code>.</p>
+<div class="src" data-src="proof-tree/tasks/bubble-echo/vortex/proofs/chain_c3a_defs.ml">
+<div id="L1">needs &quot;ve_vort.ml&quot;;;</div>
+<div id="L2">needs &quot;ve_tick.ml&quot;;;</div>
+<div id="L3">needs &quot;ve_vk.ml&quot;;;</div>
+<div id="L4">needs &quot;va1_code.ml&quot;;;</div>
+<div id="L5">needs &quot;va1_seq_final2.ml&quot;;;</div>
+<div id="L6">needs &quot;pop_design_defs.ml&quot;;;</div>
+<div id="L7">needs &quot;pop_design_stmts.ml&quot;;;</div>
+<div id="L8">needs &quot;pop_l2_cdrift.ml&quot;;;</div>
+<div id="L9">needs &quot;pop_l3_jdrift.ml&quot;;;</div>
+<div id="L10">needs &quot;pop_l4_drop.ml&quot;;;</div>
+<div id="L11">needs &quot;pop_l1_rimd.ml&quot;;;</div>
+<div id="L12">needs &quot;pop_l1_rim.ml&quot;;;</div>
+<div id="L13">needs &quot;pop_l5_unbirth.ml&quot;;;</div>
+<div id="L14">needs &quot;pop_h1_hol.ml&quot;;;</div>
+<div id="L15">needs &quot;pop_n1_sat.ml&quot;;;</div>
+<div id="L16">needs &quot;pop_q0_calls.ml&quot;;;</div>
+<div id="L17">needs &quot;pop_q1_untick.ml&quot;;;</div>
+<div id="L18">needs &quot;pop_q2_forward.ml&quot;;;</div>
+<div id="L19">needs &quot;pop_r5_jig_defs.ml&quot;;;</div>
+<div id="L20">needs &quot;pop_r5jig_dec.ml&quot;;;</div>
+<div id="L21">needs &quot;pop_r5jig_lem.ml&quot;;;</div>
+<div id="L22">needs &quot;pop_r5_corr_defs.ml&quot;;;</div>
+<div id="L23">needs &quot;pop_r5c_lem.ml&quot;;;</div>
+<div id="L24">needs &quot;pop_r5b_bdec.ml&quot;;;</div>
+<div id="L25">needs &quot;pop_r5bp_lem.ml&quot;;;</div>
+<div id="L26">needs &quot;pop_r5bp_lem2.ml&quot;;;</div>
+<div id="L27">needs &quot;pop_r5bp_lem3.ml&quot;;;</div>
+<div id="L28">needs &quot;pop_r5bp_lem4.ml&quot;;;</div>
+<div id="L29">needs &quot;pop_r5bp_lem5b.ml&quot;;;</div>
+<div id="L30">needs &quot;pop_r5bp_lem6.ml&quot;;;</div>
+<div id="L31">needs &quot;pop_s0_end.ml&quot;;;</div>
+<div id="L32">needs &quot;pop_r5_r4c_final.ml&quot;;;</div>
+<div id="L33">needs &quot;chain_c1_host.ml&quot;;;</div>
+<div id="L34"></div>
+<div id="L35">(* ========================================================================= *)</div>
+<div id="L36">(* Vortex chain, rung C3a, layer 1: definitions (C3A agent, Claude Opus 5.5, *)</div>
+<div id="L37">(* 2026-11-13). Every new definition is the verbatim text of its entry in    *)</div>
+<div id="L38">(* chain_c3a_final.spec; va1_f26_mc is function #26 of vortex_a1.wasm (the   *)</div>
+<div id="L39">(* spec pins its byte list). No proofs beyond the entry-pc lint.             *)</div>
+<div id="L40">(* ========================================================================= *)</div>
+<div id="L41"></div>
+<div id="L42">let va1_f26_mc = define_from_wasm &quot;va1_f26_mc&quot; &quot;../purist/vortex_a1.wasm&quot; &quot;#26&quot;;;  (* ve_unpuncture; 729 B, entry pc 5, 6 locals *)</div>
+<div id="L43">let VA1_F26_CALLEE_RULE = WASM_CALLEE_RULE va1_f26_mc;;</div>
+<div id="L44"></div>
+<div id="L45">let va1_rbv = new_definition</div>
+<div id="L46"> `va1_rbv (tbl:num-&gt;int32) (k:num) =</div>
+<div id="L47">    word_add (word_ishr (word_add (word_mul (word_sub (word_sx (tbl (128 * k + 1)):int64) (word_sx (tbl (128 * k)))) (word 251658)) (word 262144)) 19)</div>
+<div id="L48">             (word_sx (tbl (128 * k)):int64)`;;</div>
+<div id="L49"></div>
+<div id="L50">let va1_rbinit = new_definition</div>
+<div id="L51"> `va1_rbinit (tbl:num-&gt;int32) (k:num) =</div>
+<div id="L52">    word_add (word_zx (word_ushr (word_add (if ival (va1_rbv tbl k) &gt; &amp;1 then va1_rbv tbl k else word 1) (word 1)) 1):int32) (word 251658)`;;</div>
+<div id="L53"></div>
+<div id="L54">let va1_zpx0 = new_definition</div>
+<div id="L55"> `va1_zpx0 (mdl:num-&gt;int32) (k:num) =</div>
+<div id="L56">    word_xor (word_add (word_mul (mdl 2) (word 3266489909)) (word 2769733223))</div>
+<div id="L57">             (word_mul (word_xor (word k) (word 2654435769)) (word 2246822507)):int32`;;</div>
+<div id="L58"></div>
+<div id="L59">let va1_zpx1 = new_definition</div>
+<div id="L60"> `va1_zpx1 (mdl:num-&gt;int32) (k:num) =</div>
+<div id="L61">    word_mul (word_xor (word_ushr (va1_zpx0 mdl k) 15) (va1_zpx0 mdl k)) (word 739982445):int32`;;</div>
+<div id="L62"></div>
+<div id="L63">let va1_zpseed = new_definition</div>
+<div id="L64"> `va1_zpseed (mdl:num-&gt;int32) (k:num) =</div>
+<div id="L65">    word_zx (word_ishr (word_add (word_mul (word_zx (word_xor (word_ushr (va1_zpx1 mdl k) 12) (va1_zpx1 mdl k)):int64) (word 329853))</div>
+<div id="L66">                                 (word 18446176457274163200)) 48):int32`;;</div>
+<div id="L67"></div>
+<div id="L68">let va1_mis = new_definition</div>
+<div id="L69"> `va1_mis (mdl:num-&gt;int32) (tbl:num-&gt;int32)</div>
+<div id="L70">          ((ra:num-&gt;int32),(rb:num-&gt;int32),(jq:num-&gt;int32),(jp:num-&gt;int32),(zq:num-&gt;int32),(zp:num-&gt;int32)) (k:num) =</div>
+<div id="L71">    bitval (~(ra k = word 251658)) + bitval (~(jq k = word 0)) + bitval (~(jp k = word 0)) +</div>
+<div id="L72">    bitval (~(zq k = word 0)) + bitval (~(rb k = va1_rbinit tbl k)) + bitval (~(zp k = va1_zpseed mdl k))`;;</div>
+<div id="L73"></div>
+<div id="L74">let va1_bad = new_definition</div>
+<div id="L75"> `va1_bad (mdl:num-&gt;int32) (tbl:num-&gt;int32)</div>
+<div id="L76">          ((ra:num-&gt;int32),(rb:num-&gt;int32),(jq:num-&gt;int32),(jp:num-&gt;int32),(zq:num-&gt;int32),(zp:num-&gt;int32),(nd:int32)) =</div>
+<div id="L77">    word_add nd (word (nsum (0..2047) (\k. va1_mis mdl tbl (ra,rb,jq,jp,zq,zp) k)))`;;</div>
+<div id="L78"></div>
+<div id="L79">let va1_unp_frame = new_definition</div>
+<div id="L80"> `va1_unp_frame (m0:int64-&gt;byte) (m:int64-&gt;byte) &lt;=&gt;</div>
+<div id="L81">    !a. a &lt; 4194304 /\ ~(16392 &lt;= a /\ a &lt; 16512) /\ ~(65536 &lt;= a /\ a &lt; 2039808)</div>
+<div id="L82">        ==&gt; read (bytes8 (word a)) m = read (bytes8 (word a)) m0`;;</div>
+<div id="L83"></div>
+<div id="L84">let VA1_F26_CALLEE = prove</div>
+<div id="L85"> (`wasm_entry va1_f26_mc = SOME 5 /\</div>
+<div id="L86">   wasm_decl_vals va1_f26_mc = SOME [I32 (word 0); I32 (word 0); I32 (word 0); I32 (word 0); I32 (word 0); I64 (word 0)]`,</div>
+<div id="L87">  REWRITE_TAC[VA1_F26_CALLEE_RULE]);;</div>
+</div>
+<p class="dim">Generated by <code>tools/build_trail.py</code> from the published files; checked by <code>tools/check_trail.py</code>.</p>
+</body>
+</html>

@@ -1,0 +1,288 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>c8b_vort_u.ml: Vortex Echo proof trail</title>
+<link rel="icon" href="data:,">
+<style>
+:root { --bg:#fbfbfa; --ink:#1d2129; --dim:#5b6372; --line:#e2e4e8; --acc:#2f5bb7; --code:#f1f2f4; --ok:#1d7a46; --hl:#fff3b8; }
+@media (prefers-color-scheme: dark) { :root { --bg:#0f1116; --ink:#dde1e8; --dim:#9aa3b3; --line:#2a2f3a; --acc:#8fb0ff; --code:#1a1e27; --ok:#5fd08e; --hl:#3d3615; } }
+html { background:var(--bg); color:var(--ink); }
+body { margin:0 auto; max-width:980px; padding:22px 22px 80px; font:16px/1.55 -apple-system,"Segoe UI",Helvetica,Arial,sans-serif; }
+h1 { font-size:26px; line-height:1.25; margin:6px 0 14px; }
+h2 { font-size:20px; margin:34px 0 10px; padding-top:10px; border-top:1px solid var(--line); }
+h3 { font-size:16px; margin:0 0 8px; }
+a { color:var(--acc); }
+code, pre { font:12.5px/1.45 ui-monospace,Menlo,Consolas,monospace; }
+code { background:var(--code); padding:1px 4px; border-radius:4px; }
+pre { background:var(--code); padding:10px 12px; border-radius:8px; overflow:auto; }
+pre code { background:none; padding:0; }
+pre.stmt { white-space:pre-wrap; word-break:break-all; max-height:28em; }
+.crumbs { font-size:14px; color:var(--dim); }
+.walk { display:flex; flex-wrap:wrap; gap:6px; align-items:center; font-size:14px; margin:10px 0 18px; }
+.walk a, .walk span.s { border:1px solid var(--line); border-radius:999px; padding:3px 10px; text-decoration:none; background:var(--code); }
+.walk .arr { color:var(--dim); }
+blockquote { margin:10px 0; padding:8px 14px; border-left:4px solid var(--acc); background:var(--code); border-radius:0 8px 8px 0; }
+.thm { border:1px solid var(--line); border-radius:10px; padding:14px 16px; margin:14px 0; }
+.thm:target, .step:target, .fn:target { outline:3px solid var(--acc); outline-offset:2px; }
+.thm, .step, .fn, .box, h2 { scroll-margin-top:70px; }
+.src div { scroll-margin-top:120px; }
+ol.steps { margin:6px 0 0; padding-left:22px; }
+ol.steps > li { margin:10px 0; }
+ol.steps > li > b { display:inline-block; min-width:5.5em; }
+.ok { color:var(--ok); font-weight:600; }
+.dim { color:var(--dim); font-size:14px; }
+.box { border:1px solid var(--line); border-radius:10px; padding:12px 16px; margin:12px 0; background:var(--code); }
+.box pre { background:var(--bg); }
+.replay { border-color:var(--ok); }
+table { border-collapse:collapse; font-size:13.5px; line-height:1.4; }
+th, td { border:1px solid var(--line); padding:5px 8px; vertical-align:top; text-align:left; }
+th { background:var(--code); }
+.tw { overflow-x:auto; margin:10px 0; }
+.src { font:12.5px/1.5 ui-monospace,Menlo,Consolas,monospace; background:var(--code); border-radius:8px; padding:8px 0; overflow-x:auto; }
+.src { counter-reset:ln; }
+.src div { white-space:pre; padding:0 12px 0 0; counter-increment:ln; }
+.src div::before { content:counter(ln); display:inline-block; width:4.5em; padding-right:1em; text-align:right; color:var(--dim); user-select:none; }
+.src div:target { background:var(--hl); }
+pre.hex { line-height:1.5; }
+.hex .o { color:var(--dim); }
+</style>
+</head>
+<body>
+<p class="crumbs"><a href="../../index.html">Vortex Echo</a> · <a href="../../trail/index.html">Proof trail</a> · <code>c8b_vort_u.ml</code></p>
+<h1><code>c8b_vort_u.ml</code></h1>
+<p>A file loaded by a proof run. Published at <a href="../../proof-tree/tasks/bubble-echo/vortex/proofs/c8b_vort_u.ml"><code>proof-tree/tasks/bubble-echo/vortex/proofs/c8b_vort_u.ml</code></a> (SHA-256 <code>932d9f739dfd69b22b3297643d56affb855ef13d0e0b5a2bf95e63fcd7af8d66</code>; <a href="https://github.com/BenKnill/vortex-echo/blob/main/proof-tree/tasks/bubble-echo/vortex/proofs/c8b_vort_u.ml">on GitHub</a>). Line N has the anchor <code>#LN</code>.</p>
+<div class="src" data-src="proof-tree/tasks/bubble-echo/vortex/proofs/c8b_vort_u.ml">
+<div id="L1">(* ========================================================================= *)</div>
+<div id="L2">(* C8b row B1 (lane vortex-chain-20261111-142342, role c8b, Claude Opus 5.5, *)</div>
+<div id="L3">(* 2026-11-14): the unused vortex words.                                     *)</div>
+<div id="L4">(*   va1_vabu N u m   VA words j (1114112 + 4j) = FST u j and VB words j     *)</div>
+<div id="L5">(*                    (1122304 + 4j) = SND u j for 3N &lt;= j &lt; 2048            *)</div>
+<div id="L6">(* VE_VORT_(UN)APPLY_LOOP_CORRECT_U: the Fredkin loop theorems of ve_vort.ml *)</div>
+<div id="L7">(* with va1_vabu N u added to pre and post (same frame), by a copy of        *)</div>
+<div id="L8">(* VORT_TAC whose loop invariant carries the two extra conjuncts (the loop   *)</div>
+<div id="L9">(* stores only words j &lt; 3N).                                                *)</div>
+<div id="L10">(* VE_VORT_(UN)APPLY_FREDKIN_U: the whole exports, composed from the field   *)</div>
+<div id="L11">(* phase (ve_vk_ok, whose frame is locals + scratch, so va1_vabu survives by *)</div>
+<div id="L12">(* VA1_ENSURES_GHOST) and the loop theorems above.                           *)</div>
+<div id="L13">(* Never edits ve_vort*.ml; the tactics below are renamed copies (_U).       *)</div>
+<div id="L14">(* ========================================================================= *)</div>
+<div id="L15"></div>
+<div id="L16">let va1_vabu = new_definition</div>
+<div id="L17"> `va1_vabu N (u:(num-&gt;int32)#(num-&gt;int32)) (m:int64-&gt;byte) &lt;=&gt;</div>
+<div id="L18">    (!j. 3 * N &lt;= j /\ j &lt; 2048 ==&gt; read (bytes32 (word (1114112 + 4 * j))) m = FST u j) /\</div>
+<div id="L19">    (!j. 3 * N &lt;= j /\ j &lt; 2048 ==&gt; read (bytes32 (word (1122304 + 4 * j))) m = SND u j)`;;</div>
+<div id="L20"></div>
+<div id="L21">(* a fact R that every frame transition preserves rides along an ensures *)</div>
+<div id="L22">let VA1_ENSURES_GHOST = prove</div>
+<div id="L23"> (`!(step:A-&gt;A-&gt;bool) P Q C R.</div>
+<div id="L24">     ensures step P Q C /\ (!s s&#x27;. R s /\ C s s&#x27; ==&gt; R s&#x27;)</div>
+<div id="L25">     ==&gt; ensures step (\s. P s /\ R s) (\s. Q s /\ R s) C`,</div>
+<div id="L26">  REPEAT GEN_TAC THEN REWRITE_TAC[ensures] THEN STRIP_TAC THEN</div>
+<div id="L27">  X_GEN_TAC `s:A` THEN BETA_TAC THEN STRIP_TAC THEN</div>
+<div id="L28">  SUBGOAL_THEN `eventually step (\s&#x27;. Q s&#x27; /\ C s s&#x27;) (s:A)` MP_TAC THENL</div>
+<div id="L29">   [ASM_MESON_TAC[]; ALL_TAC] THEN</div>
+<div id="L30">  MATCH_MP_TAC(REWRITE_RULE[RIGHT_IMP_FORALL_THM] EVENTUALLY_MONO) THEN</div>
+<div id="L31">  BETA_TAC THEN ASM_MESON_TAC[]);;</div>
+<div id="L32"></div>
+<div id="L33">(* ---- the loop: copies of ve_vort_tacs.ml pieces with the ghost conjuncts *)</div>
+<div id="L34"></div>
+<div id="L35">let vort_inv_u mc pa pb na nb ai bi =</div>
+<div id="L36">  let t = subst [mc,`MC:byte list`; pa,`PA:num`; pb,`PB:num`; na,`NA:num-&gt;int32`; nb,`NB:num-&gt;int32`;</div>
+<div id="L37">                 ai,`AI:num-&gt;int32`; bi,`BI:num-&gt;int32`]</div>
+<div id="L38">   `\i s. read wcode s = MC /\ read wstatus s = WRunning /\</div>
+<div id="L39">          read wmemsize s = 4194304 /\ read warity s = 0 /\</div>
+<div id="L40">          read wlabels s = [0,1370,0; 0,1512,0] /\</div>
+<div id="L41">          read (wlocal 3) s = I32 (word (PA + 8 * i)) /\</div>
+<div id="L42">          read (wlocal 14) s = I32 (word (PB + 8 * i)) /\</div>
+<div id="L43">          read (wlocal 0) s = I32 (word (1974272 + 8 * i)) /\</div>
+<div id="L44">          read (wlocal 4) s = I32 (word (2 * q - 2 * i)) /\</div>
+<div id="L45">          read (wlocal 2) s = I32 (word r) /\</div>
+<div id="L46">          read wstack s = (if read wpc s = word 1372 then [] else [I32 (word (2 * q - 2 * i))]) /\</div>
+<div id="L47">          (!m. m &lt; 3 * N ==&gt; read (wmem :&gt; bytes32 (word (PA + 4 * m))) s =</div>
+<div id="L48">                             (if m &lt; 2 * i then NA m else AI m)) /\</div>
+<div id="L49">          (!m. m &lt; 3 * N ==&gt; read (wmem :&gt; bytes32 (word (PB + 4 * m))) s =</div>
+<div id="L50">                             (if m &lt; 2 * i then NB m else BI m)) /\</div>
+<div id="L51">          (!m. m &lt; 3 * N ==&gt; read (wmem :&gt; bytes32 (word (1974272 + 4 * m))) s = (vd:num-&gt;int32) m) /\</div>
+<div id="L52">          (!j. 3 * N &lt;= j /\ j &lt; 2048 ==&gt; read (wmem :&gt; bytes32 (word (1114112 + 4 * j))) s =</div>
+<div id="L53">                             FST (uw:(num-&gt;int32)#(num-&gt;int32)) j) /\</div>
+<div id="L54">          (!j. 3 * N &lt;= j /\ j &lt; 2048 ==&gt; read (wmem :&gt; bytes32 (word (1122304 + 4 * j))) s =</div>
+<div id="L55">                             SND (uw:(num-&gt;int32)#(num-&gt;int32)) j)` in</div>
+<div id="L56">  rhs(concl(TOP_DEPTH_CONV BETA_CONV t));;</div>
+<div id="L57"></div>
+<div id="L58">(* an unused-word conjunct after the stores: every store is to a word &lt; 3N *)</div>
+<div id="L59">let VORT_MEMU_TAC =</div>
+<div id="L60">  X_GEN_TAC `j:num` THEN STRIP_TAC THEN REPEAT B32_PEEL_TAC THEN ASM_SIMP_TAC[] THEN NO_TAC;;</div>
+<div id="L61"></div>
+<div id="L62">let VORT_BODY_U_TAC exec pa pb ai bi =</div>
+<div id="L63">  X_GEN_TAC `i:num` THEN STRIP_TAC THEN</div>
+<div id="L64">  SUBGOAL_THEN `2 * i + 2 &lt;= 3 * N` ASSUME_TAC THENL [ASM_ARITH_TAC; ALL_TAC] THEN</div>
+<div id="L65">  VORT_VALS_TAC pa pb THEN</div>
+<div id="L66">  ENSURES_INIT_TAC &quot;s0&quot; THEN RESOLVE_PC_COND_TAC THEN MEMNAME_TAC THEN</div>
+<div id="L67">  VORT_LOADFACTS_TAC pa pb ai bi THEN VORT_B32O_FACTS_TAC pa pb THEN</div>
+<div id="L68">  CAP_MSTEPS_TAC exec (1--50) THEN</div>
+<div id="L69">  ENSURES_FINAL_STATE_TAC THEN REWRITE_TAC[READ_COMPONENT_COMPOSE] THEN</div>
+<div id="L70">  ASM_REWRITE_TAC[] THEN CONV_TAC(DEPTH_CONV WORD_RED_CONV) THEN</div>
+<div id="L71">  ASM_SIMP_TAC[injectivity &quot;wval&quot;; CONS_11; VE_DEC2] THEN</div>
+<div id="L72">  REPEAT CONJ_TAC THEN TRY(WORD_NUM_EQ_TAC THEN NO_TAC) THEN</div>
+<div id="L73">  TRY VORT_MEMU_TAC THEN</div>
+<div id="L74">  TRY(VORT_MEM_TAC THEN NO_TAC);;</div>
+<div id="L75"></div>
+<div id="L76">let VORT_EXIT_EVEN_U_TAC exec =</div>
+<div id="L77">  ENSURES_INIT_TAC &quot;s0&quot; THEN RESOLVE_PC_COND_TAC THEN MEMNAME_TAC THEN</div>
+<div id="L78">  RULE_ASSUM_TAC(REWRITE_RULE[SUB_REFL]) THEN</div>
+<div id="L79">  CAP_MSTEPS_TAC exec (1--6) THEN</div>
+<div id="L80">  ENSURES_FINAL_STATE_TAC THEN REWRITE_TAC[READ_COMPONENT_COMPOSE] THEN</div>
+<div id="L81">  ASM_REWRITE_TAC[] THEN REPEAT CONJ_TAC THEN</div>
+<div id="L82">  FIRST [VORT_MEMU_TAC;</div>
+<div id="L83">         X_GEN_TAC `m:num` THEN DISCH_TAC THEN ASM_SIMP_TAC[] THEN</div>
+<div id="L84">         COND_CASES_TAC THEN REWRITE_TAC[] THEN ASM_ARITH_TAC];;</div>
+<div id="L85"></div>
+<div id="L86">let VORT_EXIT_ODD_U_TAC exec pa pb ai bi =</div>
+<div id="L87">  SUBGOAL_THEN `(word r:int32 = word 0) &lt;=&gt; F` ASSUME_TAC THENL</div>
+<div id="L88">   [REWRITE_TAC[] THEN DISCH_THEN(MP_TAC o AP_TERM `val:int32-&gt;num`) THEN</div>
+<div id="L89">    SUBGOAL_THEN `val(word r:int32) = r` SUBST1_TAC THENL</div>
+<div id="L90">     [MATCH_MP_TAC CAP_VAL_WORD32 THEN ASM_ARITH_TAC;</div>
+<div id="L91">      REWRITE_TAC[VAL_WORD_0] THEN ASM_ARITH_TAC];</div>
+<div id="L92">    ALL_TAC] THEN</div>
+<div id="L93">  SUBGOAL_THEN `2 * q &lt; 3 * N` ASSUME_TAC THENL [ASM_ARITH_TAC; ALL_TAC] THEN</div>
+<div id="L94">  MAP_EVERY (fun b -&gt; VAL_TAC (subst [b,`bb:num`] `val(word (bb + 8 * q):int32) = bb + 8 * q`))</div>
+<div id="L95">   [pa; pb; `1974272`] THEN</div>
+<div id="L96">  ENSURES_INIT_TAC &quot;s0&quot; THEN RESOLVE_PC_COND_TAC THEN MEMNAME_TAC THEN</div>
+<div id="L97">  RULE_ASSUM_TAC(REWRITE_RULE[SUB_REFL]) THEN</div>
+<div id="L98">  MAP_EVERY (fun (b,f) -&gt;</div>
+<div id="L99">    SUBGOAL_THEN (subst [b,`bb:num`; f,`ff:num-&gt;int32`] `read (bytes32 (word (bb + 8 * q))) mm = ff (2 * q)`)</div>
+<div id="L100">      ASSUME_TAC THENL</div>
+<div id="L101">     [SUBGOAL_THEN (subst [b,`bb:num`] `bb + 8 * q = bb + 4 * (2 * q)`) SUBST1_TAC THENL</div>
+<div id="L102">       [ARITH_TAC; ASM_SIMP_TAC[LT_REFL]];</div>
+<div id="L103">      ALL_TAC]) [pa,ai; pb,bi; `1974272`,`vd:num-&gt;int32`] THEN</div>
+<div id="L104">  MAP_EVERY (fun (x,y) -&gt; B32O_TAC (subst [x,`bb:num`] `bb + 8 * q`) (subst [y,`bb:num`] `bb + 8 * q`))</div>
+<div id="L105">   [pb,pa; `1974272`,pa; pa,pb] THEN</div>
+<div id="L106">  CAP_MSTEPS_TAC exec (1--20) THEN</div>
+<div id="L107">  ENSURES_FINAL_STATE_TAC THEN REWRITE_TAC[READ_COMPONENT_COMPOSE] THEN</div>
+<div id="L108">  ASM_REWRITE_TAC[] THEN REPEAT CONJ_TAC THEN</div>
+<div id="L109">  FIRST [VORT_MEMU_TAC;</div>
+<div id="L110">   (X_GEN_TAC `m:num` THEN DISCH_TAC THEN</div>
+<div id="L111">    ASM_CASES_TAC `m = 2 * q` THENL</div>
+<div id="L112">     [FIRST_X_ASSUM SUBST_ALL_TAC THEN REWRITE_TAC[ARITH_RULE `4 * 2 * q = 8 * q`] THEN</div>
+<div id="L113">      ASM_REWRITE_TAC[CAP_B32_SAME];</div>
+<div id="L114">      REPEAT B32_PEEL_TAC THEN ASM_SIMP_TAC[] THEN</div>
+<div id="L115">      COND_CASES_TAC THEN REWRITE_TAC[] THEN ASM_ARITH_TAC])];;</div>
+<div id="L116"></div>
+<div id="L117">let VORT_U_TAC mc exec pa pb na nb ai bi =</div>
+<div id="L118">  REWRITE_TAC[va1_vabu; GSYM READ_COMPONENT_COMPOSE] THEN</div>
+<div id="L119">  VORT_SETUP_TAC THEN</div>
+<div id="L120">  ENSURES_WHILE_UP_TAC `q:num` `1372` `1473` (vort_inv_u mc pa pb na nb ai bi) THEN</div>
+<div id="L121">  REPEAT CONJ_TAC THENL</div>
+<div id="L122">   [ASM_ARITH_TAC; VORT_ENTRY_TAC exec; VORT_BODY_U_TAC exec pa pb ai bi; VORT_BACK_TAC exec;</div>
+<div id="L123">    ASM_CASES_TAC `r = 0` THENL</div>
+<div id="L124">     [VORT_EXIT_EVEN_U_TAC exec; VORT_EXIT_ODD_U_TAC exec pa pb ai bi]];;</div>
+<div id="L125"></div>
+<div id="L126">(* ---- the frame side condition of VA1_ENSURES_GHOST: a frame made of     *)</div>
+<div id="L127">(* MAYCHANGE over non-memory components and memory byte regions disjoint  *)</div>
+<div id="L128">(* from the unused words preserves va1_vabu N u                            *)</div>
+<div id="L129"></div>
+<div id="L130">(* peel every write (bytes(word b,n)) off a read (bytes32 (word a)), by arithmetic *)</div>
+<div id="L131">let VA1_B32_PEEL_BYTES_TAC : tactic = fun (asl,w) -&gt;</div>
+<div id="L132">  let pat = `read (bytes32 (word (a:num))) (write (bytes(word (b:num),(n:num))) (y:num) (m:int64-&gt;byte))` in</div>
+<div id="L133">  let t = find_term (can (term_match [] pat)) w in</div>
+<div id="L134">  let i = term_match [] pat t in</div>
+<div id="L135">  (MP_TAC (SPECL (map (fun v -&gt; instantiate i v) [`a:num`;`b:num`;`n:num`;`y:num`;`m:int64-&gt;byte`]) B32_BYTES_OTHER) THEN</div>
+<div id="L136">   ANTS_TAC THENL [CONV_TAC NUM_REDUCE_CONV THEN ASM_ARITH_TAC; DISCH_THEN SUBST1_TAC]) (asl,w);;</div>
+<div id="L137"></div>
+<div id="L138">let VA1_VABU_FRAME_TAC : tactic =</div>
+<div id="L139">  REPEAT GEN_TAC THEN CONV_TAC(TOP_DEPTH_CONV BETA_CONV) THEN</div>
+<div id="L140">  DISCH_THEN(CONJUNCTS_THEN2 MP_TAC MP_TAC) THEN</div>
+<div id="L141">  GEN_REWRITE_TAC (LAND_CONV o TOP_DEPTH_CONV) [MAYCHANGE; SEQ_ID] THEN</div>
+<div id="L142">  GEN_REWRITE_TAC (LAND_CONV o TOP_DEPTH_CONV) [GSYM SEQ_ASSOC] THEN</div>
+<div id="L143">  GEN_REWRITE_TAC (LAND_CONV o TOP_DEPTH_CONV) [ASSIGNS_SEQ] THEN</div>
+<div id="L144">  GEN_REWRITE_TAC (LAND_CONV o TOP_DEPTH_CONV) [ASSIGNS_THM] THEN</div>
+<div id="L145">  REWRITE_TAC[LEFT_IMP_EXISTS_THM] THEN REPEAT GEN_TAC THEN</div>
+<div id="L146">  DISCH_THEN(fun th -&gt; if is_var(rhs(concl th)) then SUBST1_TAC(SYM th) else SUBST1_TAC th) THEN</div>
+<div id="L147">  CONV_TAC(ONCE_DEPTH_CONV(CHANGED_CONV WMEM_READ_OVER_WRITES_CONV)) THEN</div>
+<div id="L148">  REWRITE_TAC[va1_vabu] THEN STRIP_TAC THEN CONJ_TAC THEN</div>
+<div id="L149">  X_GEN_TAC `j:num` THEN STRIP_TAC THEN</div>
+<div id="L150">  REPEAT VA1_B32_PEEL_BYTES_TAC THEN ASM_SIMP_TAC[];;</div>
+<div id="L151"></div>
+<div id="L152">(* ---- the whole exports ------------------------------------------------- *)</div>
+<div id="L153"></div>
+<div id="L154">(* an ensures whose frame keeps the unused words, with va1_vabu N uw added *)</div>
+<div id="L155">let C8B_GHOST (n:term) (th1:thm) =</div>
+<div id="L156">  let _,[_;_;_;c] = strip_comb (concl th1) in</div>
+<div id="L157">  let r = mk_abs(`s:wasmstate`, list_mk_comb(`va1_vabu`,</div>
+<div id="L158">            [n; `uw:(num-&gt;int32)#(num-&gt;int32)`; `read wmem (s:wasmstate)`])) in</div>
+<div id="L159">  let s = `s:wasmstate` and s&#x27; = `s&#x27;:wasmstate` in</div>
+<div id="L160">  let side = list_mk_forall([s;s&#x27;], mk_imp(mk_conj(mk_comb(r,s), list_mk_comb(c,[s;s&#x27;])), mk_comb(r,s&#x27;))) in</div>
+<div id="L161">  MATCH_MP VA1_ENSURES_GHOST (CONJ th1 (prove(side, VA1_VABU_FRAME_TAC)));;</div>
+<div id="L162"></div>
+<div id="L163">(* VE_VORT_COMPOSE_TAC of ve_vort.ml with the ghost conjunct: the field     *)</div>
+<div id="L164">(* phase (selected conjunct of ve_vk_ok) carries va1_vabu by C8B_GHOST, the *)</div>
+<div id="L165">(* loop theorem (_U) by its statement                                       *)</div>
+<div id="L166">let C8B_VORT_COMPOSE_TAC sel loopth src post_tac =</div>
+<div id="L167">  REWRITE_TAC[ve_fredkin_fwd; ve_fredkin_bwd; FST; SND] THEN CONV_TAC(TOP_DEPTH_CONV BETA_CONV) THEN</div>
+<div id="L168">  GEN_TAC THEN DISCH_THEN(MP_TAC o sel o REWRITE_RULE[ve_vk_ok]) THEN</div>
+<div id="L169">  DISCH_THEN(fun pth -&gt;</div>
+<div id="L170">    REPEAT GEN_TAC THEN STRIP_TAC THEN</div>
+<div id="L171">    MP_TAC(SPECL [`N:num`; `mdl:num-&gt;int32`; `va:num-&gt;int32`; `vb:num-&gt;int32`] pth) THEN</div>
+<div id="L172">    ASM_REWRITE_TAC[] THEN DISCH_THEN(ASSUME_TAC o C8B_GHOST `N:num`) THEN</div>
+<div id="L173">    MP_TAC(SPECL [`N:num`; `va:num-&gt;int32`; `vb:num-&gt;int32`;</div>
+<div id="L174">                  mk_comb(`(VK:(num-&gt;int32)-&gt;(num-&gt;int32)-&gt;num-&gt;int32) mdl`, src);</div>
+<div id="L175">                  `uw:(num-&gt;int32)#(num-&gt;int32)`] loopth) THEN</div>
+<div id="L176">    ASM_REWRITE_TAC[] THEN DISCH_TAC) THEN</div>
+<div id="L177">  (fun (asl,w) -&gt;</div>
+<div id="L178">     let th2 = snd(hd asl) and th1 = snd(hd(tl asl)) in</div>
+<div id="L179">     let _,[_;p1;q1;_] = strip_comb(concl th1) in</div>
+<div id="L180">     let _,[_;p2;r2;_] = strip_comb(concl th2) in</div>
+<div id="L181">     let x = `s:wasmstate` in</div>
+<div id="L182">     let pimp = TAC_PROOF((asl, mk_forall(x, mk_imp(mk_comb(q1,x), mk_comb(p2,x)))),</div>
+<div id="L183">       X_GEN_TAC `s:wasmstate` THEN CONV_TAC(TOP_DEPTH_CONV BETA_CONV) THEN STRIP_TAC THEN</div>
+<div id="L184">       ASM_REWRITE_TAC[] THEN</div>
+<div id="L185">       FIRST_X_ASSUM(fun th -&gt; if can (find_term ((=) `16640`)) (concl th)</div>
+<div id="L186">                               then MP_TAC(SPEC `1` th) else NO_TAC) THEN</div>
+<div id="L187">       CONV_TAC(ONCE_DEPTH_CONV NUM_REDUCE_CONV) THEN ASM_REWRITE_TAC[]) in</div>
+<div id="L188">     let th2a = MATCH_MP ENSURES_PRECONDITION_THM (CONJ pimp th2) in</div>
+<div id="L189">     let th12 = MATCH_MP ENSURES_TRANS (CONJ th1 th2a) in</div>
+<div id="L190">     (MATCH_MP_TAC ENSURES_FRAME_SUBSUMED THEN EXISTS_TAC (rand(concl th12)) THEN</div>
+<div id="L191">      CONJ_TAC THENL [SUBSUMED_MAYCHANGE_TAC; ALL_TAC] THEN</div>
+<div id="L192">      MATCH_MP_TAC ENSURES_PRECONDITION_THM THEN EXISTS_TAC p1 THEN CONJ_TAC THENL</div>
+<div id="L193">       [X_GEN_TAC `s:wasmstate` THEN CONV_TAC(TOP_DEPTH_CONV BETA_CONV) THEN STRIP_TAC THEN</div>
+<div id="L194">        ASM_REWRITE_TAC[];</div>
+<div id="L195">        ALL_TAC] THEN</div>
+<div id="L196">      MATCH_MP_TAC ENSURES_POSTCONDITION_THM THEN EXISTS_TAC r2 THEN CONJ_TAC THENL</div>
+<div id="L197">       [X_GEN_TAC `s:wasmstate` THEN CONV_TAC(TOP_DEPTH_CONV BETA_CONV) THEN STRIP_TAC THEN</div>
+<div id="L198">        ASM_REWRITE_TAC[] THEN REPEAT CONJ_TAC THEN</div>
+<div id="L199">        (X_GEN_TAC `m:num` THEN DISCH_TAC THEN ASM_SIMP_TAC[] THEN post_tac);</div>
+<div id="L200">        ACCEPT_TAC th12]) (asl,w));;</div>
+<div id="L201"></div>
+<div id="L202">let VE_VORT_APPLY_LOOP_CORRECT_U = prove</div>
+<div id="L203"> (parse_term c8b_spec_VE_VORT_APPLY_LOOP_CORRECT_U,</div>
+<div id="L204">  VORT_U_TAC `ve_vort_apply_mc` VE_VORT_APPLY_EXEC `1122304` `1114112`</div>
+<div id="L205">    `\m:num. word_add ((vd:num-&gt;int32) m) ((va:num-&gt;int32) m)` `vb:num-&gt;int32`</div>
+<div id="L206">    `vb:num-&gt;int32` `va:num-&gt;int32`);;</div>
+<div id="L207"></div>
+<div id="L208">let VE_VORT_UNAPPLY_LOOP_CORRECT_U = prove</div>
+<div id="L209"> (parse_term c8b_spec_VE_VORT_UNAPPLY_LOOP_CORRECT_U,</div>
+<div id="L210">  VORT_U_TAC `ve_vort_unapply_mc` VE_VORT_UNAPPLY_EXEC `1114112` `1122304`</div>
+<div id="L211">    `\m:num. word_sub ((vb:num-&gt;int32) m) ((vd:num-&gt;int32) m)` `va:num-&gt;int32`</div>
+<div id="L212">    `va:num-&gt;int32` `vb:num-&gt;int32`);;</div>
+<div id="L213"></div>
+<div id="L214">let VE_VORT_APPLY_FREDKIN_U = prove</div>
+<div id="L215"> (parse_term c8b_spec_VE_VORT_APPLY_FREDKIN_U,</div>
+<div id="L216">  C8B_VORT_COMPOSE_TAC CONJUNCT1 VE_VORT_APPLY_LOOP_CORRECT_U `vb:num-&gt;int32`</div>
+<div id="L217">    (REWRITE_TAC[WORD_ADD_SYM]));;</div>
+<div id="L218"></div>
+<div id="L219">let VE_VORT_UNAPPLY_FREDKIN_U = prove</div>
+<div id="L220"> (parse_term c8b_spec_VE_VORT_UNAPPLY_FREDKIN_U,</div>
+<div id="L221">  C8B_VORT_COMPOSE_TAC CONJUNCT2 VE_VORT_UNAPPLY_LOOP_CORRECT_U `va:num-&gt;int32` ALL_TAC);;</div>
+<div id="L222"></div>
+<div id="L223">let VA1_VABU_SAT = prove</div>
+<div id="L224"> (parse_term c8b_spec_VA1_VABU_SAT,</div>
+<div id="L225">  REPEAT GEN_TAC THEN</div>
+<div id="L226">  EXISTS_TAC `(\j. read (bytes32 (word (1114112 + 4 * j))) (m:int64-&gt;byte)),</div>
+<div id="L227">              (\j. read (bytes32 (word (1122304 + 4 * j))) (m:int64-&gt;byte))` THEN</div>
+<div id="L228">  REWRITE_TAC[va1_vabu]);;</div>
+</div>
+<p class="dim">Generated by <code>tools/build_trail.py</code> from the published files; checked by <code>tools/check_trail.py</code>.</p>
+</body>
+</html>

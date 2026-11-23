@@ -1,0 +1,262 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>chain_c5p_final.ml: Vortex Echo proof trail</title>
+<link rel="icon" href="data:,">
+<style>
+:root { --bg:#fbfbfa; --ink:#1d2129; --dim:#5b6372; --line:#e2e4e8; --acc:#2f5bb7; --code:#f1f2f4; --ok:#1d7a46; --hl:#fff3b8; }
+@media (prefers-color-scheme: dark) { :root { --bg:#0f1116; --ink:#dde1e8; --dim:#9aa3b3; --line:#2a2f3a; --acc:#8fb0ff; --code:#1a1e27; --ok:#5fd08e; --hl:#3d3615; } }
+html { background:var(--bg); color:var(--ink); }
+body { margin:0 auto; max-width:980px; padding:22px 22px 80px; font:16px/1.55 -apple-system,"Segoe UI",Helvetica,Arial,sans-serif; }
+h1 { font-size:26px; line-height:1.25; margin:6px 0 14px; }
+h2 { font-size:20px; margin:34px 0 10px; padding-top:10px; border-top:1px solid var(--line); }
+h3 { font-size:16px; margin:0 0 8px; }
+a { color:var(--acc); }
+code, pre { font:12.5px/1.45 ui-monospace,Menlo,Consolas,monospace; }
+code { background:var(--code); padding:1px 4px; border-radius:4px; }
+pre { background:var(--code); padding:10px 12px; border-radius:8px; overflow:auto; }
+pre code { background:none; padding:0; }
+pre.stmt { white-space:pre-wrap; word-break:break-all; max-height:28em; }
+.crumbs { font-size:14px; color:var(--dim); }
+.walk { display:flex; flex-wrap:wrap; gap:6px; align-items:center; font-size:14px; margin:10px 0 18px; }
+.walk a, .walk span.s { border:1px solid var(--line); border-radius:999px; padding:3px 10px; text-decoration:none; background:var(--code); }
+.walk .arr { color:var(--dim); }
+blockquote { margin:10px 0; padding:8px 14px; border-left:4px solid var(--acc); background:var(--code); border-radius:0 8px 8px 0; }
+.thm { border:1px solid var(--line); border-radius:10px; padding:14px 16px; margin:14px 0; }
+.thm:target, .step:target, .fn:target { outline:3px solid var(--acc); outline-offset:2px; }
+.thm, .step, .fn, .box, h2 { scroll-margin-top:70px; }
+.src div { scroll-margin-top:120px; }
+ol.steps { margin:6px 0 0; padding-left:22px; }
+ol.steps > li { margin:10px 0; }
+ol.steps > li > b { display:inline-block; min-width:5.5em; }
+.ok { color:var(--ok); font-weight:600; }
+.dim { color:var(--dim); font-size:14px; }
+.box { border:1px solid var(--line); border-radius:10px; padding:12px 16px; margin:12px 0; background:var(--code); }
+.box pre { background:var(--bg); }
+.replay { border-color:var(--ok); }
+table { border-collapse:collapse; font-size:13.5px; line-height:1.4; }
+th, td { border:1px solid var(--line); padding:5px 8px; vertical-align:top; text-align:left; }
+th { background:var(--code); }
+.tw { overflow-x:auto; margin:10px 0; }
+.src { font:12.5px/1.5 ui-monospace,Menlo,Consolas,monospace; background:var(--code); border-radius:8px; padding:8px 0; overflow-x:auto; }
+.src { counter-reset:ln; }
+.src div { white-space:pre; padding:0 12px 0 0; counter-increment:ln; }
+.src div::before { content:counter(ln); display:inline-block; width:4.5em; padding-right:1em; text-align:right; color:var(--dim); user-select:none; }
+.src div:target { background:var(--hl); }
+pre.hex { line-height:1.5; }
+.hex .o { color:var(--dim); }
+</style>
+</head>
+<body>
+<p class="crumbs"><a href="../../index.html">Vortex Echo</a> · <a href="../../trail/index.html">Proof trail</a> · <code>chain_c5p_final.ml</code></p>
+<h1><code>chain_c5p_final.ml</code></h1>
+<p>The proof file of receipt <code>chain_c5p_final</code>. Published at <a href="../../proof-tree/tasks/bubble-echo/vortex/proofs/chain_c5p_final.ml"><code>proof-tree/tasks/bubble-echo/vortex/proofs/chain_c5p_final.ml</code></a> (SHA-256 <code>d372a74be9f7fbeae7ec75b2111b84e3ca38cc5681f36254580d45dd0e703729</code>; <a href="https://github.com/BenKnill/vortex-echo/blob/main/proof-tree/tasks/bubble-echo/vortex/proofs/chain_c5p_final.ml">on GitHub</a>). Line N has the anchor <code>#LN</code>.</p>
+<div class="src" data-src="proof-tree/tasks/bubble-echo/vortex/proofs/chain_c5p_final.ml">
+<div id="L1">(* Vortex chain rung C5&#x27;, final leaf (spec-locked to chain_c5p.spec): re-binds every spec theorem: the 7 C5&#x27; rules of</div>
+<div id="L2">   chain_c5p_rules.ml and the 24 public theorems of main&#x27;s wasm_frames.ml as delivered by the shim chain_c5p_frames.ml. *)</div>
+<div id="L3">needs &quot;chain_c5p_rules.ml&quot;;;</div>
+<div id="L4">let VA1_C5P_ENSURES_WASMN = prove</div>
+<div id="L5"> (`!fs (P:wasmstate-&gt;bool) Q C. ensures (wasmc fs) P Q C ==&gt; ensures (wasmn fs) P Q C`,</div>
+<div id="L6">  ACCEPT_TAC VA1_C5P_ENSURES_WASMN);;</div>
+<div id="L7">let VA1_C5P_EVENTUALLY_WASMN = prove</div>
+<div id="L8"> (`!fs P s. eventually (wasmc fs) P s ==&gt; eventually (wasmn fs) P s`,</div>
+<div id="L9">  ACCEPT_TAC VA1_C5P_EVENTUALLY_WASMN);;</div>
+<div id="L10">let VA1_F33_WFSUM = prove</div>
+<div id="L11"> (`!fs a0 a1 a2 m (Q:wasmstate-&gt;bool).</div>
+<div id="L12">     (!s. Q s ==&gt; read (wglobal 0) s = I32 (word 16384)) /\</div>
+<div id="L13">     ensures (wasmc fs) (va1_f33_pre a0 a1 a2 m) Q</div>
+<div id="L14">       (MAYCHANGE [wpc] ,, MAYCHANGE [wstack] ,, MAYCHANGE [wlabels] ,, MAYCHANGE [wstatus] ,,</div>
+<div id="L15">        MAYCHANGE [wlocals] ,, MAYCHANGE [wglobal 0] ,, MAYCHANGE [wmem])</div>
+<div id="L16">     ==&gt; wfsum fs (va1_f33_pre a0 a1 a2 m) Q</div>
+<div id="L17">          (MAYCHANGE [wpc] ,, MAYCHANGE [wstack] ,, MAYCHANGE [wlabels] ,, MAYCHANGE [wstatus] ,,</div>
+<div id="L18">        MAYCHANGE [wlocals] ,, MAYCHANGE [wmem])`,</div>
+<div id="L19">  ACCEPT_TAC VA1_F33_WFSUM);;</div>
+<div id="L20">let VA1_CALL33_WASMN = prove</div>
+<div id="L21"> (`!fs mc pc a0 a1 a2 (rest:wval list) m r (R:(int64-&gt;byte)-&gt;bool) (Q:wasmstate-&gt;bool).</div>
+<div id="L22">     fs 33 = (va1_puncture_mc,3,1) /\ pc &lt; 2 EXP 64 /\ wasm_decode mc pc = SOME (Wcall 33,6) /\</div>
+<div id="L23">     wfsum fs (va1_f33_pre a0 a1 a2 m) Q</div>
+<div id="L24">       (MAYCHANGE [wpc] ,, MAYCHANGE [wstack] ,, MAYCHANGE [wlabels] ,, MAYCHANGE [wstatus] ,,</div>
+<div id="L25">        MAYCHANGE [wlocals] ,, MAYCHANGE [wmem]) /\</div>
+<div id="L26">     (!c. Q c ==&gt; read wstatus c = WDone /\ read wstack c = [I32 r] /\ R (read wmem c))</div>
+<div id="L27">     ==&gt; ensures (wasmn fs)</div>
+<div id="L28">          (\s. read wcode s = mc /\ read wpc s = word pc /\ read wstatus s = WRunning /\</div>
+<div id="L29">               read wstack s = CONS (I32 a2) (CONS (I32 a1) (CONS (I32 a0) rest)) /\</div>
+<div id="L30">               read wmemsize s = 4194304 /\ read (wglobal 0) s = I32 (word 16384) /\ read wmem s = m)</div>
+<div id="L31">          (\s. read wcode s = mc /\ read wpc s = word (pc + 6) /\ read wstatus s = WRunning /\</div>
+<div id="L32">               read wstack s = CONS (I32 r) rest /\</div>
+<div id="L33">               read wmemsize s = 4194304 /\ read (wglobal 0) s = I32 (word 16384) /\ R (read wmem s))</div>
+<div id="L34">          (MAYCHANGE [wpc] ,, MAYCHANGE [wstack] ,, MAYCHANGE [wmem])`,</div>
+<div id="L35">  ACCEPT_TAC VA1_CALL33_WASMN);;</div>
+<div id="L36">let VA1_CALL33_FROM_WASMC = prove</div>
+<div id="L37"> (`!fs mc pc a0 a1 a2 (rest:wval list) m r (R:(int64-&gt;byte)-&gt;bool) (Q:wasmstate-&gt;bool).</div>
+<div id="L38">     fs 33 = (va1_puncture_mc,3,1) /\ pc &lt; 2 EXP 64 /\ wasm_decode mc pc = SOME (Wcall 33,6) /\</div>
+<div id="L39">     ensures (wasmc fs) (va1_f33_pre a0 a1 a2 m) Q</div>
+<div id="L40">       (MAYCHANGE [wpc] ,, MAYCHANGE [wstack] ,, MAYCHANGE [wlabels] ,, MAYCHANGE [wstatus] ,,</div>
+<div id="L41">        MAYCHANGE [wlocals] ,, MAYCHANGE [wglobal 0] ,, MAYCHANGE [wmem]) /\</div>
+<div id="L42">     (!c. Q c ==&gt; read wstatus c = WDone /\ read wstack c = [I32 r] /\</div>
+<div id="L43">              read (wglobal 0) c = I32 (word 16384) /\ R (read wmem c))</div>
+<div id="L44">     ==&gt; ensures (wasmn fs)</div>
+<div id="L45">          (\s. read wcode s = mc /\ read wpc s = word pc /\ read wstatus s = WRunning /\</div>
+<div id="L46">               read wstack s = CONS (I32 a2) (CONS (I32 a1) (CONS (I32 a0) rest)) /\</div>
+<div id="L47">               read wmemsize s = 4194304 /\ read (wglobal 0) s = I32 (word 16384) /\ read wmem s = m)</div>
+<div id="L48">          (\s. read wcode s = mc /\ read wpc s = word (pc + 6) /\ read wstatus s = WRunning /\</div>
+<div id="L49">               read wstack s = CONS (I32 r) rest /\</div>
+<div id="L50">               read wmemsize s = 4194304 /\ read (wglobal 0) s = I32 (word 16384) /\ R (read wmem s))</div>
+<div id="L51">          (MAYCHANGE [wpc] ,, MAYCHANGE [wstack] ,, MAYCHANGE [wmem])`,</div>
+<div id="L52">  ACCEPT_TAC VA1_CALL33_FROM_WASMC);;</div>
+<div id="L53">let VA1_TF_CALL33_SITE = prove</div>
+<div id="L54"> (`!fs a0 a1 a2 (rest:wval list) m r (R:(int64-&gt;byte)-&gt;bool) (Q:wasmstate-&gt;bool).</div>
+<div id="L55">     fs 33 = (va1_puncture_mc,3,1) /\</div>
+<div id="L56">     ensures (wasmc fs) (va1_f33_pre a0 a1 a2 m) Q</div>
+<div id="L57">       (MAYCHANGE [wpc] ,, MAYCHANGE [wstack] ,, MAYCHANGE [wlabels] ,, MAYCHANGE [wstatus] ,,</div>
+<div id="L58">        MAYCHANGE [wlocals] ,, MAYCHANGE [wglobal 0] ,, MAYCHANGE [wmem]) /\</div>
+<div id="L59">     (!c. Q c ==&gt; read wstatus c = WDone /\ read wstack c = [I32 r] /\</div>
+<div id="L60">              read (wglobal 0) c = I32 (word 16384) /\ R (read wmem c))</div>
+<div id="L61">     ==&gt; ensures (wasmn fs)</div>
+<div id="L62">          (\s. read wcode s = va1_tick_forward_mc /\ read wpc s = word 309 /\ read wstatus s = WRunning /\</div>
+<div id="L63">               read wstack s = CONS (I32 a2) (CONS (I32 a1) (CONS (I32 a0) rest)) /\</div>
+<div id="L64">               read wmemsize s = 4194304 /\ read (wglobal 0) s = I32 (word 16384) /\ read wmem s = m)</div>
+<div id="L65">          (\s. read wcode s = va1_tick_forward_mc /\ read wpc s = word 315 /\ read wstatus s = WRunning /\</div>
+<div id="L66">               read wstack s = CONS (I32 r) rest /\</div>
+<div id="L67">               read wmemsize s = 4194304 /\ read (wglobal 0) s = I32 (word 16384) /\ R (read wmem s))</div>
+<div id="L68">          (MAYCHANGE [wpc] ,, MAYCHANGE [wstack] ,, MAYCHANGE [wmem])`,</div>
+<div id="L69">  ACCEPT_TAC VA1_TF_CALL33_SITE);;</div>
+<div id="L70">let VA1_C5P_SITE_SAT = prove</div>
+<div id="L71"> (`!a0 a1 a2 (rest:wval list) m. ?s.</div>
+<div id="L72">     read wcode s = va1_tick_forward_mc /\ read wpc s = word 309 /\ read wstatus s = WRunning /\</div>
+<div id="L73">     read wstack s = CONS (I32 a2) (CONS (I32 a1) (CONS (I32 a0) rest)) /\</div>
+<div id="L74">     read wmemsize s = 4194304 /\ read (wglobal 0) s = I32 (word 16384) /\ read wmem s = m`,</div>
+<div id="L75">  ACCEPT_TAC VA1_C5P_SITE_SAT);;</div>
+<div id="L76">let WASMF_DET = prove</div>
+<div id="L77"> (`!fs x y z. wasmf fs x y /\ wasmf fs x z ==&gt; y = z`,</div>
+<div id="L78">  ACCEPT_TAC WASMF_DET);;</div>
+<div id="L79">let WASMF_LIFT = prove</div>
+<div id="L80"> (`!fs (P:wasmstate-&gt;bool) Q C.</div>
+<div id="L81">     ensures wasm P Q C</div>
+<div id="L82">     ==&gt; !k. ensures (wasmf fs) (\x. P (FST x) /\ SND x = k)</div>
+<div id="L83">                                (\x. Q (FST x) /\ SND x = k)</div>
+<div id="L84">                                (\x y. C (FST x) (FST y))`,</div>
+<div id="L85">  ACCEPT_TAC WASMF_LIFT);;</div>
+<div id="L86">let WASMN_TO_WASMF = prove</div>
+<div id="L87"> (`!fs (P:wasmstate-&gt;bool) Q C.</div>
+<div id="L88">     ensures (wasmn fs) P Q C</div>
+<div id="L89">     ==&gt; !k. ensures (wasmf fs) (\x. P (FST x) /\ SND x = k)</div>
+<div id="L90">                                (\x. Q (FST x) /\ SND x = k)</div>
+<div id="L91">                                (\x y. C (FST x) (FST y))`,</div>
+<div id="L92">  ACCEPT_TAC WASMN_TO_WASMF);;</div>
+<div id="L93">let WASMN_TO_WFSUM = prove</div>
+<div id="L94"> (`!fs (P:wasmstate-&gt;bool) Q C. ensures (wasmn fs) P Q C ==&gt; wfsum fs P Q C`,</div>
+<div id="L95">  ACCEPT_TAC WASMN_TO_WFSUM);;</div>
+<div id="L96">let WASM_TO_WFSUM = prove</div>
+<div id="L97"> (`!fs (P:wasmstate-&gt;bool) Q C. ensures wasm P Q C ==&gt; wfsum fs P Q C`,</div>
+<div id="L98">  ACCEPT_TAC WASM_TO_WFSUM);;</div>
+<div id="L99">let WASMN_CALL_ENSURES = prove</div>
+<div id="L100"> (`!fs f code np nr e decls (P:wasmstate-&gt;bool) Q C Pre Post D n.</div>
+<div id="L101">     wfsum fs P Q C /\</div>
+<div id="L102">     (!c. Q c ==&gt; ~(read wstatus c = WRunning)) /\</div>
+<div id="L103">     fs f = (code,np,nr) /\ wasm_entry code = SOME e /\</div>
+<div id="L104">     wasm_decl_vals code = SOME decls /\</div>
+<div id="L105">     (!s. Pre s ==&gt; read wstatus s = WRunning /\</div>
+<div id="L106">                    wasm_decode (read wcode s) (val (read wpc s)) = SOME (Wcall f,n) /\</div>
+<div id="L107">                    np &lt;= LENGTH (read wstack s) /\</div>
+<div id="L108">                    P (wcall_entry code np nr (read wstack s) e decls s)) /\</div>
+<div id="L109">     (!s c1. Pre s /\ Q c1 /\ C (wcall_entry code np nr (read wstack s) e decls s) c1</div>
+<div id="L110">             ==&gt; Post (wcall_return (val (read wpc s) + n) np c1 s) /\</div>
+<div id="L111">                 D s (wcall_return (val (read wpc s) + n) np c1 s))</div>
+<div id="L112">     ==&gt; ensures (wasmn fs) Pre Post D`,</div>
+<div id="L113">  ACCEPT_TAC WASMN_CALL_ENSURES);;</div>
+<div id="L114">let WASMN_CALL_STEP = prove</div>
+<div id="L115"> (`!fs f code np nr e decls (P:wasmstate-&gt;bool) Q C n s R.</div>
+<div id="L116">     wfsum fs P Q C /\</div>
+<div id="L117">     (!c. Q c ==&gt; ~(read wstatus c = WRunning)) /\</div>
+<div id="L118">     fs f = (code,np,nr) /\ wasm_entry code = SOME e /\</div>
+<div id="L119">     wasm_decl_vals code = SOME decls /\</div>
+<div id="L120">     read wstatus s = WRunning /\</div>
+<div id="L121">     wasm_decode (read wcode s) (val (read wpc s)) = SOME (Wcall f,n) /\</div>
+<div id="L122">     np &lt;= LENGTH (read wstack s) /\</div>
+<div id="L123">     P (wcall_entry code np nr (read wstack s) e decls s) /\</div>
+<div id="L124">     (!c1. Q c1 /\ C (wcall_entry code np nr (read wstack s) e decls s) c1</div>
+<div id="L125">           ==&gt; eventually (wasmn fs) R (wcall_return (val (read wpc s) + n) np c1 s))</div>
+<div id="L126">     ==&gt; eventually (wasmn fs) R s`,</div>
+<div id="L127">  ACCEPT_TAC WASMN_CALL_STEP);;</div>
+<div id="L128">let WCALL_RETURN_TRAP_OBS = prove</div>
+<div id="L129"> (`!npc np c1 s. read wstatus c1 = WTrapped</div>
+<div id="L130">     ==&gt; wtrap_obs (wcall_return npc np c1 s) = wtrap_obs c1`,</div>
+<div id="L131">  ACCEPT_TAC WCALL_RETURN_TRAP_OBS);;</div>
+<div id="L132">let WASMF_TRAPPED_STEP = prove</div>
+<div id="L133"> (`!fs x y. wasmf fs x y /\ read wstatus (FST x) = WTrapped</div>
+<div id="L134">            ==&gt; read wstatus (FST y) = WTrapped /\ wtrap_obs (FST y) = wtrap_obs (FST x)`,</div>
+<div id="L135">  ACCEPT_TAC WASMF_TRAPPED_STEP);;</div>
+<div id="L136">let WASMF_TRAPPED_RTC = prove</div>
+<div id="L137"> (`!fs x y. RTC (wasmf fs) x y</div>
+<div id="L138">            ==&gt; read wstatus (FST x) = WTrapped</div>
+<div id="L139">                ==&gt; read wstatus (FST y) = WTrapped /\</div>
+<div id="L140">                    wtrap_obs (FST y) = wtrap_obs (FST x)`,</div>
+<div id="L141">  ACCEPT_TAC WASMF_TRAPPED_RTC);;</div>
+<div id="L142">let EVENTUALLY_RTC_DET = prove</div>
+<div id="L143"> (`!(R:A-&gt;A-&gt;bool) P.</div>
+<div id="L144">     (!x y z. R x y /\ R x z ==&gt; y = z)</div>
+<div id="L145">     ==&gt; !x y. RTC R x y ==&gt; eventually R P y ==&gt; eventually R P x`,</div>
+<div id="L146">  ACCEPT_TAC EVENTUALLY_RTC_DET);;</div>
+<div id="L147">let DIV3_BIG_HIDES_LOOP = prove</div>
+<div id="L148"> (`eventually div3_big (\x. x = 1) 0`,</div>
+<div id="L149">  ACCEPT_TAC DIV3_BIG_HIDES_LOOP);;</div>
+<div id="L150">let DIV3_NONDETERMINISTIC = prove</div>
+<div id="L151"> (`~(!x y z. div3 x y /\ div3 x z ==&gt; y = z)`,</div>
+<div id="L152">  ACCEPT_TAC DIV3_NONDETERMINISTIC);;</div>
+<div id="L153">let RTC_WASM_WASMF = prove</div>
+<div id="L154"> (`!fs a b. RTC wasm a b ==&gt; RTC (wasmf fs) (a,[]) (b,[])`,</div>
+<div id="L155">  ACCEPT_TAC RTC_WASM_WASMF);;</div>
+<div id="L156">let WASMC_WASMN = prove</div>
+<div id="L157"> (`!fs s s&#x27;. wasmc fs s s&#x27; ==&gt; wasmn fs s s&#x27;`,</div>
+<div id="L158">  ACCEPT_TAC WASMC_WASMN);;</div>
+<div id="L159">let RTC_DET_FINAL = prove</div>
+<div id="L160"> (`!(R:A-&gt;A-&gt;bool).</div>
+<div id="L161">     (!x y z. R x y /\ R x z ==&gt; y = z)</div>
+<div id="L162">     ==&gt; !x y. RTC R x y</div>
+<div id="L163">               ==&gt; !z. RTC R x z /\ (!u. ~R y u) /\ (!u. ~R z u) ==&gt; y = z`,</div>
+<div id="L164">  ACCEPT_TAC RTC_DET_FINAL);;</div>
+<div id="L165">let WASM_CALLN_DET = prove</div>
+<div id="L166"> (`!fs f npc s a b.</div>
+<div id="L167">     wasm_calln fs f npc s a /\ wasm_calln fs f npc s b ==&gt; a = b`,</div>
+<div id="L168">  ACCEPT_TAC WASM_CALLN_DET);;</div>
+<div id="L169">let WASMN_DET = prove</div>
+<div id="L170"> (`!fs s a b. wasmn fs s a /\ wasmn fs s b ==&gt; a = b`,</div>
+<div id="L171">  ACCEPT_TAC WASMN_DET);;</div>
+<div id="L172">let EVENTUALLY_SUBREL_DET = prove</div>
+<div id="L173"> (`!(r1:A-&gt;A-&gt;bool) r2 P.</div>
+<div id="L174">     (!x y. r1 x y ==&gt; r2 x y) /\ (!x y z. r2 x y /\ r2 x z ==&gt; y = z)</div>
+<div id="L175">     ==&gt; !s. eventually r1 P s ==&gt; eventually r2 P s`,</div>
+<div id="L176">  ACCEPT_TAC EVENTUALLY_SUBREL_DET);;</div>
+<div id="L177">let EVENTUALLY_WASMC_WASMN = prove</div>
+<div id="L178"> (`!fs P s. eventually (wasmc fs) P s ==&gt; eventually (wasmn fs) P s`,</div>
+<div id="L179">  ACCEPT_TAC EVENTUALLY_WASMC_WASMN);;</div>
+<div id="L180">let ENSURES_WASMC_WASMN = prove</div>
+<div id="L181"> (`!fs (P:wasmstate-&gt;bool) Q C. ensures (wasmc fs) P Q C ==&gt; ensures (wasmn fs) P Q C`,</div>
+<div id="L182">  ACCEPT_TAC ENSURES_WASMC_WASMN);;</div>
+<div id="L183">let MAYCHANGE_RESTORED = prove</div>
+<div id="L184"> (`!(c:(A,B)component) (C:A-&gt;A-&gt;bool).</div>
+<div id="L185">     strongly_valid_component c /\ (!s s&#x27;. C s s&#x27; ==&gt; read c s&#x27; = read c s)</div>
+<div id="L186">     ==&gt; !s s&#x27;. (C ,, MAYCHANGE [c]) s s&#x27; /\ read c s&#x27; = read c s ==&gt; C s s&#x27;`,</div>
+<div id="L187">  ACCEPT_TAC MAYCHANGE_RESTORED);;</div>
+<div id="L188">let ENSURES_MAYCHANGE_RESTORED = prove</div>
+<div id="L189"> (`!(step:A-&gt;A-&gt;bool) P Q C (c:(A,B)component).</div>
+<div id="L190">     strongly_valid_component c /\ (!s s&#x27;. C s s&#x27; ==&gt; read c s&#x27; = read c s) /\</div>
+<div id="L191">     (!s s&#x27;. P s /\ Q s&#x27; /\ (C ,, MAYCHANGE [c]) s s&#x27; ==&gt; read c s&#x27; = read c s) /\</div>
+<div id="L192">     ensures step P Q (C ,, MAYCHANGE [c])</div>
+<div id="L193">     ==&gt; ensures step P Q C`,</div>
+<div id="L194">  ACCEPT_TAC ENSURES_MAYCHANGE_RESTORED);;</div>
+<div id="L195">let WASM_ENSURES_GLOBAL_RESTORED = prove</div>
+<div id="L196"> (`!(step:wasmstate-&gt;wasmstate-&gt;bool) P Q C k.</div>
+<div id="L197">     (!s s&#x27;. C s s&#x27; ==&gt; read (wglobal k) s&#x27; = read (wglobal k) s) /\</div>
+<div id="L198">     (!s s&#x27;. P s /\ Q s&#x27; /\ (C ,, MAYCHANGE [wglobal k]) s s&#x27;</div>
+<div id="L199">             ==&gt; read (wglobal k) s&#x27; = read (wglobal k) s) /\</div>
+<div id="L200">     ensures step P Q (C ,, MAYCHANGE [wglobal k])</div>
+<div id="L201">     ==&gt; ensures step P Q C`,</div>
+<div id="L202">  ACCEPT_TAC WASM_ENSURES_GLOBAL_RESTORED);;</div>
+</div>
+<p class="dim">Generated by <code>tools/build_trail.py</code> from the published files; checked by <code>tools/check_trail.py</code>.</p>
+</body>
+</html>

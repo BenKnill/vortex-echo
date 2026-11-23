@@ -1430,16 +1430,116 @@ void main(){ vec3 h = texture(uA, vUV).rgb + uW * texture(uB, vUV).rgb; h = h / 
     if (popped) { const tphys = (tick - popTick) / 60 / SLOWMO * 1000; slow.style.display = 'block'; setHtml(slow, `slow motion &times;${SLOWMO} <span>t = ${tphys.toFixed(2)} ms after puncture &middot; Taylor-Culick rim, 4 cm bubble &middot; </span><span>swirl clock ${PSUB}/${QSUB} during the pop (stylised: in real time the swirl is frozen)</span>`); }
     else { slow.style.display = 'none'; }
     const head = `state: vortex_a1.wasm ${VEC.sha.slice(0, 8)} (digest ok)`;
-    let status = busy || (lastCheck ? checkHtml(lastCheck) : `state hash at tick 0: ${hash0}`);
-    if (lastVerify && lastVerify !== lastCheck) status = `${checkHtml(lastVerify)}<br>${status}`;
+    // page pass 1, round 1 follow-up: a finished check is wrapped in span.chk, which the phone layout hides (the result
+    // card beside the verify button shows it); the text stays in #read, word for word, for the capture harness and suites
+    // (status carries its leading " · ", inside the span for a check, so nothing dangles when the span is hidden)
+    const chk = h => `<span class="chk"> · ${h}</span>`;
+    let status = busy ? ` · ${busy}` : lastCheck ? chk(checkHtml(lastCheck)) : ` · state hash at tick 0: ${hash0}`;
+    if (lastVerify && lastVerify !== lastCheck)
+      status = chk(checkHtml(lastVerify) + '<br>') + status.replace(/^(<span class="chk">)? · /, '$1');
     const now = performance.now();
     if (queueNoticeUntil === Infinity) queueNoticeUntil = now + 3000;
     if (queueNoticeUntil > now) status += '<br><b class="bad">Control queue full. Input refused. Try again in a moment.</b>';
     if (popNoticeUntil === Infinity) popNoticeUntil = now + 3000;
     if (popNoticeUntil > now) status += `<br><b class="bad">${popNotice}</b>` +   // worded as past: it stays true after the state moves on
       (popTick >= 0 ? ` To puncture elsewhere, rewind to before tick ${popTick} or reset.` : '');   // advice only while it applies, from the current state
-    setHtml($('read'), `tick ${tick} · ${ph}${dir < 0 ? ' · reversing' : ''}${MANUAL ? '' : ` · ${fps.toFixed(0)} fps`} · seed ${SEED} · ${NV} vortices · ${(NVERT / 1000).toFixed(0)}k tracers · ${nd} droplets<br>${head} · ${status}`);
+    setHtml($('read'), `tick ${tick} · ${ph}${dir < 0 ? ' · reversing' : ''}${MANUAL ? '' : ` · ${fps.toFixed(0)} fps`} · seed ${SEED} · ${NV} vortices · ${(NVERT / 1000).toFixed(0)}k tracers · ${nd} droplets<br>${head}${status}`);
     $('play').textContent = running ? 'pause' : 'run';
+    updateStage(now);
+  }
+  // ---------- presentation only (page pass 1, 2026-11-21) ----------
+  // Reads the controller state; never steps the module, queues a command or writes controller state. It draws: the
+  // verify button's plan, the latest check result large beside it, a read-only timeline, and a caption when the auto film
+  // turns back and when playback arrives back at tick 0.
+  const fmtInt = n => String(n).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  const stage = { seen: null, seenTick: 0, back: false, capUntil: 0, cap: '', shown: null, vjob: null, shownFor: new WeakMap(), planFor: new WeakMap() };
+  function verifyParts() {   // verifyJob's default budget N from here, and the ticks left before the end of the pop
+    const N = Math.max(200, Math.min(1200, (popTick >= 0 ? popTick + AFTER : AUTO + AFTER) - tick));
+    const P = popTick >= 0 ? popTick : (event && event.tick > tick && event.tick < AUTO ? event.tick : AUTO);
+    return { N, cap: Math.max(0, P + AFTER - tick) };
+  }
+  function verifyPlan() {   // the forward ticks the button's check would run from here (verifyJob's N, capped at the end of the pop)
+    const { N, cap } = verifyParts();
+    return Math.min(N, cap);
+  }
+  // Three numbers, kept apart (round 1, finding 5; round 2, finding 3). The PREVIEW: what the button shows while idle,
+  // from the state as drawn. The COMMITTED PLAN: what the job will run, from the state it starts in (commands queued
+  // before Verify, such as a click on the bubble in the same frame, run first and can change it), shown on the button
+  // while it runs. The ACTUAL COUNTS: what ran, in the result. The card adds a plan-change note only when the committed
+  // plan differs from the preview the button showed at the click; an interrupted test is explained by its own result.
+  function committedPlan() {
+    const v = stage.vjob, m = /verifying: (forward|back) (\d+)\/(\d+)/.exec(busy || '');
+    if (m && m[1] === 'forward') { v.N = +m[3]; v.plan = Math.min(v.N, v.cap); }   // the budget, as the job reports it
+    if (m && m[1] === 'back') return +m[3];            // backward: exactly the forward ticks that ran
+    return v.plan;
+  }
+  function checkTitle(c) { return c.src === 'verify' ? 'verify reversal' : c.src === 'reset' ? 'reset' : 'playback back at tick 0'; }
+  function resultHtml(c) {
+    const mb = n => (n / 1e6).toFixed(2);
+    if (c.kind !== 'tested') return `<div class="t">${checkTitle(c)}</div><div class="big">${c.kind === 'none' ? 'no ticks tested' : 'no verdict'}</div><div>${c.ticks}</div>`;
+    const ok = c.mod.diff === 0;
+    return `<div class="t">${checkTitle(c)}: ${c.ticks}</div>` +
+      `<div class="big ${ok ? 'ok' : 'bad'}">${fmtInt(c.mod.diff)} bytes differ</div>` +
+      `<div>of the ${fmtInt(c.mod.bytes)} bytes (${mb(c.mod.bytes)} MB) of the module snapshot, the memory the proofs are about, compared with ${c.src === 'verify' ? 'where the test started' : 'tick 0 at load'}</div>` +
+      (c.tr ? `<div>GPU tracers (browser measurement, not proved): <b class="${c.tr.diff === 0 ? 'ok' : 'bad'}">${fmtInt(c.tr.diff)} of ${mb(c.tr.bytes)} MB differ</b></div>`
+        : '<div>GPU tracer comparison unavailable (WebGL context lost or the read failed)</div>') +
+      '<div>A test in your browser, not a proof.</div>';
+  }
+  function updateStage(now) {
+    // the verify button: its plan, or an honest "nothing to test" at the end of the pop (it stays clickable and then
+    // reports "no ticks tested", as the controller always has)
+    const n = verifyPlan(), idle = !busy && n === 0;
+    $('verify').classList.toggle('idle', idle);
+    // the committed plan: read in the frame the job starts (startJob has run, the job has not stepped), so from its start state
+    if (job && job.name === 'verify' && (!stage.vjob || stage.vjob.job !== job)) {
+      const v = verifyParts(); stage.vjob = { job, t0: tick, N: v.N, cap: v.cap, plan: Math.min(v.N, v.cap), result: null }; }
+    // and, in the frame it finishes (nothing else runs in that frame), tie the plan to its result
+    if (stage.vjob && !stage.vjob.result && stage.vjob.job !== job && lastVerify) { stage.vjob.result = lastVerify; stage.planFor.set(lastVerify, stage.vjob); }
+    const vj = job && job.name === 'verify' ? committedPlan() : null;
+    stage.shown = busy || queue.length ? null : { n: idle ? 0 : n, t: tick };
+    setHtml($('vplan'), vj !== null ? `running: ${fmtInt(vj)} ticks forward from tick ${stage.vjob.t0}, ${fmtInt(vj)} back; nothing else moves until it finishes`
+      : busy ? 'running: nothing else moves until it finishes' : queue.length ? 'test: the plan is set when it starts (commands waiting)'
+      : idle ? 'nothing to test here: the pop has ended; reverse first'
+      : `preview from tick ${tick}: ${fmtInt(n)} ticks forward, ${fmtInt(n)} back, then compare`);
+    // the result card: progress while a job runs, else the latest check (and an earlier Verify the HUD still shows)
+    const c = lastCheck;
+    if (c !== stage.seen) {
+      stage.seen = c; stage.seenTick = tick;
+      if (c && c.src === 'playback' && c.kind === 'tested') {
+        stage.cap = `Back at tick 0<span><b class="${c.mod.diff === 0 ? 'ok' : 'bad'}">${fmtInt(c.mod.diff)} bytes</b> of the ${(c.mod.bytes / 1e6).toFixed(2)} MB module snapshot differ from the start. A test in your browser, not a proof.</span>`;
+        stage.capUntil = now + 4000; }
+    }
+    let h;
+    if (busy) {
+      const m = /(forward|back) (\d+)\/(\d+)/.exec(busy);
+      const f = m ? (m[1] === 'forward' ? +m[2] / (2 * +m[3]) : 0.5 + +m[2] / (2 * +m[3])) : null;
+      h = `<div class="t">${job && job.name === 'reset' ? 'reset' : vj !== null ? `verify reversal: ${fmtInt(vj)} ticks forward from tick ${stage.vjob.t0}, then back` : 'verify reversal'}</div><div class="big">${busy}</div>` +
+        (f === null ? '' : `<div class="bar"><i style="width:${(100 * f).toFixed(1)}%"></i></div>`) + '<div>Only this check moves the simulation until it finishes.</div>';
+    } else if (c) {
+      const sh = stage.shownFor.get(c), vp = c.src === 'verify' ? stage.planFor.get(c) : undefined;
+      h = resultHtml(c) + (vp && c.kind === 'incomplete' && c.forward !== undefined
+        ? `<div>Planned when the test started: ${fmtInt(vp.plan)} ticks forward from tick ${vp.t0}, then back; it stopped after ${fmtInt(c.forward)} forward and ${fmtInt(c.back || 0)} back.</div>` : '')
+        + (vp && sh && (sh.n !== vp.plan || sh.t !== vp.t0)
+        ? `<div>The button's preview when clicked was ${fmtInt(sh.n)} ticks each way from tick ${sh.t}; a command queued before the test ran first and changed the state, so the plan committed when the test started was ${fmtInt(vp.plan)} ticks each way from tick ${vp.t0}.</div>` : '') + (lastVerify && lastVerify !== c && lastVerify.kind === 'tested'
+        ? `<div>Earlier verify reversal (${lastVerify.ticks}): <b class="${lastVerify.mod.diff === 0 ? 'ok' : 'bad'}">${fmtInt(lastVerify.mod.diff)} bytes differ</b></div>` : '');
+    } else h = '<div class="t">verify reversal</div><div>Runs the module forward from this tick, then back the same number of ticks, and compares its 1.95 MB module snapshot with where it started, byte for byte. A test in your browser, not a proof.</div>';
+    setHtml($('vres'), h);
+    $('vres').classList.toggle('old', !busy && !!c && tick !== stage.seenTick);
+    // the turn of the auto film (its timing is the controller's; this only announces it)
+    const back = demoState === 'rev' && dir < 0 && running;
+    if (back && !stage.back) { stage.cap = 'Now backwards<span>the same module, tick_backward, one tick at a time, back toward tick 0</span>'; stage.capUntil = now + 2800; }
+    stage.back = back;
+    const turn = $('turn'), on = now < stage.capUntil;
+    if (turn.style.display !== (on ? 'block' : 'none')) turn.style.display = on ? 'block' : 'none';
+    if (on) setHtml(turn, stage.cap);
+    // the timeline, read-only: 0, the puncture (planned or done), the end of the pop, the furthest tick reached, now.
+    // The puncture label has its own row under the other two; near either end it starts or ends at its marker.
+    const P = popTick >= 0 ? popTick : (event && event.tick < AUTO ? event.tick : AUTO), end = P + AFTER;
+    const x = t => (100 * Math.max(0, Math.min(1, t / end))).toFixed(2) + '%';
+    setHtml($('tl'), `<div class="track"></div><div class="seen" style="width:${x(Math.max(maxTickSeen, tick))}"></div>` +
+      `<div class="mk" style="left:0%"></div><div class="mk p" style="left:${x(P)}"></div><div class="mk" style="left:100%"></div>` +
+      `<div class="lb l" style="left:0%">tick 0</div><div class="lb p${P / end < 0.25 ? ' l' : P / end > 0.75 ? ' r' : ''}" style="left:${x(P)}">puncture ${popTick >= 0 ? 'at' : 'due at'} ${P}</div>` +
+      `<div class="lb r" style="left:100%">end of pop ${end}</div><div class="th" style="left:${x(tick)}" title="tick ${tick}"></div>`);
   }
   function endRun() {   // playback stopped (end of the pop, tick 0, or a refused step): direction and the demo's hold
     if (dir < 0 && tick === 0) setDir(1);
@@ -1591,7 +1691,10 @@ void main(){ vec3 h = texture(uA, vUV).rgb + uW * texture(uB, vUV).rgb; h = h / 
   $('vort').onclick = () => { view.vort = !view.vort; $('vort').classList.toggle('on', view.vort); forceRender = true; };   // drawing only (redraw even when paused)
   $('vort').classList.toggle('on', view.vort);
   $('speed').onchange = e => sendControl('speed', +e.target.value);
-  $('verify').onclick = () => sendControl('verify');
+  $('verify').onclick = () => {   // as sendControl('verify'); the promise only lets the card name the preview the button showed
+    const shown = stage.shown;
+    send('verify', undefined, true).then(r => { if (r && typeof r === 'object') stage.shownFor.set(r, shown); }, () => {});
+  };
   // State-changing hooks return promises and run in queue order. Queries answer synchronously.
   // timing() reads and clears drawing/step counters; light(mode) changes the lighting and requests a redraw.
   function rimGone() { if (popTick < 0 || tick < popTick) return 0; let g = 0; for (let k = 0; k < M; k++) g += (1 - Math.cos(Math.min(PI, reff(ra, k) * 1))) / 2; return g / M; }

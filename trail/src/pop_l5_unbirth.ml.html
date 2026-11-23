@@ -1,0 +1,700 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>pop_l5_unbirth.ml: Vortex Echo proof trail</title>
+<link rel="icon" href="data:,">
+<style>
+:root { --bg:#fbfbfa; --ink:#1d2129; --dim:#5b6372; --line:#e2e4e8; --acc:#2f5bb7; --code:#f1f2f4; --ok:#1d7a46; --hl:#fff3b8; }
+@media (prefers-color-scheme: dark) { :root { --bg:#0f1116; --ink:#dde1e8; --dim:#9aa3b3; --line:#2a2f3a; --acc:#8fb0ff; --code:#1a1e27; --ok:#5fd08e; --hl:#3d3615; } }
+html { background:var(--bg); color:var(--ink); }
+body { margin:0 auto; max-width:980px; padding:22px 22px 80px; font:16px/1.55 -apple-system,"Segoe UI",Helvetica,Arial,sans-serif; }
+h1 { font-size:26px; line-height:1.25; margin:6px 0 14px; }
+h2 { font-size:20px; margin:34px 0 10px; padding-top:10px; border-top:1px solid var(--line); }
+h3 { font-size:16px; margin:0 0 8px; }
+a { color:var(--acc); }
+code, pre { font:12.5px/1.45 ui-monospace,Menlo,Consolas,monospace; }
+code { background:var(--code); padding:1px 4px; border-radius:4px; }
+pre { background:var(--code); padding:10px 12px; border-radius:8px; overflow:auto; }
+pre code { background:none; padding:0; }
+pre.stmt { white-space:pre-wrap; word-break:break-all; max-height:28em; }
+.crumbs { font-size:14px; color:var(--dim); }
+.walk { display:flex; flex-wrap:wrap; gap:6px; align-items:center; font-size:14px; margin:10px 0 18px; }
+.walk a, .walk span.s { border:1px solid var(--line); border-radius:999px; padding:3px 10px; text-decoration:none; background:var(--code); }
+.walk .arr { color:var(--dim); }
+blockquote { margin:10px 0; padding:8px 14px; border-left:4px solid var(--acc); background:var(--code); border-radius:0 8px 8px 0; }
+.thm { border:1px solid var(--line); border-radius:10px; padding:14px 16px; margin:14px 0; }
+.thm:target, .step:target, .fn:target { outline:3px solid var(--acc); outline-offset:2px; }
+.thm, .step, .fn, .box, h2 { scroll-margin-top:70px; }
+.src div { scroll-margin-top:120px; }
+ol.steps { margin:6px 0 0; padding-left:22px; }
+ol.steps > li { margin:10px 0; }
+ol.steps > li > b { display:inline-block; min-width:5.5em; }
+.ok { color:var(--ok); font-weight:600; }
+.dim { color:var(--dim); font-size:14px; }
+.box { border:1px solid var(--line); border-radius:10px; padding:12px 16px; margin:12px 0; background:var(--code); }
+.box pre { background:var(--bg); }
+.replay { border-color:var(--ok); }
+table { border-collapse:collapse; font-size:13.5px; line-height:1.4; }
+th, td { border:1px solid var(--line); padding:5px 8px; vertical-align:top; text-align:left; }
+th { background:var(--code); }
+.tw { overflow-x:auto; margin:10px 0; }
+.src { font:12.5px/1.5 ui-monospace,Menlo,Consolas,monospace; background:var(--code); border-radius:8px; padding:8px 0; overflow-x:auto; }
+.src { counter-reset:ln; }
+.src div { white-space:pre; padding:0 12px 0 0; counter-increment:ln; }
+.src div::before { content:counter(ln); display:inline-block; width:4.5em; padding-right:1em; text-align:right; color:var(--dim); user-select:none; }
+.src div:target { background:var(--hl); }
+pre.hex { line-height:1.5; }
+.hex .o { color:var(--dim); }
+</style>
+</head>
+<body>
+<p class="crumbs"><a href="../../index.html">Vortex Echo</a> · <a href="../../trail/index.html">Proof trail</a> · <code>pop_l5_unbirth.ml</code></p>
+<h1><code>pop_l5_unbirth.ml</code></h1>
+<p>A file loaded by a proof run. Published at <a href="../../proof-tree/tasks/bubble-echo/vortex/proofs/pop_l5_unbirth.ml"><code>proof-tree/tasks/bubble-echo/vortex/proofs/pop_l5_unbirth.ml</code></a> (SHA-256 <code>8d86b479adbb62c5ab5397c4ab28403747224406f17f02120556aa9c00ec3a49</code>; <a href="https://github.com/BenKnill/vortex-echo/blob/main/proof-tree/tasks/bubble-echo/vortex/proofs/pop_l5_unbirth.ml">on GitHub</a>). Line N has the anchor <code>#LN</code>.</p>
+<div class="src" data-src="proof-tree/tasks/bubble-echo/vortex/proofs/pop_l5_unbirth.ml">
+<div id="L1">needs &quot;ve_vort.ml&quot;;;</div>
+<div id="L2">needs &quot;ve_tick.ml&quot;;;</div>
+<div id="L3">needs &quot;ve_vk.ml&quot;;;</div>
+<div id="L4">needs &quot;va1_code.ml&quot;;;</div>
+<div id="L5">needs &quot;va1_seq_final2.ml&quot;;;</div>
+<div id="L6">needs &quot;pop_design_defs.ml&quot;;;</div>
+<div id="L7">needs &quot;pop_design_stmts.ml&quot;;;</div>
+<div id="L8">(* ========================================================================= *)</div>
+<div id="L9">(* Vortex pop, segment L5 (SEG-L5 prover, Claude Opus 5.5, 2026-11-11): the  *)</div>
+<div id="L10">(* un-birth f14 of vortex_a1.wasm (ve_birth_unapply, 271 B, entry pc 3,      *)</div>
+<div id="L11">(* locals l0..l6) on the exact bytes: POP_L5_UNBIRTH_OK |- va1_unbirth_ok,   *)</div>
+<div id="L12">(* and VA1_UNB_CLAUSES. Lemma file (a LEAFCHAIN layer); the spec-locked      *)</div>
+<div id="L13">(* final leaf pop_l5_final.ml re-binds VA1_UNBIRTH_OK / VA1_UNB_CLAUSES.      *)</div>
+<div id="L14">(*                                                                           *)</div>
+<div id="L15">(* f14: 3..24 l0 := ND, l1 := select(16384, ND, ND &lt;u 16384); 26..44 if ND = *)</div>
+<div id="L16">(*   0: ND := l1 (= 0), return 0; 45..76 l2 := T + 1, l0 := 48 l1 + 1179600 *)</div>
+<div id="L17">(*   (top record), l3 := 0, l4 := l1; 78 block, 80 loop: 82..95 exit 1 if    *)</div>
+<div id="L18">(*   the top tag (word 6, at l5 = l0 + 24) &lt;&gt; l2; 97..171 if word 7 (kp) &lt;=u *)</div>
+<div id="L19">(*   65535: ZQ[4 (kp MOD 2048)] += word 8, ZP[..] += word 9; 172..223 six    *)</div>
+<div id="L20">(*   i64.store 0 zero the 12 words; 226..247 l0 -= 48, l3 += 1, br_if on     *)</div>
+<div id="L21">(*   l4 -= 1; 249..256 exit 2: l4 := 0, l3 := l1; 259..270 ND := l4,        *)</div>
+<div id="L22">(*   return l3.                                                              *)</div>
+<div id="L23">(* Proof: L = val ND (&lt;= 16384, so l1 = ND). K = the number of records the   *)</div>
+<div id="L24">(* loop pops (PL5_K_EXISTS, least index where the count runs out or the tag  *)</div>
+<div id="L25">(* check of va1_unb fails); va1_unb b L bs = va1_unb b K bs (PL5_UNB_FINAL). *)</div>
+<div id="L26">(* Loop invariant at i (pc 82 / 247): l0 = 1179600 + 48 (L - i), l1 = L,     *)</div>
+<div id="L27">(* l2 = b, l3 = i, l4 = L - i, memory DI/ZQ/ZP = those of va1_unb b i bs,    *)</div>
+<div id="L28">(* ND untouched. Pieces: PL5_ZERO (ND = 0), PL5_ENTRY (pc 3 -&gt; 82),          *)</div>
+<div id="L29">(* PL5_BODY (one pop, generic state X, both credit branches), PL5_BACK,      *)</div>
+<div id="L30">(* PL5_EXIT_TAG (tag &lt;&gt; b at pc 82), PL5_EXIT_CNT (count out at pc 247);     *)</div>
+<div id="L31">(* ENSURES_WHILE_UP over K iterations (K = 0 by ENSURES_TRANS).               *)</div>
+<div id="L32">(* Memory after a pop: forward frame through the write chain (pl5_fwd:       *)</div>
+<div id="L33">(* PL5_W32S_W32/W64 disjoint, PL5_W32S_UPD, PL5_W32S_Z64 = i64 zero store),  *)</div>
+<div id="L34">(* then function equality (PL5_ZERO12 for the 12 zeroed words).              *)</div>
+<div id="L35">(* ========================================================================= *)</div>
+<div id="L36"></div>
+<div id="L37">(* ========================================================================= *)</div>
+<div id="L38">(* vortex-pop L5 (un-birth, f14): pure lemmas. va1_unb algebra (pops as long *)</div>
+<div id="L39">(* as the top tag is b), the depaired va1_pop1 / va1_bs, and va1_w32s frame  *)</div>
+<div id="L40">(* lemmas over 32- and 64-bit stores. Claude Opus 5.5, 2026-11-11.           *)</div>
+<div id="L41">(* ========================================================================= *)</div>
+<div id="L42"></div>
+<div id="L43">let VA1_UNB_CLAUSES = prove(parse_term pop_spec_VA1_UNB_CLAUSES, REWRITE_TAC[va1_unb]);;</div>
+<div id="L44"></div>
+<div id="L45">(* the &quot;top tag is b&quot; check of va1_unb, as a term builder *)</div>
+<div id="L46">let pl5_chk b x =</div>
+<div id="L47">  subst [b,`bb:int32`; x,`xx:(num-&gt;int32)#(num-&gt;int32)#(num-&gt;int32)#int32`]</div>
+<div id="L48">   `0 &lt; val (SND(SND(SND xx))) /\ FST xx (12 * (val (SND(SND(SND xx))) - 1) + 6) = bb`;;</div>
+<div id="L49"></div>
+<div id="L50">let PL5_UNB_ADD = prove</div>
+<div id="L51"> (`!b i c bs.</div>
+<div id="L52">     (!j. j &lt; i ==&gt; 0 &lt; val (SND(SND(SND (va1_unb b j bs)))) /\</div>
+<div id="L53">                    FST (va1_unb b j bs) (12 * (val (SND(SND(SND (va1_unb b j bs)))) - 1) + 6) = b)</div>
+<div id="L54">     ==&gt; va1_unb b (i + c) bs = va1_unb b c (va1_unb b i bs)`,</div>
+<div id="L55">  GEN_TAC THEN INDUCT_TAC THEN REWRITE_TAC[ADD_CLAUSES; VA1_UNB_CLAUSES] THEN</div>
+<div id="L56">  REPEAT STRIP_TAC THEN</div>
+<div id="L57">  FIRST_ASSUM(MP_TAC o SPEC `0`) THEN REWRITE_TAC[LT_0; VA1_UNB_CLAUSES] THEN</div>
+<div id="L58">  STRIP_TAC THEN ASM_REWRITE_TAC[] THEN</div>
+<div id="L59">  FIRST_X_ASSUM(fun th -&gt; if is_forall(concl th) &amp;&amp; can (find_term ((=) `c:num`)) (concl th)</div>
+<div id="L60">                          then MATCH_MP_TAC th else NO_TAC) THEN</div>
+<div id="L61">  X_GEN_TAC `j:num` THEN DISCH_TAC THEN</div>
+<div id="L62">  FIRST_X_ASSUM(MP_TAC o SPEC `SUC j`) THEN ASM_REWRITE_TAC[LT_SUC; VA1_UNB_CLAUSES]);;</div>
+<div id="L63"></div>
+<div id="L64">let PL5_UNB_STEP = prove</div>
+<div id="L65"> (`!b i bs.</div>
+<div id="L66">     (!j. j &lt;= i ==&gt; 0 &lt; val (SND(SND(SND (va1_unb b j bs)))) /\</div>
+<div id="L67">                     FST (va1_unb b j bs) (12 * (val (SND(SND(SND (va1_unb b j bs)))) - 1) + 6) = b)</div>
+<div id="L68">     ==&gt; va1_unb b (i + 1) bs = va1_pop1 (va1_unb b i bs)`,</div>
+<div id="L69">  REPEAT STRIP_TAC THEN</div>
+<div id="L70">  MP_TAC(SPECL [`b:int32`; `i:num`; `SUC 0`; `bs:(num-&gt;int32)#(num-&gt;int32)#(num-&gt;int32)#int32`] PL5_UNB_ADD) THEN</div>
+<div id="L71">  ANTS_TAC THENL [ASM_MESON_TAC[LT_IMP_LE]; ALL_TAC] THEN</div>
+<div id="L72">  REWRITE_TAC[ADD_CLAUSES; GSYM ADD1] THEN DISCH_THEN SUBST1_TAC THEN</div>
+<div id="L73">  REWRITE_TAC[VA1_UNB_CLAUSES] THEN</div>
+<div id="L74">  FIRST_X_ASSUM(MP_TAC o SPEC `i:num`) THEN REWRITE_TAC[LE_REFL] THEN</div>
+<div id="L75">  STRIP_TAC THEN ASM_REWRITE_TAC[]);;</div>
+<div id="L76"></div>
+<div id="L77">let PL5_UNB_STOP = prove</div>
+<div id="L78"> (`!b c bs. ~(0 &lt; val (SND(SND(SND bs))) /\ FST bs (12 * (val (SND(SND(SND bs))) - 1) + 6) = b)</div>
+<div id="L79">            ==&gt; va1_unb b c bs = bs`,</div>
+<div id="L80">  GEN_TAC THEN INDUCT_TAC THEN SIMP_TAC[VA1_UNB_CLAUSES]);;</div>
+<div id="L81"></div>
+<div id="L82">(* va1_pop1 on projections *)</div>
+<div id="L83">let PL5_POP1 = prove</div>
+<div id="L84"> (`!bs:(num-&gt;int32)#(num-&gt;int32)#(num-&gt;int32)#int32.</div>
+<div id="L85">     FST (va1_pop1 bs) =</div>
+<div id="L86">       (\w. if 12 * (val (SND(SND(SND bs))) - 1) &lt;= w /\ w &lt; 12 * (val (SND(SND(SND bs))) - 1) + 12</div>
+<div id="L87">            then word 0 else FST bs w) /\</div>
+<div id="L88">     FST (SND (va1_pop1 bs)) =</div>
+<div id="L89">       (\i. if val (FST bs (12 * (val (SND(SND(SND bs))) - 1) + 7)) &lt; 65536 /\</div>
+<div id="L90">               i = val (FST bs (12 * (val (SND(SND(SND bs))) - 1) + 7)) MOD 2048</div>
+<div id="L91">            then word_add (FST (SND bs) i) (FST bs (12 * (val (SND(SND(SND bs))) - 1) + 8))</div>
+<div id="L92">            else FST (SND bs) i) /\</div>
+<div id="L93">     FST (SND (SND (va1_pop1 bs))) =</div>
+<div id="L94">       (\i. if val (FST bs (12 * (val (SND(SND(SND bs))) - 1) + 7)) &lt; 65536 /\</div>
+<div id="L95">               i = val (FST bs (12 * (val (SND(SND(SND bs))) - 1) + 7)) MOD 2048</div>
+<div id="L96">            then word_add (FST (SND (SND bs)) i) (FST bs (12 * (val (SND(SND(SND bs))) - 1) + 9))</div>
+<div id="L97">            else FST (SND (SND bs)) i) /\</div>
+<div id="L98">     SND (SND (SND (va1_pop1 bs))) = word (val (SND(SND(SND bs))) - 1)`,</div>
+<div id="L99">  REWRITE_TAC[FORALL_PAIR_THM; va1_pop1] THEN CONV_TAC(TOP_DEPTH_CONV let_CONV) THEN</div>
+<div id="L100">  REWRITE_TAC[]);;</div>
+<div id="L101"></div>
+<div id="L102">let PL5_BS = prove</div>
+<div id="L103"> (`!bs:(num-&gt;int32)#(num-&gt;int32)#(num-&gt;int32)#int32. !m.</div>
+<div id="L104">     va1_bs bs m &lt;=&gt;</div>
+<div id="L105">     va1_w32s 1179648 196608 (FST bs) m /\ va1_w32s 1163264 2048 (FST (SND bs)) m /\</div>
+<div id="L106">     va1_w32s 1171456 2048 (FST (SND (SND bs))) m /\ read (bytes32 (word 16400)) m = SND (SND (SND bs))`,</div>
+<div id="L107">  REWRITE_TAC[FORALL_PAIR_THM; va1_bs]);;</div>
+<div id="L108"></div>
+<div id="L109">(* ND after i successful pops *)</div>
+<div id="L110">let PL5_UNB_ND = prove</div>
+<div id="L111"> (`!b bs i.</div>
+<div id="L112">     (!j. j &lt; i ==&gt; 0 &lt; val (SND(SND(SND (va1_unb b j bs)))) /\</div>
+<div id="L113">                    FST (va1_unb b j bs) (12 * (val (SND(SND(SND (va1_unb b j bs)))) - 1) + 6) = b) /\</div>
+<div id="L114">     i &lt;= val (SND(SND(SND bs)))</div>
+<div id="L115">     ==&gt; SND(SND(SND (va1_unb b i bs))) = word (val (SND(SND(SND bs))) - i)`,</div>
+<div id="L116">  GEN_TAC THEN GEN_TAC THEN INDUCT_TAC THENL</div>
+<div id="L117">   [REWRITE_TAC[VA1_UNB_CLAUSES; SUB_0; WORD_VAL]; ALL_TAC] THEN</div>
+<div id="L118">  STRIP_TAC THEN</div>
+<div id="L119">  MP_TAC(SPECL [`b:int32`; `i:num`; `bs:(num-&gt;int32)#(num-&gt;int32)#(num-&gt;int32)#int32`] PL5_UNB_STEP) THEN</div>
+<div id="L120">  ANTS_TAC THENL [ASM_MESON_TAC[LT_SUC_LE]; REWRITE_TAC[GSYM ADD1] THEN DISCH_THEN SUBST1_TAC] THEN</div>
+<div id="L121">  REWRITE_TAC[PL5_POP1] THEN</div>
+<div id="L122">  FIRST_X_ASSUM(MP_TAC o check (is_imp o concl)) THEN ANTS_TAC THENL</div>
+<div id="L123">   [CONJ_TAC THENL [ASM_MESON_TAC[LT_SUC; LT_TRANS; ARITH_RULE `j &lt; i ==&gt; j &lt; SUC i`]; ASM_ARITH_TAC];</div>
+<div id="L124">    DISCH_THEN SUBST1_TAC] THEN</div>
+<div id="L125">  AP_TERM_TAC THEN</div>
+<div id="L126">  MP_TAC(ISPEC `SND(SND(SND (bs:(num-&gt;int32)#(num-&gt;int32)#(num-&gt;int32)#int32)))` VAL_BOUND) THEN</div>
+<div id="L127">  REWRITE_TAC[DIMINDEX_32] THEN DISCH_TAC THEN</div>
+<div id="L128">  SUBGOAL_THEN `val(word (val (SND(SND(SND (bs:(num-&gt;int32)#(num-&gt;int32)#(num-&gt;int32)#int32)))) - i):int32) =</div>
+<div id="L129">                val (SND(SND(SND bs))) - i` SUBST1_TAC THENL</div>
+<div id="L130">   [MATCH_MP_TAC CAP_VAL_WORD32 THEN ASM_ARITH_TAC; ASM_ARITH_TAC]);;</div>
+<div id="L131"></div>
+<div id="L132">(* the stopping index K: the loop pops exactly K records *)</div>
+<div id="L133">let PL5_K_EXISTS = prove</div>
+<div id="L134"> (`!b bs L. ?K. K &lt;= L /\</div>
+<div id="L135">             (!j. j &lt; K ==&gt; 0 &lt; val (SND(SND(SND (va1_unb b j bs)))) /\</div>
+<div id="L136">                  FST (va1_unb b j bs) (12 * (val (SND(SND(SND (va1_unb b j bs)))) - 1) + 6) = b) /\</div>
+<div id="L137">             (K &lt; L ==&gt; ~(0 &lt; val (SND(SND(SND (va1_unb b K bs)))) /\</div>
+<div id="L138">                  FST (va1_unb b K bs) (12 * (val (SND(SND(SND (va1_unb b K bs)))) - 1) + 6) = b))`,</div>
+<div id="L139">  REPEAT GEN_TAC THEN</div>
+<div id="L140">  MP_TAC(ISPEC `\k. k = L \/ k &lt; L /\</div>
+<div id="L141">     ~(0 &lt; val (SND(SND(SND (va1_unb b k bs)))) /\</div>
+<div id="L142">       FST (va1_unb b k bs) (12 * (val (SND(SND(SND (va1_unb b k bs)))) - 1) + 6) = (b:int32))` num_WOP) THEN</div>
+<div id="L143">  REWRITE_TAC[] THEN</div>
+<div id="L144">  MATCH_MP_TAC(TAUT `p /\ (q ==&gt; r) ==&gt; (p &lt;=&gt; q) ==&gt; r`) THEN</div>
+<div id="L145">  CONJ_TAC THENL [EXISTS_TAC `L:num` THEN REWRITE_TAC[]; ALL_TAC] THEN</div>
+<div id="L146">  DISCH_THEN(X_CHOOSE_THEN `K:num` (CONJUNCTS_THEN2 (LABEL_TAC &quot;k&quot;) (LABEL_TAC &quot;min&quot;))) THEN</div>
+<div id="L147">  EXISTS_TAC `K:num` THEN</div>
+<div id="L148">  SUBGOAL_THEN `K &lt;= L` ASSUME_TAC THENL</div>
+<div id="L149">   [USE_THEN &quot;k&quot; (DISJ_CASES_THEN STRIP_ASSUME_TAC) THEN ASM_ARITH_TAC; ALL_TAC] THEN</div>
+<div id="L150">  ASM_REWRITE_TAC[] THEN CONJ_TAC THENL</div>
+<div id="L151">   [X_GEN_TAC `j:num` THEN DISCH_TAC THEN USE_THEN &quot;min&quot; (MP_TAC o SPEC `j:num`) THEN</div>
+<div id="L152">    SUBGOAL_THEN `j &lt; K /\ j &lt; L /\ ~(j = L)` (fun th -&gt; REWRITE_TAC[th] THEN TRY(CONV_TAC TAUT)) THEN</div>
+<div id="L153">    ASM_ARITH_TAC;</div>
+<div id="L154">    DISCH_TAC THEN USE_THEN &quot;k&quot; MP_TAC THEN</div>
+<div id="L155">    SUBGOAL_THEN `K &lt; L /\ ~(K = L)` (fun th -&gt; REWRITE_TAC[th] THEN TRY(CONV_TAC TAUT)) THEN</div>
+<div id="L156">    ASM_ARITH_TAC]);;</div>
+<div id="L157"></div>
+<div id="L158">let PL5_UNB_FINAL = prove</div>
+<div id="L159"> (`!b bs L K. K &lt;= L /\</div>
+<div id="L160">             (!j. j &lt; K ==&gt; 0 &lt; val (SND(SND(SND (va1_unb b j bs)))) /\</div>
+<div id="L161">                  FST (va1_unb b j bs) (12 * (val (SND(SND(SND (va1_unb b j bs)))) - 1) + 6) = b) /\</div>
+<div id="L162">             (K &lt; L ==&gt; ~(0 &lt; val (SND(SND(SND (va1_unb b K bs)))) /\</div>
+<div id="L163">                  FST (va1_unb b K bs) (12 * (val (SND(SND(SND (va1_unb b K bs)))) - 1) + 6) = b))</div>
+<div id="L164">             ==&gt; va1_unb b L bs = va1_unb b K bs`,</div>
+<div id="L165">  REPEAT STRIP_TAC THEN</div>
+<div id="L166">  MP_TAC(SPECL [`b:int32`; `K:num`; `L - K:num`; `bs:(num-&gt;int32)#(num-&gt;int32)#(num-&gt;int32)#int32`] PL5_UNB_ADD) THEN</div>
+<div id="L167">  ASM_REWRITE_TAC[] THEN</div>
+<div id="L168">  SUBGOAL_THEN `K + L - K = L` SUBST1_TAC THENL [ASM_ARITH_TAC; DISCH_THEN SUBST1_TAC] THEN</div>
+<div id="L169">  ASM_CASES_TAC `K:num = L` THENL</div>
+<div id="L170">   [ASM_REWRITE_TAC[SUB_REFL; VA1_UNB_CLAUSES];</div>
+<div id="L171">    MATCH_MP_TAC PL5_UNB_STOP THEN FIRST_X_ASSUM MATCH_MP_TAC THEN ASM_ARITH_TAC]);;</div>
+<div id="L172"></div>
+<div id="L173">(* ---- va1_w32s frames over single stores ---- *)</div>
+<div id="L174"></div>
+<div id="L175">let PL5_W32S_EXT = prove</div>
+<div id="L176"> (`!base n f g m. va1_w32s base n f m /\ (!k. k &lt; n ==&gt; f k = g k) ==&gt; va1_w32s base n g m`,</div>
+<div id="L177">  REWRITE_TAC[va1_w32s] THEN MESON_TAC[]);;</div>
+<div id="L178"></div>
+<div id="L179">let PL5_W32S_W32 = prove</div>
+<div id="L180"> (`!base n f e (v:int32) m.</div>
+<div id="L181">     va1_w32s base n f m /\ (e + 4 &lt;= base \/ base + 4 * n &lt;= e) /\</div>
+<div id="L182">     base + 4 * n &lt;= 4294967296 /\ e &lt; 4294967296</div>
+<div id="L183">     ==&gt; va1_w32s base n f (write (bytes32 (word e)) v m)`,</div>
+<div id="L184">  REWRITE_TAC[va1_w32s] THEN REPEAT STRIP_TAC THEN</div>
+<div id="L185">  MP_TAC(SPECL [`base + 4 * k`; `e:num`; `v:int32`; `m:int64-&gt;byte`] VK_R32_W32) THEN</div>
+<div id="L186">  (ANTS_TAC THENL [ASM_ARITH_TAC; DISCH_THEN SUBST1_TAC THEN ASM_SIMP_TAC[]]));;</div>
+<div id="L187"></div>
+<div id="L188">let PL5_W32S_W64 = prove</div>
+<div id="L189"> (`!base n f e (v:int64) m.</div>
+<div id="L190">     va1_w32s base n f m /\ (e + 8 &lt;= base \/ base + 4 * n &lt;= e) /\</div>
+<div id="L191">     base + 4 * n &lt;= 4294967296 /\ e &lt; 4294967296</div>
+<div id="L192">     ==&gt; va1_w32s base n f (write (bytes64 (word e)) v m)`,</div>
+<div id="L193">  REWRITE_TAC[va1_w32s] THEN REPEAT STRIP_TAC THEN</div>
+<div id="L194">  MP_TAC(SPECL [`base + 4 * k`; `e:num`; `v:int64`; `m:int64-&gt;byte`] VK_R32_W64) THEN</div>
+<div id="L195">  (ANTS_TAC THENL [ASM_ARITH_TAC; DISCH_THEN SUBST1_TAC THEN ASM_SIMP_TAC[]]));;</div>
+<div id="L196"></div>
+<div id="L197">let PL5_W32S_UPD = prove</div>
+<div id="L198"> (`!base n f c (v:int32) m.</div>
+<div id="L199">     va1_w32s base n f m /\ c &lt; n /\ base + 4 * n &lt;= 4294967296</div>
+<div id="L200">     ==&gt; va1_w32s base n (\j. if j = c then v else f j) (write (bytes32 (word (base + 4 * c))) v m)`,</div>
+<div id="L201">  REWRITE_TAC[va1_w32s] THEN REPEAT STRIP_TAC THEN</div>
+<div id="L202">  ASM_CASES_TAC `k:num = c` THEN ASM_REWRITE_TAC[CAP_B32_SAME] THEN</div>
+<div id="L203">  MP_TAC(SPECL [`base + 4 * k`; `base + 4 * c`; `v:int32`; `m:int64-&gt;byte`] VK_R32_W32) THEN</div>
+<div id="L204">  (ANTS_TAC THENL [ASM_ARITH_TAC; DISCH_THEN SUBST1_TAC THEN ASM_SIMP_TAC[]]));;</div>
+<div id="L205"></div>
+<div id="L206">let PL5_R32_W64_ZERO = prove</div>
+<div id="L207"> (`!(x:int64) (m:int64-&gt;byte).</div>
+<div id="L208">     read (bytes32 x) (write (bytes64 x) (word 0) m) = word 0 /\</div>
+<div id="L209">     read (bytes32 (word_add x (word 4))) (write (bytes64 x) (word 0) m) = word 0`,</div>
+<div id="L210">  REPEAT GEN_TAC THEN</div>
+<div id="L211">  SUBGOAL_THEN `!y (mm:int64-&gt;byte). read (bytes32 y) mm = word (read (bytes(y,4)) mm)`</div>
+<div id="L212">    (fun th -&gt; REWRITE_TAC[th]) THENL</div>
+<div id="L213">   [REWRITE_TAC[bytes32; READ_COMPONENT_COMPOSE; asword; through; read]; ALL_TAC] THEN</div>
+<div id="L214">  SUBGOAL_THEN `write (bytes64 x) (word 0:int64) (m:int64-&gt;byte) = write (bytes(x,8)) 0 m`</div>
+<div id="L215">    SUBST1_TAC THENL</div>
+<div id="L216">   [REWRITE_TAC[bytes64; WRITE_COMPONENT_COMPOSE; asword; through; write; read; VAL_WORD_0];</div>
+<div id="L217">    ALL_TAC] THEN</div>
+<div id="L218">  MP_TAC(ISPECL [`x:int64`; `4`; `4`; `write (bytes(x:int64,8)) 0 (m:int64-&gt;byte)`] READ_BYTES_COMBINE) THEN</div>
+<div id="L219">  REWRITE_TAC[ARITH_RULE `4 + 4 = 8`] THEN</div>
+<div id="L220">  SIMP_TAC[READ_WRITE_BYTES; DIMINDEX_64; ARITH_RULE `8 &lt;= 2 EXP 64`; MOD_0] THEN</div>
+<div id="L221">  CONV_TAC(ONCE_DEPTH_CONV NUM_REDUCE_CONV) THEN</div>
+<div id="L222">  DISCH_THEN(MP_TAC o SYM) THEN REWRITE_TAC[ADD_EQ_0; MULT_EQ_0] THEN</div>
+<div id="L223">  CONV_TAC(ONCE_DEPTH_CONV NUM_REDUCE_CONV) THEN SIMP_TAC[]);;</div>
+<div id="L224"></div>
+<div id="L225">let PL5_W32S_Z64 = prove</div>
+<div id="L226"> (`!base n f c m.</div>
+<div id="L227">     va1_w32s base n f m /\ c + 1 &lt; n /\ base + 4 * n &lt;= 4294967296</div>
+<div id="L228">     ==&gt; va1_w32s base n (\j. if j = c \/ j = c + 1 then word 0 else f j)</div>
+<div id="L229">                  (write (bytes64 (word (base + 4 * c))) (word 0) m)`,</div>
+<div id="L230">  REWRITE_TAC[va1_w32s] THEN REPEAT STRIP_TAC THEN</div>
+<div id="L231">  ASM_CASES_TAC `k:num = c` THENL</div>
+<div id="L232">   [ASM_REWRITE_TAC[PL5_R32_W64_ZERO]; ALL_TAC] THEN</div>
+<div id="L233">  ASM_CASES_TAC `k:num = c + 1` THENL</div>
+<div id="L234">   [ASM_REWRITE_TAC[] THEN</div>
+<div id="L235">    SUBGOAL_THEN `word (base + 4 * (c + 1)):int64 = word_add (word (base + 4 * c)) (word 4)` SUBST1_TAC THENL</div>
+<div id="L236">     [REWRITE_TAC[GSYM WORD_ADD] THEN AP_TERM_TAC THEN ARITH_TAC; REWRITE_TAC[PL5_R32_W64_ZERO]];</div>
+<div id="L237">    ALL_TAC] THEN</div>
+<div id="L238">  ASM_REWRITE_TAC[] THEN</div>
+<div id="L239">  MP_TAC(SPECL [`base + 4 * k`; `base + 4 * c`; `word 0:int64`; `m:int64-&gt;byte`] VK_R32_W64) THEN</div>
+<div id="L240">  (ANTS_TAC THENL [ASM_ARITH_TAC; DISCH_THEN SUBST1_TAC THEN ASM_SIMP_TAC[]]));;</div>
+<div id="L241"></div>
+<div id="L242">let PL5_FRAME = `MAYCHANGE [wpc] ,, MAYCHANGE [wstack] ,, MAYCHANGE [wlabels] ,,</div>
+<div id="L243">            MAYCHANGE [wstatus] ,, MAYCHANGE [wlocal 0; wlocal 1; wlocal 2; wlocal 3; wlocal 4; wlocal 5; wlocal 6] ,,</div>
+<div id="L244">            MAYCHANGE [wmem :&gt; bytes(word 16400,4)] ,,</div>
+<div id="L245">            MAYCHANGE [wmem :&gt; bytes(word 1163264,16384)] ,,</div>
+<div id="L246">            MAYCHANGE [wmem :&gt; bytes(word 1179648,786432)]`;;</div>
+<div id="L247">let PL5_F14_EXEC = FAST_MK_EXEC_RULE va1_f14_mc 3;;</div>
+<div id="L248"></div>
+<div id="L249">let PL5_STEPS_TAC execth snums =</div>
+<div id="L250">  MAP_EVERY (fun s (asl,w) -&gt;</div>
+<div id="L251">     let mths = filter (fun th -&gt; vk_is_memfact (concl th)) (map snd asl) in</div>
+<div id="L252">     (CAP_STEP_TAC execth (READ_COMPONENT_COMPOSE :: mths) s THEN</div>
+<div id="L253">      CAP_DISCARD_OLD_TAC s THEN WASM_COMPACT_HYPS_TAC) (asl,w))</div>
+<div id="L254">   (statenames &quot;s&quot; snums);;</div>
+<div id="L255"></div>
+<div id="L256">let pl5_inv b i x = subst [b,`bb:int32`; i,`ii:num`; x,`XX:(num-&gt;int32)#(num-&gt;int32)#(num-&gt;int32)#int32`]</div>
+<div id="L257"> `\s. read wcode s = va1_f14_mc /\ read wstatus s = WRunning /\</div>
+<div id="L258">      read wmemsize s = 4194304 /\ read warity s = 1 /\</div>
+<div id="L259">      read wlabels s = [0,80,0; 0,259,0] /\</div>
+<div id="L260">      read (wlocal 0) s = I32 (word (1179600 + 48 * (L - ii))) /\</div>
+<div id="L261">      read (wlocal 1) s = I32 (word L) /\</div>
+<div id="L262">      read (wlocal 2) s = I32 bb /\</div>
+<div id="L263">      read (wlocal 3) s = I32 (word ii) /\</div>
+<div id="L264">      read (wlocal 4) s = I32 (word (L - ii)) /\</div>
+<div id="L265">      read wstack s = (if read wpc s = word 82 then [] else [I32 (word (L - ii))]) /\</div>
+<div id="L266">      va1_w32s 1179648 196608 (FST (XX:(num-&gt;int32)#(num-&gt;int32)#(num-&gt;int32)#int32)) (read wmem s) /\</div>
+<div id="L267">      va1_w32s 1163264 2048 (FST (SND XX)) (read wmem s) /\</div>
+<div id="L268">      va1_w32s 1171456 2048 (FST (SND (SND XX))) (read wmem s) /\</div>
+<div id="L269">      read (bytes32 (word 16400)) (read wmem s) = word L`;;</div>
+<div id="L270"></div>
+<div id="L271">let pl5_pc pc p = let s = `s:wasmstate` in</div>
+<div id="L272">  mk_abs(s, mk_conj(`read wcode (s:wasmstate) = va1_f14_mc`,</div>
+<div id="L273">                    mk_conj(mk_eq(`read wpc (s:wasmstate)`, mk_comb(`word:num-&gt;int64`, mk_small_numeral pc)),</div>
+<div id="L274">                            rhs(concl(BETA_CONV(mk_comb(p,s)))))));;</div>
+<div id="L275"></div>
+<div id="L276">let pl5_pre = `\s. read wcode s = va1_f14_mc /\ read wpc s = word 3 /\</div>
+<div id="L277">                read wstatus s = WRunning /\ read wstack s = [] /\ read wlabels s = [] /\</div>
+<div id="L278">                read warity s = 1 /\ read wmemsize s = 4194304 /\</div>
+<div id="L279">                read wlocals s = wcall_locals [] decls /\</div>
+<div id="L280">                va1_tick t (read wmem s) /\ va1_bs (di,zq,zp,word L) (read wmem s)`;;</div>
+<div id="L281"></div>
+<div id="L282">let pl5_entry_goal =</div>
+<div id="L283">  list_mk_forall([`L:num`; `t:int32`; `di:num-&gt;int32`; `zq:num-&gt;int32`; `zp:num-&gt;int32`; `decls:wval list`],</div>
+<div id="L284">   mk_imp(`0 &lt; L /\ L &lt;= 16384 /\ wasm_decl_vals va1_f14_mc = SOME decls`,</div>
+<div id="L285">    list_mk_comb(`ensures wasm`, [pl5_pre; pl5_pc 82 (pl5_inv `word_add (t:int32) (word 1)` `0` `(di:num-&gt;int32,zq:num-&gt;int32,zp:num-&gt;int32,word L:int32)`); PL5_FRAME])));;</div>
+<div id="L286"></div>
+<div id="L287"></div>
+<div id="L288">let PL5_SHL_AND = prove</div>
+<div id="L289"> (`!kp:int32. val (word_and (word_shl kp 2) (word 8188):int32) = 4 * (val kp MOD 2048)`,</div>
+<div id="L290">  GEN_TAC THEN</div>
+<div id="L291">  SUBGOAL_THEN `word_and (word_shl (kp:int32) 2) (word 8188) = word_shl (word_and kp (word 2047)) 2`</div>
+<div id="L292">    SUBST1_TAC THENL [BITBLAST_TAC; ALL_TAC] THEN</div>
+<div id="L293">  REWRITE_TAC[VAL_WORD_SHL; DIMINDEX_32] THEN</div>
+<div id="L294">  MP_TAC(ISPECL [`kp:int32`; `11`] VAL_WORD_AND_MASK_WORD) THEN</div>
+<div id="L295">  CONV_TAC(ONCE_DEPTH_CONV NUM_REDUCE_CONV) THEN DISCH_THEN SUBST1_TAC THEN</div>
+<div id="L296">  CONV_TAC(ONCE_DEPTH_CONV NUM_REDUCE_CONV) THEN</div>
+<div id="L297">  MATCH_MP_TAC MOD_LT THEN MP_TAC(SPECL [`val (kp:int32)`; `2048`] MOD_LT_EQ) THEN ARITH_TAC);;</div>
+<div id="L298"></div>
+<div id="L299">let PL5_WRAP = prove</div>
+<div id="L300"> (`!a b c. a + c = b + 4294967296 ==&gt; word_add (word a) (word c):int32 = word b`,</div>
+<div id="L301">  REPEAT STRIP_TAC THEN REWRITE_TAC[GSYM WORD_ADD] THEN ASM_REWRITE_TAC[] THEN</div>
+<div id="L302">  REWRITE_TAC[WORD_ADD] THEN CONV_TAC(ONCE_DEPTH_CONV WORD_RED_CONV) THEN REWRITE_TAC[WORD_ADD_0]);;</div>
+<div id="L303"></div>
+<div id="L304">let PL5_ZERO12 = prove</div>
+<div id="L305"> (`!n k (f:num-&gt;int32).</div>
+<div id="L306">     (if k = 12 * n + 2 \/ k = (12 * n + 2) + 1 then word 0</div>
+<div id="L307">      else if k = 12 * n + 4 \/ k = (12 * n + 4) + 1 then word 0</div>
+<div id="L308">      else if k = 12 * n + 6 \/ k = (12 * n + 6) + 1 then word 0</div>
+<div id="L309">      else if k = 12 * n + 8 \/ k = (12 * n + 8) + 1 then word 0</div>
+<div id="L310">      else if k = 12 * n + 10 \/ k = (12 * n + 10) + 1 then word 0</div>
+<div id="L311">      else if k = 12 * n \/ k = 12 * n + 1 then word 0</div>
+<div id="L312">      else f k) =</div>
+<div id="L313">     (if 12 * n &lt;= k /\ k &lt; 12 * n + 12 then word 0 else f k)`,</div>
+<div id="L314">  REPEAT GEN_TAC THEN</div>
+<div id="L315">  ASM_CASES_TAC `12 * n &lt;= k /\ k &lt; 12 * n + 12` THEN ASM_REWRITE_TAC[] THENL</div>
+<div id="L316">   [SUBGOAL_THEN `?j. j &lt; 12 /\ k = 12 * n + j` MP_TAC THENL</div>
+<div id="L317">     [EXISTS_TAC `k - 12 * n` THEN ASM_ARITH_TAC; ALL_TAC] THEN</div>
+<div id="L318">    DISCH_THEN(X_CHOOSE_THEN `j:num` (CONJUNCTS_THEN2 MP_TAC SUBST1_TAC)) THEN</div>
+<div id="L319">    SPEC_TAC(`j:num`,`j:num`) THEN CONV_TAC EXPAND_CASES_CONV THEN</div>
+<div id="L320">    REWRITE_TAC[GSYM ADD_ASSOC; EQ_ADD_LCANCEL; ADD_CLAUSES] THEN</div>
+<div id="L321">    CONV_TAC(DEPTH_CONV NUM_RED_CONV) THEN</div>
+<div id="L322">    REWRITE_TAC[ARITH_RULE `!m p. m = m + p &lt;=&gt; p = 0`] THEN</div>
+<div id="L323">    CONV_TAC(DEPTH_CONV NUM_RED_CONV) THEN REWRITE_TAC[];</div>
+<div id="L324">    SUBGOAL_THEN `!j. j &lt; 12 ==&gt; ~(k = 12 * n + j)` MP_TAC THENL</div>
+<div id="L325">     [REPEAT STRIP_TAC THEN ASM_ARITH_TAC; ALL_TAC] THEN</div>
+<div id="L326">    CONV_TAC(LAND_CONV EXPAND_CASES_CONV) THEN</div>
+<div id="L327">    REWRITE_TAC[GSYM ADD_ASSOC; ADD_CLAUSES] THEN CONV_TAC(DEPTH_CONV NUM_RED_CONV) THEN</div>
+<div id="L328">    STRIP_TAC THEN ASM_REWRITE_TAC[]]);;</div>
+<div id="L329"></div>
+<div id="L330">let pl5_arith asl tm = TAC_PROOF((asl,tm), VK_ARITH_TAC);;</div>
+<div id="L331"></div>
+<div id="L332">(* forward frame: th |- va1_w32s base n f mm  ==&gt; |- va1_w32s base n f&#x27; m (m a write chain over mm) *)</div>
+<div id="L333">let rec pl5_fwd asl th m =</div>
+<div id="L334">  if aconv m (rand(concl th)) then th else</div>
+<div id="L335">  match m with</div>
+<div id="L336">    Comb(Comb(Comb(Const(&quot;write&quot;,_),c),v),m0) -&gt;</div>
+<div id="L337">      let th0 = pl5_fwd asl th m0 in</div>
+<div id="L338">      let _,args = strip_comb(concl th0) in</div>
+<div id="L339">      let base = el 0 args and n = el 1 args and f = el 2 args in</div>
+<div id="L340">      let cname = fst(dest_const(rator c)) and e = rand(rand c) in</div>
+<div id="L341">      let upd = try let l,r = dest_binop `(+):num-&gt;num-&gt;num` e in</div>
+<div id="L342">                    if l = base then Some r else if r = base then Some l else None</div>
+<div id="L343">                with Failure _ -&gt; None in</div>
+<div id="L344">      (match upd with</div>
+<div id="L345">         None -&gt;</div>
+<div id="L346">           let lem = if cname = &quot;bytes32&quot; then PL5_W32S_W32 else PL5_W32S_W64 in</div>
+<div id="L347">           let lem&#x27; = ISPECL [base;n;f;e;v;m0] lem in</div>
+<div id="L348">           let side = rand(lhand(concl lem&#x27;)) in</div>
+<div id="L349">           MP lem&#x27; (CONJ th0 (pl5_arith asl side))</div>
+<div id="L350">       | Some k4 -&gt;</div>
+<div id="L351">           let _,cc = dest_binop `( * ):num-&gt;num-&gt;num` k4 in</div>
+<div id="L352">           let e&#x27; = mk_binop `(+):num-&gt;num-&gt;num` base (mk_binop `( * ):num-&gt;num-&gt;num` `4` cc) in</div>
+<div id="L353">           let lem = if cname = &quot;bytes32&quot; then PL5_W32S_UPD else PL5_W32S_Z64 in</div>
+<div id="L354">           let lem&#x27; = if cname = &quot;bytes32&quot; then ISPECL [base;n;f;cc;v;m0] lem else ISPECL [base;n;f;cc;m0] lem in</div>
+<div id="L355">           let side = rand(lhand(concl lem&#x27;)) in</div>
+<div id="L356">           let th1 = MP lem&#x27; (CONJ th0 (pl5_arith asl side)) in</div>
+<div id="L357">           if e&#x27; = e then th1 else</div>
+<div id="L358">           let eq = AP_TERM `word:num-&gt;int64` (ARITH_RULE(mk_eq(e&#x27;,e))) in</div>
+<div id="L359">           GEN_REWRITE_RULE (RAND_CONV o ONCE_DEPTH_CONV) [eq] th1)</div>
+<div id="L360">  | _ -&gt; failwith &quot;pl5_fwd: not a write chain&quot;;;</div>
+<div id="L361"></div>
+<div id="L362">(* rewrite with the state-free, read-free assumptions only *)</div>
+<div id="L363">let pl5_pure_ths asl = filter (fun th -&gt; let c = concl th in</div>
+<div id="L364">   not (can (find_term (fun t -&gt; is_const t &amp;&amp; (let n = fst(dest_const t) in</div>
+<div id="L365">          n = &quot;read&quot; || n = &quot;write&quot; || n = &quot;MAYCHANGE&quot; || n = &quot;,,&quot;))) c) &amp;&amp;</div>
+<div id="L366">   not (can (find_term (fun t -&gt; type_of t = `:wasmstate`)) c)) (map snd asl);;</div>
+<div id="L367">let PL5_PURE_REWRITE_TAC ths : tactic = fun (asl,w) -&gt; REWRITE_TAC(ths @ pl5_pure_ths asl) (asl,w);;</div>
+<div id="L368"></div>
+<div id="L369">let PL5_FUNEQ_TAC : tactic =</div>
+<div id="L370">  X_GEN_TAC `k:num` THEN DISCH_TAC THEN REWRITE_TAC[PL5_POP1] THEN</div>
+<div id="L371">  PL5_PURE_REWRITE_TAC[ADD_SUB] THEN CONV_TAC(TOP_DEPTH_CONV BETA_CONV) THEN</div>
+<div id="L372">  REWRITE_TAC[PL5_ZERO12] THEN</div>
+<div id="L373">  REPEAT(COND_CASES_TAC THEN PL5_PURE_REWRITE_TAC[WORD_ADD_SYM]);;</div>
+<div id="L374"></div>
+<div id="L375">let PL5_W32S_GOAL_TAC : tactic = fun (asl,w) -&gt;</div>
+<div id="L376">  let _,args = strip_comb w in</div>
+<div id="L377">  let base = el 0 args and m = el 3 args in</div>
+<div id="L378">  let rec inner t = match t with Comb(Comb(Comb(Const(&quot;write&quot;,_),_),_),m0) -&gt; inner m0 | _ -&gt; t in</div>
+<div id="L379">  let mm = inner m in</div>
+<div id="L380">  let th = find (fun th -&gt; let c = concl th in</div>
+<div id="L381">     try let h,a = strip_comb c in fst(dest_const h) = &quot;va1_w32s&quot; &amp;&amp; el 0 a = base &amp;&amp; el 3 a = mm</div>
+<div id="L382">     with Failure _ -&gt; false) (map snd asl) in</div>
+<div id="L383">  let th&#x27; = pl5_fwd asl th m in</div>
+<div id="L384">  let f&#x27; = el 2 (snd(strip_comb(concl th&#x27;))) in</div>
+<div id="L385">  (MATCH_MP_TAC PL5_W32S_EXT THEN EXISTS_TAC f&#x27; THEN CONJ_TAC THENL [ACCEPT_TAC th&#x27;; PL5_FUNEQ_TAC]) (asl,w);;</div>
+<div id="L386"></div>
+<div id="L387">let PL5_MEM_CLOSE_TAC : tactic =</div>
+<div id="L388">  REPEAT CONJ_TAC THEN</div>
+<div id="L389">  TRY(CONV_TAC(DEPTH_CONV WORD_RED_CONV) THEN REWRITE_TAC[] THEN NO_TAC) THEN</div>
+<div id="L390">  TRY(PL5_W32S_GOAL_TAC THEN NO_TAC) THEN</div>
+<div id="L391">  REPEAT VK_PEEL_TAC THEN ASM_REWRITE_TAC[];;</div>
+<div id="L392"></div>
+<div id="L393">let PL5_DI_FACT_TAC base k v =</div>
+<div id="L394">  let a = mk_binop `(+):num-&gt;num-&gt;num` base (mk_binop `( * ):num-&gt;num-&gt;num` `4` k) in</div>
+<div id="L395">  let tm = subst [a,`aa:num`; v,`vv:int32`] `read (wmem :&gt; bytes32 (word aa)) s0 = vv` in</div>
+<div id="L396">  SUBGOAL_THEN tm ASSUME_TAC THENL</div>
+<div id="L397">   [REWRITE_TAC[READ_COMPONENT_COMPOSE] THEN</div>
+<div id="L398">    FIRST_ASSUM(fun th -&gt; let c = concl th in</div>
+<div id="L399">      if is_comb c &amp;&amp; can (term_match [] (subst [base,`bb:num`] `va1_w32s bb n f m`)) c</div>
+<div id="L400">      then MP_TAC(SPEC k (REWRITE_RULE[va1_w32s] th)) else NO_TAC) THEN</div>
+<div id="L401">    ANTS_TAC THENL [VK_ARITH_TAC; DISCH_THEN SUBST1_TAC THEN ASM_REWRITE_TAC[]];</div>
+<div id="L402">    ALL_TAC];;</div>
+<div id="L403"></div>
+<div id="L404">let pl5_val_fact off c =</div>
+<div id="L405">  let a = if off = 0 then `word (1179648 + 4 * 12 * n):int32`</div>
+<div id="L406">          else mk_comb(mk_comb(`word_add:int32-&gt;int32-&gt;int32`, `word (1179648 + 4 * 12 * n):int32`),</div>
+<div id="L407">                       mk_comb(`word:num-&gt;int32`, mk_small_numeral off)) in</div>
+<div id="L408">  mk_eq(mk_comb(`val:int32-&gt;num`, a), subst [c,`cc:num`] `1179648 + 4 * cc`);;</div>
+<div id="L409"></div>
+<div id="L410">let PL5_VALS_TAC =</div>
+<div id="L411">  MAP_EVERY (fun (off,c) -&gt; SUBGOAL_THEN (pl5_val_fact off c) ASSUME_TAC THENL</div>
+<div id="L412">     [REWRITE_TAC[GSYM WORD_ADD] THEN MATCH_MP_TAC CAP_VAL_WORD32_EQ THEN CONJ_TAC THEN VK_ARITH_TAC; ALL_TAC])</div>
+<div id="L413">   [0,`12 * n`; 8,`12 * n + 2`; 16,`12 * n + 4`; 24,`12 * n + 6`; 28,`12 * n + 7`;</div>
+<div id="L414">    32,`12 * n + 8`; 36,`12 * n + 9`; 40,`12 * n + 10`];;</div>
+<div id="L415"></div>
+<div id="L416"></div>
+<div id="L417">let PL5_ENTRY = prove(pl5_entry_goal,</div>
+<div id="L418">  REPEAT GEN_TAC THEN STRIP_TAC THEN</div>
+<div id="L419">  FIRST_X_ASSUM(MP_TAC o check (fun th -&gt; can (find_term ((=) `decls:wval list`)) (concl th))) THEN</div>
+<div id="L420">  REWRITE_TAC[CONJUNCT2 VA1_F14_CALLEE; option_INJ] THEN DISCH_THEN(SUBST_ALL_TAC o SYM) THEN</div>
+<div id="L421">  REWRITE_TAC[va1_bs; va1_tick] THEN</div>
+<div id="L422">  ENSURES_INIT_TAC &quot;s0&quot; THEN</div>
+<div id="L423">  SUBGOAL_THEN `!k. k &lt; 7 ==&gt; read (wlocal k) s0 = I32 (word 0)` MP_TAC THENL</div>
+<div id="L424">   [FIRST_X_ASSUM(MP_TAC o check (fun th -&gt; can (find_term ((=) `wlocals`)) (concl th))) THEN</div>
+<div id="L425">    REWRITE_TAC[wlocal; READ_COMPONENT_COMPOSE] THEN DISCH_THEN SUBST1_TAC THEN</div>
+<div id="L426">    REWRITE_TAC[wcall_locals; LENGTH; READ_ELEMENT] THEN CONV_TAC(ONCE_DEPTH_CONV NUM_REDUCE_CONV) THEN</div>
+<div id="L427">    CONV_TAC EXPAND_CASES_CONV THEN CONV_TAC(ONCE_DEPTH_CONV NUM_REDUCE_CONV) THEN REWRITE_TAC[EL; HD; TL; LENGTH; ARITH] THEN</div>
+<div id="L428">    CONV_TAC(ONCE_DEPTH_CONV EL_CONV) THEN REWRITE_TAC[];</div>
+<div id="L429">    CONV_TAC(ONCE_DEPTH_CONV EXPAND_CASES_CONV) THEN CONV_TAC(ONCE_DEPTH_CONV NUM_REDUCE_CONV) THEN STRIP_TAC] THEN</div>
+<div id="L430">  FIRST_X_ASSUM(K ALL_TAC o check (fun th -&gt; can (find_term ((=) `wlocals`)) (concl th))) THEN</div>
+<div id="L431">  ABBREV_TAC `mm = read wmem (s0:wasmstate)` THEN</div>
+<div id="L432">  SUBGOAL_THEN `(word L:int32 = word 0) &lt;=&gt; F` ASSUME_TAC THENL</div>
+<div id="L433">   [MATCH_MP_TAC VK_WORD_NE0 THEN ASM_ARITH_TAC; ALL_TAC] THEN</div>
+<div id="L434">  SUBGOAL_THEN `(if ~(val (word L:int32) &lt; 16384) then I32 (word 16384) else I32 (word L)) = I32 (word L)` ASSUME_TAC THENL</div>
+<div id="L435">   [SUBGOAL_THEN `val (word L:int32) = L` SUBST1_TAC THENL [MATCH_MP_TAC CAP_VAL_WORD32 THEN ASM_ARITH_TAC; ALL_TAC] THEN</div>
+<div id="L436">    COND_CASES_TAC THEN REWRITE_TAC[] THEN AP_TERM_TAC THEN AP_TERM_TAC THEN ASM_ARITH_TAC; ALL_TAC] THEN</div>
+<div id="L437">  PL5_STEPS_TAC PL5_F14_EXEC (1--29) THEN</div>
+<div id="L438">  ENSURES_FINAL_STATE_TAC THEN ASM_REWRITE_TAC[] THEN</div>
+<div id="L439">  REWRITE_TAC[SUB_0; injectivity &quot;wval&quot;; GSYM WORD_ADD; GSYM WORD_MUL] THEN</div>
+<div id="L440">  AP_TERM_TAC THEN ARITH_TAC);;</div>
+<div id="L441"></div>
+<div id="L442">let pl5_body_goal =</div>
+<div id="L443">  list_mk_forall([`L:num`; `b:int32`; `X:(num-&gt;int32)#(num-&gt;int32)#(num-&gt;int32)#int32`; `i:num`],</div>
+<div id="L444">   mk_imp(`i &lt; L /\ L &lt;= 16384 /\ val (SND(SND(SND (X:(num-&gt;int32)#(num-&gt;int32)#(num-&gt;int32)#int32)))) = L - i /\</div>
+<div id="L445">           FST X (12 * (L - (i + 1)) + 6) = (b:int32)`,</div>
+<div id="L446">    list_mk_comb(`ensures wasm`, [pl5_pc 82 (pl5_inv `b:int32` `i:num` `X:(num-&gt;int32)#(num-&gt;int32)#(num-&gt;int32)#int32`);</div>
+<div id="L447">       pl5_pc 247 (pl5_inv `b:int32` `i + 1` `va1_pop1 X`); PL5_FRAME])));;</div>
+<div id="L448"></div>
+<div id="L449">let PL5_BODY = prove(pl5_body_goal,</div>
+<div id="L450">  REPEAT GEN_TAC THEN STRIP_TAC THEN</div>
+<div id="L451">  ABBREV_TAC `n = L - (i + 1)` THEN</div>
+<div id="L452">  SUBGOAL_THEN `n &lt; 16384 /\ L - i = n + 1 /\ 1179600 + 48 * (L - i) = 1179648 + 4 * 12 * n` STRIP_ASSUME_TAC THENL</div>
+<div id="L453">   [EXPAND_TAC &quot;n&quot; THEN ASM_ARITH_TAC; ALL_TAC] THEN</div>
+<div id="L454">  ASM_REWRITE_TAC[] THEN</div>
+<div id="L455">  ABBREV_TAC `kp = FST (X:(num-&gt;int32)#(num-&gt;int32)#(num-&gt;int32)#int32) (12 * n + 7)` THEN</div>
+<div id="L456">  ABBREV_TAC `w8 = FST (X:(num-&gt;int32)#(num-&gt;int32)#(num-&gt;int32)#int32) (12 * n + 8)` THEN</div>
+<div id="L457">  ABBREV_TAC `w9 = FST (X:(num-&gt;int32)#(num-&gt;int32)#(num-&gt;int32)#int32) (12 * n + 9)` THEN</div>
+<div id="L458">  ENSURES_INIT_TAC &quot;s0&quot; THEN RESOLVE_PC_COND_TAC THEN</div>
+<div id="L459">  PL5_DI_FACT_TAC `1179648` `12 * n + 6` `b:int32` THEN</div>
+<div id="L460">  PL5_DI_FACT_TAC `1179648` `12 * n + 7` `kp:int32` THEN</div>
+<div id="L461">  PL5_DI_FACT_TAC `1179648` `12 * n + 8` `w8:int32` THEN</div>
+<div id="L462">  PL5_DI_FACT_TAC `1179648` `12 * n + 9` `w9:int32` THEN</div>
+<div id="L463">  PL5_VALS_TAC THEN</div>
+<div id="L464">  SUBGOAL_THEN `word_add (word (1179648 + 4 * 12 * n)) (word 4294967248):int32 = word (1179600 + 48 * n) /\</div>
+<div id="L465">                word_add (word i) (word 1):int32 = word (i + 1) /\</div>
+<div id="L466">                word_add (word (n + 1)) (word 4294967295):int32 = word n` STRIP_ASSUME_TAC THENL</div>
+<div id="L467">   [REPEAT CONJ_TAC THENL</div>
+<div id="L468">     [MATCH_MP_TAC PL5_WRAP THEN ARITH_TAC; REWRITE_TAC[WORD_ADD]; MATCH_MP_TAC PL5_WRAP THEN ARITH_TAC];</div>
+<div id="L469">    ALL_TAC] THEN</div>
+<div id="L470">  ASM_CASES_TAC `val (kp:int32) &lt; 65536` THENL</div>
+<div id="L471">   [ABBREV_TAC `kk = val (kp:int32) MOD 2048` THEN</div>
+<div id="L472">    SUBGOAL_THEN `kk &lt; 2048 /\ val (word_and (word_shl (kp:int32) 2) (word 8188):int32) = 4 * kk` STRIP_ASSUME_TAC THENL</div>
+<div id="L473">     [EXPAND_TAC &quot;kk&quot; THEN REWRITE_TAC[PL5_SHL_AND; MOD_LT_EQ] THEN ARITH_TAC; ALL_TAC] THEN</div>
+<div id="L474">    PL5_DI_FACT_TAC `1163264` `kk:num` `FST (SND (X:(num-&gt;int32)#(num-&gt;int32)#(num-&gt;int32)#int32)) kk` THEN</div>
+<div id="L475">    PL5_DI_FACT_TAC `1171456` `kk:num` `FST (SND (SND (X:(num-&gt;int32)#(num-&gt;int32)#(num-&gt;int32)#int32))) kk` THEN</div>
+<div id="L476">    ABBREV_TAC `mm = read wmem (s0:wasmstate)` THEN</div>
+<div id="L477">    WASM_STEPS_TAC PL5_F14_EXEC (1--79);</div>
+<div id="L478">    ABBREV_TAC `mm = read wmem (s0:wasmstate)` THEN</div>
+<div id="L479">    WASM_STEPS_TAC PL5_F14_EXEC (1--55)] THEN</div>
+<div id="L480">  ENSURES_FINAL_STATE_TAC THEN ASM_REWRITE_TAC[] THEN PL5_MEM_CLOSE_TAC);;</div>
+<div id="L481"></div>
+<div id="L482">let pl5_post x = subst [x,`XX:(num-&gt;int32)#(num-&gt;int32)#(num-&gt;int32)#int32`]</div>
+<div id="L483">  `\s. read wstatus s = WDone /\ (?r. read wstack s = [I32 r]) /\ va1_bs XX (read wmem s)`;;</div>
+<div id="L484"></div>
+<div id="L485">let pl5_bx = `X:(num-&gt;int32)#(num-&gt;int32)#(num-&gt;int32)#int32`;;</div>
+<div id="L486"></div>
+<div id="L487">let PL5_BACK = prove</div>
+<div id="L488"> (list_mk_forall([`L:num`; `b:int32`; pl5_bx; `i:num`],</div>
+<div id="L489">   mk_imp(`0 &lt; i /\ i &lt; L /\ L &lt;= 16384`,</div>
+<div id="L490">    list_mk_comb(`ensures wasm`, [pl5_pc 247 (pl5_inv `b:int32` `i:num` pl5_bx);</div>
+<div id="L491">                                  pl5_pc 82 (pl5_inv `b:int32` `i:num` pl5_bx); PL5_FRAME]))),</div>
+<div id="L492">  REPEAT GEN_TAC THEN STRIP_TAC THEN</div>
+<div id="L493">  SUBGOAL_THEN `(word (L - i):int32 = word 0) &lt;=&gt; F` ASSUME_TAC THENL</div>
+<div id="L494">   [MATCH_MP_TAC VK_WORD_NE0 THEN ASM_ARITH_TAC; ALL_TAC] THEN</div>
+<div id="L495">  ENSURES_INIT_TAC &quot;s0&quot; THEN RESOLVE_PC_COND_TAC THEN</div>
+<div id="L496">  ABBREV_TAC `mm = read wmem (s0:wasmstate)` THEN</div>
+<div id="L497">  PL5_STEPS_TAC PL5_F14_EXEC (1--2) THEN</div>
+<div id="L498">  ENSURES_FINAL_STATE_TAC THEN ASM_REWRITE_TAC[]);;</div>
+<div id="L499"></div>
+<div id="L500">let PL5_BS_CLOSE_TAC : tactic =</div>
+<div id="L501">  REWRITE_TAC[PL5_BS] THEN REPEAT CONJ_TAC THEN</div>
+<div id="L502">  TRY(PL5_W32S_GOAL_TAC THEN NO_TAC) THEN</div>
+<div id="L503">  REWRITE_TAC[CAP_B32_SAME] THEN ASM_REWRITE_TAC[];;</div>
+<div id="L504"></div>
+<div id="L505">let PL5_EXIT_TAG = prove</div>
+<div id="L506"> (list_mk_forall([`L:num`; `b:int32`; pl5_bx; `i:num`],</div>
+<div id="L507">   mk_imp(`i &lt; L /\ L &lt;= 16384 /\ ~(FST (X:(num-&gt;int32)#(num-&gt;int32)#(num-&gt;int32)#int32) (12 * (L - (i + 1)) + 6) = b) /\</div>
+<div id="L508">           SND (SND (SND X)) = word (L - i)`,</div>
+<div id="L509">    list_mk_comb(`ensures wasm`, [pl5_pc 82 (pl5_inv `b:int32` `i:num` pl5_bx); pl5_post pl5_bx; PL5_FRAME]))),</div>
+<div id="L510">  REPEAT GEN_TAC THEN STRIP_TAC THEN</div>
+<div id="L511">  ABBREV_TAC `n = L - (i + 1)` THEN</div>
+<div id="L512">  SUBGOAL_THEN `n &lt; 16384 /\ L - i = n + 1 /\ 1179600 + 48 * (L - i) = 1179648 + 4 * 12 * n` STRIP_ASSUME_TAC THENL</div>
+<div id="L513">   [EXPAND_TAC &quot;n&quot; THEN ASM_ARITH_TAC; ALL_TAC] THEN</div>
+<div id="L514">  ASM_REWRITE_TAC[] THEN</div>
+<div id="L515">  ABBREV_TAC `tg = FST (X:(num-&gt;int32)#(num-&gt;int32)#(num-&gt;int32)#int32) (12 * n + 6)` THEN</div>
+<div id="L516">  SUBGOAL_THEN `(tg:int32 = b) &lt;=&gt; F` ASSUME_TAC THENL [ASM_REWRITE_TAC[]; ALL_TAC] THEN</div>
+<div id="L517">  ENSURES_INIT_TAC &quot;s0&quot; THEN RESOLVE_PC_COND_TAC THEN</div>
+<div id="L518">  PL5_DI_FACT_TAC `1179648` `12 * n + 6` `tg:int32` THEN</div>
+<div id="L519">  PL5_VALS_TAC THEN</div>
+<div id="L520">  ABBREV_TAC `mm = read wmem (s0:wasmstate)` THEN</div>
+<div id="L521">  WASM_STEPS_TAC PL5_F14_EXEC (1--13) THEN</div>
+<div id="L522">  ENSURES_FINAL_STATE_TAC THEN ASM_REWRITE_TAC[] THEN</div>
+<div id="L523">  CONJ_TAC THENL [MESON_TAC[]; PL5_BS_CLOSE_TAC]);;</div>
+<div id="L524"></div>
+<div id="L525">let PL5_EXIT_CNT = prove</div>
+<div id="L526"> (list_mk_forall([`L:num`; `b:int32`; pl5_bx],</div>
+<div id="L527">   mk_imp(`L &lt;= 16384 /\ SND (SND (SND (X:(num-&gt;int32)#(num-&gt;int32)#(num-&gt;int32)#int32))) = word 0`,</div>
+<div id="L528">    list_mk_comb(`ensures wasm`, [pl5_pc 247 (pl5_inv `b:int32` `L:num` pl5_bx); pl5_post pl5_bx; PL5_FRAME]))),</div>
+<div id="L529">  REPEAT GEN_TAC THEN STRIP_TAC THEN REWRITE_TAC[SUB_REFL] THEN</div>
+<div id="L530">  ENSURES_INIT_TAC &quot;s0&quot; THEN RESOLVE_PC_COND_TAC THEN</div>
+<div id="L531">  ABBREV_TAC `mm = read wmem (s0:wasmstate)` THEN</div>
+<div id="L532">  PL5_STEPS_TAC PL5_F14_EXEC (1--12) THEN</div>
+<div id="L533">  ENSURES_FINAL_STATE_TAC THEN ASM_REWRITE_TAC[] THEN</div>
+<div id="L534">  CONJ_TAC THENL [MESON_TAC[]; PL5_BS_CLOSE_TAC]);;</div>
+<div id="L535"></div>
+<div id="L536">let PL5_ZERO = prove</div>
+<div id="L537"> (list_mk_forall([`t:int32`; `di:num-&gt;int32`; `zq:num-&gt;int32`; `zp:num-&gt;int32`; `decls:wval list`],</div>
+<div id="L538">   mk_imp(`wasm_decl_vals va1_f14_mc = SOME decls`,</div>
+<div id="L539">    list_mk_comb(`ensures wasm`, [subst [`0`,`L:num`] pl5_pre;</div>
+<div id="L540">       pl5_post `(di:num-&gt;int32,zq:num-&gt;int32,zp:num-&gt;int32,word 0:int32)`; PL5_FRAME]))),</div>
+<div id="L541">  REPEAT GEN_TAC THEN STRIP_TAC THEN</div>
+<div id="L542">  FIRST_X_ASSUM(MP_TAC o check (fun th -&gt; can (find_term ((=) `decls:wval list`)) (concl th))) THEN</div>
+<div id="L543">  REWRITE_TAC[CONJUNCT2 VA1_F14_CALLEE; option_INJ] THEN DISCH_THEN(SUBST_ALL_TAC o SYM) THEN</div>
+<div id="L544">  REWRITE_TAC[va1_bs; va1_tick] THEN</div>
+<div id="L545">  ENSURES_INIT_TAC &quot;s0&quot; THEN</div>
+<div id="L546">  SUBGOAL_THEN `!k. k &lt; 7 ==&gt; read (wlocal k) s0 = I32 (word 0)` MP_TAC THENL</div>
+<div id="L547">   [FIRST_X_ASSUM(MP_TAC o check (fun th -&gt; can (find_term ((=) `wlocals`)) (concl th))) THEN</div>
+<div id="L548">    REWRITE_TAC[wlocal; READ_COMPONENT_COMPOSE] THEN DISCH_THEN SUBST1_TAC THEN</div>
+<div id="L549">    REWRITE_TAC[wcall_locals; LENGTH; READ_ELEMENT] THEN CONV_TAC(ONCE_DEPTH_CONV NUM_REDUCE_CONV) THEN</div>
+<div id="L550">    CONV_TAC EXPAND_CASES_CONV THEN CONV_TAC(ONCE_DEPTH_CONV NUM_REDUCE_CONV) THEN REWRITE_TAC[EL; HD; TL; LENGTH; ARITH] THEN</div>
+<div id="L551">    CONV_TAC(ONCE_DEPTH_CONV EL_CONV) THEN REWRITE_TAC[];</div>
+<div id="L552">    CONV_TAC(ONCE_DEPTH_CONV EXPAND_CASES_CONV) THEN CONV_TAC(ONCE_DEPTH_CONV NUM_REDUCE_CONV) THEN STRIP_TAC] THEN</div>
+<div id="L553">  FIRST_X_ASSUM(K ALL_TAC o check (fun th -&gt; can (find_term ((=) `wlocals`)) (concl th))) THEN</div>
+<div id="L554">  ABBREV_TAC `mm = read wmem (s0:wasmstate)` THEN</div>
+<div id="L555">  SUBGOAL_THEN `(if ~(val (word 0:int32) &lt; 16384) then I32 (word 16384) else I32 (word 0)) = I32 (word 0)` ASSUME_TAC THENL</div>
+<div id="L556">   [REWRITE_TAC[VAL_WORD_0; ARITH]; ALL_TAC] THEN</div>
+<div id="L557">  PL5_STEPS_TAC PL5_F14_EXEC (1--17) THEN</div>
+<div id="L558">  ENSURES_FINAL_STATE_TAC THEN ASM_REWRITE_TAC[] THEN</div>
+<div id="L559">  CONJ_TAC THENL [MESON_TAC[]; ALL_TAC] THEN</div>
+<div id="L560">  REWRITE_TAC[CAP_B32_SAME] THEN REPEAT CONJ_TAC THEN</div>
+<div id="L561">  MATCH_MP_TAC PL5_W32S_W32 THEN ASM_REWRITE_TAC[] THEN ARITH_TAC);;</div>
+<div id="L562"></div>
+<div id="L563">let pl5_b = `word_add (t:int32) (word 1)`;;</div>
+<div id="L564">let pl5_U i = subst [i,`ii:num`]</div>
+<div id="L565">  `va1_unb (word_add (t:int32) (word 1)) ii (di:num-&gt;int32,zq:num-&gt;int32,zp:num-&gt;int32,word L:int32)`;;</div>
+<div id="L566"></div>
+<div id="L567">let POP_L5_UNBIRTH_OK = prove(parse_term pop_spec_VA1_UNBIRTH_OK,</div>
+<div id="L568">  REWRITE_TAC[va1_unbirth_ok] THEN</div>
+<div id="L569">  MAP_EVERY X_GEN_TAC [`t:int32`; `di:num-&gt;int32`; `zq:num-&gt;int32`; `zp:num-&gt;int32`; `nd:int32`; `decls:wval list`] THEN</div>
+<div id="L570">  STRIP_TAC THEN</div>
+<div id="L571">  ABBREV_TAC `L = val (nd:int32)` THEN</div>
+<div id="L572">  SUBGOAL_THEN `nd:int32 = word L` SUBST_ALL_TAC THENL [EXPAND_TAC &quot;L&quot; THEN REWRITE_TAC[WORD_VAL]; ALL_TAC] THEN</div>
+<div id="L573">  SUBGOAL_THEN `L &lt;= 16384` ASSUME_TAC THENL [ASM_MESON_TAC[]; ALL_TAC] THEN</div>
+<div id="L574">  ASM_REWRITE_TAC[] THEN</div>
+<div id="L575">  ASM_CASES_TAC `L = 0` THENL</div>
+<div id="L576">   [FIRST_X_ASSUM SUBST_ALL_TAC THEN REWRITE_TAC[VA1_UNB_CLAUSES] THEN</div>
+<div id="L577">    MATCH_MP_TAC PL5_ZERO THEN ASM_REWRITE_TAC[];</div>
+<div id="L578">    ALL_TAC] THEN</div>
+<div id="L579">  SUBGOAL_THEN `0 &lt; L` ASSUME_TAC THENL [ASM_ARITH_TAC; ALL_TAC] THEN</div>
+<div id="L580">  MP_TAC(SPECL [pl5_b; `(di:num-&gt;int32,zq:num-&gt;int32,zp:num-&gt;int32,word L:int32)`; `L:num`] PL5_K_EXISTS) THEN</div>
+<div id="L581">  DISCH_THEN(X_CHOOSE_THEN `K:num` (CONJUNCTS_THEN2 ASSUME_TAC</div>
+<div id="L582">    (CONJUNCTS_THEN2 (LABEL_TAC &quot;chk&quot;) (LABEL_TAC &quot;stop&quot;)))) THEN</div>
+<div id="L583">  SUBGOAL_THEN (mk_eq(pl5_U `L:num`, pl5_U `K:num`)) SUBST1_TAC THENL</div>
+<div id="L584">   [MATCH_MP_TAC PL5_UNB_FINAL THEN ASM_REWRITE_TAC[]; ALL_TAC] THEN</div>
+<div id="L585">  SUBGOAL_THEN (mk_forall(`j:num`, mk_imp(`j &lt;= K`,</div>
+<div id="L586">     mk_eq(subst [pl5_U `j:num`,`uu:(num-&gt;int32)#(num-&gt;int32)#(num-&gt;int32)#int32`]</div>
+<div id="L587">             `SND (SND (SND (uu:(num-&gt;int32)#(num-&gt;int32)#(num-&gt;int32)#int32)))`, `word (L - j):int32`))))</div>
+<div id="L588">   (LABEL_TAC &quot;nd&quot;) THENL</div>
+<div id="L589">   [X_GEN_TAC `j:num` THEN DISCH_TAC THEN</div>
+<div id="L590">    MP_TAC(SPECL [pl5_b; `(di:num-&gt;int32,zq:num-&gt;int32,zp:num-&gt;int32,word L:int32)`; `j:num`] PL5_UNB_ND) THEN</div>
+<div id="L591">    ASM_REWRITE_TAC[] THEN ANTS_TAC THENL</div>
+<div id="L592">     [CONJ_TAC THENL [GEN_TAC THEN DISCH_TAC THEN USE_THEN &quot;chk&quot; MATCH_MP_TAC THEN ASM_ARITH_TAC; ASM_ARITH_TAC];</div>
+<div id="L593">      SIMP_TAC[]];</div>
+<div id="L594">    ALL_TAC] THEN</div>
+<div id="L595">  ASM_CASES_TAC `K = 0` THENL</div>
+<div id="L596">   [FIRST_X_ASSUM SUBST_ALL_TAC THEN REWRITE_TAC[VA1_UNB_CLAUSES] THEN</div>
+<div id="L597">    MATCH_MP_TAC ENSURES_TRANS_SIMPLE THEN</div>
+<div id="L598">    EXISTS_TAC (pl5_pc 82 (pl5_inv pl5_b `0` `(di:num-&gt;int32,zq:num-&gt;int32,zp:num-&gt;int32,word L:int32)`)) THEN</div>
+<div id="L599">    REPEAT CONJ_TAC THENL</div>
+<div id="L600">     [MAYCHANGE_IDEMPOT_TAC;</div>
+<div id="L601">      MATCH_MP_TAC PL5_ENTRY THEN ASM_REWRITE_TAC[];</div>
+<div id="L602">      MATCH_MP_TAC PL5_EXIT_TAG THEN ASM_REWRITE_TAC[SUB_0] THEN</div>
+<div id="L603">      REMOVE_THEN &quot;stop&quot; MP_TAC THEN ASM_REWRITE_TAC[VA1_UNB_CLAUSES; ADD_CLAUSES]];</div>
+<div id="L604">    ALL_TAC] THEN</div>
+<div id="L605">  ENSURES_WHILE_UP_TAC `K:num` `82` `247` (mk_abs(`i:num`, pl5_inv pl5_b `i:num` (pl5_U `i:num`))) THEN</div>
+<div id="L606">  REPEAT CONJ_TAC THENL</div>
+<div id="L607">   [ASM_REWRITE_TAC[];</div>
+<div id="L608">    PURE_REWRITE_TAC[CONJUNCT1 VA1_UNB_CLAUSES] THEN MATCH_MP_TAC PL5_ENTRY THEN ASM_REWRITE_TAC[];</div>
+<div id="L609">    X_GEN_TAC `i:num` THEN STRIP_TAC THEN</div>
+<div id="L610">    SUBGOAL_THEN (mk_eq(pl5_U `i + 1`, mk_comb(`va1_pop1`, pl5_U `i:num`))) SUBST1_TAC THENL</div>
+<div id="L611">     [MATCH_MP_TAC PL5_UNB_STEP THEN GEN_TAC THEN DISCH_TAC THEN USE_THEN &quot;chk&quot; MATCH_MP_TAC THEN ASM_ARITH_TAC;</div>
+<div id="L612">      ALL_TAC] THEN</div>
+<div id="L613">    MATCH_MP_TAC PL5_BODY THEN</div>
+<div id="L614">    CONJ_TAC THENL [ASM_ARITH_TAC; ALL_TAC] THEN CONJ_TAC THENL [ASM_ARITH_TAC; ALL_TAC] THEN</div>
+<div id="L615">    SUBGOAL_THEN (mk_eq(mk_comb(`val:int32-&gt;num`, subst [pl5_U `i:num`,`uu:(num-&gt;int32)#(num-&gt;int32)#(num-&gt;int32)#int32`]</div>
+<div id="L616">        `SND (SND (SND (uu:(num-&gt;int32)#(num-&gt;int32)#(num-&gt;int32)#int32)))`), `L - i`)) ASSUME_TAC THENL</div>
+<div id="L617">     [USE_THEN &quot;nd&quot; (MP_TAC o SPEC `i:num`) THEN ANTS_TAC THENL [ASM_ARITH_TAC; DISCH_THEN SUBST1_TAC] THEN</div>
+<div id="L618">      MATCH_MP_TAC CAP_VAL_WORD32 THEN ASM_ARITH_TAC;</div>
+<div id="L619">      ALL_TAC] THEN</div>
+<div id="L620">    ASM_REWRITE_TAC[] THEN</div>
+<div id="L621">    USE_THEN &quot;chk&quot; (MP_TAC o SPEC `i:num`) THEN ANTS_TAC THENL [ASM_ARITH_TAC; ALL_TAC] THEN</div>
+<div id="L622">    ASM_REWRITE_TAC[ARITH_RULE `L - i - 1 = L - (i + 1)`] THEN MESON_TAC[];</div>
+<div id="L623">    X_GEN_TAC `i:num` THEN STRIP_TAC THEN MATCH_MP_TAC PL5_BACK THEN ASM_ARITH_TAC;</div>
+<div id="L624">    ASM_CASES_TAC `K:num = L` THENL</div>
+<div id="L625">     [FIRST_X_ASSUM SUBST_ALL_TAC THEN MATCH_MP_TAC PL5_EXIT_CNT THEN ASM_REWRITE_TAC[] THEN</div>
+<div id="L626">      USE_THEN &quot;nd&quot; (MP_TAC o SPEC `L:num`) THEN REWRITE_TAC[LE_REFL; SUB_REFL];</div>
+<div id="L627">      ALL_TAC] THEN</div>
+<div id="L628">    MATCH_MP_TAC ENSURES_TRANS_SIMPLE THEN</div>
+<div id="L629">    EXISTS_TAC (pl5_pc 82 (pl5_inv pl5_b `K:num` (pl5_U `K:num`))) THEN</div>
+<div id="L630">    REPEAT CONJ_TAC THENL</div>
+<div id="L631">     [MAYCHANGE_IDEMPOT_TAC;</div>
+<div id="L632">      MATCH_MP_TAC PL5_BACK THEN ASM_ARITH_TAC;</div>
+<div id="L633">      MATCH_MP_TAC PL5_EXIT_TAG THEN</div>
+<div id="L634">      SUBGOAL_THEN `K &lt; L` ASSUME_TAC THENL [ASM_ARITH_TAC; ALL_TAC] THEN</div>
+<div id="L635">      USE_THEN &quot;nd&quot; (MP_TAC o SPEC `K:num`) THEN REWRITE_TAC[LE_REFL] THEN DISCH_TAC THEN</div>
+<div id="L636">      ASM_REWRITE_TAC[] THEN</div>
+<div id="L637">      SUBGOAL_THEN `val (word (L - K):int32) = L - K` ASSUME_TAC THENL</div>
+<div id="L638">       [MATCH_MP_TAC CAP_VAL_WORD32 THEN ASM_ARITH_TAC; ALL_TAC] THEN</div>
+<div id="L639">      SUBGOAL_THEN `0 &lt; L - K /\ L - K - 1 = L - (K + 1)` STRIP_ASSUME_TAC THENL [ASM_ARITH_TAC; ALL_TAC] THEN</div>
+<div id="L640">      REMOVE_THEN &quot;stop&quot; MP_TAC THEN ASM_REWRITE_TAC[]]]);;</div>
+</div>
+<p class="dim">Generated by <code>tools/build_trail.py</code> from the published files; checked by <code>tools/check_trail.py</code>.</p>
+</body>
+</html>

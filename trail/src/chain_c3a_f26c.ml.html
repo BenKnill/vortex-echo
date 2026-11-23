@@ -1,0 +1,343 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>chain_c3a_f26c.ml: Vortex Echo proof trail</title>
+<link rel="icon" href="data:,">
+<style>
+:root { --bg:#fbfbfa; --ink:#1d2129; --dim:#5b6372; --line:#e2e4e8; --acc:#2f5bb7; --code:#f1f2f4; --ok:#1d7a46; --hl:#fff3b8; }
+@media (prefers-color-scheme: dark) { :root { --bg:#0f1116; --ink:#dde1e8; --dim:#9aa3b3; --line:#2a2f3a; --acc:#8fb0ff; --code:#1a1e27; --ok:#5fd08e; --hl:#3d3615; } }
+html { background:var(--bg); color:var(--ink); }
+body { margin:0 auto; max-width:980px; padding:22px 22px 80px; font:16px/1.55 -apple-system,"Segoe UI",Helvetica,Arial,sans-serif; }
+h1 { font-size:26px; line-height:1.25; margin:6px 0 14px; }
+h2 { font-size:20px; margin:34px 0 10px; padding-top:10px; border-top:1px solid var(--line); }
+h3 { font-size:16px; margin:0 0 8px; }
+a { color:var(--acc); }
+code, pre { font:12.5px/1.45 ui-monospace,Menlo,Consolas,monospace; }
+code { background:var(--code); padding:1px 4px; border-radius:4px; }
+pre { background:var(--code); padding:10px 12px; border-radius:8px; overflow:auto; }
+pre code { background:none; padding:0; }
+pre.stmt { white-space:pre-wrap; word-break:break-all; max-height:28em; }
+.crumbs { font-size:14px; color:var(--dim); }
+.walk { display:flex; flex-wrap:wrap; gap:6px; align-items:center; font-size:14px; margin:10px 0 18px; }
+.walk a, .walk span.s { border:1px solid var(--line); border-radius:999px; padding:3px 10px; text-decoration:none; background:var(--code); }
+.walk .arr { color:var(--dim); }
+blockquote { margin:10px 0; padding:8px 14px; border-left:4px solid var(--acc); background:var(--code); border-radius:0 8px 8px 0; }
+.thm { border:1px solid var(--line); border-radius:10px; padding:14px 16px; margin:14px 0; }
+.thm:target, .step:target, .fn:target { outline:3px solid var(--acc); outline-offset:2px; }
+.thm, .step, .fn, .box, h2 { scroll-margin-top:70px; }
+.src div { scroll-margin-top:120px; }
+ol.steps { margin:6px 0 0; padding-left:22px; }
+ol.steps > li { margin:10px 0; }
+ol.steps > li > b { display:inline-block; min-width:5.5em; }
+.ok { color:var(--ok); font-weight:600; }
+.dim { color:var(--dim); font-size:14px; }
+.box { border:1px solid var(--line); border-radius:10px; padding:12px 16px; margin:12px 0; background:var(--code); }
+.box pre { background:var(--bg); }
+.replay { border-color:var(--ok); }
+table { border-collapse:collapse; font-size:13.5px; line-height:1.4; }
+th, td { border:1px solid var(--line); padding:5px 8px; vertical-align:top; text-align:left; }
+th { background:var(--code); }
+.tw { overflow-x:auto; margin:10px 0; }
+.src { font:12.5px/1.5 ui-monospace,Menlo,Consolas,monospace; background:var(--code); border-radius:8px; padding:8px 0; overflow-x:auto; }
+.src { counter-reset:ln; }
+.src div { white-space:pre; padding:0 12px 0 0; counter-increment:ln; }
+.src div::before { content:counter(ln); display:inline-block; width:4.5em; padding-right:1em; text-align:right; color:var(--dim); user-select:none; }
+.src div:target { background:var(--hl); }
+pre.hex { line-height:1.5; }
+.hex .o { color:var(--dim); }
+</style>
+</head>
+<body>
+<p class="crumbs"><a href="../../index.html">Vortex Echo</a> · <a href="../../trail/index.html">Proof trail</a> · <code>chain_c3a_f26c.ml</code></p>
+<h1><code>chain_c3a_f26c.ml</code></h1>
+<p>A file loaded by a proof run. Published at <a href="../../proof-tree/tasks/bubble-echo/vortex/proofs/chain_c3a_f26c.ml"><code>proof-tree/tasks/bubble-echo/vortex/proofs/chain_c3a_f26c.ml</code></a> (SHA-256 <code>ea8d4f4d8429b1ed821393a3c6e185ff921485f99ea1cfe7e114cf842f81ab1e</code>; <a href="https://github.com/BenKnill/vortex-echo/blob/main/proof-tree/tasks/bubble-echo/vortex/proofs/chain_c3a_f26c.ml">on GitHub</a>). Line N has the anchor <code>#LN</code>.</p>
+<div class="src" data-src="proof-tree/tasks/bubble-echo/vortex/proofs/chain_c3a_f26c.ml">
+<div id="L1">needs &quot;ve_vort.ml&quot;;;</div>
+<div id="L2">needs &quot;ve_tick.ml&quot;;;</div>
+<div id="L3">needs &quot;ve_vk.ml&quot;;;</div>
+<div id="L4">needs &quot;va1_code.ml&quot;;;</div>
+<div id="L5">needs &quot;va1_seq_final2.ml&quot;;;</div>
+<div id="L6">needs &quot;pop_design_defs.ml&quot;;;</div>
+<div id="L7">needs &quot;pop_design_stmts.ml&quot;;;</div>
+<div id="L8">needs &quot;pop_l2_cdrift.ml&quot;;;</div>
+<div id="L9">needs &quot;pop_l3_jdrift.ml&quot;;;</div>
+<div id="L10">needs &quot;pop_l4_drop.ml&quot;;;</div>
+<div id="L11">needs &quot;pop_l1_rimd.ml&quot;;;</div>
+<div id="L12">needs &quot;pop_l1_rim.ml&quot;;;</div>
+<div id="L13">needs &quot;pop_l5_unbirth.ml&quot;;;</div>
+<div id="L14">needs &quot;pop_h1_hol.ml&quot;;;</div>
+<div id="L15">needs &quot;pop_n1_sat.ml&quot;;;</div>
+<div id="L16">needs &quot;pop_q0_calls.ml&quot;;;</div>
+<div id="L17">needs &quot;pop_q1_untick.ml&quot;;;</div>
+<div id="L18">needs &quot;pop_q2_forward.ml&quot;;;</div>
+<div id="L19">needs &quot;pop_r5_jig_defs.ml&quot;;;</div>
+<div id="L20">needs &quot;pop_r5jig_dec.ml&quot;;;</div>
+<div id="L21">needs &quot;pop_r5jig_lem.ml&quot;;;</div>
+<div id="L22">needs &quot;pop_r5_corr_defs.ml&quot;;;</div>
+<div id="L23">needs &quot;pop_r5c_lem.ml&quot;;;</div>
+<div id="L24">needs &quot;pop_r5b_bdec.ml&quot;;;</div>
+<div id="L25">needs &quot;pop_r5bp_lem.ml&quot;;;</div>
+<div id="L26">needs &quot;pop_r5bp_lem2.ml&quot;;;</div>
+<div id="L27">needs &quot;pop_r5bp_lem3.ml&quot;;;</div>
+<div id="L28">needs &quot;pop_r5bp_lem4.ml&quot;;;</div>
+<div id="L29">needs &quot;pop_r5bp_lem5b.ml&quot;;;</div>
+<div id="L30">needs &quot;pop_r5bp_lem6.ml&quot;;;</div>
+<div id="L31">needs &quot;pop_s0_end.ml&quot;;;</div>
+<div id="L32">needs &quot;pop_r5_r4c_final.ml&quot;;;</div>
+<div id="L33">needs &quot;chain_c1_host.ml&quot;;;</div>
+<div id="L34">needs &quot;chain_c3a_defs.ml&quot;;;</div>
+<div id="L35">needs &quot;chain_c3a_f26a.ml&quot;;;</div>
+<div id="L36">needs &quot;chain_c3a_f26b.ml&quot;;;</div>
+<div id="L37">(* ========================================================================= *)</div>
+<div id="L38">(* Vortex chain, rung C3a, layer 4: f26 assembled (C3A, Claude Opus 5.5,     *)</div>
+<div id="L39">(* 2026-11-13): entry (pc 5..69), the check loop (layer 2), the 26 header    *)</div>
+<div id="L40">(* stores (309..556), loop 2, pc 646..652, loop 3 (layer 3), the tail (ND := *)</div>
+<div id="L41">(* 0, return local 0). The memory atoms a loop does not touch are carried    *)</div>
+<div id="L42">(* around it by C3_ENSURES_CARRY and component reasoning on its frame (the   *)</div>
+<div id="L43">(* C1 KEEPS method, chain_c1_np.ml). Result: VA1_F26_OK.                     *)</div>
+<div id="L44">(* ========================================================================= *)</div>
+<div id="L45"></div>
+<div id="L46">let C3_ENSURES_CARRY = prove</div>
+<div id="L47"> (`!(step:A-&gt;A-&gt;bool) P Q C R.</div>
+<div id="L48">     ensures step P Q C /\ (!s s&#x27;. R s /\ C s s&#x27; ==&gt; R s&#x27;)</div>
+<div id="L49">     ==&gt; ensures step (\s. P s /\ R s) (\s. Q s /\ R s) C`,</div>
+<div id="L50">  REPEAT GEN_TAC THEN REWRITE_TAC[ensures] THEN STRIP_TAC THEN</div>
+<div id="L51">  X_GEN_TAC `s:A` THEN CONV_TAC(TOP_DEPTH_CONV BETA_CONV) THEN STRIP_TAC THEN</div>
+<div id="L52">  MATCH_MP_TAC C1_EV_MONO_CONJ THEN EXISTS_TAC `\s&#x27;. (Q:A-&gt;bool) s&#x27; /\ C (s:A) s&#x27;` THEN</div>
+<div id="L53">  CONV_TAC(TOP_DEPTH_CONV BETA_CONV) THEN ASM_SIMP_TAC[] THEN ASM_MESON_TAC[]);;</div>
+<div id="L54"></div>
+<div id="L55">(* ---- component frames (verbatim method of chain_c1_np.ml C1_*_KEEPS) ---- *)</div>
+<div id="L56">let C3_SEQ_KEEPS = prove</div>
+<div id="L57"> (`!(d:(A,C)component) (r1:A-&gt;A-&gt;bool) (r2:A-&gt;A-&gt;bool).</div>
+<div id="L58">     (!s s&#x27;. r1 s s&#x27; ==&gt; read d s&#x27; = read d s) /\</div>
+<div id="L59">     (!s s&#x27;. r2 s s&#x27; ==&gt; read d s&#x27; = read d s)</div>
+<div id="L60">     ==&gt; !s s&#x27;. (r1 ,, r2) s s&#x27; ==&gt; read d s&#x27; = read d s`,</div>
+<div id="L61">  REWRITE_TAC[seq] THEN CONV_TAC(TOP_DEPTH_CONV BETA_CONV) THEN MESON_TAC[]);;</div>
+<div id="L62">let C3_ASSIGNS_KEEPS = prove</div>
+<div id="L63"> (`!(c:(A,B)component) (d:(A,C)component).</div>
+<div id="L64">     (!y s. read d (write c y s) = read d s)</div>
+<div id="L65">     ==&gt; !s s&#x27;. ASSIGNS c s s&#x27; ==&gt; read d s&#x27; = read d s`,</div>
+<div id="L66">  REWRITE_TAC[ASSIGNS_THM] THEN CONV_TAC(TOP_DEPTH_CONV BETA_CONV) THEN MESON_TAC[]);;</div>
+<div id="L67">let C3_COMP_TAC =</div>
+<div id="L68">  REPEAT GEN_TAC THEN REWRITE_TAC[wlocal; READ_COMPONENT_COMPOSE; WRITE_COMPONENT_COMPOSE] THEN</div>
+<div id="L69">  CONV_TAC(TOP_DEPTH_CONV COMPONENT_READ_OVER_WRITE_CONV) THEN REWRITE_TAC[];;</div>
+<div id="L70">let C3_KEEPS_TAC (comptac:tactic) =</div>
+<div id="L71">  REWRITE_TAC[MAYCHANGE; SEQ_ID] THEN</div>
+<div id="L72">  REPEAT(MATCH_MP_TAC C3_SEQ_KEEPS THEN CONJ_TAC) THEN</div>
+<div id="L73">  MATCH_MP_TAC C3_ASSIGNS_KEEPS THEN comptac;;</div>
+<div id="L74">let C3_B32_COMP_TAC =</div>
+<div id="L75">  C3_COMP_TAC THEN</div>
+<div id="L76">  TRY(MATCH_MP_TAC B32_BYTES_OTHER THEN CONV_TAC NUM_REDUCE_CONV THEN ASM_ARITH_TAC);;</div>
+<div id="L77"></div>
+<div id="L78">let c3_keep32 lo hi cf = subst [mk_small_numeral lo,`LO:num`; mk_small_numeral hi,`HI:num`; cf,`CF:wasmstate-&gt;wasmstate-&gt;bool`]</div>
+<div id="L79"> `!a. (a + 4 &lt;= LO \/ HI &lt;= a) /\ a + 4 &lt; 2 EXP 64</div>
+<div id="L80">      ==&gt; !s s&#x27;. CF s s&#x27; ==&gt; read (bytes32 (word a)) (read wmem s&#x27;) = read (bytes32 (word a)) (read wmem s)`;;</div>
+<div id="L81">let C3_KEEP32_TAC =</div>
+<div id="L82">  GEN_TAC THEN STRIP_TAC THEN REWRITE_TAC[GSYM READ_COMPONENT_COMPOSE] THEN</div>
+<div id="L83">  C3_KEEPS_TAC C3_B32_COMP_TAC;;</div>
+<div id="L84">let C3_L2_KEEP32 = prove(c3_keep32 1130496 1179648 C3_LOOP2_FRAME, C3_KEEP32_TAC);;</div>
+<div id="L85">let C3_L3_KEEP32 = prove(c3_keep32 1179648 1966080 C3_LOOP3_FRAME, C3_KEEP32_TAC);;</div>
+<div id="L86"></div>
+<div id="L87">(* carry: every atom is a bytes32 read at an address outside the frame *)</div>
+<div id="L88">let C3_CARRY_TAC (kth:thm) : tactic =</div>
+<div id="L89">  REPEAT GEN_TAC THEN CONV_TAC(TOP_DEPTH_CONV BETA_CONV) THEN STRIP_TAC THEN</div>
+<div id="L90">  RULE_ASSUM_TAC(REWRITE_RULE[va1_pop; va1_w32s]) THEN REWRITE_TAC[va1_pop; va1_w32s] THEN</div>
+<div id="L91">  REPEAT CONJ_TAC THEN TRY(GEN_TAC THEN DISCH_TAC) THEN</div>
+<div id="L92">  W(fun (asl,w) -&gt;</div>
+<div id="L93">    let a = rand(rand(rand(rator(lhs w)))) in</div>
+<div id="L94">    MP_TAC(SPEC a kth) THEN ANTS_TAC THENL [CONV_TAC NUM_REDUCE_CONV THEN ASM_ARITH_TAC; ALL_TAC] THEN</div>
+<div id="L95">    DISCH_THEN(fun th -&gt; FIRST_ASSUM(fun cth -&gt; REWRITE_TAC[MATCH_MP th cth])) THEN</div>
+<div id="L96">    ASM_MESON_TAC[]);;</div>
+<div id="L97"></div>
+<div id="L98">let c3_r2 = `\m. va1_pop (word 4294967295) ap m /\ read (bytes32 (word 16404)) m = word_add (h:int32) r /\</div>
+<div id="L99">   va1_w32s 16408 26 (\k. if k &lt; 24 then word 0 else (hp:num-&gt;int32) k) m /\</div>
+<div id="L100">   va1_w32s 1179648 196608 (di:num-&gt;int32) m /\ read (bytes32 (word 16400)) m = (nd:int32)`;;</div>
+<div id="L101">let c3_r3 = `\m. va1_pop (word 4294967295) ap m /\ read (bytes32 (word 16404)) m = word_add (h:int32) r /\</div>
+<div id="L102">   va1_w32s 16408 26 (\k. if k &lt; 24 then word 0 else (hp:num-&gt;int32) k) m /\</div>
+<div id="L103">   va1_w32s 1130496 2048 (\k. word 0) m /\ va1_w32s 1138688 2048 (\k. word 0) m /\</div>
+<div id="L104">   va1_w32s 1146880 2048 (\k. word 0) m /\ va1_w32s 1155072 2048 (\k. word 0) m /\</div>
+<div id="L105">   va1_w32s 1163264 2048 (\k. word 0) m /\ va1_w32s 1171456 2048 (\k. word 0) m /\</div>
+<div id="L106">   read (bytes32 (word 16400)) m = (nd:int32)`;;</div>
+<div id="L107"></div>
+<div id="L108">let C3_S_L2 = prove</div>
+<div id="L109"> ((let lth = C3_LOOP2 in let _,[step;pp;qq;cc] = strip_comb(concl lth) in</div>
+<div id="L110">   let s = `s:wasmstate` in</div>
+<div id="L111">   let r = mk_abs(s, rhs(concl(BETA_CONV(mk_comb(c3_r2, mk_comb(`read wmem`, s)))))) in</div>
+<div id="L112">   rand(concl(ISPECL [step;pp;qq;cc;r] C3_ENSURES_CARRY))),</div>
+<div id="L113">  MATCH_MP_TAC C3_ENSURES_CARRY THEN CONJ_TAC THENL</div>
+<div id="L114">   [ACCEPT_TAC C3_LOOP2; C3_CARRY_TAC C3_L2_KEEP32]);;</div>
+<div id="L115">let C3_S_L3 = prove</div>
+<div id="L116"> ((let lth = C3_LOOP3 in let _,[step;pp;qq;cc] = strip_comb(concl lth) in</div>
+<div id="L117">   let s = `s:wasmstate` in</div>
+<div id="L118">   let r = mk_abs(s, rhs(concl(BETA_CONV(mk_comb(c3_r3, mk_comb(`read wmem`, s)))))) in</div>
+<div id="L119">   rand(concl(ISPECL [step;pp;qq;cc;r] C3_ENSURES_CARRY))),</div>
+<div id="L120">  MATCH_MP_TAC C3_ENSURES_CARRY THEN CONJ_TAC THENL</div>
+<div id="L121">   [ACCEPT_TAC C3_LOOP3; C3_CARRY_TAC C3_L3_KEEP32]);;</div>
+<div id="L122"></div>
+<div id="L123">(* ---- reads through numeric bytes32 write chains --------------------------- *)</div>
+<div id="L124">let C3_R32_CONV : conv = fun tm -&gt;</div>
+<div id="L125">  match tm with</div>
+<div id="L126">    Comb(Comb(Const(&quot;read&quot;,_),Comb(Const(&quot;bytes32&quot;,_),Comb(Const(&quot;word&quot;,_),x))),</div>
+<div id="L127">         Comb(Comb(Comb(Const(&quot;write&quot;,_),Comb(Const(&quot;bytes32&quot;,_),Comb(Const(&quot;word&quot;,_),a))),v),m))</div>
+<div id="L128">      when is_numeral x &amp;&amp; is_numeral a -&gt;</div>
+<div id="L129">      if dest_numeral x = dest_numeral a then</div>
+<div id="L130">        ISPECL [mk_comb(`word:num-&gt;int64`,x); v; m] CAP_B32_SAME</div>
+<div id="L131">      else</div>
+<div id="L132">        let th = ISPECL [x; a; v; m] VK_R32_W32 in</div>
+<div id="L133">        MP th (EQT_ELIM(NUM_REDUCE_CONV(lhand(concl th))))</div>
+<div id="L134">  | _ -&gt; failwith &quot;C3_R32_CONV&quot;;;</div>
+<div id="L135"></div>
+<div id="L136">let rec C3_CHAIN32_TAC : tactic = fun g -&gt;</div>
+<div id="L137">  FIRST [FIRST_ASSUM ACCEPT_TAC;</div>
+<div id="L138">         MATCH_MP_TAC PL5_W32S_W32 THEN CONJ_TAC THENL [ALL_TAC; CONV_TAC NUM_REDUCE_CONV] THEN</div>
+<div id="L139">         C3_CHAIN32_TAC] g;;</div>
+<div id="L140"></div>
+<div id="L141">(* a numeric atom: unfold va1_pop / bounded va1_w32s into reads, then read *)</div>
+<div id="L142">let C3_NUM_ATOM_TAC : tactic =</div>
+<div id="L143">  REWRITE_TAC[va1_pop; va1_bs; va1_w32s] THEN</div>
+<div id="L144">  TRY(CONV_TAC EXPAND_CASES_CONV) THEN CONV_TAC NUM_REDUCE_CONV THEN</div>
+<div id="L145">  CONV_TAC(TOP_DEPTH_CONV C3_R32_CONV) THEN ASM_REWRITE_TAC[];;</div>
+<div id="L146"></div>
+<div id="L147">let C3_ATOM_TAC : tactic = FIRST [C3_CHAIN32_TAC; C3_NUM_ATOM_TAC];;</div>
+<div id="L148"></div>
+<div id="L149">let C3_HDR_FACTS_TAC : tactic = fun (asl,w) -&gt;</div>
+<div id="L150">  let th = find (fun th -&gt; let c = concl th in try let h,a = strip_comb c in</div>
+<div id="L151">     fst(dest_const h) = &quot;va1_w32s&quot; &amp;&amp; dest_small_numeral(hd a) = 16408 with _ -&gt; false) (map snd asl) in</div>
+<div id="L152">  let inst k a = let t = SPECL [`16408`; `26`; `hp:num-&gt;int32`; rand(concl th); mk_small_numeral k; mk_small_numeral a] C3_W32S_AT in</div>
+<div id="L153">                 MP t (CONJ th (EQT_ELIM(NUM_REDUCE_CONV(rand(lhand(concl t)))))) in</div>
+<div id="L154">  (ASSUME_TAC (inst 24 16504) THEN ASSUME_TAC (inst 25 16508)) (asl,w);;</div>
+<div id="L155"></div>
+<div id="L156">let c3_fillr r tm = rhs(concl(TOP_DEPTH_CONV BETA_CONV (vsubst [r, `R2:(int64-&gt;byte)-&gt;bool`] tm)));;</div>
+<div id="L157"></div>
+<div id="L158">(* ---- 309..556: healErr += err, P := -1, 24 header words := 0, local3 := -8192 *)</div>
+<div id="L159">let c3_stores_tm = c3_fill (c3_fillr c3_r2 (subst [C3_F26_FRAME,`CF:wasmstate-&gt;wasmstate-&gt;bool`]</div>
+<div id="L160"> `ensures wasm</div>
+<div id="L161">   (\s. read wcode s = va1_f26_mc /\ read wpc s = word 309 /\ read wstatus s = WRunning /\</div>
+<div id="L162">        read wmemsize s = 4194304 /\ read warity s = 1 /\ read wlabels s = [0,726,0] /\</div>
+<div id="L163">        read wstack s = [] /\ C3ATOMS (read wmem s) /\ read (wlocal 0) s = I32 (r:int32))</div>
+<div id="L164">   (\s. read wcode s = va1_f26_mc /\ read wpc s = word 556 /\ read wstatus s = WRunning /\</div>
+<div id="L165">        read wmemsize s = 4194304 /\ read warity s = 1 /\ read wlabels s = [0,726,0] /\</div>
+<div id="L166">        read wstack s = [] /\ read (wlocal 3) s = I32 (word 4294959104) /\ read (wlocal 0) s = I32 r /\</div>
+<div id="L167">        va1_w32s 1130496 2048 (ra:num-&gt;int32) (read wmem s) /\ va1_w32s 1138688 2048 (rb:num-&gt;int32) (read wmem s) /\</div>
+<div id="L168">        va1_w32s 1146880 2048 (jq:num-&gt;int32) (read wmem s) /\ va1_w32s 1155072 2048 (jp:num-&gt;int32) (read wmem s) /\</div>
+<div id="L169">        va1_w32s 1163264 2048 (zq:num-&gt;int32) (read wmem s) /\ va1_w32s 1171456 2048 (zp:num-&gt;int32) (read wmem s) /\</div>
+<div id="L170">        R2 (read wmem s))</div>
+<div id="L171">   CF`));;</div>
+<div id="L172"></div>
+<div id="L173">let C3_S_STORES = prove(c3_stores_tm,</div>
+<div id="L174">  ENSURES_INIT_TAC &quot;s0&quot; THEN ABBREV_TAC `mm = read wmem s0` THEN C3_HDR_FACTS_TAC THEN</div>
+<div id="L175">  RULE_ASSUM_TAC(REWRITE_RULE[va1_pop]) THEN</div>
+<div id="L176">  C3_STEPS_TO C3A_F26_EXEC 556 THEN</div>
+<div id="L177">  ENSURES_FINAL_STATE_TAC THEN ASM_REWRITE_TAC[] THEN</div>
+<div id="L178">  REPEAT CONJ_TAC THEN C3_ATOM_TAC);;</div>
+<div id="L179"></div>
+<div id="L180">(* ---- entry 5..69, pc 646..652, tail 716..WDone, and the assembly ---------- *)</div>
+<div id="L181">let c3_bt t = rhs(concl(TOP_DEPTH_CONV BETA_CONV t));;</div>
+<div id="L182">let c3_parts th = let _,[_;p;q;c] = strip_comb(concl th) in c3_bt p, c3_bt q, c;;</div>
+<div id="L183"></div>
+<div id="L184">let c3_entry_tm =</div>
+<div id="L185">  let _,[_;cpre;_;_] = strip_comb c3_check_tm in</div>
+<div id="L186">  mk_imp(`~(p:int32 = word 4294967295) /\ wasm_decl_vals va1_f26_mc = SOME decls`,</div>
+<div id="L187">    list_mk_comb(`ensures wasm`, [`PRE26:wasmstate-&gt;bool`; cpre; C3_F26_FRAME]));;</div>
+<div id="L188">let c3_entry_tm = subst [`(\s. read wcode s = va1_f26_mc /\ read wpc s = word 5 /\ read wstatus s = WRunning /\                read wstack s = [] /\ read wlabels s = [] /\ read warity s = 1 /\                read wmemsize s = 4194304 /\ read wlocals s = wcall_locals [] decls /\                va1_pop p ap (read wmem s) /\ va1_mdl mdl (read wmem s) /\                read (bytes32 (word 16404)) (read wmem s) = h /\                va1_w32s 16408 26 hp (read wmem s) /\ va1_w32s 65536 262144 tbl (read wmem s) /\                va1_w32s 1130496 2048 ra (read wmem s) /\ va1_w32s 1138688 2048 rb (read wmem s) /\                va1_w32s 1146880 2048 jq (read wmem s) /\ va1_w32s 1155072 2048 jp (read wmem s) /\                va1_bs (di,zq,zp,nd) (read wmem s))`, `PRE26:wasmstate-&gt;bool`] c3_entry_tm;;</div>
+<div id="L189"></div>
+<div id="L190">let C3_STEPSX_TAC execth (xths:thm list) snums =</div>
+<div id="L191">  MAP_EVERY (fun s (asl,w) -&gt;</div>
+<div id="L192">     let mths = filter (fun th -&gt; is_memfact (concl th)) (map snd asl) in</div>
+<div id="L193">     WASM_SINGLE_STEP_TAC execth (READ_COMPONENT_COMPOSE :: C3_COND_I64 :: C3_COND_I32 :: xths @ mths) s (asl,w))</div>
+<div id="L194">   (statenames &quot;s&quot; snums);;</div>
+<div id="L195">let rec C3_STEPSX_TO execth xths pc : tactic = fun (asl,w) -&gt;</div>
+<div id="L196">  let s = rand w in</div>
+<div id="L197">  let cur = dest_small_numeral(rand(rhs(concl(find_read_th &quot;wpc&quot; s (map snd asl))))) in</div>
+<div id="L198">  if cur = pc then ALL_TAC (asl,w) else</div>
+<div id="L199">  let n = fst(dest_var s) in</div>
+<div id="L200">  let k = int_of_string(String.sub n 1 (String.length n - 1)) + 1 in</div>
+<div id="L201">  (C3_STEPSX_TAC execth xths [k] THEN C3_STEPSX_TO execth xths pc) (asl,w);;</div>
+<div id="L202"></div>
+<div id="L203">let C3_S_ENTRY = prove(c3_entry_tm,</div>
+<div id="L204">  STRIP_TAC THEN ENSURES_INIT_TAC &quot;s0&quot; THEN ABBREV_TAC `mm = read wmem s0` THEN</div>
+<div id="L205">  RULE_ASSUM_TAC(REWRITE_RULE[va1_bs; va1_pop]) THEN</div>
+<div id="L206">  FIRST_ASSUM(fun th -&gt; if can (term_match [] `va1_mdl mdl m`) (concl th) then</div>
+<div id="L207">     ASSUME_TAC(CONV_RULE NUM_REDUCE_CONV (SPEC `2` (REWRITE_RULE[va1_mdl] th))) else NO_TAC) THEN</div>
+<div id="L208">  RULE_ASSUM_TAC(CONV_RULE(TRY_CONV(LAND_CONV NUM_REDUCE_CONV)) o REWRITE_RULE[ARITH]) THEN</div>
+<div id="L209">  C3_STEPSX_TO C3A_F26_EXEC [ASSUME `~(p:int32 = word 4294967295)`] 69 THEN</div>
+<div id="L210">  ENSURES_FINAL_STATE_TAC THEN ASM_REWRITE_TAC[va1_pop]);;</div>
+<div id="L211"></div>
+<div id="L212">let c3_mid_tm =</div>
+<div id="L213">  let _,q2,_ = c3_parts C3_S_L2 and p3,_,_ = c3_parts C3_S_L3 in</div>
+<div id="L214">  list_mk_comb(`ensures wasm`, [q2; p3; C3_F26_FRAME]);;</div>
+<div id="L215">let C3_S_MID = prove(c3_mid_tm,</div>
+<div id="L216">  ENSURES_INIT_TAC &quot;s0&quot; THEN ABBREV_TAC `mm = read wmem s0` THEN</div>
+<div id="L217">  C3_STEPS_TAC C3A_F26_EXEC (1--2) THEN</div>
+<div id="L218">  ENSURES_FINAL_STATE_TAC THEN ASM_REWRITE_TAC[]);;</div>
+<div id="L219"></div>
+<div id="L220">let c3_tail_tm =</div>
+<div id="L221">  let _,q3,_ = c3_parts C3_S_L3 in</div>
+<div id="L222">  list_mk_comb(`ensures wasm`, [q3;</div>
+<div id="L223">   `\s. read wstatus s = WDone /\ read wstack s = [I32 (r:int32)] /\</div>
+<div id="L224">        va1_pop (word 4294967295) ap (read wmem s) /\</div>
+<div id="L225">        read (bytes32 (word 16404)) (read wmem s) = word_add h r /\</div>
+<div id="L226">        va1_w32s 16408 26 (\k. if k &lt; 24 then word 0 else hp k) (read wmem s) /\</div>
+<div id="L227">        va1_w32s 1130496 2048 (\k. word 0) (read wmem s) /\ va1_w32s 1138688 2048 (\k. word 0) (read wmem s) /\</div>
+<div id="L228">        va1_w32s 1146880 2048 (\k. word 0) (read wmem s) /\ va1_w32s 1155072 2048 (\k. word 0) (read wmem s) /\</div>
+<div id="L229">        va1_bs ((\k. word 0),(\k. word 0),(\k. word 0),word 0) (read wmem s)`;</div>
+<div id="L230">   C3_F26_FRAME]);;</div>
+<div id="L231">let C3_S_TAIL = prove(c3_tail_tm,</div>
+<div id="L232">  ENSURES_INIT_TAC &quot;s0&quot; THEN ABBREV_TAC `mm = read wmem s0` THEN</div>
+<div id="L233">  RULE_ASSUM_TAC(REWRITE_RULE[va1_pop]) THEN</div>
+<div id="L234">  C3_STEPS_TAC C3A_F26_EXEC (1--6) THEN</div>
+<div id="L235">  ENSURES_FINAL_STATE_TAC THEN ASM_REWRITE_TAC[va1_bs] THEN</div>
+<div id="L236">  REPEAT CONJ_TAC THEN C3_ATOM_TAC);;</div>
+<div id="L237"></div>
+<div id="L238">let C3_IMP_TAC (ths:thm list) =</div>
+<div id="L239">  GEN_TAC THEN CONV_TAC(TOP_DEPTH_CONV BETA_CONV) THEN REWRITE_TAC ths THEN STRIP_TAC THEN ASM_REWRITE_TAC[];;</div>
+<div id="L240">let C3_USE_TAC (ths:thm list) (th:thm) : tactic =</div>
+<div id="L241">  let p,q,c = c3_parts th in</div>
+<div id="L242">  MATCH_MP_TAC ENSURES_FRAME_SUBSUMED THEN EXISTS_TAC c THEN CONJ_TAC THENL [SUBSUMED_MAYCHANGE_TAC; ALL_TAC] THEN</div>
+<div id="L243">  MATCH_MP_TAC ENSURES_PRECONDITION_THM THEN EXISTS_TAC p THEN CONJ_TAC THENL [C3_IMP_TAC []; ALL_TAC] THEN</div>
+<div id="L244">  MATCH_MP_TAC ENSURES_POSTCONDITION_THM THEN EXISTS_TAC q THEN CONJ_TAC THENL</div>
+<div id="L245">   [C3_IMP_TAC ths;</div>
+<div id="L246">    FIRST [ACCEPT_TAC th;</div>
+<div id="L247">           CONV_TAC(TOP_DEPTH_CONV BETA_CONV) THEN ACCEPT_TAC (CONV_RULE(TOP_DEPTH_CONV BETA_CONV) th)]];;</div>
+<div id="L248">let c3_mid th = let _,q,_ = c3_parts th in let s,b = dest_abs q in mk_abs(s, list_mk_conj(tl(tl(conjuncts b))));;</div>
+<div id="L249">let c3_r = `word_add nd (word (nsum (0..2047) (va1_mis mdl tbl ((ra:num-&gt;int32),(rb:num-&gt;int32),(jq:num-&gt;int32),(jp:num-&gt;int32),(zq:num-&gt;int32),(zp:num-&gt;int32))))):int32`;;</div>
+<div id="L250">let c3_ri th = INST [c3_r,`r:int32`] th;;</div>
+<div id="L251"></div>
+<div id="L252">let VA1_F26_OK = prove</div>
+<div id="L253"> (`!p ap mdl hp tbl (ra:num-&gt;int32) (rb:num-&gt;int32) (jq:num-&gt;int32) (jp:num-&gt;int32) (di:num-&gt;int32) (zq:num-&gt;int32) (zp:num-&gt;int32) (nd:int32) h decls.</div>
+<div id="L254">     ~(p = word 4294967295) /\ wasm_decl_vals va1_f26_mc = SOME decls</div>
+<div id="L255">     ==&gt; ensures wasm</div>
+<div id="L256">          (\s. read wcode s = va1_f26_mc /\ read wpc s = word 5 /\ read wstatus s = WRunning /\</div>
+<div id="L257">               read wstack s = [] /\ read wlabels s = [] /\ read warity s = 1 /\</div>
+<div id="L258">               read wmemsize s = 4194304 /\ read wlocals s = wcall_locals [] decls /\</div>
+<div id="L259">               va1_pop p ap (read wmem s) /\ va1_mdl mdl (read wmem s) /\</div>
+<div id="L260">               read (bytes32 (word 16404)) (read wmem s) = h /\</div>
+<div id="L261">               va1_w32s 16408 26 hp (read wmem s) /\ va1_w32s 65536 262144 tbl (read wmem s) /\</div>
+<div id="L262">               va1_w32s 1130496 2048 ra (read wmem s) /\ va1_w32s 1138688 2048 rb (read wmem s) /\</div>
+<div id="L263">               va1_w32s 1146880 2048 jq (read wmem s) /\ va1_w32s 1155072 2048 jp (read wmem s) /\</div>
+<div id="L264">               va1_bs (di,zq,zp,nd) (read wmem s))</div>
+<div id="L265">          (\s. read wstatus s = WDone /\ read wstack s = [I32 (va1_bad mdl tbl (ra,rb,jq,jp,zq,zp,nd))] /\</div>
+<div id="L266">               va1_pop (word 4294967295) ap (read wmem s) /\</div>
+<div id="L267">               read (bytes32 (word 16404)) (read wmem s) = word_add h (va1_bad mdl tbl (ra,rb,jq,jp,zq,zp,nd)) /\</div>
+<div id="L268">               va1_w32s 16408 26 (\k. if k &lt; 24 then word 0 else hp k) (read wmem s) /\</div>
+<div id="L269">               va1_w32s 1130496 2048 (\k. word 0) (read wmem s) /\ va1_w32s 1138688 2048 (\k. word 0) (read wmem s) /\</div>
+<div id="L270">               va1_w32s 1146880 2048 (\k. word 0) (read wmem s) /\ va1_w32s 1155072 2048 (\k. word 0) (read wmem s) /\</div>
+<div id="L271">               va1_bs ((\k. word 0),(\k. word 0),(\k. word 0),word 0) (read wmem s))</div>
+<div id="L272">          (MAYCHANGE [wpc] ,, MAYCHANGE [wstack] ,, MAYCHANGE [wlabels] ,, MAYCHANGE [wstatus] ,,</div>
+<div id="L273">           MAYCHANGE [wlocal 0; wlocal 1; wlocal 2; wlocal 3; wlocal 4; wlocal 5] ,,</div>
+<div id="L274">           MAYCHANGE [wmem :&gt; bytes(word 16396,116)] ,, MAYCHANGE [wmem :&gt; bytes(word 1130496,835584)])`,</div>
+<div id="L275">  REPEAT GEN_TAC THEN STRIP_TAC THEN</div>
+<div id="L276">  let eth = MP C3_S_ENTRY (CONJ (ASSUME `~(p:int32 = word 4294967295)`) (ASSUME `wasm_decl_vals va1_f26_mc = SOME decls`)) in</div>
+<div id="L277">  ENSURES_SEQUENCE_TAC `69` (c3_mid eth) THEN CONJ_TAC THENL [C3_USE_TAC [] eth; ALL_TAC] THEN</div>
+<div id="L278">  ENSURES_SEQUENCE_TAC `309` (c3_mid C3_F26_CHECK) THEN CONJ_TAC THENL [C3_USE_TAC [] C3_F26_CHECK; ALL_TAC] THEN</div>
+<div id="L279">  ENSURES_SEQUENCE_TAC `556` (c3_mid (c3_ri C3_S_STORES)) THEN CONJ_TAC THENL [C3_USE_TAC [] (c3_ri C3_S_STORES); ALL_TAC] THEN</div>
+<div id="L280">  ENSURES_SEQUENCE_TAC `646` (c3_mid (c3_ri C3_S_L2)) THEN CONJ_TAC THENL [C3_USE_TAC [] (c3_ri C3_S_L2); ALL_TAC] THEN</div>
+<div id="L281">  ENSURES_SEQUENCE_TAC `652` (c3_mid (c3_ri C3_S_MID)) THEN CONJ_TAC THENL [C3_USE_TAC [] (c3_ri C3_S_MID); ALL_TAC] THEN</div>
+<div id="L282">  ENSURES_SEQUENCE_TAC `716` (c3_mid (c3_ri C3_S_L3)) THEN CONJ_TAC THENL [C3_USE_TAC [] (c3_ri C3_S_L3); ALL_TAC] THEN</div>
+<div id="L283">  C3_USE_TAC [va1_bad; ETA_AX] (c3_ri C3_S_TAIL));;</div>
+</div>
+<p class="dim">Generated by <code>tools/build_trail.py</code> from the published files; checked by <code>tools/check_trail.py</code>.</p>
+</body>
+</html>

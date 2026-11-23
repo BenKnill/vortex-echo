@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>pop_s0_end.ml: Vortex Echo proof trail</title>
+<link rel="icon" href="data:,">
+<style>
+:root { --bg:#fbfbfa; --ink:#1d2129; --dim:#5b6372; --line:#e2e4e8; --acc:#2f5bb7; --code:#f1f2f4; --ok:#1d7a46; --hl:#fff3b8; }
+@media (prefers-color-scheme: dark) { :root { --bg:#0f1116; --ink:#dde1e8; --dim:#9aa3b3; --line:#2a2f3a; --acc:#8fb0ff; --code:#1a1e27; --ok:#5fd08e; --hl:#3d3615; } }
+html { background:var(--bg); color:var(--ink); }
+body { margin:0 auto; max-width:980px; padding:22px 22px 80px; font:16px/1.55 -apple-system,"Segoe UI",Helvetica,Arial,sans-serif; }
+h1 { font-size:26px; line-height:1.25; margin:6px 0 14px; }
+h2 { font-size:20px; margin:34px 0 10px; padding-top:10px; border-top:1px solid var(--line); }
+h3 { font-size:16px; margin:0 0 8px; }
+a { color:var(--acc); }
+code, pre { font:12.5px/1.45 ui-monospace,Menlo,Consolas,monospace; }
+code { background:var(--code); padding:1px 4px; border-radius:4px; }
+pre { background:var(--code); padding:10px 12px; border-radius:8px; overflow:auto; }
+pre code { background:none; padding:0; }
+pre.stmt { white-space:pre-wrap; word-break:break-all; max-height:28em; }
+.crumbs { font-size:14px; color:var(--dim); }
+.walk { display:flex; flex-wrap:wrap; gap:6px; align-items:center; font-size:14px; margin:10px 0 18px; }
+.walk a, .walk span.s { border:1px solid var(--line); border-radius:999px; padding:3px 10px; text-decoration:none; background:var(--code); }
+.walk .arr { color:var(--dim); }
+blockquote { margin:10px 0; padding:8px 14px; border-left:4px solid var(--acc); background:var(--code); border-radius:0 8px 8px 0; }
+.thm { border:1px solid var(--line); border-radius:10px; padding:14px 16px; margin:14px 0; }
+.thm:target, .step:target, .fn:target { outline:3px solid var(--acc); outline-offset:2px; }
+.thm, .step, .fn, .box, h2 { scroll-margin-top:70px; }
+.src div { scroll-margin-top:120px; }
+ol.steps { margin:6px 0 0; padding-left:22px; }
+ol.steps > li { margin:10px 0; }
+ol.steps > li > b { display:inline-block; min-width:5.5em; }
+.ok { color:var(--ok); font-weight:600; }
+.dim { color:var(--dim); font-size:14px; }
+.box { border:1px solid var(--line); border-radius:10px; padding:12px 16px; margin:12px 0; background:var(--code); }
+.box pre { background:var(--bg); }
+.replay { border-color:var(--ok); }
+table { border-collapse:collapse; font-size:13.5px; line-height:1.4; }
+th, td { border:1px solid var(--line); padding:5px 8px; vertical-align:top; text-align:left; }
+th { background:var(--code); }
+.tw { overflow-x:auto; margin:10px 0; }
+.src { font:12.5px/1.5 ui-monospace,Menlo,Consolas,monospace; background:var(--code); border-radius:8px; padding:8px 0; overflow-x:auto; }
+.src { counter-reset:ln; }
+.src div { white-space:pre; padding:0 12px 0 0; counter-increment:ln; }
+.src div::before { content:counter(ln); display:inline-block; width:4.5em; padding-right:1em; text-align:right; color:var(--dim); user-select:none; }
+.src div:target { background:var(--hl); }
+pre.hex { line-height:1.5; }
+.hex .o { color:var(--dim); }
+</style>
+</head>
+<body>
+<p class="crumbs"><a href="../../index.html">Vortex Echo</a> · <a href="../../trail/index.html">Proof trail</a> · <code>pop_s0_end.ml</code></p>
+<h1><code>pop_s0_end.ml</code></h1>
+<p>A file loaded by a proof run. Published at <a href="../../proof-tree/tasks/bubble-echo/vortex/proofs/pop_s0_end.ml"><code>proof-tree/tasks/bubble-echo/vortex/proofs/pop_s0_end.ml</code></a> (SHA-256 <code>0678084d1bade742ff76e622ff430abc89e8d711f4bc203a72b3e5e0a4b789c0</code>; <a href="https://github.com/BenKnill/vortex-echo/blob/main/proof-tree/tasks/bubble-echo/vortex/proofs/pop_s0_end.ml">on GitHub</a>). Line N has the anchor <code>#LN</code>.</p>
+<div class="src" data-src="proof-tree/tasks/bubble-echo/vortex/proofs/pop_s0_end.ml">
+<div id="L1">needs &quot;ve_vort.ml&quot;;;</div>
+<div id="L2">needs &quot;ve_tick.ml&quot;;;</div>
+<div id="L3">needs &quot;ve_vk.ml&quot;;;</div>
+<div id="L4">needs &quot;va1_code.ml&quot;;;</div>
+<div id="L5">needs &quot;va1_seq_final2.ml&quot;;;</div>
+<div id="L6">needs &quot;pop_design_defs.ml&quot;;;</div>
+<div id="L7">needs &quot;pop_design_stmts.ml&quot;;;</div>
+<div id="L8">(* ========================================================================= *)</div>
+<div id="L9">(* Vortex pop effort, segment S0 (rung R0, pop end of run), prover S0       *)</div>
+<div id="L10">(* (Claude Opus 5.5), 2026-11-11. Statements: pop_design_stmts.ml strings,  *)</div>
+<div id="L11">(* spec pop_design_r0_end.spec (frozen, sha256 a58767df...).                 *)</div>
+<div id="L12">(*                                                                           *)</div>
+<div id="L13">(* tick_forward (f35) of vortex_a1.wasm, once the pop has run out: P set,   *)</div>
+<div id="L14">(* T &gt;=u P and T &gt;=u P + 520 (wrapping add, as in the bytes). Path: pc 13    *)</div>
+<div id="L15">(* load P, pc 22 eq -1 (false), pc 27 load T, pc 36 ge_u (true, br_if 1 to   *)</div>
+<div id="L16">(* pc 133), local 2 := 0, pc 145 ge_u against P + 520 (true, br_if 1 to the  *)</div>
+<div id="L17">(* outer block end), return local 2 = 0. No call, no store.                  *)</div>
+<div id="L18">(* No definitions, no parser changes in this file (spec-locked leaf).        *)</div>
+<div id="L19">(* ========================================================================= *)</div>
+<div id="L20"></div>
+<div id="L21">(* A step that also rewrites with the state-free hypotheses: the branch     *)</div>
+<div id="L22">(* tests at pc 22, 36 and 145 need ~(p = -1), val p &lt;= val t and             *)</div>
+<div id="L23">(* val (p + 520) &lt;= val t; GE turns the stepper output (val t &gt;= ..) into   *)</div>
+<div id="L24">(* the hypothesis form.                                                      *)</div>
+<div id="L25">let POP_S0_MSTEP_TAC execth sname (asl,w) =</div>
+<div id="L26">  let notstate th =</div>
+<div id="L27">    not (exists (fun v -&gt; type_of v = `:wasmstate`) (frees (concl th))) in</div>
+<div id="L28">  let mths = filter (fun th -&gt; is_memfact (concl th) || notstate th) (map snd asl) in</div>
+<div id="L29">  (CAPC_STEP_TAC execth</div>
+<div id="L30">     (READ_COMPONENT_COMPOSE :: VA1_GTU_MAX :: GE :: BITVAL_CLAUSES :: mths) sname THEN</div>
+<div id="L31">   CAP_DISCARD_OLD_TAC sname) (asl,w);;</div>
+<div id="L32"></div>
+<div id="L33">(* step until WDone (this path has no call) *)</div>
+<div id="L34">let rec POP_S0_RUN_TAC execth : tactic = fun (asl,w) -&gt;</div>
+<div id="L35">  let s = rand w in</div>
+<div id="L36">  let ths = map snd asl in</div>
+<div id="L37">  let is_done = exists (fun th -&gt;</div>
+<div id="L38">    concl th = mk_eq(mk_comb(`read wstatus`,s),`WDone`)) ths in</div>
+<div id="L39">  if is_done then ALL_TAC (asl,w) else</div>
+<div id="L40">  let n = fst(dest_var s) in</div>
+<div id="L41">  let k = int_of_string(String.sub n 1 (String.length n - 1)) + 1 in</div>
+<div id="L42">  let sname = &quot;s&quot;^string_of_int k in</div>
+<div id="L43">  (POP_S0_MSTEP_TAC execth sname THEN POP_S0_RUN_TAC execth) (asl,w);;</div>
+<div id="L44"></div>
+<div id="L45">let VA1_TICK_FORWARD_POP_END = prove</div>
+<div id="L46"> (parse_term pop_spec_VA1_TICK_FORWARD_POP_END,</div>
+<div id="L47">  REPEAT GEN_TAC THEN STRIP_TAC THEN</div>
+<div id="L48">  ENSURES_INIT_TAC &quot;s0&quot; THEN VA1_MEMNAME_TAC &quot;mm0&quot; THEN</div>
+<div id="L49">  POP_S0_RUN_TAC VA1_TICK_FORWARD_EXEC THEN</div>
+<div id="L50">  ENSURES_FINAL_STATE_TAC THEN ASM_REWRITE_TAC[]);;</div>
+<div id="L51"></div>
+<div id="L52">(* two disjoint 4-byte cells: a bytes32 write leaves the other read alone *)</div>
+<div id="L53">let POP_S0_B32_B32_OTHER = prove</div>
+<div id="L54"> (`!a b (y:int32) (m:int64-&gt;byte).</div>
+<div id="L55">     (a + 4 &lt;= b \/ b + 4 &lt;= a) /\ a + 4 &lt; 2 EXP 64 /\ b + 4 &lt; 2 EXP 64</div>
+<div id="L56">     ==&gt; read (bytes32 (word a)) (write (bytes32 (word b)) y m) =</div>
+<div id="L57">         read (bytes32 (word a)) m`,</div>
+<div id="L58">  REPEAT GEN_TAC THEN DISCH_TAC THEN</div>
+<div id="L59">  MATCH_MP_TAC READ_WRITE_ORTHOGONAL_COMPONENTS THEN</div>
+<div id="L60">  REWRITE_TAC[bytes32] THEN MATCH_MP_TAC ORTHOGONAL_COMPONENTS_SUB_LEFT THEN</div>
+<div id="L61">  MATCH_MP_TAC ORTHOGONAL_COMPONENTS_SUB_RIGHT THEN</div>
+<div id="L62">  REWRITE_TAC[ORTHOGONAL_COMPONENTS_BYTES; DIMINDEX_64] THEN</div>
+<div id="L63">  MATCH_MP_TAC NONOVERLAPPING_MODULO_SIMPLE THEN</div>
+<div id="L64">  SUBGOAL_THEN `val(word a:int64) = a /\ val(word b:int64) = b`</div>
+<div id="L65">   (CONJUNCTS_THEN SUBST1_TAC) THENL</div>
+<div id="L66">   [CONJ_TAC THEN MATCH_MP_TAC VAL_WORD_EQ THEN REWRITE_TAC[DIMINDEX_64] THEN</div>
+<div id="L67">    ASM_ARITH_TAC;</div>
+<div id="L68">    ASM_ARITH_TAC]);;</div>
+<div id="L69"></div>
+<div id="L70">(* the R0 precondition memory facts hold together: write T, P and AUTO *)</div>
+<div id="L71">let VA1_TICK_POP_SAT = prove</div>
+<div id="L72"> (parse_term pop_spec_VA1_TICK_POP_SAT,</div>
+<div id="L73">  REPEAT GEN_TAC THEN</div>
+<div id="L74">  EXISTS_TAC `write (bytes32 (word 16512)) (ap:int32)</div>
+<div id="L75">               (write (bytes32 (word 16396)) (p:int32)</div>
+<div id="L76">                 (write (bytes32 (word 16392)) (t:int32) (\a:int64. word 0:byte)))` THEN</div>
+<div id="L77">  REWRITE_TAC[va1_tick; va1_pop] THEN</div>
+<div id="L78">  SIMP_TAC[READ_WRITE_VALID_COMPONENT; VALID_COMPONENT_BYTES32;</div>
+<div id="L79">           POP_S0_B32_B32_OTHER; ARITH]);;</div>
+<div id="L80"></div>
+<div id="L81">(* the real end state P = 120, T = 640 meets the numeric hypotheses *)</div>
+<div id="L82">let VA1_POP_END_SAT = prove</div>
+<div id="L83"> (parse_term pop_spec_VA1_POP_END_SAT,</div>
+<div id="L84">  CONV_TAC(DEPTH_CONV WORD_RED_CONV) THEN CONV_TAC NUM_REDUCE_CONV);;</div>
+</div>
+<p class="dim">Generated by <code>tools/build_trail.py</code> from the published files; checked by <code>tools/check_trail.py</code>.</p>
+</body>
+</html>

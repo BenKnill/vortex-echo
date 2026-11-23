@@ -1,0 +1,449 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>chain_c2_final.ml: Vortex Echo proof trail</title>
+<link rel="icon" href="data:,">
+<style>
+:root { --bg:#fbfbfa; --ink:#1d2129; --dim:#5b6372; --line:#e2e4e8; --acc:#2f5bb7; --code:#f1f2f4; --ok:#1d7a46; --hl:#fff3b8; }
+@media (prefers-color-scheme: dark) { :root { --bg:#0f1116; --ink:#dde1e8; --dim:#9aa3b3; --line:#2a2f3a; --acc:#8fb0ff; --code:#1a1e27; --ok:#5fd08e; --hl:#3d3615; } }
+html { background:var(--bg); color:var(--ink); }
+body { margin:0 auto; max-width:980px; padding:22px 22px 80px; font:16px/1.55 -apple-system,"Segoe UI",Helvetica,Arial,sans-serif; }
+h1 { font-size:26px; line-height:1.25; margin:6px 0 14px; }
+h2 { font-size:20px; margin:34px 0 10px; padding-top:10px; border-top:1px solid var(--line); }
+h3 { font-size:16px; margin:0 0 8px; }
+a { color:var(--acc); }
+code, pre { font:12.5px/1.45 ui-monospace,Menlo,Consolas,monospace; }
+code { background:var(--code); padding:1px 4px; border-radius:4px; }
+pre { background:var(--code); padding:10px 12px; border-radius:8px; overflow:auto; }
+pre code { background:none; padding:0; }
+pre.stmt { white-space:pre-wrap; word-break:break-all; max-height:28em; }
+.crumbs { font-size:14px; color:var(--dim); }
+.walk { display:flex; flex-wrap:wrap; gap:6px; align-items:center; font-size:14px; margin:10px 0 18px; }
+.walk a, .walk span.s { border:1px solid var(--line); border-radius:999px; padding:3px 10px; text-decoration:none; background:var(--code); }
+.walk .arr { color:var(--dim); }
+blockquote { margin:10px 0; padding:8px 14px; border-left:4px solid var(--acc); background:var(--code); border-radius:0 8px 8px 0; }
+.thm { border:1px solid var(--line); border-radius:10px; padding:14px 16px; margin:14px 0; }
+.thm:target, .step:target, .fn:target { outline:3px solid var(--acc); outline-offset:2px; }
+.thm, .step, .fn, .box, h2 { scroll-margin-top:70px; }
+.src div { scroll-margin-top:120px; }
+ol.steps { margin:6px 0 0; padding-left:22px; }
+ol.steps > li { margin:10px 0; }
+ol.steps > li > b { display:inline-block; min-width:5.5em; }
+.ok { color:var(--ok); font-weight:600; }
+.dim { color:var(--dim); font-size:14px; }
+.box { border:1px solid var(--line); border-radius:10px; padding:12px 16px; margin:12px 0; background:var(--code); }
+.box pre { background:var(--bg); }
+.replay { border-color:var(--ok); }
+table { border-collapse:collapse; font-size:13.5px; line-height:1.4; }
+th, td { border:1px solid var(--line); padding:5px 8px; vertical-align:top; text-align:left; }
+th { background:var(--code); }
+.tw { overflow-x:auto; margin:10px 0; }
+.src { font:12.5px/1.5 ui-monospace,Menlo,Consolas,monospace; background:var(--code); border-radius:8px; padding:8px 0; overflow-x:auto; }
+.src { counter-reset:ln; }
+.src div { white-space:pre; padding:0 12px 0 0; counter-increment:ln; }
+.src div::before { content:counter(ln); display:inline-block; width:4.5em; padding-right:1em; text-align:right; color:var(--dim); user-select:none; }
+.src div:target { background:var(--hl); }
+pre.hex { line-height:1.5; }
+.hex .o { color:var(--dim); }
+</style>
+</head>
+<body>
+<p class="crumbs"><a href="../../index.html">Vortex Echo</a> · <a href="../../trail/index.html">Proof trail</a> · <code>chain_c2_final.ml</code></p>
+<h1><code>chain_c2_final.ml</code></h1>
+<p>The proof file of receipt <code>chain_c2_final</code>. Published at <a href="../../proof-tree/tasks/bubble-echo/vortex/proofs/chain_c2_final.ml"><code>proof-tree/tasks/bubble-echo/vortex/proofs/chain_c2_final.ml</code></a> (SHA-256 <code>92ee68fe8f12b2a6948ad528372778d9548dd231b2893369b9e1df59b17830a9</code>; <a href="https://github.com/BenKnill/vortex-echo/blob/main/proof-tree/tasks/bubble-echo/vortex/proofs/chain_c2_final.ml">on GitHub</a>). Line N has the anchor <code>#LN</code>.</p>
+<div class="src" data-src="proof-tree/tasks/bubble-echo/vortex/proofs/chain_c2_final.ml">
+<div id="L1">needs &quot;ve_vort.ml&quot;;;</div>
+<div id="L2">needs &quot;ve_tick.ml&quot;;;</div>
+<div id="L3">needs &quot;ve_vk.ml&quot;;;</div>
+<div id="L4">needs &quot;va1_code.ml&quot;;;</div>
+<div id="L5">needs &quot;va1_seq_final2.ml&quot;;;</div>
+<div id="L6">needs &quot;pop_design_defs.ml&quot;;;</div>
+<div id="L7">needs &quot;pop_design_stmts.ml&quot;;;</div>
+<div id="L8">needs &quot;pop_l2_cdrift.ml&quot;;;</div>
+<div id="L9">needs &quot;pop_l3_jdrift.ml&quot;;;</div>
+<div id="L10">needs &quot;pop_l4_drop.ml&quot;;;</div>
+<div id="L11">needs &quot;pop_l1_rimd.ml&quot;;;</div>
+<div id="L12">needs &quot;pop_l1_rim.ml&quot;;;</div>
+<div id="L13">needs &quot;pop_l5_unbirth.ml&quot;;;</div>
+<div id="L14">needs &quot;pop_h1_hol.ml&quot;;;</div>
+<div id="L15">needs &quot;pop_n1_sat.ml&quot;;;</div>
+<div id="L16">needs &quot;pop_q0_calls.ml&quot;;;</div>
+<div id="L17">needs &quot;pop_q1_untick.ml&quot;;;</div>
+<div id="L18">needs &quot;pop_q2_forward.ml&quot;;;</div>
+<div id="L19">needs &quot;pop_r5_jig_defs.ml&quot;;;</div>
+<div id="L20">needs &quot;pop_r5jig_dec.ml&quot;;;</div>
+<div id="L21">needs &quot;pop_r5jig_lem.ml&quot;;;</div>
+<div id="L22">needs &quot;pop_r5_corr_defs.ml&quot;;;</div>
+<div id="L23">needs &quot;pop_r5c_lem.ml&quot;;;</div>
+<div id="L24">needs &quot;pop_r5b_bdec.ml&quot;;;</div>
+<div id="L25">needs &quot;pop_r5bp_lem.ml&quot;;;</div>
+<div id="L26">needs &quot;pop_r5bp_lem2.ml&quot;;;</div>
+<div id="L27">needs &quot;pop_r5bp_lem3.ml&quot;;;</div>
+<div id="L28">needs &quot;pop_r5bp_lem4.ml&quot;;;</div>
+<div id="L29">needs &quot;pop_r5bp_lem5b.ml&quot;;;</div>
+<div id="L30">needs &quot;pop_r5bp_lem6.ml&quot;;;</div>
+<div id="L31">needs &quot;pop_s0_end.ml&quot;;;</div>
+<div id="L32">needs &quot;pop_r5_r4c_final.ml&quot;;;</div>
+<div id="L33">needs &quot;chain_c1_host.ml&quot;;;</div>
+<div id="L34">needs &quot;chain_c2_host_pop.ml&quot;;;</div>
+<div id="L35">needs &quot;chain_c2_chain.ml&quot;;;</div>
+<div id="L36">(* ========================================================================= *)</div>
+<div id="L37">(* Vortex chain, rung C2: spec-locked final leaf for chain_c2_final.spec     *)</div>
+<div id="L38">(* (frozen sha256 c7a0c0a8...; PROVE-C2, Claude Opus 5.5, 2026-11-11).       *)</div>
+<div id="L39">(* Every one of the 33 spec theorems is re-bound here against its frozen     *)</div>
+<div id="L40">(* literal statement (ACCEPT_TAC of the layer or basis theorem), including   *)</div>
+<div id="L41">(* the 22 copied ones, so that the receipt&#x27;s inspect checks each one in this *)</div>
+<div id="L42">(* leaf. Layers: chain_c2_host_pop.ml, chain_c2_chain.ml. This leaf defines  *)</div>
+<div id="L43">(* nothing and changes no parser state.                                      *)</div>
+<div id="L44">(* ========================================================================= *)</div>
+<div id="L45"></div>
+<div id="L46">let VA1_POP_REACH_CLAUSES = prove</div>
+<div id="L47"> (`(!(mdl:num-&gt;int32) (hp:num-&gt;int32) (tbl:num-&gt;int32) (p:int32) (t0:int32)</div>
+<div id="L48">    (S0:(num-&gt;int32)#(num-&gt;int32)#(num-&gt;int32)#(num-&gt;int32)#(num-&gt;int32)#(num-&gt;int32)#(num-&gt;int32)#int32) S.</div>
+<div id="L49">     va1_pop_reach mdl hp tbl p t0 S0 0 S &lt;=&gt; S = S0) /\</div>
+<div id="L50">  (!(mdl:num-&gt;int32) (hp:num-&gt;int32) (tbl:num-&gt;int32) (p:int32) (t0:int32)</div>
+<div id="L51">    (S0:(num-&gt;int32)#(num-&gt;int32)#(num-&gt;int32)#(num-&gt;int32)#(num-&gt;int32)#(num-&gt;int32)#(num-&gt;int32)#int32) u S.</div>
+<div id="L52">     va1_pop_reach mdl hp tbl p t0 S0 (SUC u) S &lt;=&gt;</div>
+<div id="L53">     ?S&#x27; (L:(num-&gt;int32)list).</div>
+<div id="L54">        va1_pop_reach mdl hp tbl p t0 S0 u S&#x27; /\</div>
+<div id="L55">        ALL (\r. r 6 = word (val t0 + u + 1) /\ r 10 = word 0 /\ r 11 = word 0) L /\</div>
+<div id="L56">        val (va1_ndof S&#x27;) + LENGTH L &lt;= 16384 /\</div>
+<div id="L57">        S = va1_pop_fwd va1_ck va1_jigk L mdl hp tbl (word (val t0 + u)) p S&#x27;)`,</div>
+<div id="L58">  ACCEPT_TAC VA1_POP_REACH_CLAUSES);;</div>
+<div id="L59"></div>
+<div id="L60">let VA1_POP_HCALL_FWD = prove</div>
+<div id="L61"> (`!(fs:num-&gt;byte list#num#num) (gl:num-&gt;wval) (t:int32) (p:int32) (ap:int32) (mdl:num-&gt;int32) (N:num)</div>
+<div id="L62">   (x:(num-&gt;int32)#(num-&gt;int32)) (hp:num-&gt;int32) (tbl:num-&gt;int32)</div>
+<div id="L63">   (S:(num-&gt;int32)#(num-&gt;int32)#(num-&gt;int32)#(num-&gt;int32)#(num-&gt;int32)#(num-&gt;int32)#(num-&gt;int32)#int32)</div>
+<div id="L64">   (m:int64-&gt;byte).</div>
+<div id="L65">     mdl 1 = word N /\ 1 &lt;= N /\ N &lt;= 640 /\ va1_fs_pop fs /\</div>
+<div id="L66">     va1_pop_window t p /\ va1_log_ok t (va1_diof S) (va1_ndof S) /\</div>
+<div id="L67">     va1_st t p ap mdl N x hp tbl S m</div>
+<div id="L68">     ==&gt; va1_hcall (wasmc fs) va1_tick_forward_mc [] (word 1)</div>
+<div id="L69">           (\gl&#x27; m&#x27;. gl&#x27; = gl /\</div>
+<div id="L70">              ?L. ALL (\r. r 6 = word_add t (word 1) /\ r 10 = word 0 /\ r 11 = word 0) L /\</div>
+<div id="L71">                  val (va1_ndof S) + LENGTH L &lt;= 16384 /\</div>
+<div id="L72">                  va1_st (word_add t (word 1)) p ap mdl N (ve_fredkin_fwd (ve_vk mdl) x) hp tbl</div>
+<div id="L73">                         (va1_pop_fwd va1_ck va1_jigk L mdl hp tbl t p S) m&#x27;) gl m`,</div>
+<div id="L74">  ACCEPT_TAC VA1_POP_HCALL_FWD);;</div>
+<div id="L75"></div>
+<div id="L76">let VA1_POP_HCALL_BWD = prove</div>
+<div id="L77"> (`!(fs:num-&gt;byte list#num#num) (gl:num-&gt;wval) (t:int32) (p:int32) (ap:int32) (mdl:num-&gt;int32) (N:num)</div>
+<div id="L78">   (x:(num-&gt;int32)#(num-&gt;int32)) (hp:num-&gt;int32) (tbl:num-&gt;int32)</div>
+<div id="L79">   (S:(num-&gt;int32)#(num-&gt;int32)#(num-&gt;int32)#(num-&gt;int32)#(num-&gt;int32)#(num-&gt;int32)#(num-&gt;int32)#int32)</div>
+<div id="L80">   (L:(num-&gt;int32)list) (m:int64-&gt;byte).</div>
+<div id="L81">     mdl 1 = word N /\ 1 &lt;= N /\ N &lt;= 640 /\ va1_fs_pop fs /\</div>
+<div id="L82">     va1_pop_window t p /\ va1_log_ok t (va1_diof S) (va1_ndof S) /\</div>
+<div id="L83">     ALL (\r. r 6 = word_add t (word 1)) L /\ val (va1_ndof S) + LENGTH L &lt;= 16384 /\</div>
+<div id="L84">     va1_st (word_add t (word 1)) p ap mdl N (ve_fredkin_fwd (ve_vk mdl) x) hp tbl</div>
+<div id="L85">            (va1_pop_fwd va1_ck va1_jigk L mdl hp tbl t p S) m</div>
+<div id="L86">     ==&gt; va1_hcall (wasmc fs) va1_tick_backward_mc [] (word 1)</div>
+<div id="L87">           (\gl&#x27; m&#x27;. gl&#x27; = gl /\ va1_st t p ap mdl N x hp tbl S m&#x27;) gl m`,</div>
+<div id="L88">  ACCEPT_TAC VA1_POP_HCALL_BWD);;</div>
+<div id="L89"></div>
+<div id="L90">let VA1_POP_HCALL_END = prove</div>
+<div id="L91"> (`!(fs:num-&gt;byte list#num#num) (gl:num-&gt;wval) (t:int32) (p:int32) (ap:int32) (m:int64-&gt;byte).</div>
+<div id="L92">     ~(p = word 4294967295) /\ val p &lt;= val t /\ val (word_add p (word 520)) &lt;= val t /\</div>
+<div id="L93">     va1_tick t m /\ va1_pop p ap m</div>
+<div id="L94">     ==&gt; va1_hcall (wasmc fs) va1_tick_forward_mc [] (word 0) (\gl&#x27; m&#x27;. gl&#x27; = gl /\ m&#x27; = m) gl m`,</div>
+<div id="L95">  ACCEPT_TAC VA1_POP_HCALL_END);;</div>
+<div id="L96"></div>
+<div id="L97">let VA1_POP_REACH_LOG_OK = prove</div>
+<div id="L98"> (`!(mdl:num-&gt;int32) (hp:num-&gt;int32) (tbl:num-&gt;int32) (p:int32) (t0:int32)</div>
+<div id="L99">   (S0:(num-&gt;int32)#(num-&gt;int32)#(num-&gt;int32)#(num-&gt;int32)#(num-&gt;int32)#(num-&gt;int32)#(num-&gt;int32)#int32)</div>
+<div id="L100">   (u:num)</div>
+<div id="L101">   (S:(num-&gt;int32)#(num-&gt;int32)#(num-&gt;int32)#(num-&gt;int32)#(num-&gt;int32)#(num-&gt;int32)#(num-&gt;int32)#int32).</div>
+<div id="L102">     va1_log_ok t0 (va1_diof S0) (va1_ndof S0) /\ val t0 + u &lt; 4294967296 /\</div>
+<div id="L103">     va1_pop_reach mdl hp tbl p t0 S0 u S</div>
+<div id="L104">     ==&gt; va1_log_ok (word (val t0 + u)) (va1_diof S) (va1_ndof S)`,</div>
+<div id="L105">  ACCEPT_TAC VA1_POP_REACH_LOG_OK);;</div>
+<div id="L106"></div>
+<div id="L107">let VA1_POP_SCRUB = prove</div>
+<div id="L108"> (`!(fs:num-&gt;byte list#num#num) (gl:num-&gt;wval) (mdl:num-&gt;int32) (N:num) (p:int32) (ap:int32)</div>
+<div id="L109">   (x0:(num-&gt;int32)#(num-&gt;int32)) (hp:num-&gt;int32) (tbl:num-&gt;int32) (t0:int32)</div>
+<div id="L110">   (S0:(num-&gt;int32)#(num-&gt;int32)#(num-&gt;int32)#(num-&gt;int32)#(num-&gt;int32)#(num-&gt;int32)#(num-&gt;int32)#int32)</div>
+<div id="L111">   (K:num).</div>
+<div id="L112">     mdl 1 = word N /\ 1 &lt;= N /\ N &lt;= 640 /\ va1_fs_pop fs /\</div>
+<div id="L113">     ~(p = word 4294967295) /\ val p &lt;= val t0 /\ val t0 + K &lt;= val p + 520 /\ val p + 520 &lt; 4294967296 /\</div>
+<div id="L114">     va1_log_ok t0 (va1_diof S0) (va1_ndof S0)</div>
+<div id="L115">     ==&gt; !(cs:bool list) (u:num) (m:int64-&gt;byte).</div>
+<div id="L116">           u &lt;= K /\ va1_cmds_ok K u cs /\ va1_pop_at mdl N p ap x0 hp tbl t0 S0 u m</div>
+<div id="L117">           ==&gt; va1_hrun (wasmc fs) cs</div>
+<div id="L118">                 (\gl&#x27; m&#x27;. gl&#x27; = gl /\</div>
+<div id="L119">                    va1_pop_at mdl N p ap x0 hp tbl t0 S0 (va1_cmds_end u cs) m&#x27;) gl m`,</div>
+<div id="L120">  ACCEPT_TAC VA1_POP_SCRUB);;</div>
+<div id="L121"></div>
+<div id="L122">let VA1_POP_CHAIN_INVERSE = prove</div>
+<div id="L123"> (`!(fs:num-&gt;byte list#num#num) (gl:num-&gt;wval) (mdl:num-&gt;int32) (N:num) (p:int32) (ap:int32)</div>
+<div id="L124">   (x0:(num-&gt;int32)#(num-&gt;int32)) (hp:num-&gt;int32) (tbl:num-&gt;int32) (t0:int32)</div>
+<div id="L125">   (S0:(num-&gt;int32)#(num-&gt;int32)#(num-&gt;int32)#(num-&gt;int32)#(num-&gt;int32)#(num-&gt;int32)#(num-&gt;int32)#int32)</div>
+<div id="L126">   (k:num) (m:int64-&gt;byte).</div>
+<div id="L127">     mdl 1 = word N /\ 1 &lt;= N /\ N &lt;= 640 /\ va1_fs_pop fs /\</div>
+<div id="L128">     ~(p = word 4294967295) /\ val p &lt;= val t0 /\ val t0 + k &lt;= val p + 520 /\ val p + 520 &lt; 4294967296 /\</div>
+<div id="L129">     va1_log_ok t0 (va1_diof S0) (va1_ndof S0) /\ va1_st t0 p ap mdl N x0 hp tbl S0 m</div>
+<div id="L130">     ==&gt; va1_hrun (wasmc fs) (APPEND (REPLICATE k T) (REPLICATE k F))</div>
+<div id="L131">           (\gl&#x27; m&#x27;. gl&#x27; = gl /\ va1_st t0 p ap mdl N x0 hp tbl S0 m&#x27;) gl m`,</div>
+<div id="L132">  ACCEPT_TAC VA1_POP_CHAIN_INVERSE);;</div>
+<div id="L133"></div>
+<div id="L134">let VA1_POP_CHAIN_TO_END = prove</div>
+<div id="L135"> (`!(fs:num-&gt;byte list#num#num) (gl:num-&gt;wval) (mdl:num-&gt;int32) (N:num) (p:int32) (ap:int32)</div>
+<div id="L136">   (x0:(num-&gt;int32)#(num-&gt;int32)) (hp:num-&gt;int32) (tbl:num-&gt;int32)</div>
+<div id="L137">   (S0:(num-&gt;int32)#(num-&gt;int32)#(num-&gt;int32)#(num-&gt;int32)#(num-&gt;int32)#(num-&gt;int32)#(num-&gt;int32)#int32)</div>
+<div id="L138">   (m:int64-&gt;byte).</div>
+<div id="L139">     mdl 1 = word N /\ 1 &lt;= N /\ N &lt;= 640 /\ va1_fs_pop fs /\</div>
+<div id="L140">     ~(p = word 4294967295) /\ val p + 520 &lt; 4294967296 /\</div>
+<div id="L141">     va1_log_ok p (va1_diof S0) (va1_ndof S0) /\ va1_st p p ap mdl N x0 hp tbl S0 m</div>
+<div id="L142">     ==&gt; va1_hrun (wasmc fs) (REPLICATE 520 T)</div>
+<div id="L143">           (\gl1 m1. gl1 = gl /\ va1_pop_at mdl N p ap x0 hp tbl p S0 520 m1 /\</div>
+<div id="L144">              va1_hcall (wasmc fs) va1_tick_forward_mc [] (word 0)</div>
+<div id="L145">                (\gl2 m2. gl2 = gl1 /\ m2 = m1 /\</div>
+<div id="L146">                   va1_hrun (wasmc fs) (REPLICATE 520 F)</div>
+<div id="L147">                     (\gl3 m3. gl3 = gl /\ va1_st p p ap mdl N x0 hp tbl S0 m3) gl2 m2) gl1 m1) gl m`,</div>
+<div id="L148">  ACCEPT_TAC VA1_POP_CHAIN_TO_END);;</div>
+<div id="L149"></div>
+<div id="L150">let VA1_POP_CHAIN_SAT = prove</div>
+<div id="L151"> (`(!(t:int32) (p:int32) (ap:int32) (mdl:num-&gt;int32) (N:num) (x:(num-&gt;int32)#(num-&gt;int32))</div>
+<div id="L152">    (hp:num-&gt;int32) (tbl:num-&gt;int32)</div>
+<div id="L153">    (S:(num-&gt;int32)#(num-&gt;int32)#(num-&gt;int32)#(num-&gt;int32)#(num-&gt;int32)#(num-&gt;int32)#(num-&gt;int32)#int32).</div>
+<div id="L154">     N &lt;= 640 ==&gt; ?m:int64-&gt;byte. va1_st t p ap mdl N x hp tbl S m) /\</div>
+<div id="L155">  (?(fs:num-&gt;byte list#num#num) (mdl:num-&gt;int32) (N:num) (p:int32) (ap:int32)</div>
+<div id="L156">    (x0:(num-&gt;int32)#(num-&gt;int32)) (hp:num-&gt;int32) (tbl:num-&gt;int32)</div>
+<div id="L157">    (S0:(num-&gt;int32)#(num-&gt;int32)#(num-&gt;int32)#(num-&gt;int32)#(num-&gt;int32)#(num-&gt;int32)#(num-&gt;int32)#int32)</div>
+<div id="L158">    (m:int64-&gt;byte).</div>
+<div id="L159">     mdl 1 = word N /\ 1 &lt;= N /\ N &lt;= 640 /\ va1_fs_pop fs /\</div>
+<div id="L160">     ~(p = word 4294967295) /\ val p + 520 &lt; 4294967296 /\</div>
+<div id="L161">     va1_log_ok p (va1_diof S0) (va1_ndof S0) /\ va1_st p p ap mdl N x0 hp tbl S0 m)`,</div>
+<div id="L162">  ACCEPT_TAC VA1_POP_CHAIN_SAT);;</div>
+<div id="L163"></div>
+<div id="L164">let VA1_POP_SCRUB_FRAME = prove</div>
+<div id="L165"> (`!(fs:num-&gt;byte list#num#num) (gl:num-&gt;wval) (mdl:num-&gt;int32) (N:num) (p:int32) (ap:int32)</div>
+<div id="L166">   (x0:(num-&gt;int32)#(num-&gt;int32)) (hp:num-&gt;int32) (tbl:num-&gt;int32) (t0:int32)</div>
+<div id="L167">   (S0:(num-&gt;int32)#(num-&gt;int32)#(num-&gt;int32)#(num-&gt;int32)#(num-&gt;int32)#(num-&gt;int32)#(num-&gt;int32)#int32)</div>
+<div id="L168">   (K:num).</div>
+<div id="L169">     mdl 1 = word N /\ 1 &lt;= N /\ N &lt;= 640 /\ va1_fs_pop fs /\</div>
+<div id="L170">     ~(p = word 4294967295) /\ val p &lt;= val t0 /\ val t0 + K &lt;= val p + 520 /\ val p + 520 &lt; 4294967296 /\</div>
+<div id="L171">     va1_log_ok t0 (va1_diof S0) (va1_ndof S0)</div>
+<div id="L172">     ==&gt; !(cs:bool list) (u:num) (m:int64-&gt;byte).</div>
+<div id="L173">           u &lt;= K /\ va1_cmds_ok K u cs /\ va1_pop_at mdl N p ap x0 hp tbl t0 S0 u m</div>
+<div id="L174">           ==&gt; va1_hrun (wasmc fs) cs</div>
+<div id="L175">                 (\gl&#x27; m&#x27;. gl&#x27; = gl /\</div>
+<div id="L176">                    va1_pop_at mdl N p ap x0 hp tbl t0 S0 (va1_cmds_end u cs) m&#x27; /\</div>
+<div id="L177">                    va1_pop_frame m m&#x27;) gl m`,</div>
+<div id="L178">  ACCEPT_TAC VA1_POP_SCRUB_FRAME);;</div>
+<div id="L179"></div>
+<div id="L180">let VA1_POP_CHAIN_BYTES = prove</div>
+<div id="L181"> (`!(fs:num-&gt;byte list#num#num) (gl:num-&gt;wval) (mdl:num-&gt;int32) (N:num) (p:int32) (ap:int32)</div>
+<div id="L182">   (x0:(num-&gt;int32)#(num-&gt;int32)) (hp:num-&gt;int32) (tbl:num-&gt;int32) (t0:int32)</div>
+<div id="L183">   (S0:(num-&gt;int32)#(num-&gt;int32)#(num-&gt;int32)#(num-&gt;int32)#(num-&gt;int32)#(num-&gt;int32)#(num-&gt;int32)#int32)</div>
+<div id="L184">   (k:num) (m:int64-&gt;byte).</div>
+<div id="L185">     mdl 1 = word N /\ 1 &lt;= N /\ N &lt;= 640 /\ va1_fs_pop fs /\</div>
+<div id="L186">     ~(p = word 4294967295) /\ val p &lt;= val t0 /\ val t0 + k &lt;= val p + 520 /\ val p + 520 &lt; 4294967296 /\</div>
+<div id="L187">     va1_log_ok t0 (va1_diof S0) (va1_ndof S0) /\ va1_st t0 p ap mdl N x0 hp tbl S0 m</div>
+<div id="L188">     ==&gt; va1_hrun (wasmc fs) (APPEND (REPLICATE k T) (REPLICATE k F))</div>
+<div id="L189">           (\gl&#x27; m&#x27;. gl&#x27; = gl /\ va1_st t0 p ap mdl N x0 hp tbl S0 m&#x27; /\ va1_pop_frame m m&#x27;) gl m`,</div>
+<div id="L190">  ACCEPT_TAC VA1_POP_CHAIN_BYTES);;</div>
+<div id="L191"></div>
+<div id="L192">let VA1_HRUN_CLAUSES = prove</div>
+<div id="L193"> (`(!(step:wasmstate-&gt;wasmstate-&gt;bool) (Q:(num-&gt;wval)-&gt;(int64-&gt;byte)-&gt;bool) gl m.</div>
+<div id="L194">     va1_hrun step [] Q gl m &lt;=&gt; Q gl m) /\</div>
+<div id="L195">  (!(step:wasmstate-&gt;wasmstate-&gt;bool) c cs (Q:(num-&gt;wval)-&gt;(int64-&gt;byte)-&gt;bool) gl m.</div>
+<div id="L196">     va1_hrun step (CONS c cs) Q gl m &lt;=&gt;</div>
+<div id="L197">     va1_hcall step (if c then va1_tick_forward_mc else va1_tick_backward_mc) [] (word 1)</div>
+<div id="L198">               (va1_hrun step cs Q) gl m)`,</div>
+<div id="L199">  ACCEPT_TAC VA1_HRUN_CLAUSES);;</div>
+<div id="L200"></div>
+<div id="L201">let VA1_CMDS_OK_CLAUSES = prove</div>
+<div id="L202"> (`(!K u. va1_cmds_ok K u [] &lt;=&gt; T) /\</div>
+<div id="L203">  (!K u c cs. va1_cmds_ok K u (CONS c cs) &lt;=&gt;</div>
+<div id="L204">     if c then u &lt; K /\ va1_cmds_ok K (u + 1) cs else 0 &lt; u /\ va1_cmds_ok K (u - 1) cs)`,</div>
+<div id="L205">  ACCEPT_TAC VA1_CMDS_OK_CLAUSES);;</div>
+<div id="L206"></div>
+<div id="L207">let VA1_CMDS_END_CLAUSES = prove</div>
+<div id="L208"> (`(!u. va1_cmds_end u [] = u) /\</div>
+<div id="L209">  (!u c cs. va1_cmds_end u (CONS c cs) = va1_cmds_end (if c then u + 1 else u - 1) cs)`,</div>
+<div id="L210">  ACCEPT_TAC VA1_CMDS_END_CLAUSES);;</div>
+<div id="L211"></div>
+<div id="L212">let VA1_HCALL_ENSURES = prove</div>
+<div id="L213"> (`!(step:wasmstate-&gt;wasmstate-&gt;bool) (code:byte list) (e:num) (decls:wval list) (args:wval list) (r:int32)</div>
+<div id="L214">   (P:wasmstate-&gt;bool) (Q:wasmstate-&gt;bool) (C:wasmstate-&gt;wasmstate-&gt;bool)</div>
+<div id="L215">   (R:(num-&gt;wval)-&gt;(int64-&gt;byte)-&gt;bool) (gl:num-&gt;wval) (m:int64-&gt;byte).</div>
+<div id="L216">     wasm_entry code = SOME e /\ wasm_decl_vals code = SOME decls /\ ensures step P Q C /\</div>
+<div id="L217">     (!s0. read wmemsize s0 = 4194304 /\ read wglobals s0 = gl /\ read wmem s0 = m</div>
+<div id="L218">           ==&gt; P (wcall_entry code (LENGTH args) 1 args e decls s0)) /\</div>
+<div id="L219">     (!s0 s. read wmemsize s0 = 4194304 /\ read wglobals s0 = gl /\ read wmem s0 = m /\</div>
+<div id="L220">             Q s /\ C (wcall_entry code (LENGTH args) 1 args e decls s0) s</div>
+<div id="L221">             ==&gt; read wstatus s = WDone /\ read wstack s = [I32 r] /\</div>
+<div id="L222">                 read wmemsize s = 4194304 /\ R (read wglobals s) (read wmem s))</div>
+<div id="L223">     ==&gt; va1_hcall step code args r R gl m`,</div>
+<div id="L224">  ACCEPT_TAC VA1_HCALL_ENSURES);;</div>
+<div id="L225"></div>
+<div id="L226">let VA1_HCALL_MONO = prove</div>
+<div id="L227"> (`!(step:wasmstate-&gt;wasmstate-&gt;bool) (code:byte list) (args:wval list) (r:int32)</div>
+<div id="L228">   (Q:(num-&gt;wval)-&gt;(int64-&gt;byte)-&gt;bool) (Q&#x27;:(num-&gt;wval)-&gt;(int64-&gt;byte)-&gt;bool) (gl:num-&gt;wval) (m:int64-&gt;byte).</div>
+<div id="L229">     (!g x. Q g x ==&gt; Q&#x27; g x) /\ va1_hcall step code args r Q gl m</div>
+<div id="L230">     ==&gt; va1_hcall step code args r Q&#x27; gl m`,</div>
+<div id="L231">  ACCEPT_TAC VA1_HCALL_MONO);;</div>
+<div id="L232"></div>
+<div id="L233">let VA1_HRUN_MONO = prove</div>
+<div id="L234"> (`!(step:wasmstate-&gt;wasmstate-&gt;bool) (cs:bool list)</div>
+<div id="L235">   (Q:(num-&gt;wval)-&gt;(int64-&gt;byte)-&gt;bool) (Q&#x27;:(num-&gt;wval)-&gt;(int64-&gt;byte)-&gt;bool) (gl:num-&gt;wval) (m:int64-&gt;byte).</div>
+<div id="L236">     (!g x. Q g x ==&gt; Q&#x27; g x) /\ va1_hrun step cs Q gl m</div>
+<div id="L237">     ==&gt; va1_hrun step cs Q&#x27; gl m`,</div>
+<div id="L238">  ACCEPT_TAC VA1_HRUN_MONO);;</div>
+<div id="L239"></div>
+<div id="L240">let VA1_HRUN_APPEND = prove</div>
+<div id="L241"> (`!(step:wasmstate-&gt;wasmstate-&gt;bool) (cs1:bool list) (cs2:bool list) (Q:(num-&gt;wval)-&gt;(int64-&gt;byte)-&gt;bool).</div>
+<div id="L242">     va1_hrun step (APPEND cs1 cs2) Q = va1_hrun step cs1 (va1_hrun step cs2 Q)`,</div>
+<div id="L243">  ACCEPT_TAC VA1_HRUN_APPEND);;</div>
+<div id="L244"></div>
+<div id="L245">let VA1_HCALL_START_SAT = prove</div>
+<div id="L246"> (`!(gl:num-&gt;wval) (m:int64-&gt;byte).</div>
+<div id="L247">     ?s0. read wmemsize s0 = 4194304 /\ read wglobals s0 = gl /\ read wmem s0 = m`,</div>
+<div id="L248">  ACCEPT_TAC VA1_HCALL_START_SAT);;</div>
+<div id="L249"></div>
+<div id="L250">let VA1_HCALL_RUNS = prove</div>
+<div id="L251"> (`!(fs:num-&gt;byte list#num#num) (code:byte list) (args:wval list) (r:int32)</div>
+<div id="L252">   (Q:(num-&gt;wval)-&gt;(int64-&gt;byte)-&gt;bool) (gl:num-&gt;wval) (m:int64-&gt;byte).</div>
+<div id="L253">     va1_hcall (wasmc fs) code args r Q gl m</div>
+<div id="L254">     ==&gt; ?e decls.</div>
+<div id="L255">           wasm_entry code = SOME e /\ wasm_decl_vals code = SOME decls /\</div>
+<div id="L256">           !s0. read wmemsize s0 = 4194304 /\ read wglobals s0 = gl /\ read wmem s0 = m</div>
+<div id="L257">                ==&gt; (?s. RTC (wasmc fs) (wcall_entry code (LENGTH args) 1 args e decls s0) s /\</div>
+<div id="L258">                         read wstatus s = WDone /\ read wstack s = [I32 r] /\</div>
+<div id="L259">                         read wmemsize s = 4194304 /\ Q (read wglobals s) (read wmem s)) /\</div>
+<div id="L260">                    (!s. RTC (wasmc fs) (wcall_entry code (LENGTH args) 1 args e decls s0) s /\</div>
+<div id="L261">                         ~(read wstatus s = WRunning)</div>
+<div id="L262">                         ==&gt; read wstatus s = WDone /\ read wstack s = [I32 r] /\</div>
+<div id="L263">                             read wmemsize s = 4194304 /\ Q (read wglobals s) (read wmem s))`,</div>
+<div id="L264">  ACCEPT_TAC VA1_HCALL_RUNS);;</div>
+<div id="L265"></div>
+<div id="L266">let VA1_TICKF_CALLEE = prove</div>
+<div id="L267"> (`wasm_entry va1_tick_forward_mc = SOME 3 /\</div>
+<div id="L268">  wasm_decl_vals va1_tick_forward_mc = SOME [I32 (word 0); I32 (word 0); I32 (word 0)]`,</div>
+<div id="L269">  ACCEPT_TAC VA1_TICKF_CALLEE);;</div>
+<div id="L270"></div>
+<div id="L271">let VA1_TICKB_CALLEE = prove</div>
+<div id="L272"> (`wasm_entry va1_tick_backward_mc = SOME 3 /\</div>
+<div id="L273">  wasm_decl_vals va1_tick_backward_mc = SOME [I32 (word 0); I32 (word 0)]`,</div>
+<div id="L274">  ACCEPT_TAC VA1_TICKB_CALLEE);;</div>
+<div id="L275"></div>
+<div id="L276">let VA1_TICK_FORWARD_POP_R5C = prove</div>
+<div id="L277"> (`!fs gl t p ap mdl N x hp tbl (ra:num-&gt;int32) (rb:num-&gt;int32) (jq:num-&gt;int32) (jp:num-&gt;int32) (di:num-&gt;int32) (zq:num-&gt;int32) (zp:num-&gt;int32) (nd:int32).</div>
+<div id="L278">     mdl 1 = word N /\ 1 &lt;= N /\ N &lt;= 640 /\</div>
+<div id="L279">     fs 9 = (va1_f9_mc,0,0) /\ fs 11 = (va1_f11_mc,0,0) /\ fs 13 = (va1_f13_mc,0,1) /\</div>
+<div id="L280">     fs 15 = (va1_f15_mc,0,0) /\ fs 17 = (va1_f17_mc,1,0) /\ fs 19 = (va1_f19_mc,0,0) /\</div>
+<div id="L281">     fs 21 = (va1_f21_mc,0,0) /\ fs 23 = (va1_f23_mc,0,0) /\ fs 27 = (va1_f27_mc,0,0) /\</div>
+<div id="L282">     va1_pop_window t p /\ va1_log_ok t di nd</div>
+<div id="L283">     ==&gt; ensures (wasmc fs)</div>
+<div id="L284">          (\s. read wcode s = va1_tick_forward_mc /\ read wpc s = word 3 /\</div>
+<div id="L285">             read wstatus s = WRunning /\ read wstack s = [] /\</div>
+<div id="L286">             read wlabels s = [] /\ read warity s = 1 /\</div>
+<div id="L287">             read wmemsize s = 4194304 /\ read wglobals s = gl /\</div>
+<div id="L288">             va1_st t p ap mdl N x hp tbl (ra,rb,jq,jp,di,zq,zp,nd) (read wmem s))</div>
+<div id="L289">          (\s. read wstatus s = WDone /\ read wstack s = [I32 (word 1)] /\</div>
+<div id="L290">             ?L. ALL (\r. r 6 = word_add t (word 1) /\ r 10 = word 0 /\ r 11 = word 0) L /\</div>
+<div id="L291">                 val nd + LENGTH L &lt;= 16384 /\</div>
+<div id="L292">                 va1_st (word_add t (word 1)) p ap mdl N (ve_fredkin_fwd (ve_vk mdl) x) hp tbl</div>
+<div id="L293">                        (va1_pop_fwd va1_ck va1_jigk L mdl hp tbl t p (ra,rb,jq,jp,di,zq,zp,nd)) (read wmem s))</div>
+<div id="L294">          (MAYCHANGE [wpc] ,, MAYCHANGE [wstack] ,, MAYCHANGE [wlabels] ,,</div>
+<div id="L295">           MAYCHANGE [wstatus] ,, MAYCHANGE [wlocal 0; wlocal 1; wlocal 2] ,,</div>
+<div id="L296">           MAYCHANGE [wmem :&gt; bytes(word 16392,4)] ,, MAYCHANGE [wmem :&gt; bytes(word 16400,4)] ,,</div>
+<div id="L297">           MAYCHANGE [wmem :&gt; bytes(word 1114112,851968)] ,,</div>
+<div id="L298">           MAYCHANGE [wmem :&gt; bytes(word 1966080,73728)])`,</div>
+<div id="L299">  ACCEPT_TAC VA1_TICK_FORWARD_POP_R5C);;</div>
+<div id="L300"></div>
+<div id="L301">let VA1_TICK_POP_INVERSE_R5 = prove</div>
+<div id="L302"> (`!fs gl t p ap mdl N x hp tbl (ra:num-&gt;int32) (rb:num-&gt;int32) (jq:num-&gt;int32) (jp:num-&gt;int32) (di:num-&gt;int32) (zq:num-&gt;int32) (zp:num-&gt;int32) (nd:int32) L.</div>
+<div id="L303">     mdl 1 = word N /\ 1 &lt;= N /\ N &lt;= 640 /\</div>
+<div id="L304">     fs 10 = (va1_f10_mc,0,0) /\ fs 12 = (va1_f12_mc,0,0) /\ fs 14 = (va1_f14_mc,0,1) /\</div>
+<div id="L305">     fs 16 = (va1_f16_mc,0,0) /\ fs 18 = (va1_f18_mc,1,0) /\ fs 20 = (va1_f20_mc,0,0) /\</div>
+<div id="L306">     fs 22 = (va1_f22_mc,0,0) /\ fs 24 = (va1_f24_mc,0,0) /\ fs 28 = (va1_f28_mc,0,0) /\</div>
+<div id="L307">     va1_pop_window t p /\ va1_log_ok t di nd /\</div>
+<div id="L308">     ALL (\r. r 6 = word_add t (word 1)) L /\ val nd + LENGTH L &lt;= 16384</div>
+<div id="L309">     ==&gt; ensures (wasmc fs)</div>
+<div id="L310">          (\s. read wcode s = va1_tick_backward_mc /\ read wpc s = word 3 /\</div>
+<div id="L311">             read wstatus s = WRunning /\ read wstack s = [] /\</div>
+<div id="L312">             read wlabels s = [] /\ read warity s = 1 /\</div>
+<div id="L313">             read wmemsize s = 4194304 /\ read wglobals s = gl /\</div>
+<div id="L314">             va1_st (word_add t (word 1)) p ap mdl N (ve_fredkin_fwd (ve_vk mdl) x) hp tbl</div>
+<div id="L315">                    (va1_pop_fwd va1_ck va1_jigk L mdl hp tbl t p (ra,rb,jq,jp,di,zq,zp,nd)) (read wmem s))</div>
+<div id="L316">          (\s. read wstatus s = WDone /\ read wstack s = [I32 (word 1)] /\</div>
+<div id="L317">             va1_st t p ap mdl N x hp tbl (ra,rb,jq,jp,di,zq,zp,nd) (read wmem s))</div>
+<div id="L318">          (MAYCHANGE [wpc] ,, MAYCHANGE [wstack] ,, MAYCHANGE [wlabels] ,,</div>
+<div id="L319">           MAYCHANGE [wstatus] ,, MAYCHANGE [wlocal 0; wlocal 1] ,,</div>
+<div id="L320">           MAYCHANGE [wmem :&gt; bytes(word 16392,4)] ,, MAYCHANGE [wmem :&gt; bytes(word 16400,4)] ,,</div>
+<div id="L321">           MAYCHANGE [wmem :&gt; bytes(word 1114112,851968)] ,,</div>
+<div id="L322">           MAYCHANGE [wmem :&gt; bytes(word 1966080,73728)])`,</div>
+<div id="L323">  ACCEPT_TAC VA1_TICK_POP_INVERSE_R5);;</div>
+<div id="L324"></div>
+<div id="L325">let VA1_LOG_OK_POP_FWD = prove</div>
+<div id="L326"> (`!(CK:(num-&gt;int32)-&gt;(num-&gt;int32)-&gt;(num-&gt;int32)-&gt;int32-&gt;int32-&gt;num-&gt;(num-&gt;int32)-&gt;(num-&gt;int32)-&gt;num-&gt;int32)</div>
+<div id="L327">  (JK:(num-&gt;int32)-&gt;(num-&gt;int32)-&gt;(num-&gt;int32)-&gt;int32-&gt;int32-&gt;(num-&gt;int32)-&gt;(num-&gt;int32)-&gt;num-&gt;int32)</div>
+<div id="L328">  L mdl hp tbl t p (ra:num-&gt;int32) (rb:num-&gt;int32) (jq:num-&gt;int32) (jp:num-&gt;int32) (di:num-&gt;int32) (zq:num-&gt;int32) (zp:num-&gt;int32) (nd:int32).</div>
+<div id="L329">     va1_log_ok t di nd /\ ~(word_add t (word 1) = word 0) /\</div>
+<div id="L330">     ALL (\r. r 6 = word_add t (word 1)) L /\ val nd + LENGTH L &lt;= 16384</div>
+<div id="L331">     ==&gt; va1_log_ok (word_add t (word 1))</div>
+<div id="L332">           (FST(SND(SND(SND(SND(va1_pop_fwd CK JK L mdl hp tbl t p (ra,rb,jq,jp,di,zq,zp,nd)))))))</div>
+<div id="L333">           (SND(SND(SND(SND(SND(SND(SND(va1_pop_fwd CK JK L mdl hp tbl t p (ra,rb,jq,jp,di,zq,zp,nd)))))))))`,</div>
+<div id="L334">  ACCEPT_TAC VA1_LOG_OK_POP_FWD);;</div>
+<div id="L335"></div>
+<div id="L336">let VA1_ST_SAT = prove</div>
+<div id="L337"> (`!t p ap mdl N x hp tbl ps. N &lt;= 640 ==&gt; ?m. va1_st t p ap mdl N x hp tbl ps m`,</div>
+<div id="L338">  ACCEPT_TAC VA1_ST_SAT);;</div>
+<div id="L339"></div>
+<div id="L340">let VA1_TICK_FORWARD_POP_END = prove</div>
+<div id="L341"> (`!fs gl t p ap.</div>
+<div id="L342">     ~(p = word 4294967295) /\ val p &lt;= val t /\ val (word_add p (word 520)) &lt;= val t</div>
+<div id="L343">     ==&gt; ensures (wasmc fs)</div>
+<div id="L344">          (\s. read wcode s = va1_tick_forward_mc /\ read wpc s = word 3 /\</div>
+<div id="L345">             read wstatus s = WRunning /\ read wstack s = [] /\</div>
+<div id="L346">             read wlabels s = [] /\ read warity s = 1 /\</div>
+<div id="L347">             read wmemsize s = 4194304 /\ read wglobals s = gl /\</div>
+<div id="L348">             va1_tick t (read wmem s) /\ va1_pop p ap (read wmem s))</div>
+<div id="L349">          (\s. read wstatus s = WDone /\ read wstack s = [I32 (word 0)])</div>
+<div id="L350">          (MAYCHANGE [wpc] ,, MAYCHANGE [wstack] ,, MAYCHANGE [wlabels] ,,</div>
+<div id="L351">           MAYCHANGE [wstatus] ,, MAYCHANGE [wlocal 0; wlocal 1; wlocal 2])`,</div>
+<div id="L352">  ACCEPT_TAC VA1_TICK_FORWARD_POP_END);;</div>
+<div id="L353"></div>
+<div id="L354">let VA1_PUSH_CLAUSES = prove</div>
+<div id="L355"> (`(!bs. va1_push ([]:(num-&gt;int32)list) (bs:(num-&gt;int32)#(num-&gt;int32)#(num-&gt;int32)#int32) = bs) /\</div>
+<div id="L356">   (!r rs bs. va1_push (CONS r rs) bs = va1_push rs (va1_push1 r bs))`,</div>
+<div id="L357">  ACCEPT_TAC VA1_PUSH_CLAUSES);;</div>
+<div id="L358"></div>
+<div id="L359">let VA1P_KD_FWDN_CLAUSES = prove</div>
+<div id="L360"> (`(!K D s. ve_kd_fwdn K D 0 s = s) /\</div>
+<div id="L361">   (!K D n s. ve_kd_fwdn K D (SUC n) s = ve_kd_fwd (K n) (D n) (ve_kd_fwdn K D n s))`,</div>
+<div id="L362">  ACCEPT_TAC VA1P_KD_FWDN_CLAUSES);;</div>
+<div id="L363"></div>
+<div id="L364">let VA1_ISQ_CLAUSES = prove</div>
+<div id="L365"> (`(!x. ve_isq 0 x = x) /\ (!k x. ve_isq (SUC k) x = ve_isq_step (ve_isq k x))`,</div>
+<div id="L366">  ACCEPT_TAC VA1_ISQ_CLAUSES);;</div>
+<div id="L367"></div>
+<div id="L368">let VA1_VK_RS_CLAUSES = prove</div>
+<div id="L369"> (`(!X C i c. ve_vk_rs X C i 0 c = word 0) /\</div>
+<div id="L370">   (!X C i k c. ve_vk_rs X C i (SUC k) c = word_add (ve_vk_ti X C i (i + 1 + k) c) (ve_vk_rs X C i k c))`,</div>
+<div id="L371">  ACCEPT_TAC VA1_VK_RS_CLAUSES);;</div>
+<div id="L372"></div>
+<div id="L373">let VA1_VK_ACC_CLAUSES = prove</div>
+<div id="L374"> (`(!X C n j c. ve_vk_acc X C n 0 j c = word 0) /\</div>
+<div id="L375">   (!X C n i j c. ve_vk_acc X C n (SUC i) j c =</div>
+<div id="L376">      if j = i then word_add (ve_vk_acc X C n i j c) (ve_vk_rs X C i (n - 1 - i) c)</div>
+<div id="L377">      else if i &lt; j then ve_vk_upd X C i j c (ve_vk_acc X C n i j c)</div>
+<div id="L378">      else ve_vk_acc X C n i j c)`,</div>
+<div id="L379">  ACCEPT_TAC VA1_VK_ACC_CLAUSES);;</div>
+<div id="L380"></div>
+<div id="L381">let VA1_WDECL_VALS_CLAUSES = prove</div>
+<div id="L382"> (`(!code pc. wdecl_vals 0 (code:byte list) pc = SOME ([]:wval list)) /\</div>
+<div id="L383">  (!k code pc. wdecl_vals (SUC k) code pc =</div>
+<div id="L384">     wobind (wuleb (wdrop pc code)) (\p.</div>
+<div id="L385">     wobind (whd (wdrop (pc + SND p) code)) (\t.</div>
+<div id="L386">     wobind (wdecl_vals k code (pc + SND p + 1)) (\r.</div>
+<div id="L387">       SOME (APPEND (REPLICATE (FST p) (wzero_of (val (t:byte)))) r)))))`,</div>
+<div id="L388">  ACCEPT_TAC VA1_WDECL_VALS_CLAUSES);;</div>
+<div id="L389"></div>
+</div>
+<p class="dim">Generated by <code>tools/build_trail.py</code> from the published files; checked by <code>tools/check_trail.py</code>.</p>
+</body>
+</html>

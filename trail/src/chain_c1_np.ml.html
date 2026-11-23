@@ -1,0 +1,412 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>chain_c1_np.ml: Vortex Echo proof trail</title>
+<link rel="icon" href="data:,">
+<style>
+:root { --bg:#fbfbfa; --ink:#1d2129; --dim:#5b6372; --line:#e2e4e8; --acc:#2f5bb7; --code:#f1f2f4; --ok:#1d7a46; --hl:#fff3b8; }
+@media (prefers-color-scheme: dark) { :root { --bg:#0f1116; --ink:#dde1e8; --dim:#9aa3b3; --line:#2a2f3a; --acc:#8fb0ff; --code:#1a1e27; --ok:#5fd08e; --hl:#3d3615; } }
+html { background:var(--bg); color:var(--ink); }
+body { margin:0 auto; max-width:980px; padding:22px 22px 80px; font:16px/1.55 -apple-system,"Segoe UI",Helvetica,Arial,sans-serif; }
+h1 { font-size:26px; line-height:1.25; margin:6px 0 14px; }
+h2 { font-size:20px; margin:34px 0 10px; padding-top:10px; border-top:1px solid var(--line); }
+h3 { font-size:16px; margin:0 0 8px; }
+a { color:var(--acc); }
+code, pre { font:12.5px/1.45 ui-monospace,Menlo,Consolas,monospace; }
+code { background:var(--code); padding:1px 4px; border-radius:4px; }
+pre { background:var(--code); padding:10px 12px; border-radius:8px; overflow:auto; }
+pre code { background:none; padding:0; }
+pre.stmt { white-space:pre-wrap; word-break:break-all; max-height:28em; }
+.crumbs { font-size:14px; color:var(--dim); }
+.walk { display:flex; flex-wrap:wrap; gap:6px; align-items:center; font-size:14px; margin:10px 0 18px; }
+.walk a, .walk span.s { border:1px solid var(--line); border-radius:999px; padding:3px 10px; text-decoration:none; background:var(--code); }
+.walk .arr { color:var(--dim); }
+blockquote { margin:10px 0; padding:8px 14px; border-left:4px solid var(--acc); background:var(--code); border-radius:0 8px 8px 0; }
+.thm { border:1px solid var(--line); border-radius:10px; padding:14px 16px; margin:14px 0; }
+.thm:target, .step:target, .fn:target { outline:3px solid var(--acc); outline-offset:2px; }
+.thm, .step, .fn, .box, h2 { scroll-margin-top:70px; }
+.src div { scroll-margin-top:120px; }
+ol.steps { margin:6px 0 0; padding-left:22px; }
+ol.steps > li { margin:10px 0; }
+ol.steps > li > b { display:inline-block; min-width:5.5em; }
+.ok { color:var(--ok); font-weight:600; }
+.dim { color:var(--dim); font-size:14px; }
+.box { border:1px solid var(--line); border-radius:10px; padding:12px 16px; margin:12px 0; background:var(--code); }
+.box pre { background:var(--bg); }
+.replay { border-color:var(--ok); }
+table { border-collapse:collapse; font-size:13.5px; line-height:1.4; }
+th, td { border:1px solid var(--line); padding:5px 8px; vertical-align:top; text-align:left; }
+th { background:var(--code); }
+.tw { overflow-x:auto; margin:10px 0; }
+.src { font:12.5px/1.5 ui-monospace,Menlo,Consolas,monospace; background:var(--code); border-radius:8px; padding:8px 0; overflow-x:auto; }
+.src { counter-reset:ln; }
+.src div { white-space:pre; padding:0 12px 0 0; counter-increment:ln; }
+.src div::before { content:counter(ln); display:inline-block; width:4.5em; padding-right:1em; text-align:right; color:var(--dim); user-select:none; }
+.src div:target { background:var(--hl); }
+pre.hex { line-height:1.5; }
+.hex .o { color:var(--dim); }
+</style>
+</head>
+<body>
+<p class="crumbs"><a href="../../index.html">Vortex Echo</a> · <a href="../../trail/index.html">Proof trail</a> · <code>chain_c1_np.ml</code></p>
+<h1><code>chain_c1_np.ml</code></h1>
+<p>A file loaded by a proof run. Published at <a href="../../proof-tree/tasks/bubble-echo/vortex/proofs/chain_c1_np.ml"><code>proof-tree/tasks/bubble-echo/vortex/proofs/chain_c1_np.ml</code></a> (SHA-256 <code>f4617780b7fd46161320e241d9a9715a6039d883a39e206d11dfed9f9322a895</code>; <a href="https://github.com/BenKnill/vortex-echo/blob/main/proof-tree/tasks/bubble-echo/vortex/proofs/chain_c1_np.ml">on GitHub</a>). Line N has the anchor <code>#LN</code>.</p>
+<div class="src" data-src="proof-tree/tasks/bubble-echo/vortex/proofs/chain_c1_np.ml">
+<div id="L1">needs &quot;ve_vort.ml&quot;;;</div>
+<div id="L2">needs &quot;ve_tick.ml&quot;;;</div>
+<div id="L3">needs &quot;ve_vk.ml&quot;;;</div>
+<div id="L4">needs &quot;va1_code.ml&quot;;;</div>
+<div id="L5">needs &quot;va1_seq_final2.ml&quot;;;</div>
+<div id="L6">needs &quot;chain_c1_host.ml&quot;;;</div>
+<div id="L7">(* ========================================================================= *)</div>
+<div id="L8">(* Vortex chain, rung C1, layer 2 of 3: the no-pop chain (PROVE-C1, Claude  *)</div>
+<div id="L9">(* Opus 5.5, 2026-11-11). Spec chain_c1_final.spec (frozen 3b62701f...).    *)</div>
+<div id="L10">(* Definitions va1_swf, va1_swb, va1_np_st, va1_fs_np exactly as pinned;    *)</div>
+<div id="L11">(* tick frames keep wmemsize and wglobals (component reasoning over the     *)</div>
+<div id="L12">(* MAYCHANGE frames of the PROVED tick theorems); one host call per tick;   *)</div>
+<div id="L13">(* scrub in any order; the film; non-vacuity. Pure HOL over                  *)</div>
+<div id="L14">(* VA1_TICK_FORWARD/BACKWARD_NOPOP_VK and VE_VORT_STEPS_INVERSE_VK; no       *)</div>
+<div id="L15">(* stepping, no decode rule, no mk_thm / new_axiom / CHEAT_TAC.              *)</div>
+<div id="L16">(* ========================================================================= *)</div>
+<div id="L17"></div>
+<div id="L18">let va1_swf = new_definition</div>
+<div id="L19"> `va1_swf (mdl:num-&gt;int32) = ve_fredkin_fwdn (\i. ve_vk mdl) 16`;;</div>
+<div id="L20"></div>
+<div id="L21">let va1_swb = new_definition</div>
+<div id="L22"> `va1_swb (mdl:num-&gt;int32) = ve_fredkin_bwdn (\i. ve_vk mdl) 16`;;</div>
+<div id="L23"></div>
+<div id="L24">let va1_np_st = new_definition</div>
+<div id="L25"> `va1_np_st (t:int32) (ap:int32) (mdl:num-&gt;int32) (N:num) (x:(num-&gt;int32)#(num-&gt;int32)) (m:int64-&gt;byte) &lt;=&gt;</div>
+<div id="L26">    va1_tick t m /\ va1_pop (word 4294967295) ap m /\ va1_mdl mdl m /\ va1_vab N x m`;;</div>
+<div id="L27"></div>
+<div id="L28">let va1_fs_np = new_definition</div>
+<div id="L29"> `va1_fs_np (fs:num-&gt;byte list#num#num) &lt;=&gt;</div>
+<div id="L30">    fs 9 = (va1_f9_mc,0,0) /\ fs 10 = (va1_f10_mc,0,0) /\ fs 27 = (va1_f27_mc,0,0) /\ fs 28 = (va1_f28_mc,0,0)`;;</div>
+<div id="L31"></div>
+<div id="L32">(* ---- frames: a component d that no assigned component touches is kept ---- *)</div>
+<div id="L33"></div>
+<div id="L34">let C1_SEQ_KEEPS = prove</div>
+<div id="L35"> (`!(d:(A,C)component) (r1:A-&gt;A-&gt;bool) (r2:A-&gt;A-&gt;bool).</div>
+<div id="L36">     (!s s&#x27;. r1 s s&#x27; ==&gt; read d s&#x27; = read d s) /\</div>
+<div id="L37">     (!s s&#x27;. r2 s s&#x27; ==&gt; read d s&#x27; = read d s)</div>
+<div id="L38">     ==&gt; !s s&#x27;. (r1 ,, r2) s s&#x27; ==&gt; read d s&#x27; = read d s`,</div>
+<div id="L39">  REWRITE_TAC[seq] THEN CONV_TAC(TOP_DEPTH_CONV BETA_CONV) THEN MESON_TAC[]);;</div>
+<div id="L40"></div>
+<div id="L41">let C1_ASSIGNS_KEEPS = prove</div>
+<div id="L42"> (`!(c:(A,B)component) (d:(A,C)component).</div>
+<div id="L43">     (!y s. read d (write c y s) = read d s)</div>
+<div id="L44">     ==&gt; !s s&#x27;. ASSIGNS c s s&#x27; ==&gt; read d s&#x27; = read d s`,</div>
+<div id="L45">  REWRITE_TAC[ASSIGNS_THM] THEN CONV_TAC(TOP_DEPTH_CONV BETA_CONV) THEN MESON_TAC[]);;</div>
+<div id="L46"></div>
+<div id="L47">let C1_COMP_TAC =</div>
+<div id="L48">  REPEAT GEN_TAC THEN REWRITE_TAC[wlocal; READ_COMPONENT_COMPOSE; WRITE_COMPONENT_COMPOSE] THEN</div>
+<div id="L49">  CONV_TAC(TOP_DEPTH_CONV COMPONENT_READ_OVER_WRITE_CONV) THEN REWRITE_TAC[];;</div>
+<div id="L50"></div>
+<div id="L51">let C1_KEEPS_TAC (comptac:tactic) =</div>
+<div id="L52">  REWRITE_TAC[MAYCHANGE; SEQ_ID] THEN</div>
+<div id="L53">  REPEAT(MATCH_MP_TAC C1_SEQ_KEEPS THEN CONJ_TAC) THEN</div>
+<div id="L54">  MATCH_MP_TAC C1_ASSIGNS_KEEPS THEN comptac;;</div>
+<div id="L55"></div>
+<div id="L56">let c1_frame_of th = rand(snd(dest_imp(snd(strip_forall(concl th)))));;</div>
+<div id="L57">let c1_npf_frame = c1_frame_of VA1_TICK_FORWARD_NOPOP_VK;;</div>
+<div id="L58">let c1_npb_frame = c1_frame_of VA1_TICK_BACKWARD_NOPOP_VK;;</div>
+<div id="L59">let c1_fr fr tm = vsubst [fr, `cf:wasmstate-&gt;wasmstate-&gt;bool`] tm;;</div>
+<div id="L60"></div>
+<div id="L61">let C1_KEEPS_MEMSIZE = `!s s&#x27;. (cf:wasmstate-&gt;wasmstate-&gt;bool) s s&#x27; ==&gt; read wmemsize s&#x27; = read wmemsize s`;;</div>
+<div id="L62">let C1_KEEPS_GLOBALS = `!s s&#x27;. (cf:wasmstate-&gt;wasmstate-&gt;bool) s s&#x27; ==&gt; read wglobals s&#x27; = read wglobals s`;;</div>
+<div id="L63">let C1_KEEPS_BOTH = `!s s&#x27;. (cf:wasmstate-&gt;wasmstate-&gt;bool) s s&#x27;</div>
+<div id="L64">   ==&gt; read wmemsize s&#x27; = read wmemsize s /\ read wglobals s&#x27; = read wglobals s`;;</div>
+<div id="L65"></div>
+<div id="L66">let VA1_NPF_MEMSIZE = prove(c1_fr c1_npf_frame C1_KEEPS_MEMSIZE, C1_KEEPS_TAC C1_COMP_TAC);;</div>
+<div id="L67">let VA1_NPF_GLOBALS = prove(c1_fr c1_npf_frame C1_KEEPS_GLOBALS, C1_KEEPS_TAC C1_COMP_TAC);;</div>
+<div id="L68">let VA1_NPB_MEMSIZE = prove(c1_fr c1_npb_frame C1_KEEPS_MEMSIZE, C1_KEEPS_TAC C1_COMP_TAC);;</div>
+<div id="L69">let VA1_NPB_GLOBALS = prove(c1_fr c1_npb_frame C1_KEEPS_GLOBALS, C1_KEEPS_TAC C1_COMP_TAC);;</div>
+<div id="L70">let VA1_NPF_KEEPS = prove(c1_fr c1_npf_frame C1_KEEPS_BOTH, MESON_TAC[VA1_NPF_MEMSIZE; VA1_NPF_GLOBALS]);;</div>
+<div id="L71">let VA1_NPB_KEEPS = prove(c1_fr c1_npb_frame C1_KEEPS_BOTH, MESON_TAC[VA1_NPB_MEMSIZE; VA1_NPB_GLOBALS]);;</div>
+<div id="L72"></div>
+<div id="L73">(* ---- one host call per tick ---- *)</div>
+<div id="L74">(* lth = |- ensures (wasmc fs) P Q C (the tick theorem, antecedent discharged), *)</div>
+<div id="L75">(* cth = callee facts, kths = frame facts `C s s&#x27; ==&gt; ...` used on the final state *)</div>
+<div id="L76">let C1_NP_HCALL_TAC (lth:thm) (cth:thm) (kths:thm list) : tactic =</div>
+<div id="L77">  let _,[step;pp;qq;cc] = strip_comb(concl lth) in</div>
+<div id="L78">  let eth,dth = CONJ_PAIR cth in</div>
+<div id="L79">  let code = rand(lhand(concl eth)) and e = rand(rand(concl eth))</div>
+<div id="L80">  and decls = rand(rand(concl dth)) in</div>
+<div id="L81">  MATCH_MP_TAC (ISPECL [step; code; e; decls; `[]:wval list`; `word 1:int32`; pp; qq; cc]</div>
+<div id="L82">                  VA1_HCALL_ENSURES) THEN</div>
+<div id="L83">  REWRITE_TAC[eth; dth; lth] THEN CONJ_TAC THENL</div>
+<div id="L84">   [GEN_TAC THEN STRIP_TAC THEN CONV_TAC(TOP_DEPTH_CONV BETA_CONV) THEN</div>
+<div id="L85">    ASM_REWRITE_TAC[WCALL_ENTRY_READS];</div>
+<div id="L86">    REPEAT GEN_TAC THEN CONV_TAC(TOP_DEPTH_CONV BETA_CONV) THEN STRIP_TAC THEN</div>
+<div id="L87">    MAP_EVERY (fun kth -&gt; FIRST_ASSUM(MP_TAC o MATCH_MP kth) THEN</div>
+<div id="L88">                          ASM_REWRITE_TAC[WCALL_ENTRY_READS] THEN DISCH_TAC) kths THEN</div>
+<div id="L89">    ASM_REWRITE_TAC[va1_swf; va1_swb]];;</div>
+<div id="L90"></div>
+<div id="L91">let VA1_NP_HCALL_FWD = prove</div>
+<div id="L92"> (`!(fs:num-&gt;byte list#num#num) (gl:num-&gt;wval) (t:int32) (ap:int32) (mdl:num-&gt;int32) (N:num)</div>
+<div id="L93">   (x:(num-&gt;int32)#(num-&gt;int32)) (m:int64-&gt;byte).</div>
+<div id="L94">     mdl 1 = word N /\ 1 &lt;= N /\ N &lt;= 640 /\ va1_fs_np fs /\</div>
+<div id="L95">     (ap = word 0 \/ ~(ap = word_add t (word 1))) /\ va1_np_st t ap mdl N x m</div>
+<div id="L96">     ==&gt; va1_hcall (wasmc fs) va1_tick_forward_mc [] (word 1)</div>
+<div id="L97">           (\gl&#x27; m&#x27;. gl&#x27; = gl /\ va1_np_st (word_add t (word 1)) ap mdl N (va1_swf mdl x) m&#x27;) gl m`,</div>
+<div id="L98">  REPEAT GEN_TAC THEN REWRITE_TAC[va1_fs_np; va1_np_st] THEN</div>
+<div id="L99">  DISCH_THEN(REPEAT_TCL CONJUNCTS_THEN ASSUME_TAC) THEN</div>
+<div id="L100">  MP_TAC(SPECL [`fs:num-&gt;byte list#num#num`; `gl:num-&gt;wval`; `t:int32`; `ap:int32`;</div>
+<div id="L101">                `mdl:num-&gt;int32`; `N:num`; `x:(num-&gt;int32)#(num-&gt;int32)`]</div>
+<div id="L102">               VA1_TICK_FORWARD_NOPOP_VK) THEN</div>
+<div id="L103">  ANTS_TAC THENL [ASM_REWRITE_TAC[]; ALL_TAC] THEN</div>
+<div id="L104">  DISCH_THEN(fun lth -&gt; C1_NP_HCALL_TAC lth VA1_TICKF_CALLEE [VA1_NPF_KEEPS]));;</div>
+<div id="L105"></div>
+<div id="L106">let VA1_NP_HCALL_BWD = prove</div>
+<div id="L107"> (`!(fs:num-&gt;byte list#num#num) (gl:num-&gt;wval) (u:int32) (ap:int32) (mdl:num-&gt;int32) (N:num)</div>
+<div id="L108">   (y:(num-&gt;int32)#(num-&gt;int32)) (m:int64-&gt;byte).</div>
+<div id="L109">     mdl 1 = word N /\ 1 &lt;= N /\ N &lt;= 640 /\ va1_fs_np fs /\ ~(u = word 0) /\ va1_np_st u ap mdl N y m</div>
+<div id="L110">     ==&gt; va1_hcall (wasmc fs) va1_tick_backward_mc [] (word 1)</div>
+<div id="L111">           (\gl&#x27; m&#x27;. gl&#x27; = gl /\ va1_np_st (word_sub u (word 1)) ap mdl N (va1_swb mdl y) m&#x27;) gl m`,</div>
+<div id="L112">  REPEAT GEN_TAC THEN REWRITE_TAC[va1_fs_np; va1_np_st] THEN</div>
+<div id="L113">  DISCH_THEN(REPEAT_TCL CONJUNCTS_THEN ASSUME_TAC) THEN</div>
+<div id="L114">  MP_TAC(SPECL [`fs:num-&gt;byte list#num#num`; `gl:num-&gt;wval`; `u:int32`; `ap:int32`;</div>
+<div id="L115">                `mdl:num-&gt;int32`; `N:num`; `y:(num-&gt;int32)#(num-&gt;int32)`]</div>
+<div id="L116">               VA1_TICK_BACKWARD_NOPOP_VK) THEN</div>
+<div id="L117">  ANTS_TAC THENL [ASM_REWRITE_TAC[]; ALL_TAC] THEN</div>
+<div id="L118">  DISCH_THEN(fun lth -&gt; C1_NP_HCALL_TAC lth VA1_TICKB_CALLEE [VA1_NPB_KEEPS]));;</div>
+<div id="L119"></div>
+<div id="L120">(* ---- tick arithmetic and the inverse ---- *)</div>
+<div id="L121"></div>
+<div id="L122">let C1_WORD_ADD1 = prove</div>
+<div id="L123"> (`!u. word_add (word u) (word 1):int32 = word (u + 1)`,</div>
+<div id="L124">  REWRITE_TAC[WORD_ADD]);;</div>
+<div id="L125"></div>
+<div id="L126">let C1_WORD_SUB1 = prove</div>
+<div id="L127"> (`!u. 0 &lt; u ==&gt; word_sub (word u) (word 1):int32 = word (u - 1)`,</div>
+<div id="L128">  REPEAT STRIP_TAC THEN REWRITE_TAC[WORD_SUB] THEN</div>
+<div id="L129">  ASM_SIMP_TAC[ARITH_RULE `0 &lt; u ==&gt; 1 &lt;= u`]);;</div>
+<div id="L130"></div>
+<div id="L131">let C1_WORD_NZ = prove</div>
+<div id="L132"> (`!u kk. 0 &lt; u /\ u &lt;= kk /\ kk &lt; 4294967296 ==&gt; ~(word u:int32 = word 0)`,</div>
+<div id="L133">  REPEAT STRIP_TAC THEN FIRST_X_ASSUM(MP_TAC o AP_TERM `val:int32-&gt;num`) THEN</div>
+<div id="L134">  REWRITE_TAC[VAL_WORD; DIMINDEX_32] THEN CONV_TAC NUM_REDUCE_CONV THEN</div>
+<div id="L135">  SUBGOAL_THEN `u MOD 4294967296 = u` SUBST1_TAC THENL</div>
+<div id="L136">   [MATCH_MP_TAC MOD_LT THEN ASM_ARITH_TAC; ASM_ARITH_TAC]);;</div>
+<div id="L137"></div>
+<div id="L138">let C1_AUTO_FWD = prove</div>
+<div id="L139"> (`!(ap:int32) u kk. kk &lt; 4294967296 /\ u &lt; kk /\ (ap = word 0 \/ kk &lt; val ap)</div>
+<div id="L140">     ==&gt; ap = word 0 \/ ~(ap = word (u + 1))`,</div>
+<div id="L141">  REPEAT GEN_TAC THEN ASM_CASES_TAC `ap:int32 = word 0` THEN ASM_REWRITE_TAC[] THEN</div>
+<div id="L142">  STRIP_TAC THEN DISCH_THEN SUBST_ALL_TAC THEN</div>
+<div id="L143">  POP_ASSUM MP_TAC THEN REWRITE_TAC[VAL_WORD; DIMINDEX_32] THEN</div>
+<div id="L144">  SUBGOAL_THEN `(u + 1) MOD 2 EXP 32 = u + 1` SUBST1_TAC THENL</div>
+<div id="L145">   [MATCH_MP_TAC MOD_LT THEN CONV_TAC NUM_REDUCE_CONV THEN ASM_ARITH_TAC; ASM_ARITH_TAC]);;</div>
+<div id="L146"></div>
+<div id="L147">let C1_SWF_ITER = prove</div>
+<div id="L148"> (`!mdl u x. va1_swf mdl (ITER u (va1_swf mdl) x) = ITER (u + 1) (va1_swf mdl) x`,</div>
+<div id="L149">  REWRITE_TAC[GSYM ADD1; ITER]);;</div>
+<div id="L150"></div>
+<div id="L151">let C1_SWB_ITER = prove</div>
+<div id="L152"> (`!mdl u x. 0 &lt; u ==&gt; va1_swb mdl (ITER u (va1_swf mdl) x) = ITER (u - 1) (va1_swf mdl) x`,</div>
+<div id="L153">  GEN_TAC THEN INDUCT_TAC THEN REWRITE_TAC[LT_REFL; ITER; SUC_SUB1] THEN</div>
+<div id="L154">  REWRITE_TAC[va1_swb; va1_swf; VE_VORT_STEPS_INVERSE_VK]);;</div>
+<div id="L155"></div>
+<div id="L156">(* ---- scrub in any order ---- *)</div>
+<div id="L157"></div>
+<div id="L158">let VA1_NP_SCRUB = prove</div>
+<div id="L159"> (`!(fs:num-&gt;byte list#num#num) (gl:num-&gt;wval) (mdl:num-&gt;int32) (N:num) (ap:int32)</div>
+<div id="L160">   (x0:(num-&gt;int32)#(num-&gt;int32)) (K:num).</div>
+<div id="L161">     mdl 1 = word N /\ 1 &lt;= N /\ N &lt;= 640 /\ va1_fs_np fs /\ K &lt; 4294967296 /\</div>
+<div id="L162">     (ap = word 0 \/ K &lt; val ap)</div>
+<div id="L163">     ==&gt; !(cs:bool list) (u:num) (m:int64-&gt;byte).</div>
+<div id="L164">           u &lt;= K /\ va1_cmds_ok K u cs /\</div>
+<div id="L165">           va1_np_st (word u) ap mdl N (ITER u (va1_swf mdl) x0) m</div>
+<div id="L166">           ==&gt; va1_hrun (wasmc fs) cs</div>
+<div id="L167">                 (\gl&#x27; m&#x27;. gl&#x27; = gl /\</div>
+<div id="L168">                    va1_np_st (word (va1_cmds_end u cs)) ap mdl N</div>
+<div id="L169">                              (ITER (va1_cmds_end u cs) (va1_swf mdl) x0) m&#x27;) gl m`,</div>
+<div id="L170">  MAP_EVERY X_GEN_TAC</div>
+<div id="L171">   [`fs:num-&gt;byte list#num#num`; `gl:num-&gt;wval`; `mdl:num-&gt;int32`; `N:num`;</div>
+<div id="L172">    `ap:int32`; `x0:(num-&gt;int32)#(num-&gt;int32)`; `kk:num`] THEN</div>
+<div id="L173">  DISCH_THEN(REPEAT_TCL CONJUNCTS_THEN ASSUME_TAC) THEN</div>
+<div id="L174">  LIST_INDUCT_TAC THENL</div>
+<div id="L175">   [REWRITE_TAC[VA1_HRUN_CLAUSES; VA1_CMDS_OK_CLAUSES; VA1_CMDS_END_CLAUSES] THEN</div>
+<div id="L176">    CONV_TAC(TOP_DEPTH_CONV BETA_CONV) THEN REWRITE_TAC[VA1_CMDS_END_CLAUSES] THEN MESON_TAC[];</div>
+<div id="L177">    ALL_TAC] THEN</div>
+<div id="L178">  MAP_EVERY X_GEN_TAC [`u:num`; `m:int64-&gt;byte`] THEN</div>
+<div id="L179">  REWRITE_TAC[VA1_HRUN_CLAUSES; VA1_CMDS_OK_CLAUSES; VA1_CMDS_END_CLAUSES] THEN</div>
+<div id="L180">  ASM_CASES_TAC `h:bool` THEN ASM_REWRITE_TAC[] THEN STRIP_TAC THEN</div>
+<div id="L181">  MATCH_MP_TAC VA1_HCALL_MONO THENL</div>
+<div id="L182">   [EXISTS_TAC `\gl&#x27; m&#x27;. gl&#x27; = (gl:num-&gt;wval) /\</div>
+<div id="L183">       va1_np_st (word (u + 1)) ap mdl N (ITER (u + 1) (va1_swf mdl) x0) m&#x27;` THEN</div>
+<div id="L184">    CONJ_TAC THENL</div>
+<div id="L185">     [REPEAT GEN_TAC THEN CONV_TAC(TOP_DEPTH_CONV BETA_CONV) THEN</div>
+<div id="L186">      DISCH_THEN(CONJUNCTS_THEN2 SUBST1_TAC ASSUME_TAC) THEN</div>
+<div id="L187">      FIRST_X_ASSUM MATCH_MP_TAC THEN ASM_REWRITE_TAC[] THEN</div>
+<div id="L188">      UNDISCH_TAC `u &lt; kk` THEN ARITH_TAC;</div>
+<div id="L189">      MP_TAC(SPECL [`fs:num-&gt;byte list#num#num`; `gl:num-&gt;wval`; `word u:int32`; `ap:int32`;</div>
+<div id="L190">        `mdl:num-&gt;int32`; `N:num`; `ITER u (va1_swf mdl) x0`; `m:int64-&gt;byte`]</div>
+<div id="L191">        VA1_NP_HCALL_FWD) THEN</div>
+<div id="L192">      REWRITE_TAC[C1_WORD_ADD1; C1_SWF_ITER] THEN DISCH_THEN MATCH_MP_TAC THEN</div>
+<div id="L193">      ASM_REWRITE_TAC[] THEN MATCH_MP_TAC C1_AUTO_FWD THEN</div>
+<div id="L194">      EXISTS_TAC `kk:num` THEN ASM_REWRITE_TAC[]];</div>
+<div id="L195">    EXISTS_TAC `\gl&#x27; m&#x27;. gl&#x27; = (gl:num-&gt;wval) /\</div>
+<div id="L196">       va1_np_st (word (u - 1)) ap mdl N (ITER (u - 1) (va1_swf mdl) x0) m&#x27;` THEN</div>
+<div id="L197">    CONJ_TAC THENL</div>
+<div id="L198">     [REPEAT GEN_TAC THEN CONV_TAC(TOP_DEPTH_CONV BETA_CONV) THEN</div>
+<div id="L199">      DISCH_THEN(CONJUNCTS_THEN2 SUBST1_TAC ASSUME_TAC) THEN</div>
+<div id="L200">      FIRST_X_ASSUM MATCH_MP_TAC THEN ASM_REWRITE_TAC[] THEN</div>
+<div id="L201">      UNDISCH_TAC `u &lt;= kk` THEN ARITH_TAC;</div>
+<div id="L202">      MP_TAC(SPECL [`fs:num-&gt;byte list#num#num`; `gl:num-&gt;wval`; `word u:int32`; `ap:int32`;</div>
+<div id="L203">        `mdl:num-&gt;int32`; `N:num`; `ITER u (va1_swf mdl) x0`; `m:int64-&gt;byte`]</div>
+<div id="L204">        VA1_NP_HCALL_BWD) THEN</div>
+<div id="L205">      SUBGOAL_THEN `word_sub (word u) (word 1):int32 = word (u - 1) /\</div>
+<div id="L206">                    va1_swb mdl (ITER u (va1_swf mdl) x0) = ITER (u - 1) (va1_swf mdl) x0`</div>
+<div id="L207">        (fun th -&gt; REWRITE_TAC[th]) THENL</div>
+<div id="L208">       [ASM_SIMP_TAC[C1_WORD_SUB1; C1_SWB_ITER]; ALL_TAC] THEN</div>
+<div id="L209">      DISCH_THEN MATCH_MP_TAC THEN ASM_REWRITE_TAC[] THEN</div>
+<div id="L210">      MATCH_MP_TAC C1_WORD_NZ THEN EXISTS_TAC `kk:num` THEN ASM_REWRITE_TAC[]]]);;</div>
+<div id="L211"></div>
+<div id="L212">(* ---- the film: n forward then n backward from tick 0 ---- *)</div>
+<div id="L213"></div>
+<div id="L214">let C1_CMDS_OK_REPT = prove</div>
+<div id="L215"> (`!j kk u cs. u &lt;= kk</div>
+<div id="L216">     ==&gt; (va1_cmds_ok kk u (APPEND (REPLICATE j T) cs) &lt;=&gt;</div>
+<div id="L217">          u + j &lt;= kk /\ va1_cmds_ok kk (u + j) cs)`,</div>
+<div id="L218">  INDUCT_TAC THENL</div>
+<div id="L219">   [REWRITE_TAC[REPLICATE; APPEND; ADD_CLAUSES] THEN MESON_TAC[]; ALL_TAC] THEN</div>
+<div id="L220">  REWRITE_TAC[REPLICATE; APPEND; ADD_CLAUSES; VA1_CMDS_OK_CLAUSES] THEN</div>
+<div id="L221">  REPEAT STRIP_TAC THEN ASM_CASES_TAC `u &lt; kk` THEN ASM_REWRITE_TAC[] THENL</div>
+<div id="L222">   [FIRST_X_ASSUM(MP_TAC o SPECL [`kk:num`; `u + 1`; `cs:bool list`]) THEN</div>
+<div id="L223">    ANTS_TAC THENL [ASM_ARITH_TAC; DISCH_THEN SUBST1_TAC] THEN</div>
+<div id="L224">    REWRITE_TAC[ARITH_RULE `(u + 1) + j = SUC (u + j)`];</div>
+<div id="L225">    REWRITE_TAC[DE_MORGAN_THM] THEN DISJ1_TAC THEN ASM_ARITH_TAC]);;</div>
+<div id="L226"></div>
+<div id="L227">let C1_CMDS_OK_REPF = prove</div>
+<div id="L228"> (`!j kk u. va1_cmds_ok kk u (REPLICATE j F) &lt;=&gt; j &lt;= u`,</div>
+<div id="L229">  INDUCT_TAC THEN ASM_REWRITE_TAC[REPLICATE; VA1_CMDS_OK_CLAUSES; LE_0] THEN ARITH_TAC);;</div>
+<div id="L230"></div>
+<div id="L231">let C1_CMDS_END_REPT = prove</div>
+<div id="L232"> (`!j u cs. va1_cmds_end u (APPEND (REPLICATE j T) cs) = va1_cmds_end (u + j) cs`,</div>
+<div id="L233">  INDUCT_TAC THEN</div>
+<div id="L234">  ASM_REWRITE_TAC[REPLICATE; APPEND; VA1_CMDS_END_CLAUSES; ADD_CLAUSES;</div>
+<div id="L235">                  ARITH_RULE `!u j. (u + 1) + j = SUC (u + j)`]);;</div>
+<div id="L236"></div>
+<div id="L237">let C1_CMDS_END_REPF = prove</div>
+<div id="L238"> (`!j u. va1_cmds_end u (REPLICATE j F) = u - j`,</div>
+<div id="L239">  INDUCT_TAC THEN ASM_REWRITE_TAC[REPLICATE; VA1_CMDS_END_CLAUSES; SUB_0] THEN ARITH_TAC);;</div>
+<div id="L240"></div>
+<div id="L241">let C1_FILM_SIMPS =</div>
+<div id="L242">  [LE_0; LE_REFL; ADD_CLAUSES; SUB_REFL; ITER; C1_CMDS_OK_REPT; C1_CMDS_OK_REPF;</div>
+<div id="L243">   C1_CMDS_END_REPT; C1_CMDS_END_REPF];;</div>
+<div id="L244"></div>
+<div id="L245">let VA1_NP_FILM_INVERSE = prove</div>
+<div id="L246"> (`!(fs:num-&gt;byte list#num#num) (gl:num-&gt;wval) (mdl:num-&gt;int32) (N:num)</div>
+<div id="L247">   (x0:(num-&gt;int32)#(num-&gt;int32)) (n:num) (m:int64-&gt;byte).</div>
+<div id="L248">     mdl 1 = word N /\ 1 &lt;= N /\ N &lt;= 640 /\ va1_fs_np fs /\ n &lt; 4294967296 /\</div>
+<div id="L249">     va1_np_st (word 0) (word 0) mdl N x0 m</div>
+<div id="L250">     ==&gt; va1_hrun (wasmc fs) (APPEND (REPLICATE n T) (REPLICATE n F))</div>
+<div id="L251">           (\gl&#x27; m&#x27;. gl&#x27; = gl /\ va1_np_st (word 0) (word 0) mdl N x0 m&#x27;) gl m`,</div>
+<div id="L252">  REPEAT GEN_TAC THEN DISCH_THEN(REPEAT_TCL CONJUNCTS_THEN ASSUME_TAC) THEN</div>
+<div id="L253">  MP_TAC(SPECL [`fs:num-&gt;byte list#num#num`; `gl:num-&gt;wval`; `mdl:num-&gt;int32`; `N:num`;</div>
+<div id="L254">    `word 0:int32`; `x0:(num-&gt;int32)#(num-&gt;int32)`; `n:num`] VA1_NP_SCRUB) THEN</div>
+<div id="L255">  ASM_REWRITE_TAC[] THEN</div>
+<div id="L256">  DISCH_THEN(MP_TAC o SPECL [`APPEND (REPLICATE n T) (REPLICATE n F)`; `0`; `m:int64-&gt;byte`]) THEN</div>
+<div id="L257">  ASM_SIMP_TAC C1_FILM_SIMPS);;</div>
+<div id="L258"></div>
+<div id="L259">(* ---- non-vacuity (pattern of pop_n1_sat.ml, SEGMENT PROVER N1) ---- *)</div>
+<div id="L260"></div>
+<div id="L261">let C1_READ_BYTES32 = prove</div>
+<div id="L262"> (`!(a:int64) (m:int64-&gt;byte). read (bytes32 a) m = word (read (bytes(a,4)) m)`,</div>
+<div id="L263">  REWRITE_TAC[bytes32; READ_COMPONENT_COMPOSE; asword; through; read]);;</div>
+<div id="L264"></div>
+<div id="L265">let C1_B32_SAT = prove</div>
+<div id="L266"> (`!W:num-&gt;int32. ?m:int64-&gt;byte.</div>
+<div id="L267">      !w. 4 * w + 4 &lt;= 2 EXP 64 ==&gt; read (bytes32 (word (4 * w))) m = W w`,</div>
+<div id="L268">  GEN_TAC THEN</div>
+<div id="L269">  EXISTS_TAC</div>
+<div id="L270">   `\b:int64. write (bytes(word(4 * (val b DIV 4)):int64,4))</div>
+<div id="L271">                    (val((W:num-&gt;int32)(val b DIV 4))) (\c:int64. word 0:byte) b` THEN</div>
+<div id="L272">  X_GEN_TAC `w:num` THEN DISCH_TAC THEN</div>
+<div id="L273">  REWRITE_TAC[C1_READ_BYTES32] THEN</div>
+<div id="L274">  MATCH_MP_TAC EQ_TRANS THEN</div>
+<div id="L275">  EXISTS_TAC</div>
+<div id="L276">   `word(read (bytes(word(4 * w):int64,4))</div>
+<div id="L277">              (write (bytes(word(4 * w):int64,4)) (val((W:num-&gt;int32) w))</div>
+<div id="L278">                     (\c:int64. word 0:byte))):int32` THEN</div>
+<div id="L279">  CONJ_TAC THENL</div>
+<div id="L280">   [AP_TERM_TAC THEN REWRITE_TAC[READ_BYTES_EQ] THEN</div>
+<div id="L281">    X_GEN_TAC `i:num` THEN DISCH_TAC THEN</div>
+<div id="L282">    SUBGOAL_THEN `val(word_add (word(4 * w)) (word i):int64) DIV 4 = w`</div>
+<div id="L283">     (fun th -&gt; REWRITE_TAC[th]) THEN</div>
+<div id="L284">    REWRITE_TAC[GSYM WORD_ADD; VAL_WORD; DIMINDEX_64] THEN</div>
+<div id="L285">    SUBGOAL_THEN `(4 * w + i) MOD 2 EXP 64 = 4 * w + i` SUBST1_TAC THENL</div>
+<div id="L286">     [MATCH_MP_TAC MOD_LT THEN ASM_ARITH_TAC; ALL_TAC] THEN</div>
+<div id="L287">    MATCH_MP_TAC DIV_UNIQ THEN EXISTS_TAC `i:num` THEN ASM_ARITH_TAC;</div>
+<div id="L288">    SIMP_TAC[READ_WRITE_BYTES; DIMINDEX_64; ARITH_RULE `4 &lt;= 2 EXP 64`] THEN</div>
+<div id="L289">    REWRITE_TAC[ARITH_RULE `8 * 4 = 32`] THEN</div>
+<div id="L290">    MP_TAC(ISPEC `(W:num-&gt;int32) w` VAL_BOUND) THEN</div>
+<div id="L291">    REWRITE_TAC[DIMINDEX_32] THEN SIMP_TAC[MOD_LT; WORD_VAL]]);;</div>
+<div id="L292"></div>
+<div id="L293">let c1_addr_th a =</div>
+<div id="L294">  let four = mk_small_numeral 4 in</div>
+<div id="L295">  if is_numeral a then</div>
+<div id="L296">    let n = dest_numeral a in</div>
+<div id="L297">    let q = mk_numeral (Num.quo_num n (Num.num_of_int 4)) in</div>
+<div id="L298">    SYM(NUM_REDUCE_CONV (mk_binop `( * ):num-&gt;num-&gt;num` four q))</div>
+<div id="L299">  else</div>
+<div id="L300">    let b,fk = dest_binop `(+):num-&gt;num-&gt;num` a in</div>
+<div id="L301">    let k = rand fk in</div>
+<div id="L302">    let q = mk_numeral (Num.quo_num (dest_numeral b) (Num.num_of_int 4)) in</div>
+<div id="L303">    ARITH_RULE (mk_eq(a, mk_binop `( * ):num-&gt;num-&gt;num` four</div>
+<div id="L304">                                  (mk_binop `(+):num-&gt;num-&gt;num` q k)));;</div>
+<div id="L305"></div>
+<div id="L306">let C1_DECIDE_TAC =</div>
+<div id="L307">  W(fun (asl,w) -&gt;</div>
+<div id="L308">      let l = lhs w in</div>
+<div id="L309">      if is_cond l then</div>
+<div id="L310">        let c = rand(rator(rator l)) in</div>
+<div id="L311">        (SUBGOAL_THEN (mk_neg c) MP_TAC THENL</div>
+<div id="L312">          [ASM_ARITH_TAC; DISCH_THEN(fun th -&gt; REWRITE_TAC[EQF_INTRO th])]) ORELSE</div>
+<div id="L313">        (SUBGOAL_THEN c MP_TAC THENL</div>
+<div id="L314">          [ASM_ARITH_TAC; DISCH_THEN(fun th -&gt; REWRITE_TAC[EQT_INTRO th])])</div>
+<div id="L315">      else FIRST [REFL_TAC; AP_TERM_TAC THEN ASM_ARITH_TAC]);;</div>
+<div id="L316"></div>
+<div id="L317">let C1_CONJ_TAC =</div>
+<div id="L318">  REPEAT STRIP_TAC THEN</div>
+<div id="L319">  W(fun (asl,w) -&gt;</div>
+<div id="L320">      let a = rand(rand(rand(rator(lhs w)))) in</div>
+<div id="L321">      let th = c1_addr_th a in</div>
+<div id="L322">      SUBST1_TAC th THEN</div>
+<div id="L323">      REMOVE_THEN &quot;m&quot; (fun mth -&gt; MP_TAC(SPEC (rand(rand(concl th))) mth))) THEN</div>
+<div id="L324">  ANTS_TAC THENL [CONV_TAC NUM_REDUCE_CONV THEN ASM_ARITH_TAC;</div>
+<div id="L325">                  DISCH_THEN SUBST1_TAC] THEN</div>
+<div id="L326">  BETA_TAC THEN REPEAT C1_DECIDE_TAC;;</div>
+<div id="L327"></div>
+<div id="L328">let VA1_NP_FILM_SAT = prove</div>
+<div id="L329"> (`(?fs:num-&gt;byte list#num#num. va1_fs_np fs) /\</div>
+<div id="L330">  (!(t:int32) (ap:int32) (mdl:num-&gt;int32) (N:num) (x:(num-&gt;int32)#(num-&gt;int32)).</div>
+<div id="L331">     N &lt;= 640 ==&gt; ?m:int64-&gt;byte. va1_np_st t ap mdl N x m)`,</div>
+<div id="L332">  CONJ_TAC THENL</div>
+<div id="L333">   [EXISTS_TAC `\i. if i = 9 then (va1_f9_mc,0,0) else if i = 10 then (va1_f10_mc,0,0)</div>
+<div id="L334">                    else if i = 27 then (va1_f27_mc,0,0) else (va1_f28_mc,0,0)` THEN</div>
+<div id="L335">    REWRITE_TAC[va1_fs_np] THEN CONV_TAC(TOP_DEPTH_CONV BETA_CONV) THEN</div>
+<div id="L336">    CONV_TAC NUM_REDUCE_CONV THEN REWRITE_TAC[];</div>
+<div id="L337">    ALL_TAC] THEN</div>
+<div id="L338">  MAP_EVERY X_GEN_TAC [`t:int32`; `ap:int32`; `mdl:num-&gt;int32`; `N:num`;</div>
+<div id="L339">                       `x:(num-&gt;int32)#(num-&gt;int32)`] THEN</div>
+<div id="L340">  DISCH_TAC THEN</div>
+<div id="L341">  MP_TAC(ISPEC</div>
+<div id="L342">   `\w. if w = 4098 then t:int32</div>
+<div id="L343">        else if w = 4099 then word 4294967295</div>
+<div id="L344">        else if w = 4128 then ap</div>
+<div id="L345">        else if 4160 &lt;= w /\ w &lt; 5184 then mdl (w - 4160)</div>
+<div id="L346">        else if 278528 &lt;= w /\ w &lt; 280576 then FST x (w - 278528)</div>
+<div id="L347">        else if 280576 &lt;= w /\ w &lt; 282624 then SND x (w - 280576)</div>
+<div id="L348">        else word 0` C1_B32_SAT) THEN</div>
+<div id="L349">  DISCH_THEN(X_CHOOSE_THEN `m:int64-&gt;byte` (LABEL_TAC &quot;m&quot;)) THEN</div>
+<div id="L350">  EXISTS_TAC `m:int64-&gt;byte` THEN</div>
+<div id="L351">  REWRITE_TAC[va1_np_st; va1_tick; va1_pop; va1_mdl; va1_vab] THEN</div>
+<div id="L352">  REPEAT CONJ_TAC THEN C1_CONJ_TAC);;</div>
+</div>
+<p class="dim">Generated by <code>tools/build_trail.py</code> from the published files; checked by <code>tools/check_trail.py</code>.</p>
+</body>
+</html>

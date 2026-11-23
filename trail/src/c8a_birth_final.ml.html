@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>c8a_birth_final.ml: Vortex Echo proof trail</title>
+<link rel="icon" href="data:,">
+<style>
+:root { --bg:#fbfbfa; --ink:#1d2129; --dim:#5b6372; --line:#e2e4e8; --acc:#2f5bb7; --code:#f1f2f4; --ok:#1d7a46; --hl:#fff3b8; }
+@media (prefers-color-scheme: dark) { :root { --bg:#0f1116; --ink:#dde1e8; --dim:#9aa3b3; --line:#2a2f3a; --acc:#8fb0ff; --code:#1a1e27; --ok:#5fd08e; --hl:#3d3615; } }
+html { background:var(--bg); color:var(--ink); }
+body { margin:0 auto; max-width:980px; padding:22px 22px 80px; font:16px/1.55 -apple-system,"Segoe UI",Helvetica,Arial,sans-serif; }
+h1 { font-size:26px; line-height:1.25; margin:6px 0 14px; }
+h2 { font-size:20px; margin:34px 0 10px; padding-top:10px; border-top:1px solid var(--line); }
+h3 { font-size:16px; margin:0 0 8px; }
+a { color:var(--acc); }
+code, pre { font:12.5px/1.45 ui-monospace,Menlo,Consolas,monospace; }
+code { background:var(--code); padding:1px 4px; border-radius:4px; }
+pre { background:var(--code); padding:10px 12px; border-radius:8px; overflow:auto; }
+pre code { background:none; padding:0; }
+pre.stmt { white-space:pre-wrap; word-break:break-all; max-height:28em; }
+.crumbs { font-size:14px; color:var(--dim); }
+.walk { display:flex; flex-wrap:wrap; gap:6px; align-items:center; font-size:14px; margin:10px 0 18px; }
+.walk a, .walk span.s { border:1px solid var(--line); border-radius:999px; padding:3px 10px; text-decoration:none; background:var(--code); }
+.walk .arr { color:var(--dim); }
+blockquote { margin:10px 0; padding:8px 14px; border-left:4px solid var(--acc); background:var(--code); border-radius:0 8px 8px 0; }
+.thm { border:1px solid var(--line); border-radius:10px; padding:14px 16px; margin:14px 0; }
+.thm:target, .step:target, .fn:target { outline:3px solid var(--acc); outline-offset:2px; }
+.thm, .step, .fn, .box, h2 { scroll-margin-top:70px; }
+.src div { scroll-margin-top:120px; }
+ol.steps { margin:6px 0 0; padding-left:22px; }
+ol.steps > li { margin:10px 0; }
+ol.steps > li > b { display:inline-block; min-width:5.5em; }
+.ok { color:var(--ok); font-weight:600; }
+.dim { color:var(--dim); font-size:14px; }
+.box { border:1px solid var(--line); border-radius:10px; padding:12px 16px; margin:12px 0; background:var(--code); }
+.box pre { background:var(--bg); }
+.replay { border-color:var(--ok); }
+table { border-collapse:collapse; font-size:13.5px; line-height:1.4; }
+th, td { border:1px solid var(--line); padding:5px 8px; vertical-align:top; text-align:left; }
+th { background:var(--code); }
+.tw { overflow-x:auto; margin:10px 0; }
+.src { font:12.5px/1.5 ui-monospace,Menlo,Consolas,monospace; background:var(--code); border-radius:8px; padding:8px 0; overflow-x:auto; }
+.src { counter-reset:ln; }
+.src div { white-space:pre; padding:0 12px 0 0; counter-increment:ln; }
+.src div::before { content:counter(ln); display:inline-block; width:4.5em; padding-right:1em; text-align:right; color:var(--dim); user-select:none; }
+.src div:target { background:var(--hl); }
+pre.hex { line-height:1.5; }
+.hex .o { color:var(--dim); }
+</style>
+</head>
+<body>
+<p class="crumbs"><a href="../../index.html">Vortex Echo</a> · <a href="../../trail/index.html">Proof trail</a> · <code>c8a_birth_final.ml</code></p>
+<h1><code>c8a_birth_final.ml</code></h1>
+<p>The proof file of receipt <code>c8a_birth_final</code>. Published at <a href="../../proof-tree/tasks/bubble-echo/vortex/proofs/c8a_birth_final.ml"><code>proof-tree/tasks/bubble-echo/vortex/proofs/c8a_birth_final.ml</code></a> (SHA-256 <code>62d5b1b99cc3cfa41a7f191924c30852c6e98a18b5fac6cf7c8ddb3a8fc97d52</code>; <a href="https://github.com/BenKnill/vortex-echo/blob/main/proof-tree/tasks/bubble-echo/vortex/proofs/c8a_birth_final.ml">on GitHub</a>). Line N has the anchor <code>#LN</code>.</p>
+<div class="src" data-src="proof-tree/tasks/bubble-echo/vortex/proofs/c8a_birth_final.ml">
+<div id="L1">(* vortex-chain C8a final leaf (row A7), Claude Opus 5.5, 2026-11-15. Spec c8a_birth.spec (frozen sha256</div>
+<div id="L2">   45a80dc635545cd09bfc37f9fb4faec174c1b004db539ce6d23597d580ac21c7, FROZEN-C8A.txt). VA1_BIRTH_EQ: f13 from pc 13 to WDone</div>
+<div id="L3">   leaves ND&#x27; and the record log as va1_push (va1_born ...) of the entry state: prologue C8A_PRO, loop 1 C8A_LOOP1V (k = 0),</div>
+<div id="L4">   C8A_T2 (route lemmas in c8a_final_lem.ml) (2612: loop 2 entry, C8A_LOOP2V, C8A_T3: loop 3 entry, C8A_LOOP3V, epilogue R5B_EPI, C8A_FINAL_MEMV), with the</div>
+<div id="L5">   ND = 16384 and cap exits handled by the fold cap lemmas. VA1_BORN_SHAPE and VA1_BIRTH_EQ_OK are re-bound from the</div>
+<div id="L6">   shape layer (c8a_shape_lem.ml); the fold CLAUSES, VA1_F13_ENTRY and VA1_PUSH_CLAUSES as in the A1 probe. *)</div>
+<div id="L7">needs &quot;ve_vort.ml&quot;;;</div>
+<div id="L8">needs &quot;ve_tick.ml&quot;;;</div>
+<div id="L9">needs &quot;ve_vk.ml&quot;;;</div>
+<div id="L10">needs &quot;va1_code.ml&quot;;;</div>
+<div id="L11">needs &quot;va1_seq_final2.ml&quot;;;</div>
+<div id="L12">needs &quot;pop_design_defs.ml&quot;;;</div>
+<div id="L13">needs &quot;pop_design_stmts.ml&quot;;;</div>
+<div id="L14">needs &quot;pop_l2_cdrift.ml&quot;;;</div>
+<div id="L15">needs &quot;pop_l3_jdrift.ml&quot;;;</div>
+<div id="L16">needs &quot;pop_l4_drop.ml&quot;;;</div>
+<div id="L17">needs &quot;pop_l1_rimd.ml&quot;;;</div>
+<div id="L18">needs &quot;pop_l1_rim.ml&quot;;;</div>
+<div id="L19">needs &quot;pop_l5_unbirth.ml&quot;;;</div>
+<div id="L20">needs &quot;pop_h1_hol.ml&quot;;;</div>
+<div id="L21">needs &quot;pop_n1_sat.ml&quot;;;</div>
+<div id="L22">needs &quot;pop_q0_calls.ml&quot;;;</div>
+<div id="L23">needs &quot;pop_q1_untick.ml&quot;;;</div>
+<div id="L24">needs &quot;pop_q2_forward.ml&quot;;;</div>
+<div id="L25">needs &quot;pop_r5_jig_defs.ml&quot;;;</div>
+<div id="L26">needs &quot;pop_r5jig_dec.ml&quot;;;</div>
+<div id="L27">needs &quot;pop_r5jig_lem.ml&quot;;;</div>
+<div id="L28">needs &quot;pop_r5_corr_defs.ml&quot;;;</div>
+<div id="L29">needs &quot;pop_r5c_lem.ml&quot;;;</div>
+<div id="L30">needs &quot;pop_r5b_bdec.ml&quot;;;</div>
+<div id="L31">needs &quot;pop_r5bp_lem.ml&quot;;;</div>
+<div id="L32">needs &quot;pop_r5bp_lem2.ml&quot;;;</div>
+<div id="L33">needs &quot;pop_r5bp_lem3.ml&quot;;;</div>
+<div id="L34">needs &quot;pop_r5bp_lem4.ml&quot;;;</div>
+<div id="L35">needs &quot;pop_r5bp_lem5b.ml&quot;;;</div>
+<div id="L36">needs &quot;pop_r5bp_lem6.ml&quot;;;</div>
+<div id="L37">needs &quot;c8a_born_defs.ml&quot;;;</div>
+<div id="L38">needs &quot;c8a_shape_lem.ml&quot;;;</div>
+<div id="L39">needs &quot;c8a_isqv.ml&quot;;;</div>
+<div id="L40">needs &quot;c8a_seg1v.ml&quot;;;</div>
+<div id="L41">needs &quot;c8a_fold_lem.ml&quot;;;</div>
+<div id="L42">needs &quot;c8a_iter1.ml&quot;;;</div>
+<div id="L43">needs &quot;c8a_loop2v.ml&quot;;;</div>
+<div id="L44">needs &quot;c8a_loop3v.ml&quot;;;</div>
+<div id="L45">needs &quot;c8a_final_lem.ml&quot;;;</div>
+<div id="L46">let VA1_BIRTH_EQ = prove(`va1_birth_eq`,</div>
+<div id="L47">  REWRITE_TAC[va1_birth_eq; va1_born] THEN REPEAT GEN_TAC THEN STRIP_TAC THEN</div>
+<div id="L48">  UNDISCH_TAC `va1_log_ok t di nd` THEN REWRITE_TAC[va1_log_ok] THEN STRIP_TAC THEN</div>
+<div id="L49">  MATCH_MP_TAC ENSURES_PRECONDITION_THM THEN EXISTS_TAC c8a_pre0 THEN CONJ_TAC THENL</div>
+<div id="L50">   [X_GEN_TAC `s:wasmstate` THEN CONV_TAC(TOP_DEPTH_CONV BETA_CONV) THEN STRIP_TAC THEN</div>
+<div id="L51">    EXISTS_TAC `read wmem (s:wasmstate)` THEN</div>
+<div id="L52">    FIRST_X_ASSUM(MP_TAC o check (fun th -&gt; can (find_term ((=) `wlocals`)) (concl th))) THEN</div>
+<div id="L53">    FIRST_X_ASSUM(MP_TAC o check (fun th -&gt; can (find_term ((=) `wasm_decl_vals`)) (concl th))) THEN</div>
+<div id="L54">    REWRITE_TAC[CONJUNCT2 VA1_F13_CALLEE; option_INJ] THEN DISCH_THEN(SUBST1_TAC o SYM) THEN</div>
+<div id="L55">    REWRITE_TAC[wlocal; READ_COMPONENT_COMPOSE] THEN DISCH_THEN SUBST1_TAC THEN</div>
+<div id="L56">    REWRITE_TAC[wcall_locals; LENGTH; READ_ELEMENT] THEN CONV_TAC(ONCE_DEPTH_CONV EL_CONV) THEN</div>
+<div id="L57">    CONV_TAC(ONCE_DEPTH_CONV NUM_REDUCE_CONV) THEN REWRITE_TAC[] THEN CONV_TAC(ONCE_DEPTH_CONV EL_CONV) THEN</div>
+<div id="L58">    FIRST_ASSUM(fun th -&gt; if concl th = `va1_mdl mdl (read wmem (s:wasmstate))` then</div>
+<div id="L59">       MP_TAC(SPEC `2` (REWRITE_RULE[va1_mdl; va1_w32s] th)) else NO_TAC) THEN</div>
+<div id="L60">    CONV_TAC NUM_REDUCE_CONV THEN REWRITE_TAC[] THEN DISCH_TAC THEN</div>
+<div id="L61">    RULE_ASSUM_TAC(REWRITE_RULE[va1_tick; va1_bs]) THEN ASM_REWRITE_TAC[R5B_EX_EQ; injectivity &quot;wval&quot;; va1_push; FST; SND];</div>
+<div id="L62">    ALL_TAC] THEN</div>
+<div id="L63">  R5B_EXISTS_TAC THEN X_GEN_TAC `m0:int64-&gt;byte` THEN R5B_PURE_TAC THEN</div>
+<div id="L64">  W(fun (asl,w) -&gt; C8A_THEN (r5b_inst2 asl (SPECL [`m0:int64-&gt;byte`; `nd:int32`; `t:int32`; `mdl:num-&gt;int32`] C8A_PRO))) THEN</div>
+<div id="L65">  R5B_DISJ_TAC THEN CONJ_TAC THENL</div>
+<div id="L66">   [R5B_PURE_TAC THEN</div>
+<div id="L67">    W(fun (asl,w) -&gt; C8A_THENM (c8a_inst3 asl (SPECL (`2047` :: `0` :: tl c8a_iter1v_vars) C8A_LOOP1V))) THEN</div>
+<div id="L68">    R5B_PURE_TAC THEN</div>
+<div id="L69">    W(fun (asl,w) -&gt; C8A_THEN (c8a_inst3 asl (INST [c8a_Lf `2048`, `L:(num-&gt;int32)list`] (SPEC_ALL C8A_T2)))) THEN C8A_SAMEPOST;</div>
+<div id="L70">    R5B_PURE_TAC THEN</div>
+<div id="L71">    W(fun (asl,w) -&gt; REWRITE_TAC[FST; r5b_inst2 asl (SPEC_ALL c8a_cap1)]) THEN</div>
+<div id="L72">    W(fun (asl,w) -&gt; C8A_THENM (c8a_inst3 asl (INST [`[]:(num-&gt;int32)list`, `L:(num-&gt;int32)list`] (SPEC_ALL C8A_T2)))) THEN</div>
+<div id="L73">    C8A_SAMEPOST]);;</div>
+<div id="L74">let VA1_BORN_SHAPE = prove(`!mdl hp tbl t ra rb zq zp nd. val nd &lt;= 16384</div>
+<div id="L75">    ==&gt; ALL (\r. r 6 = word_add t (word 1) /\ r 10 = word 0 /\ r 11 = word 0) (va1_born mdl hp tbl t ra rb zq zp nd) /\</div>
+<div id="L76">        val nd + LENGTH (va1_born mdl hp tbl t ra rb zq zp nd) &lt;= 16384`, ACCEPT_TAC VA1_BORN_SHAPE);;</div>
+<div id="L77">let VA1_BIRTH_EQ_OK = prove(`va1_birth_eq ==&gt; va1_birth_ok`, ACCEPT_TAC VA1_BIRTH_EQ_OK);;</div>
+<div id="L78">let VA1_FOLD1_CLAUSES = prove(`(!mdl hp tbl t rb nd0 st. va1_fold1 mdl hp tbl t rb nd0 0 st = st) /\</div>
+<div id="L79">  (!mdl hp tbl t rb nd0 k st. va1_fold1 mdl hp tbl t rb nd0 (SUC k) st =</div>
+<div id="L80">       va1_step1 mdl hp tbl t rb nd0 k (va1_fold1 mdl hp tbl t rb nd0 k st))`, REWRITE_TAC[va1_fold1]);;</div>
+<div id="L81">let VA1_FOLD2_CLAUSES = prove(`(!mdl hp tbl t rb nd0 L. va1_fold2 mdl hp tbl t rb nd0 0 L = L) /\</div>
+<div id="L82">  (!mdl hp tbl t rb nd0 k L. va1_fold2 mdl hp tbl t rb nd0 (SUC k) L =</div>
+<div id="L83">       va1_step2 mdl hp tbl t rb nd0 k (va1_fold2 mdl hp tbl t rb nd0 k L))`, REWRITE_TAC[va1_fold2]);;</div>
+<div id="L84">let VA1_FOLD3_CLAUSES = prove(`(!mdl hp tbl t ra rb nd0 L. va1_fold3 mdl hp tbl t ra rb nd0 0 L = L) /\</div>
+<div id="L85">  (!mdl hp tbl t ra rb nd0 k L. va1_fold3 mdl hp tbl t ra rb nd0 (SUC k) L =</div>
+<div id="L86">       va1_step3 mdl hp tbl t ra rb nd0 k (va1_fold3 mdl hp tbl t ra rb nd0 k L))`, REWRITE_TAC[va1_fold3]);;</div>
+<div id="L87">let VA1_F13_ENTRY = prove(`wasm_entry va1_f13_mc = SOME 13`, ACCEPT_TAC VA1_F13_ENTRY);;</div>
+<div id="L88">let VA1_PUSH_CLAUSES = prove(parse_term pop_spec_VA1_PUSH_CLAUSES, REWRITE_TAC[va1_push]);;</div>
+</div>
+<p class="dim">Generated by <code>tools/build_trail.py</code> from the published files; checked by <code>tools/check_trail.py</code>.</p>
+</body>
+</html>

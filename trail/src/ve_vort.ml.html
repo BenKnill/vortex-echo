@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ve_vort.ml: Vortex Echo proof trail</title>
+<link rel="icon" href="data:,">
+<style>
+:root { --bg:#fbfbfa; --ink:#1d2129; --dim:#5b6372; --line:#e2e4e8; --acc:#2f5bb7; --code:#f1f2f4; --ok:#1d7a46; --hl:#fff3b8; }
+@media (prefers-color-scheme: dark) { :root { --bg:#0f1116; --ink:#dde1e8; --dim:#9aa3b3; --line:#2a2f3a; --acc:#8fb0ff; --code:#1a1e27; --ok:#5fd08e; --hl:#3d3615; } }
+html { background:var(--bg); color:var(--ink); }
+body { margin:0 auto; max-width:980px; padding:22px 22px 80px; font:16px/1.55 -apple-system,"Segoe UI",Helvetica,Arial,sans-serif; }
+h1 { font-size:26px; line-height:1.25; margin:6px 0 14px; }
+h2 { font-size:20px; margin:34px 0 10px; padding-top:10px; border-top:1px solid var(--line); }
+h3 { font-size:16px; margin:0 0 8px; }
+a { color:var(--acc); }
+code, pre { font:12.5px/1.45 ui-monospace,Menlo,Consolas,monospace; }
+code { background:var(--code); padding:1px 4px; border-radius:4px; }
+pre { background:var(--code); padding:10px 12px; border-radius:8px; overflow:auto; }
+pre code { background:none; padding:0; }
+pre.stmt { white-space:pre-wrap; word-break:break-all; max-height:28em; }
+.crumbs { font-size:14px; color:var(--dim); }
+.walk { display:flex; flex-wrap:wrap; gap:6px; align-items:center; font-size:14px; margin:10px 0 18px; }
+.walk a, .walk span.s { border:1px solid var(--line); border-radius:999px; padding:3px 10px; text-decoration:none; background:var(--code); }
+.walk .arr { color:var(--dim); }
+blockquote { margin:10px 0; padding:8px 14px; border-left:4px solid var(--acc); background:var(--code); border-radius:0 8px 8px 0; }
+.thm { border:1px solid var(--line); border-radius:10px; padding:14px 16px; margin:14px 0; }
+.thm:target, .step:target, .fn:target { outline:3px solid var(--acc); outline-offset:2px; }
+.thm, .step, .fn, .box, h2 { scroll-margin-top:70px; }
+.src div { scroll-margin-top:120px; }
+ol.steps { margin:6px 0 0; padding-left:22px; }
+ol.steps > li { margin:10px 0; }
+ol.steps > li > b { display:inline-block; min-width:5.5em; }
+.ok { color:var(--ok); font-weight:600; }
+.dim { color:var(--dim); font-size:14px; }
+.box { border:1px solid var(--line); border-radius:10px; padding:12px 16px; margin:12px 0; background:var(--code); }
+.box pre { background:var(--bg); }
+.replay { border-color:var(--ok); }
+table { border-collapse:collapse; font-size:13.5px; line-height:1.4; }
+th, td { border:1px solid var(--line); padding:5px 8px; vertical-align:top; text-align:left; }
+th { background:var(--code); }
+.tw { overflow-x:auto; margin:10px 0; }
+.src { font:12.5px/1.5 ui-monospace,Menlo,Consolas,monospace; background:var(--code); border-radius:8px; padding:8px 0; overflow-x:auto; }
+.src { counter-reset:ln; }
+.src div { white-space:pre; padding:0 12px 0 0; counter-increment:ln; }
+.src div::before { content:counter(ln); display:inline-block; width:4.5em; padding-right:1em; text-align:right; color:var(--dim); user-select:none; }
+.src div:target { background:var(--hl); }
+pre.hex { line-height:1.5; }
+.hex .o { color:var(--dim); }
+</style>
+</head>
+<body>
+<p class="crumbs"><a href="../../index.html">Vortex Echo</a> · <a href="../../trail/index.html">Proof trail</a> · <code>ve_vort.ml</code></p>
+<h1><code>ve_vort.ml</code></h1>
+<p>A file loaded by a proof run. Published at <a href="../../proof-tree/tasks/bubble-echo/vortex/proofs/ve_vort.ml"><code>proof-tree/tasks/bubble-echo/vortex/proofs/ve_vort.ml</code></a> (SHA-256 <code>028a9f3910386a0325946726205d365fe4bd72af90bb67d6af4adc6a2ae407ea</code>; <a href="https://github.com/BenKnill/vortex-echo/blob/main/proof-tree/tasks/bubble-echo/vortex/proofs/ve_vort.ml">on GitHub</a>). Line N has the anchor <code>#LN</code>.</p>
+<div class="src" data-src="proof-tree/tasks/bubble-echo/vortex/proofs/ve_vort.ml">
+<div id="L1">(* ========================================================================= *)</div>
+<div id="L2">(* Vortex Echo v1: the vortex Fredkin export pair ve_vort_apply /            *)</div>
+<div id="L3">(* ve_vort_unapply on the exact bytes of vortex/core/ve_core.wasm (sha256   *)</div>
+<div id="L4">(* 72fe0ba2; bindings in ve_vort_code.ml, decode window pc 1305 .. end).     *)</div>
+<div id="L5">(*                                                                           *)</div>
+<div id="L6">(* VE_VORT_APPLY_LOOP_CORRECT / VE_VORT_UNAPPLY_LOOP_CORRECT: the Fredkin    *)</div>
+<div id="L7">(* loop of each body (pc 1305 to the end), unconditionally, for N = 1..640   *)</div>
+<div id="L8">(* (model word 1): apply VA&#x27; = VB, VB&#x27; = VD + VA; unapply VA&#x27; = VB - VD,     *)</div>
+<div id="L9">(* VB&#x27; = VA (m &lt; 3N), no trap.                                               *)</div>
+<div id="L10">(* VE_VORT_APPLY_CORRECT / VE_VORT_UNAPPLY_CORRECT (and the _FREDKIN forms   *)</div>
+<div id="L11">(* in terms of ve_fredkin_fwd / ve_fredkin_bwd of ve_generic_defs.ml): the   *)</div>
+<div id="L12">(* whole exports from their entry, under the NAMED premise ve_vk_ok VK       *)</div>
+<div id="L13">(* (ve_vort_defs.ml: the field phase pc 21..1305 leaves VD = VK(model,       *)</div>
+<div id="L14">(* source)), composed with the loop theorems.                                *)</div>
+<div id="L15">(* VE_VORT_INVERSE: unapply on the state apply leaves restores VA and VB, an *)</div>
+<div id="L16">(* instance of FREDKIN_STEP_INVERSE. VE_VORT_STEPS_INVERSE: n substeps with  *)</div>
+<div id="L17">(* this VK, an instance of FREDKIN_STEPS_INVERSE (model level).             *)</div>
+<div id="L18">(* ========================================================================= *)</div>
+<div id="L19"></div>
+<div id="L20">needs &quot;ve_vort_code.ml&quot;;;</div>
+<div id="L21">needs &quot;../../capillary/proofs/cap_helpers.ml&quot;;;</div>
+<div id="L22">needs &quot;ve_generic.ml&quot;;;</div>
+<div id="L23">needs &quot;ve_vort_defs.ml&quot;;;</div>
+<div id="L24">needs &quot;ve_vort_tacs.ml&quot;;;</div>
+<div id="L25">needs &quot;ve_vort_stmts.ml&quot;;;</div>
+<div id="L26"></div>
+<div id="L27">let VE_VORT_APPLY_LOOP_CORRECT = prove</div>
+<div id="L28"> (parse_term ve_spec_VE_VORT_APPLY_LOOP_CORRECT,</div>
+<div id="L29">  VORT_TAC `ve_vort_apply_mc` VE_VORT_APPLY_EXEC `1122304` `1114112`</div>
+<div id="L30">    `\m:num. word_add ((vd:num-&gt;int32) m) ((va:num-&gt;int32) m)` `vb:num-&gt;int32`</div>
+<div id="L31">    `vb:num-&gt;int32` `va:num-&gt;int32`);;</div>
+<div id="L32"></div>
+<div id="L33">let VE_VORT_UNAPPLY_LOOP_CORRECT = prove</div>
+<div id="L34"> (parse_term ve_spec_VE_VORT_UNAPPLY_LOOP_CORRECT,</div>
+<div id="L35">  VORT_TAC `ve_vort_unapply_mc` VE_VORT_UNAPPLY_EXEC `1114112` `1122304`</div>
+<div id="L36">    `\m:num. word_sub ((vb:num-&gt;int32) m) ((vd:num-&gt;int32) m)` `va:num-&gt;int32`</div>
+<div id="L37">    `va:num-&gt;int32` `vb:num-&gt;int32`);;</div>
+<div id="L38"></div>
+<div id="L39">(* compose the premise&#x27;s prefix (selected conjunct of ve_vk_ok) with a loop  *)</div>
+<div id="L40">(* theorem (instantiated at vd = VK mdl source), then weaken to the stated   *)</div>
+<div id="L41">(* postcondition (close with post_tac) and frame.                            *)</div>
+<div id="L42">let VE_VORT_COMPOSE_TAC sel loopth src post_tac =</div>
+<div id="L43">  GEN_TAC THEN DISCH_THEN(MP_TAC o sel o REWRITE_RULE[ve_vk_ok]) THEN</div>
+<div id="L44">  DISCH_THEN(fun pth -&gt;</div>
+<div id="L45">    REPEAT GEN_TAC THEN STRIP_TAC THEN</div>
+<div id="L46">    MP_TAC(SPECL [`N:num`; `mdl:num-&gt;int32`; `va:num-&gt;int32`; `vb:num-&gt;int32`] pth) THEN</div>
+<div id="L47">    ASM_REWRITE_TAC[] THEN DISCH_TAC THEN</div>
+<div id="L48">    MP_TAC(SPECL [`N:num`; `va:num-&gt;int32`; `vb:num-&gt;int32`;</div>
+<div id="L49">                  mk_comb(`(VK:(num-&gt;int32)-&gt;(num-&gt;int32)-&gt;num-&gt;int32) mdl`, src)] loopth) THEN</div>
+<div id="L50">    ASM_REWRITE_TAC[] THEN DISCH_TAC) THEN</div>
+<div id="L51">  (fun (asl,w) -&gt;</div>
+<div id="L52">     let th2 = snd(hd asl) and th1 = snd(hd(tl asl)) in</div>
+<div id="L53">     let _,[_;_;q1;_] = strip_comb(concl th1) in</div>
+<div id="L54">     let _,[_;p2;r2;_] = strip_comb(concl th2) in</div>
+<div id="L55">     let x = `s:wasmstate` in</div>
+<div id="L56">     let pimp = TAC_PROOF((asl, mk_forall(x, mk_imp(mk_comb(q1,x), mk_comb(p2,x)))),</div>
+<div id="L57">       X_GEN_TAC `s:wasmstate` THEN CONV_TAC(TOP_DEPTH_CONV BETA_CONV) THEN STRIP_TAC THEN</div>
+<div id="L58">       ASM_REWRITE_TAC[] THEN</div>
+<div id="L59">       FIRST_X_ASSUM(fun th -&gt; if can (find_term ((=) `16640`)) (concl th)</div>
+<div id="L60">                               then MP_TAC(SPEC `1` th) else NO_TAC) THEN</div>
+<div id="L61">       CONV_TAC(ONCE_DEPTH_CONV NUM_REDUCE_CONV) THEN ASM_REWRITE_TAC[]) in</div>
+<div id="L62">     let th2a = MATCH_MP ENSURES_PRECONDITION_THM (CONJ pimp th2) in</div>
+<div id="L63">     let th12 = MATCH_MP ENSURES_TRANS (CONJ th1 th2a) in</div>
+<div id="L64">     (MATCH_MP_TAC ENSURES_FRAME_SUBSUMED THEN EXISTS_TAC (rand(concl th12)) THEN</div>
+<div id="L65">      CONJ_TAC THENL [SUBSUMED_MAYCHANGE_TAC; ALL_TAC] THEN</div>
+<div id="L66">      MATCH_MP_TAC ENSURES_POSTCONDITION_THM THEN EXISTS_TAC r2 THEN CONJ_TAC THENL</div>
+<div id="L67">       [X_GEN_TAC `s:wasmstate` THEN CONV_TAC(TOP_DEPTH_CONV BETA_CONV) THEN STRIP_TAC THEN</div>
+<div id="L68">        ASM_REWRITE_TAC[] THEN REPEAT CONJ_TAC THEN</div>
+<div id="L69">        (X_GEN_TAC `m:num` THEN DISCH_TAC THEN ASM_SIMP_TAC[] THEN post_tac);</div>
+<div id="L70">        ACCEPT_TAC th12]) (asl,w));;</div>
+<div id="L71"></div>
+<div id="L72">let VE_VORT_APPLY_CORRECT = prove</div>
+<div id="L73"> (parse_term ve_spec_VE_VORT_APPLY_CORRECT,</div>
+<div id="L74">  VE_VORT_COMPOSE_TAC CONJUNCT1 VE_VORT_APPLY_LOOP_CORRECT `vb:num-&gt;int32`</div>
+<div id="L75">    (REWRITE_TAC[WORD_ADD_SYM]));;</div>
+<div id="L76"></div>
+<div id="L77">let VE_VORT_UNAPPLY_CORRECT = prove</div>
+<div id="L78"> (parse_term ve_spec_VE_VORT_UNAPPLY_CORRECT,</div>
+<div id="L79">  VE_VORT_COMPOSE_TAC CONJUNCT2 VE_VORT_UNAPPLY_LOOP_CORRECT `va:num-&gt;int32` ALL_TAC);;</div>
+<div id="L80"></div>
+<div id="L81">let VE_VORT_APPLY_FREDKIN = prove</div>
+<div id="L82"> (parse_term ve_spec_VE_VORT_APPLY_FREDKIN,</div>
+<div id="L83">  REWRITE_TAC[ve_fredkin_fwd; FST; SND] THEN CONV_TAC(TOP_DEPTH_CONV BETA_CONV) THEN</div>
+<div id="L84">  REWRITE_TAC[VE_VORT_APPLY_CORRECT]);;</div>
+<div id="L85"></div>
+<div id="L86">let VE_VORT_UNAPPLY_FREDKIN = prove</div>
+<div id="L87"> (parse_term ve_spec_VE_VORT_UNAPPLY_FREDKIN,</div>
+<div id="L88">  REWRITE_TAC[ve_fredkin_bwd; FST; SND] THEN CONV_TAC(TOP_DEPTH_CONV BETA_CONV) THEN</div>
+<div id="L89">  REWRITE_TAC[VE_VORT_UNAPPLY_CORRECT]);;</div>
+<div id="L90"></div>
+<div id="L91">(* unapply after apply: the unapply theorem at the state apply leaves, i.e. *)</div>
+<div id="L92">(* (va&#x27;, vb&#x27;) = ve_fredkin_fwd (VK mdl) (va, vb); FREDKIN_STEP_INVERSE      *)</div>
+<div id="L93">(* turns its postcondition ve_fredkin_bwd (VK mdl) (va&#x27;, vb&#x27;) into (va, vb). *)</div>
+<div id="L94">let VE_VORT_INVERSE = prove</div>
+<div id="L95"> (parse_term ve_spec_VE_VORT_INVERSE,</div>
+<div id="L96">  GEN_TAC THEN DISCH_TAC THEN REPEAT GEN_TAC THEN STRIP_TAC THEN</div>
+<div id="L97">  MP_TAC(SPECL [`N:num`; `mdl:num-&gt;int32`;</div>
+<div id="L98">                `FST (ve_fredkin_fwd ((VK:(num-&gt;int32)-&gt;(num-&gt;int32)-&gt;num-&gt;int32) mdl) (va,vb))`;</div>
+<div id="L99">                `SND (ve_fredkin_fwd ((VK:(num-&gt;int32)-&gt;(num-&gt;int32)-&gt;num-&gt;int32) mdl) (va,vb))`]</div>
+<div id="L100">         (MP (SPEC `VK:(num-&gt;int32)-&gt;(num-&gt;int32)-&gt;num-&gt;int32` VE_VORT_UNAPPLY_FREDKIN)</div>
+<div id="L101">             (ASSUME `ve_vk_ok (VK:(num-&gt;int32)-&gt;(num-&gt;int32)-&gt;num-&gt;int32)`))) THEN</div>
+<div id="L102">  ASM_REWRITE_TAC[PAIR; FREDKIN_STEP_INVERSE] THEN</div>
+<div id="L103">  REWRITE_TAC[ve_fredkin_fwd; FST; SND] THEN CONV_TAC(TOP_DEPTH_CONV BETA_CONV) THEN</div>
+<div id="L104">  REWRITE_TAC[]);;</div>
+<div id="L105"></div>
+<div id="L106">let VE_FREDKIN_FWDN_CLAUSES = VE_FREDKIN_FWDN_CLAUSES;;</div>
+<div id="L107">let VE_FREDKIN_BWDN_CLAUSES = VE_FREDKIN_BWDN_CLAUSES;;</div>
+<div id="L108"></div>
+<div id="L109">let VE_VORT_STEPS_INVERSE = prove</div>
+<div id="L110"> (parse_term ve_spec_VE_VORT_STEPS_INVERSE,</div>
+<div id="L111">  REWRITE_TAC[FREDKIN_STEPS_INVERSE]);;</div>
+</div>
+<p class="dim">Generated by <code>tools/build_trail.py</code> from the published files; checked by <code>tools/check_trail.py</code>.</p>
+</body>
+</html>

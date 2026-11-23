@@ -7,53 +7,96 @@
 <link rel="icon" href="data:,">
 <script>if (!location.search) location.replace("?demo=1&az=232&el=5&roll=70");</script>
 <style>
-  :root { --bg: #0b0d12; --ink: #d9dde6; --dim: #8a93a6; --line: rgba(255,255,255,0.12); --ok: #8fe3b0; --bad: #ff8f8f; }
+  :root { --bg: #0b0d12; --ink: #d9dde6; --dim: #8a93a6; --line: rgba(255,255,255,0.12); --ok: #8fe3b0; --bad: #ff8f8f; --acc: #8fe3b0; }
   html, body { margin: 0; height: 100%; background: var(--bg); color: var(--ink); font: 13px/1.4 -apple-system, "Helvetica Neue", Helvetica, Arial, sans-serif; overflow: hidden; }
   #gl { position: fixed; inset: 0; width: 100vw; height: 100vh; display: block; cursor: crosshair; }
-  #hud { position: fixed; left: 18px; top: 14px; pointer-events: none; max-width: 520px; }
+  #hud { position: fixed; left: 18px; top: 14px; pointer-events: none; max-width: min(520px, 48vw); text-shadow: 0 1px 6px rgba(0,0,0,0.9); }
   #hud h1 { font-size: 16px; font-weight: 600; margin: 0 0 3px; letter-spacing: 0.02em; }
   #hud p { margin: 0; color: var(--dim); font-size: 12px; }
-  #slow { position: fixed; left: 50%; top: 16px; transform: translateX(-50%); display: none; pointer-events: none; text-align: center;
+  #hud p.short { display: none; }
+  #slow { position: fixed; right: 18px; top: 16px; max-width: min(420px, 44vw); display: none; pointer-events: none; text-align: right;   /* top right, clear of the HUD */
           font-size: 18px; font-weight: 600; letter-spacing: 0.04em; color: #f3f5fa; text-shadow: 0 1px 8px rgba(0,0,0,0.8); }
   #slow span { display: block; font-size: 12px; font-weight: 400; color: var(--dim); letter-spacing: 0; }
-  /* 2026-11-17 fix batch: status and controls share one bottom column, so a wrapped control row pushes the text up */
+  /* the turn and the return of the auto film, announced over the bubble for a few seconds (drawing only) */
+  #turn { position: fixed; left: 50%; top: 40%; transform: translate(-50%, -50%); display: none; pointer-events: none; text-align: center; max-width: min(640px, 90vw);
+          font-size: 34px; font-weight: 700; color: #f3f5fa; text-shadow: 0 2px 14px rgba(0,0,0,0.95), 0 0 2px rgba(0,0,0,0.9); }
+  #turn span { display: block; margin-top: 6px; font-size: 14px; font-weight: 400; color: #c9cfdb; }
+  #turn b.ok { color: var(--ok); } #turn b.bad { color: var(--bad); }
   #bottom { position: fixed; left: 16px; right: 16px; bottom: 14px; display: flex; flex-direction: column; align-items: flex-end; gap: 8px; pointer-events: none; }
   #panel { align-self: flex-start; display: flex; gap: 6px; align-items: center; flex-wrap: wrap; max-width: 100%; pointer-events: auto; }
   button, select { background: rgba(20,24,32,0.85); color: var(--ink); border: 1px solid var(--line); border-radius: 6px; padding: 5px 10px; font: inherit; cursor: pointer; }
   button:hover { border-color: rgba(255,255,255,0.3); }
   button.on { background: #2b3550; border-color: #6d7fb5; }
   button:disabled { opacity: 0.5; cursor: wait; }
-  #hint { color: var(--dim); font-size: 12px; margin-left: 6px; }
-  #read { text-align: right; color: var(--dim); font-size: 12px; max-width: 60vw; }
+  #ltbtn { color: var(--dim); }
+  #ltbtn span.on { color: var(--ink); font-weight: 600; }
+  #hint { color: var(--dim); font-size: 12px; margin-left: 6px; text-shadow: 0 1px 6px rgba(0,0,0,0.9); }
+  #read { text-align: right; color: var(--dim); font-size: 12px; max-width: 60vw; text-shadow: 0 1px 6px rgba(0,0,0,0.9); }
   #read b.ok { color: var(--ok); font-weight: 600; }
   #read b.bad { color: var(--bad); font-weight: 600; }
+  /* verify reversal: the primary control, its plan in the label, its result large beside it */
+  #vrow { align-self: stretch; display: flex; gap: 14px; align-items: stretch; pointer-events: none; }
+  #verify { pointer-events: auto; flex: none; display: flex; flex-direction: column; align-items: flex-start; justify-content: center; gap: 2px; min-width: 210px;
+            background: #17402f; border: 1px solid var(--acc); color: #eafff3; border-radius: 8px; padding: 9px 14px; text-align: left; }
+  #verify b { font-size: 16px; font-weight: 700; letter-spacing: 0.01em; }
+  #verify span { font-size: 12px; color: #bfeed2; }
+  #verify:hover { background: #1d5039; border-color: #b6f3cd; }
+  #verify.idle { background: rgba(20,24,32,0.85); border-color: var(--line); color: var(--dim); }
+  #verify.idle span { color: var(--dim); }
+  #vres { flex: 1 1 auto; min-width: 0; max-width: 620px; background: rgba(10,12,18,0.72); border: 1px solid var(--line); border-radius: 8px; padding: 8px 12px; color: var(--dim); font-size: 12px; }
+  #vres .t { color: var(--ink); font-size: 12px; }
+  #vres .big { font-size: 26px; font-weight: 700; line-height: 1.15; color: var(--ink); }
+  #vres .big.ok { color: var(--ok); } #vres .big.bad { color: var(--bad); }
+  #vres b.ok { color: var(--ok); font-weight: 600; } #vres b.bad { color: var(--bad); font-weight: 600; }
+  #vres .bar { height: 4px; background: rgba(255,255,255,0.12); border-radius: 2px; margin: 6px 0 2px; overflow: hidden; }
+  #vres .bar i { display: block; height: 100%; background: var(--acc); }
+  #vres.old { opacity: 0.7; }
+  /* read-only timeline: tick 0, the puncture, the end of the pop and where the state is now */
+  #tl { align-self: stretch; position: relative; height: 50px; pointer-events: none; }
+  #tl .track { position: absolute; left: 0; right: 0; top: 8px; height: 4px; border-radius: 2px; background: rgba(255,255,255,0.14); }
+  #tl .seen { position: absolute; left: 0; top: 8px; height: 4px; border-radius: 2px; background: rgba(143,227,176,0.35); }
+  #tl .mk { position: absolute; top: 3px; width: 2px; height: 14px; margin-left: -1px; background: #c9cfdb; }
+  #tl .mk.p { background: #ffb36b; }
+  #tl .lb { position: absolute; top: 17px; font-size: 11px; color: var(--dim); white-space: nowrap; transform: translateX(-50%); text-shadow: 0 1px 6px rgba(0,0,0,0.9); }
+  #tl .lb.l { transform: none; } #tl .lb.r { transform: translateX(-100%); }
+  #tl .lb.p { color: #ffc690; top: 33px; }   /* its own row: it never meets "tick 0" or "end of pop" (round 1, finding 6) */
+  #tl .th { position: absolute; top: 4px; width: 12px; height: 12px; margin-left: -6px; border-radius: 6px; background: #f3f5fa; box-shadow: 0 0 6px rgba(0,0,0,0.8); }
   #err { position: fixed; left: 16px; top: 70px; right: 16px; display: none; white-space: pre-wrap; color: var(--bad); background: rgba(0,0,0,0.8); padding: 8px; font: 11px/1.3 ui-monospace, Menlo, monospace; max-height: 60vh; overflow: auto; }
-  #lt { position: fixed; right: 18px; top: 14px; display: flex; flex-direction: column; align-items: flex-end; gap: 8px; z-index: 5; }
-  #ltmode { font-size: 34px; font-weight: 700; color: #f3f5fa; text-shadow: 0 2px 12px rgba(0,0,0,0.9); text-align: right; }
-  #ltmode small { display: block; font-size: 13px; font-weight: 400; color: var(--dim); }
-  #ltbtn { display: flex; border: 2px solid rgba(255,255,255,0.35); border-radius: 12px; overflow: hidden; padding: 0; background: rgba(12,14,20,0.85); }
-  #ltbtn span { padding: 14px 22px; font-size: 20px; font-weight: 600; color: var(--dim); }
-  #ltbtn span.on { background: #e9ecf4; color: #10131a; }
-  #ltbtn:hover { border-color: rgba(255,255,255,0.7); }
-  #ltkey { color: var(--dim); font-size: 13px; }
-  @media (max-width: 640px) { #bottom { align-items: stretch; } #read { max-width: none; text-align: left; } }
-  @media (max-width: 900px) { #hint { display: none; } }   /* 2026-11-17: the hint never wraps the control row under the status line */
+  @media (max-width: 900px) { #hint { display: none; } }   /* the hint never wraps the control row under the status line */
+  @media (max-width: 640px) {
+    #hud { left: 12px; right: 12px; top: 10px; max-width: none; }
+    #hud p.long { display: none; } #hud p.short { display: block; }
+    #slow { top: 94px; left: 12px; right: 12px; max-width: none; text-align: center; font-size: 15px; }
+    #slow span { font-size: 11px; }
+    #turn { font-size: 26px; top: 34%; }
+    #turn span { font-size: 13px; }
+    #bottom { left: 10px; right: 10px; bottom: 10px; align-items: stretch; gap: 6px; }
+    #read { max-width: none; text-align: left; font-size: 11px; line-height: 1.35; }
+    #vrow { flex-direction: column; gap: 6px; }
+    #read .chk { display: none; }   /* the finished check is in the result card just below */
+    #verify { min-width: 0; width: 100%; padding: 10px 14px; }
+    #vres { max-width: none; padding: 6px 10px; }
+    #vres .big { font-size: 22px; }
+    button, select { padding: 8px 11px; }
+  }
 </style>
 </head>
 <body>
 <canvas id="gl"></canvas>
 <div id="hud">
   <h1>Vortex Echo &middot; one module: vortex_a1.wasm</h1>
-  <p>All state stepping runs in vortex_a1.wasm, whose SHA-256 the page checks on load: the seeded scene, the point vortices, the v1 pop (rim, jiggle, corrugation, droplets) and the puncture at tick 120. The page only reads its memory and draws; the film colours are v5.8&rsquo;s GPU tracers, kept as drawing. The pop is v1&rsquo;s, not v5.8&rsquo;s: no flapping edge, no meeting pools, large drops or jets.</p>
-</div>
-<div id="lt">
-  <div id="ltmode">Even diffuse<small>a large even dome around the camera: the swirls show everywhere</small></div>
-  <button id="ltbtn" title="switch the lighting (key L)"><span id="ltB" class="on">Even diffuse</span><span id="ltA">Reference</span></button>
-  <div id="ltkey">click or press L to switch</div>
+  <p class="long">One WebAssembly module, vortex_a1.wasm, computes every tick of this bubble, forward and backward: the seeded scene, the point vortices, the puncture (by itself at tick 120, unless you click first) and the pop with its rim, ripples and droplets. The page checks the module&rsquo;s SHA-256 before running it, then only reads its memory and draws. The film colours come from tracers on the GPU and are drawing only. It is a simple pop: no flapping edge, meeting pools, large drops or jets.</p>
+  <p class="short">One WebAssembly module computes every tick, forward and backward; the page only reads its memory and draws. Colours are drawing only. Tap the bubble to puncture it.</p>
 </div>
 <div id="slow"></div>
+<div id="turn"></div>
 <div id="bottom">
 <div id="read"></div>
+<div id="vrow">
+  <button id="verify" title="runs the module forward from this tick, then back the same number of ticks, and compares the module snapshot (1,949,696 bytes, [0x4000, 0x1E0000)) byte for byte with where it started; the GPU tracers are reported separately"><b>verify reversal</b><span id="vplan">test: forward, then back the same number of ticks</span></button>
+  <div id="vres"></div>
+</div>
+<div id="tl"></div>
 <div id="panel">
   <button id="play">pause</button>
   <button id="rev">reverse</button>
@@ -61,8 +104,8 @@
   <select id="speed" aria-label="speed">
     <option value="0.25">0.25&times;</option><option value="0.5">0.5&times;</option><option value="1" selected>1&times;</option><option value="2">2&times;</option><option value="4">4&times;</option>
   </select>
-  <button id="verify">verify reversal</button>
   <button id="vort" title="show the point vortices (red: counter-clockwise, blue: clockwise)">vortices</button>
+  <button id="ltbtn" title="switch the lighting (key L); drawing only">light: <span id="ltB" class="on">even</span> / <span id="ltA">reference</span></button>
   <span id="hint">click the bubble to puncture it</span>
 </div>
 </div>

@@ -1,0 +1,255 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>chain_c1_host.ml: Vortex Echo proof trail</title>
+<link rel="icon" href="data:,">
+<style>
+:root { --bg:#fbfbfa; --ink:#1d2129; --dim:#5b6372; --line:#e2e4e8; --acc:#2f5bb7; --code:#f1f2f4; --ok:#1d7a46; --hl:#fff3b8; }
+@media (prefers-color-scheme: dark) { :root { --bg:#0f1116; --ink:#dde1e8; --dim:#9aa3b3; --line:#2a2f3a; --acc:#8fb0ff; --code:#1a1e27; --ok:#5fd08e; --hl:#3d3615; } }
+html { background:var(--bg); color:var(--ink); }
+body { margin:0 auto; max-width:980px; padding:22px 22px 80px; font:16px/1.55 -apple-system,"Segoe UI",Helvetica,Arial,sans-serif; }
+h1 { font-size:26px; line-height:1.25; margin:6px 0 14px; }
+h2 { font-size:20px; margin:34px 0 10px; padding-top:10px; border-top:1px solid var(--line); }
+h3 { font-size:16px; margin:0 0 8px; }
+a { color:var(--acc); }
+code, pre { font:12.5px/1.45 ui-monospace,Menlo,Consolas,monospace; }
+code { background:var(--code); padding:1px 4px; border-radius:4px; }
+pre { background:var(--code); padding:10px 12px; border-radius:8px; overflow:auto; }
+pre code { background:none; padding:0; }
+pre.stmt { white-space:pre-wrap; word-break:break-all; max-height:28em; }
+.crumbs { font-size:14px; color:var(--dim); }
+.walk { display:flex; flex-wrap:wrap; gap:6px; align-items:center; font-size:14px; margin:10px 0 18px; }
+.walk a, .walk span.s { border:1px solid var(--line); border-radius:999px; padding:3px 10px; text-decoration:none; background:var(--code); }
+.walk .arr { color:var(--dim); }
+blockquote { margin:10px 0; padding:8px 14px; border-left:4px solid var(--acc); background:var(--code); border-radius:0 8px 8px 0; }
+.thm { border:1px solid var(--line); border-radius:10px; padding:14px 16px; margin:14px 0; }
+.thm:target, .step:target, .fn:target { outline:3px solid var(--acc); outline-offset:2px; }
+.thm, .step, .fn, .box, h2 { scroll-margin-top:70px; }
+.src div { scroll-margin-top:120px; }
+ol.steps { margin:6px 0 0; padding-left:22px; }
+ol.steps > li { margin:10px 0; }
+ol.steps > li > b { display:inline-block; min-width:5.5em; }
+.ok { color:var(--ok); font-weight:600; }
+.dim { color:var(--dim); font-size:14px; }
+.box { border:1px solid var(--line); border-radius:10px; padding:12px 16px; margin:12px 0; background:var(--code); }
+.box pre { background:var(--bg); }
+.replay { border-color:var(--ok); }
+table { border-collapse:collapse; font-size:13.5px; line-height:1.4; }
+th, td { border:1px solid var(--line); padding:5px 8px; vertical-align:top; text-align:left; }
+th { background:var(--code); }
+.tw { overflow-x:auto; margin:10px 0; }
+.src { font:12.5px/1.5 ui-monospace,Menlo,Consolas,monospace; background:var(--code); border-radius:8px; padding:8px 0; overflow-x:auto; }
+.src { counter-reset:ln; }
+.src div { white-space:pre; padding:0 12px 0 0; counter-increment:ln; }
+.src div::before { content:counter(ln); display:inline-block; width:4.5em; padding-right:1em; text-align:right; color:var(--dim); user-select:none; }
+.src div:target { background:var(--hl); }
+pre.hex { line-height:1.5; }
+.hex .o { color:var(--dim); }
+</style>
+</head>
+<body>
+<p class="crumbs"><a href="../../index.html">Vortex Echo</a> · <a href="../../trail/index.html">Proof trail</a> · <code>chain_c1_host.ml</code></p>
+<h1><code>chain_c1_host.ml</code></h1>
+<p>A file loaded by a proof run. Published at <a href="../../proof-tree/tasks/bubble-echo/vortex/proofs/chain_c1_host.ml"><code>proof-tree/tasks/bubble-echo/vortex/proofs/chain_c1_host.ml</code></a> (SHA-256 <code>4c5b6e95075e7f67303a6f5090b9128ab05757d839ed2cfd93498e8a0e4b1c1a</code>; <a href="https://github.com/BenKnill/vortex-echo/blob/main/proof-tree/tasks/bubble-echo/vortex/proofs/chain_c1_host.ml">on GitHub</a>). Line N has the anchor <code>#LN</code>.</p>
+<div class="src" data-src="proof-tree/tasks/bubble-echo/vortex/proofs/chain_c1_host.ml">
+<div id="L1">needs &quot;ve_vort.ml&quot;;;</div>
+<div id="L2">needs &quot;ve_tick.ml&quot;;;</div>
+<div id="L3">needs &quot;ve_vk.ml&quot;;;</div>
+<div id="L4">needs &quot;va1_code.ml&quot;;;</div>
+<div id="L5">needs &quot;va1_seq_final2.ml&quot;;;</div>
+<div id="L6">(* ========================================================================= *)</div>
+<div id="L7">(* Vortex chain, rung C1, layer 1 of 3: the generic host-call layer          *)</div>
+<div id="L8">(* (PROVE-C1, Claude Opus 5.5, 2026-11-11). Spec chain_c1_final.spec        *)</div>
+<div id="L9">(* (frozen sha256 3b62701f...). Pure HOL: definitions va1_hcall, va1_hrun,   *)</div>
+<div id="L10">(* va1_cmds_ok, va1_cmds_end exactly as pinned, and the generic theorems     *)</div>
+<div id="L11">(* VA1_*_CLAUSES, VA1_HCALL_ENSURES, VA1_HCALL_MONO, VA1_HRUN_MONO,          *)</div>
+<div id="L12">(* VA1_HRUN_APPEND, VA1_HCALL_START_SAT, VA1_HCALL_RUNS, VA1_TICKF/B_CALLEE. *)</div>
+<div id="L13">(* No no-pop specifics (rung C2 reuses this file). No decode rule, no        *)</div>
+<div id="L14">(* stepping, no mk_thm / new_axiom / CHEAT_TAC. Helpers carry prefix C1_.    *)</div>
+<div id="L15">(* ========================================================================= *)</div>
+<div id="L16"></div>
+<div id="L17">let va1_hcall = new_definition</div>
+<div id="L18"> `va1_hcall (step:wasmstate-&gt;wasmstate-&gt;bool) (code:byte list) (args:wval list) (r:int32)</div>
+<div id="L19">            (Q:(num-&gt;wval)-&gt;(int64-&gt;byte)-&gt;bool) (gl:num-&gt;wval) (m:int64-&gt;byte) &lt;=&gt;</div>
+<div id="L20">    ?e decls.</div>
+<div id="L21">      wasm_entry code = SOME e /\ wasm_decl_vals code = SOME decls /\</div>
+<div id="L22">      !s0. read wmemsize s0 = 4194304 /\ read wglobals s0 = gl /\ read wmem s0 = m</div>
+<div id="L23">           ==&gt; eventually step</div>
+<div id="L24">                 (\s. read wstatus s = WDone /\ read wstack s = [I32 r] /\</div>
+<div id="L25">                      read wmemsize s = 4194304 /\ Q (read wglobals s) (read wmem s))</div>
+<div id="L26">                 (wcall_entry code (LENGTH args) 1 args e decls s0)`;;</div>
+<div id="L27"></div>
+<div id="L28">let va1_hrun = new_definition</div>
+<div id="L29"> `va1_hrun (step:wasmstate-&gt;wasmstate-&gt;bool) (cs:bool list) (Q:(num-&gt;wval)-&gt;(int64-&gt;byte)-&gt;bool) =</div>
+<div id="L30">    ITLIST (\c R. va1_hcall step (if c then va1_tick_forward_mc else va1_tick_backward_mc) [] (word 1) R) cs Q`;;</div>
+<div id="L31"></div>
+<div id="L32">let va1_cmds_ok = define</div>
+<div id="L33"> `(!K u. va1_cmds_ok K u [] &lt;=&gt; T) /\</div>
+<div id="L34">  (!K u c cs. va1_cmds_ok K u (CONS c cs) &lt;=&gt;</div>
+<div id="L35">     if c then u &lt; K /\ va1_cmds_ok K (u + 1) cs else 0 &lt; u /\ va1_cmds_ok K (u - 1) cs)`;;</div>
+<div id="L36"></div>
+<div id="L37">let va1_cmds_end = define</div>
+<div id="L38"> `(!u. va1_cmds_end u [] = u) /\</div>
+<div id="L39">  (!u c cs. va1_cmds_end u (CONS c cs) = va1_cmds_end (if c then u + 1 else u - 1) cs)`;;</div>
+<div id="L40"></div>
+<div id="L41">let VA1_CMDS_OK_CLAUSES = prove</div>
+<div id="L42"> (`(!K u. va1_cmds_ok K u [] &lt;=&gt; T) /\</div>
+<div id="L43">  (!K u c cs. va1_cmds_ok K u (CONS c cs) &lt;=&gt;</div>
+<div id="L44">     if c then u &lt; K /\ va1_cmds_ok K (u + 1) cs else 0 &lt; u /\ va1_cmds_ok K (u - 1) cs)`,</div>
+<div id="L45">  ACCEPT_TAC va1_cmds_ok);;</div>
+<div id="L46"></div>
+<div id="L47">let VA1_CMDS_END_CLAUSES = prove</div>
+<div id="L48"> (`(!u. va1_cmds_end u [] = u) /\</div>
+<div id="L49">  (!u c cs. va1_cmds_end u (CONS c cs) = va1_cmds_end (if c then u + 1 else u - 1) cs)`,</div>
+<div id="L50">  ACCEPT_TAC va1_cmds_end);;</div>
+<div id="L51"></div>
+<div id="L52">let VA1_HRUN_CLAUSES = prove</div>
+<div id="L53"> (`(!(step:wasmstate-&gt;wasmstate-&gt;bool) (Q:(num-&gt;wval)-&gt;(int64-&gt;byte)-&gt;bool) gl m.</div>
+<div id="L54">     va1_hrun step [] Q gl m &lt;=&gt; Q gl m) /\</div>
+<div id="L55">  (!(step:wasmstate-&gt;wasmstate-&gt;bool) c cs (Q:(num-&gt;wval)-&gt;(int64-&gt;byte)-&gt;bool) gl m.</div>
+<div id="L56">     va1_hrun step (CONS c cs) Q gl m &lt;=&gt;</div>
+<div id="L57">     va1_hcall step (if c then va1_tick_forward_mc else va1_tick_backward_mc) [] (word 1)</div>
+<div id="L58">               (va1_hrun step cs Q) gl m)`,</div>
+<div id="L59">  REWRITE_TAC[va1_hrun; ITLIST]);;</div>
+<div id="L60"></div>
+<div id="L61">(* eventually: monotone, implication form *)</div>
+<div id="L62">let C1_EV_MONO = prove</div>
+<div id="L63"> (`!(step:A-&gt;A-&gt;bool) P Q s.</div>
+<div id="L64">     (!s. P s ==&gt; Q s) ==&gt; eventually step P s ==&gt; eventually step Q s`,</div>
+<div id="L65">  MESON_TAC[EVENTUALLY_MONO]);;</div>
+<div id="L66"></div>
+<div id="L67">let C1_EV_MONO_CONJ = prove</div>
+<div id="L68"> (`!(step:A-&gt;A-&gt;bool) P Q s.</div>
+<div id="L69">     (!s. P s ==&gt; Q s) /\ eventually step P s ==&gt; eventually step Q s`,</div>
+<div id="L70">  MESON_TAC[EVENTUALLY_MONO]);;</div>
+<div id="L71"></div>
+<div id="L72">let VA1_HCALL_ENSURES = prove</div>
+<div id="L73"> (`!(step:wasmstate-&gt;wasmstate-&gt;bool) (code:byte list) (e:num) (decls:wval list) (args:wval list) (r:int32)</div>
+<div id="L74">   (P:wasmstate-&gt;bool) (Q:wasmstate-&gt;bool) (C:wasmstate-&gt;wasmstate-&gt;bool)</div>
+<div id="L75">   (R:(num-&gt;wval)-&gt;(int64-&gt;byte)-&gt;bool) (gl:num-&gt;wval) (m:int64-&gt;byte).</div>
+<div id="L76">     wasm_entry code = SOME e /\ wasm_decl_vals code = SOME decls /\ ensures step P Q C /\</div>
+<div id="L77">     (!s0. read wmemsize s0 = 4194304 /\ read wglobals s0 = gl /\ read wmem s0 = m</div>
+<div id="L78">           ==&gt; P (wcall_entry code (LENGTH args) 1 args e decls s0)) /\</div>
+<div id="L79">     (!s0 s. read wmemsize s0 = 4194304 /\ read wglobals s0 = gl /\ read wmem s0 = m /\</div>
+<div id="L80">             Q s /\ C (wcall_entry code (LENGTH args) 1 args e decls s0) s</div>
+<div id="L81">             ==&gt; read wstatus s = WDone /\ read wstack s = [I32 r] /\</div>
+<div id="L82">                 read wmemsize s = 4194304 /\ R (read wglobals s) (read wmem s))</div>
+<div id="L83">     ==&gt; va1_hcall step code args r R gl m`,</div>
+<div id="L84">  MAP_EVERY X_GEN_TAC</div>
+<div id="L85">   [`step:wasmstate-&gt;wasmstate-&gt;bool`; `code:byte list`; `e:num`; `decls:wval list`;</div>
+<div id="L86">    `args:wval list`; `r:int32`; `pp:wasmstate-&gt;bool`; `qq:wasmstate-&gt;bool`;</div>
+<div id="L87">    `cc:wasmstate-&gt;wasmstate-&gt;bool`; `rr:(num-&gt;wval)-&gt;(int64-&gt;byte)-&gt;bool`;</div>
+<div id="L88">    `gl:num-&gt;wval`; `m:int64-&gt;byte`] THEN</div>
+<div id="L89">  REWRITE_TAC[va1_hcall; ensures] THEN</div>
+<div id="L90">  DISCH_THEN(CONJUNCTS_THEN2 ASSUME_TAC (CONJUNCTS_THEN2 ASSUME_TAC</div>
+<div id="L91">    (CONJUNCTS_THEN2 (LABEL_TAC &quot;ens&quot;) (CONJUNCTS_THEN2 (LABEL_TAC &quot;pre&quot;) (LABEL_TAC &quot;post&quot;))))) THEN</div>
+<div id="L92">  MAP_EVERY EXISTS_TAC [`e:num`; `decls:wval list`] THEN ASM_REWRITE_TAC[] THEN</div>
+<div id="L93">  X_GEN_TAC `s0:wasmstate` THEN STRIP_TAC THEN</div>
+<div id="L94">  MATCH_MP_TAC C1_EV_MONO_CONJ THEN</div>
+<div id="L95">  EXISTS_TAC `\s&#x27;. (qq:wasmstate-&gt;bool) s&#x27; /\</div>
+<div id="L96">                   cc (wcall_entry code (LENGTH (args:wval list)) 1 args e decls s0) s&#x27;` THEN</div>
+<div id="L97">  CONJ_TAC THENL</div>
+<div id="L98">   [X_GEN_TAC `s:wasmstate` THEN CONV_TAC(TOP_DEPTH_CONV BETA_CONV) THEN STRIP_TAC THEN</div>
+<div id="L99">    REMOVE_THEN &quot;post&quot; (MP_TAC o SPECL [`s0:wasmstate`; `s:wasmstate`]) THEN</div>
+<div id="L100">    ASM_REWRITE_TAC[];</div>
+<div id="L101">    REMOVE_THEN &quot;ens&quot; MATCH_MP_TAC THEN REMOVE_THEN &quot;pre&quot; MATCH_MP_TAC THEN</div>
+<div id="L102">    ASM_REWRITE_TAC[]]);;</div>
+<div id="L103"></div>
+<div id="L104">let VA1_HCALL_MONO = prove</div>
+<div id="L105"> (`!(step:wasmstate-&gt;wasmstate-&gt;bool) (code:byte list) (args:wval list) (r:int32)</div>
+<div id="L106">   (Q:(num-&gt;wval)-&gt;(int64-&gt;byte)-&gt;bool) (Q&#x27;:(num-&gt;wval)-&gt;(int64-&gt;byte)-&gt;bool) (gl:num-&gt;wval) (m:int64-&gt;byte).</div>
+<div id="L107">     (!g x. Q g x ==&gt; Q&#x27; g x) /\ va1_hcall step code args r Q gl m</div>
+<div id="L108">     ==&gt; va1_hcall step code args r Q&#x27; gl m`,</div>
+<div id="L109">  REPEAT GEN_TAC THEN REWRITE_TAC[va1_hcall] THEN</div>
+<div id="L110">  DISCH_THEN(CONJUNCTS_THEN2 ASSUME_TAC</div>
+<div id="L111">    (X_CHOOSE_THEN `e:num` (X_CHOOSE_THEN `decls:wval list` STRIP_ASSUME_TAC))) THEN</div>
+<div id="L112">  MAP_EVERY EXISTS_TAC [`e:num`; `decls:wval list`] THEN ASM_REWRITE_TAC[] THEN</div>
+<div id="L113">  X_GEN_TAC `s0:wasmstate` THEN STRIP_TAC THEN</div>
+<div id="L114">  FIRST_X_ASSUM(MP_TAC o SPEC `s0:wasmstate`) THEN ASM_REWRITE_TAC[] THEN</div>
+<div id="L115">  MATCH_MP_TAC C1_EV_MONO THEN GEN_TAC THEN CONV_TAC(TOP_DEPTH_CONV BETA_CONV) THEN</div>
+<div id="L116">  STRIP_TAC THEN ASM_REWRITE_TAC[] THEN FIRST_X_ASSUM MATCH_MP_TAC THEN</div>
+<div id="L117">  ASM_REWRITE_TAC[]);;</div>
+<div id="L118"></div>
+<div id="L119">let VA1_HRUN_MONO = prove</div>
+<div id="L120"> (`!(step:wasmstate-&gt;wasmstate-&gt;bool) (cs:bool list)</div>
+<div id="L121">   (Q:(num-&gt;wval)-&gt;(int64-&gt;byte)-&gt;bool) (Q&#x27;:(num-&gt;wval)-&gt;(int64-&gt;byte)-&gt;bool) (gl:num-&gt;wval) (m:int64-&gt;byte).</div>
+<div id="L122">     (!g x. Q g x ==&gt; Q&#x27; g x) /\ va1_hrun step cs Q gl m</div>
+<div id="L123">     ==&gt; va1_hrun step cs Q&#x27; gl m`,</div>
+<div id="L124">  GEN_TAC THEN LIST_INDUCT_TAC THEN REWRITE_TAC[VA1_HRUN_CLAUSES] THENL</div>
+<div id="L125">   [MESON_TAC[]; ALL_TAC] THEN</div>
+<div id="L126">  REPEAT STRIP_TAC THEN MATCH_MP_TAC VA1_HCALL_MONO THEN</div>
+<div id="L127">  EXISTS_TAC `va1_hrun (step:wasmstate-&gt;wasmstate-&gt;bool) t (Q:(num-&gt;wval)-&gt;(int64-&gt;byte)-&gt;bool)` THEN</div>
+<div id="L128">  ASM_REWRITE_TAC[] THEN REPEAT STRIP_TAC THEN FIRST_X_ASSUM MATCH_MP_TAC THEN</div>
+<div id="L129">  EXISTS_TAC `Q:(num-&gt;wval)-&gt;(int64-&gt;byte)-&gt;bool` THEN ASM_REWRITE_TAC[]);;</div>
+<div id="L130"></div>
+<div id="L131">let VA1_HRUN_APPEND = prove</div>
+<div id="L132"> (`!(step:wasmstate-&gt;wasmstate-&gt;bool) (cs1:bool list) (cs2:bool list) (Q:(num-&gt;wval)-&gt;(int64-&gt;byte)-&gt;bool).</div>
+<div id="L133">     va1_hrun step (APPEND cs1 cs2) Q = va1_hrun step cs1 (va1_hrun step cs2 Q)`,</div>
+<div id="L134">  REWRITE_TAC[va1_hrun; ITLIST_APPEND]);;</div>
+<div id="L135"></div>
+<div id="L136">let VA1_HCALL_START_SAT = prove</div>
+<div id="L137"> (`!(gl:num-&gt;wval) (m:int64-&gt;byte).</div>
+<div id="L138">     ?s0. read wmemsize s0 = 4194304 /\ read wglobals s0 = gl /\ read wmem s0 = m`,</div>
+<div id="L139">  REPEAT GEN_TAC THEN</div>
+<div id="L140">  EXISTS_TAC `write wmem (m:int64-&gt;byte) (write wglobals (gl:num-&gt;wval)</div>
+<div id="L141">                (write wmemsize 4194304 (ARB:wasmstate)))` THEN</div>
+<div id="L142">  CONV_TAC(TOP_DEPTH_CONV COMPONENT_READ_OVER_WRITE_CONV) THEN REWRITE_TAC[]);;</div>
+<div id="L143"></div>
+<div id="L144">let VA1_HCALL_RUNS = prove</div>
+<div id="L145"> (`!(fs:num-&gt;byte list#num#num) (code:byte list) (args:wval list) (r:int32)</div>
+<div id="L146">   (Q:(num-&gt;wval)-&gt;(int64-&gt;byte)-&gt;bool) (gl:num-&gt;wval) (m:int64-&gt;byte).</div>
+<div id="L147">     va1_hcall (wasmc fs) code args r Q gl m</div>
+<div id="L148">     ==&gt; ?e decls.</div>
+<div id="L149">           wasm_entry code = SOME e /\ wasm_decl_vals code = SOME decls /\</div>
+<div id="L150">           !s0. read wmemsize s0 = 4194304 /\ read wglobals s0 = gl /\ read wmem s0 = m</div>
+<div id="L151">                ==&gt; (?s. RTC (wasmc fs) (wcall_entry code (LENGTH args) 1 args e decls s0) s /\</div>
+<div id="L152">                         read wstatus s = WDone /\ read wstack s = [I32 r] /\</div>
+<div id="L153">                         read wmemsize s = 4194304 /\ Q (read wglobals s) (read wmem s)) /\</div>
+<div id="L154">                    (!s. RTC (wasmc fs) (wcall_entry code (LENGTH args) 1 args e decls s0) s /\</div>
+<div id="L155">                         ~(read wstatus s = WRunning)</div>
+<div id="L156">                         ==&gt; read wstatus s = WDone /\ read wstack s = [I32 r] /\</div>
+<div id="L157">                             read wmemsize s = 4194304 /\ Q (read wglobals s) (read wmem s))`,</div>
+<div id="L158">  MAP_EVERY X_GEN_TAC</div>
+<div id="L159">   [`fs:num-&gt;byte list#num#num`; `code:byte list`; `args:wval list`; `r:int32`;</div>
+<div id="L160">    `qq:(num-&gt;wval)-&gt;(int64-&gt;byte)-&gt;bool`; `gl:num-&gt;wval`; `m:int64-&gt;byte`] THEN</div>
+<div id="L161">  REWRITE_TAC[va1_hcall] THEN</div>
+<div id="L162">  DISCH_THEN(X_CHOOSE_THEN `e:num` (X_CHOOSE_THEN `decls:wval list` STRIP_ASSUME_TAC)) THEN</div>
+<div id="L163">  MAP_EVERY EXISTS_TAC [`e:num`; `decls:wval list`] THEN ASM_REWRITE_TAC[] THEN</div>
+<div id="L164">  X_GEN_TAC `s0:wasmstate` THEN STRIP_TAC THEN</div>
+<div id="L165">  FIRST_X_ASSUM(MP_TAC o SPEC `s0:wasmstate`) THEN ASM_REWRITE_TAC[] THEN</div>
+<div id="L166">  DISCH_TAC THEN CONJ_TAC THENL</div>
+<div id="L167">   [FIRST_ASSUM(MP_TAC o MATCH_MP EVENTUALLY_RTC_EXISTS) THEN</div>
+<div id="L168">    CONV_TAC(TOP_DEPTH_CONV BETA_CONV) THEN MESON_TAC[];</div>
+<div id="L169">    ALL_TAC] THEN</div>
+<div id="L170">  X_GEN_TAC `s:wasmstate` THEN STRIP_TAC THEN</div>
+<div id="L171">  MP_TAC(ISPECL [`wasmc fs`;</div>
+<div id="L172">    `\s:wasmstate. read wstatus s = WDone /\ read wstack s = [I32 r] /\</div>
+<div id="L173">                   read wmemsize s = 4194304 /\ qq (read wglobals s) (read wmem s)`]</div>
+<div id="L174">    EVENTUALLY_RTC_FINAL) THEN</div>
+<div id="L175">  ANTS_TAC THENL</div>
+<div id="L176">   [CONV_TAC(TOP_DEPTH_CONV BETA_CONV) THEN REPEAT GEN_TAC THEN STRIP_TAC THEN</div>
+<div id="L177">    MATCH_MP_TAC WASMC_FINAL THEN ASM_REWRITE_TAC[distinctness &quot;wstat&quot;];</div>
+<div id="L178">    ALL_TAC] THEN</div>
+<div id="L179">  DISCH_THEN(MP_TAC o SPEC `wcall_entry code (LENGTH (args:wval list)) 1 args e decls s0`) THEN</div>
+<div id="L180">  ANTS_TAC THENL [FIRST_ASSUM ACCEPT_TAC; ALL_TAC] THEN</div>
+<div id="L181">  DISCH_THEN(MP_TAC o SPEC `s:wasmstate`) THEN CONV_TAC(TOP_DEPTH_CONV BETA_CONV) THEN</div>
+<div id="L182">  DISCH_THEN MATCH_MP_TAC THEN ASM_REWRITE_TAC[] THEN</div>
+<div id="L183">  GEN_TAC THEN MATCH_MP_TAC WASMC_FINAL THEN ASM_REWRITE_TAC[]);;</div>
+<div id="L184"></div>
+<div id="L185">let VA1_TICKF_CALLEE = WASM_CALLEE_RULE va1_tick_forward_mc;;</div>
+<div id="L186">let VA1_TICKB_CALLEE = WASM_CALLEE_RULE va1_tick_backward_mc;;</div>
+<div id="L187"></div>
+<div id="L188">(* guard: the layer&#x27;s theorems against the frozen statements *)</div>
+<div id="L189">let C1_HOST_CHECK =</div>
+<div id="L190">  let chk name th tm = if aconv (concl th) tm &amp;&amp; hyp th = [] then ()</div>
+<div id="L191">    else failwith (&quot;C1_HOST_CHECK &quot;^name) in</div>
+<div id="L192">  chk &quot;VA1_TICKF_CALLEE&quot; VA1_TICKF_CALLEE `wasm_entry va1_tick_forward_mc = SOME 3 /\</div>
+<div id="L193">  wasm_decl_vals va1_tick_forward_mc = SOME [I32 (word 0); I32 (word 0); I32 (word 0)]`;</div>
+<div id="L194">  chk &quot;VA1_TICKB_CALLEE&quot; VA1_TICKB_CALLEE `wasm_entry va1_tick_backward_mc = SOME 3 /\</div>
+<div id="L195">  wasm_decl_vals va1_tick_backward_mc = SOME [I32 (word 0); I32 (word 0)]`;;</div>
+</div>
+<p class="dim">Generated by <code>tools/build_trail.py</code> from the published files; checked by <code>tools/check_trail.py</code>.</p>
+</body>
+</html>

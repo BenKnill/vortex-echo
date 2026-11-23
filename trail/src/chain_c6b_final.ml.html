@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>chain_c6b_final.ml: Vortex Echo proof trail</title>
+<link rel="icon" href="data:,">
+<style>
+:root { --bg:#fbfbfa; --ink:#1d2129; --dim:#5b6372; --line:#e2e4e8; --acc:#2f5bb7; --code:#f1f2f4; --ok:#1d7a46; --hl:#fff3b8; }
+@media (prefers-color-scheme: dark) { :root { --bg:#0f1116; --ink:#dde1e8; --dim:#9aa3b3; --line:#2a2f3a; --acc:#8fb0ff; --code:#1a1e27; --ok:#5fd08e; --hl:#3d3615; } }
+html { background:var(--bg); color:var(--ink); }
+body { margin:0 auto; max-width:980px; padding:22px 22px 80px; font:16px/1.55 -apple-system,"Segoe UI",Helvetica,Arial,sans-serif; }
+h1 { font-size:26px; line-height:1.25; margin:6px 0 14px; }
+h2 { font-size:20px; margin:34px 0 10px; padding-top:10px; border-top:1px solid var(--line); }
+h3 { font-size:16px; margin:0 0 8px; }
+a { color:var(--acc); }
+code, pre { font:12.5px/1.45 ui-monospace,Menlo,Consolas,monospace; }
+code { background:var(--code); padding:1px 4px; border-radius:4px; }
+pre { background:var(--code); padding:10px 12px; border-radius:8px; overflow:auto; }
+pre code { background:none; padding:0; }
+pre.stmt { white-space:pre-wrap; word-break:break-all; max-height:28em; }
+.crumbs { font-size:14px; color:var(--dim); }
+.walk { display:flex; flex-wrap:wrap; gap:6px; align-items:center; font-size:14px; margin:10px 0 18px; }
+.walk a, .walk span.s { border:1px solid var(--line); border-radius:999px; padding:3px 10px; text-decoration:none; background:var(--code); }
+.walk .arr { color:var(--dim); }
+blockquote { margin:10px 0; padding:8px 14px; border-left:4px solid var(--acc); background:var(--code); border-radius:0 8px 8px 0; }
+.thm { border:1px solid var(--line); border-radius:10px; padding:14px 16px; margin:14px 0; }
+.thm:target, .step:target, .fn:target { outline:3px solid var(--acc); outline-offset:2px; }
+.thm, .step, .fn, .box, h2 { scroll-margin-top:70px; }
+.src div { scroll-margin-top:120px; }
+ol.steps { margin:6px 0 0; padding-left:22px; }
+ol.steps > li { margin:10px 0; }
+ol.steps > li > b { display:inline-block; min-width:5.5em; }
+.ok { color:var(--ok); font-weight:600; }
+.dim { color:var(--dim); font-size:14px; }
+.box { border:1px solid var(--line); border-radius:10px; padding:12px 16px; margin:12px 0; background:var(--code); }
+.box pre { background:var(--bg); }
+.replay { border-color:var(--ok); }
+table { border-collapse:collapse; font-size:13.5px; line-height:1.4; }
+th, td { border:1px solid var(--line); padding:5px 8px; vertical-align:top; text-align:left; }
+th { background:var(--code); }
+.tw { overflow-x:auto; margin:10px 0; }
+.src { font:12.5px/1.5 ui-monospace,Menlo,Consolas,monospace; background:var(--code); border-radius:8px; padding:8px 0; overflow-x:auto; }
+.src { counter-reset:ln; }
+.src div { white-space:pre; padding:0 12px 0 0; counter-increment:ln; }
+.src div::before { content:counter(ln); display:inline-block; width:4.5em; padding-right:1em; text-align:right; color:var(--dim); user-select:none; }
+.src div:target { background:var(--hl); }
+pre.hex { line-height:1.5; }
+.hex .o { color:var(--dim); }
+</style>
+</head>
+<body>
+<p class="crumbs"><a href="../../index.html">Vortex Echo</a> · <a href="../../trail/index.html">Proof trail</a> · <code>chain_c6b_final.ml</code></p>
+<h1><code>chain_c6b_final.ml</code></h1>
+<p>The proof file of receipt <code>chain_c6b_final</code>. Published at <a href="../../proof-tree/tasks/bubble-echo/vortex/proofs/chain_c6b_final.ml"><code>proof-tree/tasks/bubble-echo/vortex/proofs/chain_c6b_final.ml</code></a> (SHA-256 <code>63c37cc8d3ea1cb1e0cf92f77422cca16efd92ad038829a1a107504df109bae8</code>; <a href="https://github.com/BenKnill/vortex-echo/blob/main/proof-tree/tasks/bubble-echo/vortex/proofs/chain_c6b_final.ml">on GitHub</a>). Line N has the anchor <code>#LN</code>.</p>
+<div class="src" data-src="proof-tree/tasks/bubble-echo/vortex/proofs/chain_c6b_final.ml">
+<div id="L1">needs &quot;chain_c6b_host.ml&quot;;;</div>
+<div id="L2">(* vortex-chain c6b (Claude Opus 5.5, 2026-11-13): spec-locked final leaf for chain_c6b_final.spec (sha256 667b4b91e6e07060ae79bd6864c09cbfc241e8a7dd5dd2bef5cccf9f4ee5d4b5);</div>
+<div id="L3">   re-binds its 3 theorems from the host layer. *)</div>
+<div id="L4">let VA1_TICK_FORWARD_PUNCT = prove(`!(fs:num-&gt;byte list#num#num) (gl:num-&gt;wval) (t:int32) (mdl:num-&gt;int32) (N:num) (x:(num-&gt;int32)#(num-&gt;int32)) (a0:int32) (a1:int32) (a2:int32) (m0:int64-&gt;byte).</div>
+<div id="L5">     fs 9 = (va1_f9_mc,0,0) /\ fs 27 = (va1_f27_mc,0,0) /\ fs 33 = (va1_puncture_mc,3,1) /\</div>
+<div id="L6">     fs 25 = (va1_f25_mc,3,1) /\ fs 32 = (va1_f32_mc,2,1) /\ fs 34 = (va1_f34_mc,3,0) /\</div>
+<div id="L7">     mdl 1 = word N /\ 1 &lt;= N /\ N &lt;= 640 /\ gl 0 = I32 (word 16384) /\ ~(word_add t (word 1) = word 0) /\</div>
+<div id="L8">     va1_tick t m0 /\ va1_pop (word 4294967295) (word_add t (word 1)) m0 /\ va1_mdl mdl m0 /\ va1_vab N x m0 /\</div>
+<div id="L9">     read (bytes32 (word 16516)) m0 = a0 /\ read (bytes32 (word 16520)) m0 = a1 /\ read (bytes32 (word 16524)) m0 = a2 /\</div>
+<div id="L10">     ~(a0 = word 0 /\ a1 = word 0 /\ a2 = word 0)</div>
+<div id="L11">     ==&gt; ensures (wasmn fs)</div>
+<div id="L12">          (\s. read wcode s = va1_tick_forward_mc /\ read wpc s = word 3 /\ read wstatus s = WRunning /\</div>
+<div id="L13">               read wstack s = [] /\ read wlabels s = [] /\ read warity s = 1 /\</div>
+<div id="L14">               read wmemsize s = 4194304 /\ read wglobals s = gl /\ read wmem s = m0)</div>
+<div id="L15">          (\s. read wstatus s = WDone /\ read wstack s = [I32 (word 1)] /\</div>
+<div id="L16">               read wmemsize s = 4194304 /\ read wglobals s = gl /\</div>
+<div id="L17">               ?m1. va1_tf_mid N mdl t x m0 m1 /\ va1_c6a_mem mdl m1 (read wmem s) /\</div>
+<div id="L18">                    read (bytes32 (word 16408)) (read wmem s) = a0 /\ read (bytes32 (word 16412)) (read wmem s) = a1 /\</div>
+<div id="L19">                    read (bytes32 (word 16416)) (read wmem s) = a2)</div>
+<div id="L20">          (MAYCHANGE [wpc] ,, MAYCHANGE [wstack] ,, MAYCHANGE [wlabels] ,, MAYCHANGE [wstatus] ,,</div>
+<div id="L21">           MAYCHANGE [wlocal 0; wlocal 1; wlocal 2] ,, MAYCHANGE [wmem])`,</div>
+<div id="L22">  MATCH_ACCEPT_TAC VA1_TICK_FORWARD_PUNCT);;</div>
+<div id="L23">let VA1_C6B_SAT = prove(`!(t:int32) (mdl:num-&gt;int32) (N:num) (x:(num-&gt;int32)#(num-&gt;int32)) (a0:int32) (a1:int32) (a2:int32).</div>
+<div id="L24">     mdl 1 = word N /\ 1 &lt;= N /\ N &lt;= 640 /\ ~(word_add t (word 1) = word 0) /\</div>
+<div id="L25">     ~(a0 = word 0 /\ a1 = word 0 /\ a2 = word 0)</div>
+<div id="L26">     ==&gt; ?(fs:num-&gt;byte list#num#num) (gl:num-&gt;wval) (m0:int64-&gt;byte) (s:wasmstate).</div>
+<div id="L27">           fs 9 = (va1_f9_mc,0,0) /\ fs 27 = (va1_f27_mc,0,0) /\ fs 33 = (va1_puncture_mc,3,1) /\</div>
+<div id="L28">     fs 25 = (va1_f25_mc,3,1) /\ fs 32 = (va1_f32_mc,2,1) /\ fs 34 = (va1_f34_mc,3,0) /\</div>
+<div id="L29">           gl 0 = I32 (word 16384) /\</div>
+<div id="L30">           va1_tick t m0 /\ va1_pop (word 4294967295) (word_add t (word 1)) m0 /\ va1_mdl mdl m0 /\ va1_vab N x m0 /\</div>
+<div id="L31">     read (bytes32 (word 16516)) m0 = a0 /\ read (bytes32 (word 16520)) m0 = a1 /\ read (bytes32 (word 16524)) m0 = a2 /\</div>
+<div id="L32">           read wcode s = va1_tick_forward_mc /\ read wpc s = word 3 /\ read wstatus s = WRunning /\</div>
+<div id="L33">           read wstack s = [] /\ read wlabels s = [] /\ read warity s = 1 /\</div>
+<div id="L34">           read wmemsize s = 4194304 /\ read wglobals s = gl /\ read wmem s = m0`,</div>
+<div id="L35">  MATCH_ACCEPT_TAC VA1_C6B_SAT);;</div>
+<div id="L36">let VA1_FWDN_CLAUSES = prove(`(!f s. ve_fredkin_fwdn f 0 s = s) /\</div>
+<div id="L37">   (!f n s. ve_fredkin_fwdn f (SUC n) s = ve_fredkin_fwd (f n) (ve_fredkin_fwdn f n s))`,</div>
+<div id="L38">  MATCH_ACCEPT_TAC VA1_FWDN_CLAUSES);;</div>
+</div>
+<p class="dim">Generated by <code>tools/build_trail.py</code> from the published files; checked by <code>tools/check_trail.py</code>.</p>
+</body>
+</html>

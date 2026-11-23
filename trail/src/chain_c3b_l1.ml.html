@@ -1,0 +1,935 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>chain_c3b_l1.ml: Vortex Echo proof trail</title>
+<link rel="icon" href="data:,">
+<style>
+:root { --bg:#fbfbfa; --ink:#1d2129; --dim:#5b6372; --line:#e2e4e8; --acc:#2f5bb7; --code:#f1f2f4; --ok:#1d7a46; --hl:#fff3b8; }
+@media (prefers-color-scheme: dark) { :root { --bg:#0f1116; --ink:#dde1e8; --dim:#9aa3b3; --line:#2a2f3a; --acc:#8fb0ff; --code:#1a1e27; --ok:#5fd08e; --hl:#3d3615; } }
+html { background:var(--bg); color:var(--ink); }
+body { margin:0 auto; max-width:980px; padding:22px 22px 80px; font:16px/1.55 -apple-system,"Segoe UI",Helvetica,Arial,sans-serif; }
+h1 { font-size:26px; line-height:1.25; margin:6px 0 14px; }
+h2 { font-size:20px; margin:34px 0 10px; padding-top:10px; border-top:1px solid var(--line); }
+h3 { font-size:16px; margin:0 0 8px; }
+a { color:var(--acc); }
+code, pre { font:12.5px/1.45 ui-monospace,Menlo,Consolas,monospace; }
+code { background:var(--code); padding:1px 4px; border-radius:4px; }
+pre { background:var(--code); padding:10px 12px; border-radius:8px; overflow:auto; }
+pre code { background:none; padding:0; }
+pre.stmt { white-space:pre-wrap; word-break:break-all; max-height:28em; }
+.crumbs { font-size:14px; color:var(--dim); }
+.walk { display:flex; flex-wrap:wrap; gap:6px; align-items:center; font-size:14px; margin:10px 0 18px; }
+.walk a, .walk span.s { border:1px solid var(--line); border-radius:999px; padding:3px 10px; text-decoration:none; background:var(--code); }
+.walk .arr { color:var(--dim); }
+blockquote { margin:10px 0; padding:8px 14px; border-left:4px solid var(--acc); background:var(--code); border-radius:0 8px 8px 0; }
+.thm { border:1px solid var(--line); border-radius:10px; padding:14px 16px; margin:14px 0; }
+.thm:target, .step:target, .fn:target { outline:3px solid var(--acc); outline-offset:2px; }
+.thm, .step, .fn, .box, h2 { scroll-margin-top:70px; }
+.src div { scroll-margin-top:120px; }
+ol.steps { margin:6px 0 0; padding-left:22px; }
+ol.steps > li { margin:10px 0; }
+ol.steps > li > b { display:inline-block; min-width:5.5em; }
+.ok { color:var(--ok); font-weight:600; }
+.dim { color:var(--dim); font-size:14px; }
+.box { border:1px solid var(--line); border-radius:10px; padding:12px 16px; margin:12px 0; background:var(--code); }
+.box pre { background:var(--bg); }
+.replay { border-color:var(--ok); }
+table { border-collapse:collapse; font-size:13.5px; line-height:1.4; }
+th, td { border:1px solid var(--line); padding:5px 8px; vertical-align:top; text-align:left; }
+th { background:var(--code); }
+.tw { overflow-x:auto; margin:10px 0; }
+.src { font:12.5px/1.5 ui-monospace,Menlo,Consolas,monospace; background:var(--code); border-radius:8px; padding:8px 0; overflow-x:auto; }
+.src { counter-reset:ln; }
+.src div { white-space:pre; padding:0 12px 0 0; counter-increment:ln; }
+.src div::before { content:counter(ln); display:inline-block; width:4.5em; padding-right:1em; text-align:right; color:var(--dim); user-select:none; }
+.src div:target { background:var(--hl); }
+pre.hex { line-height:1.5; }
+.hex .o { color:var(--dim); }
+</style>
+</head>
+<body>
+<p class="crumbs"><a href="../../index.html">Vortex Echo</a> · <a href="../../trail/index.html">Proof trail</a> · <code>chain_c3b_l1.ml</code></p>
+<h1><code>chain_c3b_l1.ml</code></h1>
+<p>A file loaded by a proof run. Published at <a href="../../proof-tree/tasks/bubble-echo/vortex/proofs/chain_c3b_l1.ml"><code>proof-tree/tasks/bubble-echo/vortex/proofs/chain_c3b_l1.ml</code></a> (SHA-256 <code>e1777abaad5a546d71a73a48f805386cb73511b85d8f1ed08169f2f9ed586a41</code>; <a href="https://github.com/BenKnill/vortex-echo/blob/main/proof-tree/tasks/bubble-echo/vortex/proofs/chain_c3b_l1.ml">on GitHub</a>). Line N has the anchor <code>#LN</code>.</p>
+<div class="src" data-src="proof-tree/tasks/bubble-echo/vortex/proofs/chain_c3b_l1.ml">
+<div id="L1">needs &quot;ve_vort.ml&quot;;;</div>
+<div id="L2">needs &quot;ve_tick.ml&quot;;;</div>
+<div id="L3">needs &quot;ve_vk.ml&quot;;;</div>
+<div id="L4">needs &quot;va1_code.ml&quot;;;</div>
+<div id="L5">needs &quot;va1_seq_final2.ml&quot;;;</div>
+<div id="L6">needs &quot;pop_design_defs.ml&quot;;;</div>
+<div id="L7">needs &quot;pop_design_stmts.ml&quot;;;</div>
+<div id="L8">needs &quot;chain_c3b_dec.ml&quot;;;</div>
+<div id="L9">needs &quot;chain_c3b_defs.ml&quot;;;</div>
+<div id="L10">(* ========================================================================= *)</div>
+<div id="L11">(* Vortex chain rung C3b, layer 1 (vortex-chain-20261111-142342 c3b, Claude  *)</div>
+<div id="L12">(* Opus 5.5, 2026-11-13): f25 ve_puncture on the exact bytes. Spec           *)</div>
+<div id="L13">(* chain_c3b_final.spec (frozen 296578ea). Data-blind stepping driver copied *)</div>
+<div id="L14">(* from the R5B birth prover (prove-birth src/r5b_drv.ml), load              *)</div>
+<div id="L15">(* abbreviation, address normalisation and read-over-write conversions; the  *)</div>
+<div id="L16">(* two isqrt loops by induction on the counter, the header/jiggle block      *)</div>
+<div id="L17">(* unrolled, the 2048-bead loop (C3B_IT4/C3B_LOOP4) and the 24576-row DI      *)</div>
+<div id="L18">(* zero loop (C3B_IT5/C3B_LOOP5) by induction; VA1_F25_GUARD_P,              *)</div>
+<div id="L19">(* VA1_F25_GUARD_ARGS, VA1_F25_OK. No mk_thm / new_axiom / CHEAT_TAC.        *)</div>
+<div id="L20">(* ========================================================================= *)</div>
+<div id="L21">(* ========================================================================= *)</div>
+<div id="L22">(* C3b (Claude Opus 5.5, 2026-11-13): copy of the R5B data-blind driver      *)</div>
+<div id="L23">(* (vortex-r5birth prove-birth src/r5b_drv.ml), retargeted to f25. Steps one instruction at a time; a guard the stepper *)</div>
+<div id="L24">(* leaves undecided is first retried with val-bound facts of its subterms    *)</div>
+<div id="L25">(* (masks, shifts, sums: trap/bounds guards), then case-split (data branch). *)</div>
+<div id="L26">(* ========================================================================= *)</div>
+<div id="L27">let C3B_EXEC = C3B_F25_EXEC;;</div>
+<div id="L28">let c3b_extra = ref ([]:thm list);;</div>
+<div id="L29"></div>
+<div id="L30">let C3B_VADD = prove(`!a b:N word. val(word_add a b) &lt;= val a + val b`, REWRITE_TAC[VAL_WORD_ADD; MOD_LE]);;</div>
+<div id="L31">let C3B_VMUL = prove(`!a b:N word. val(word_mul a b) &lt;= val a * val b`, REWRITE_TAC[VAL_WORD_MUL; MOD_LE]);;</div>
+<div id="L32">let C3B_VSHL = prove(`!(a:N word) k. val(word_shl a k) &lt;= 2 EXP k * val a`, REWRITE_TAC[VAL_WORD_SHL; MOD_LE]);;</div>
+<div id="L33">let C3B_VZX = prove(`!(a:M word). val(word_zx a:N word) &lt;= val a`, REWRITE_TAC[VAL_WORD_ZX_GEN; MOD_LE]);;</div>
+<div id="L34">let C3B_VWORD = prove(`!e. val(word e:N word) &lt;= e`, REWRITE_TAC[VAL_WORD; MOD_LE]);;</div>
+<div id="L35">let C3B_VUSHR = prove(`!(a:N word) k. 2 EXP k * val(word_ushr a k) &lt; 2 EXP dimindex(:N)`,</div>
+<div id="L36">  REPEAT GEN_TAC THEN REWRITE_TAC[VAL_WORD_USHR] THEN</div>
+<div id="L37">  MP_TAC(ISPECL [`val(a:N word)`; `2 EXP k`] DIV_MUL_LE) THEN</div>
+<div id="L38">  MP_TAC(ISPEC `a:N word` VAL_BOUND) THEN ARITH_TAC);;</div>
+<div id="L39">let C3B_VAND32 = prove(`!x y:int32. val(word_and x y) &lt;= val y /\ val(word_and x y) &lt;= val x`,</div>
+<div id="L40">  REPEAT GEN_TAC THEN REWRITE_TAC[GSYM WORD_ULE] THEN CONJ_TAC THEN BITBLAST_TAC);;</div>
+<div id="L41"></div>
+<div id="L42">let c3b_nred th = CONV_RULE(DEPTH_CONV(NUM_RED_CONV ORELSEC (fun t -&gt; if t = `dimindex(:32)` then DIMINDEX_32 else</div>
+<div id="L43">                    if t = `dimindex(:64)` then DIMINDEX_64 else failwith &quot;&quot;)) THENC NUM_REDUCE_CONV) th;;</div>
+<div id="L44"></div>
+<div id="L45">(* val-bound facts for t and its word subterms *)</div>
+<div id="L46">let c3b_pm rule vt = c3b_nred (PART_MATCH lhand (SPEC_ALL rule) vt);;</div>
+<div id="L47">let C3B_VCOND = prove(`!c (a:N word) b. val (if c then a else b) &lt;= val a + val b`,</div>
+<div id="L48">  REPEAT GEN_TAC THEN COND_CASES_TAC THEN ARITH_TAC);;</div>
+<div id="L49">let rec c3b_tfacts t =</div>
+<div id="L50">  let vt = mk_icomb(`val:N word-&gt;num`, t) in</div>
+<div id="L51">  if is_cond t then</div>
+<div id="L52">    let _,(a,b) = dest_cond t in</div>
+<div id="L53">    (try [c3b_nred (PART_MATCH lhand (SPEC_ALL C3B_VCOND) vt)] with Failure _ -&gt; []) @ c3b_tfacts a @ c3b_tfacts b @</div>
+<div id="L54">    (try [c3b_nred (ISPEC t VAL_BOUND)] with Failure _ -&gt; []) else</div>
+<div id="L55">  let bnd = try [c3b_nred (ISPEC t VAL_BOUND)] with Failure _ -&gt; [] in</div>
+<div id="L56">  let sub = try</div>
+<div id="L57">    let h,args = strip_comb t in</div>
+<div id="L58">    match (fst(dest_const h), args) with</div>
+<div id="L59">      (&quot;word_add&quot;,[a;b]) -&gt; c3b_pm C3B_VADD vt :: (c3b_tfacts a @ c3b_tfacts b)</div>
+<div id="L60">    | (&quot;word_mul&quot;,[a;b]) -&gt; c3b_pm C3B_VMUL vt :: (c3b_tfacts a @ c3b_tfacts b)</div>
+<div id="L61">    | (&quot;word_shl&quot;,[a;k]) -&gt; c3b_pm C3B_VSHL vt :: c3b_tfacts a</div>
+<div id="L62">    | (&quot;word_ushr&quot;,[a;k]) -&gt; [c3b_nred (PART_MATCH (rand o lhand) (SPEC_ALL C3B_VUSHR) vt)]</div>
+<div id="L63">    | (&quot;word_and&quot;,[a;b]) when type_of t = `:int32` -&gt;</div>
+<div id="L64">         map (fun c -&gt; PART_MATCH lhand c vt) (CONJUNCTS (SPEC_ALL C3B_VAND32)) @ c3b_tfacts a @ c3b_tfacts b</div>
+<div id="L65">    | (&quot;word_zx&quot;,[a]) -&gt; c3b_pm C3B_VZX vt :: c3b_tfacts a</div>
+<div id="L66">    | (&quot;word&quot;,[e]) -&gt; if is_numeral e then [c3b_pm VAL_WORD vt] else [c3b_pm C3B_VWORD vt]</div>
+<div id="L67">    | _ -&gt; []</div>
+<div id="L68">    with Failure _ -&gt; [] in</div>
+<div id="L69">  bnd @ sub;;</div>
+<div id="L70"></div>
+<div id="L71">let setify_thms ths =</div>
+<div id="L72">  let rec go seen = function [] -&gt; [] | th::r -&gt; if mem (concl th) seen then go seen r else th :: go (concl th :: seen) r in</div>
+<div id="L73">  go [] ths;;</div>
+<div id="L74">let c3b_gfacts g =</div>
+<div id="L75">  let vs = find_terms (fun t -&gt; is_comb t &amp;&amp; (match rator t with Const(&quot;val&quot;,_) -&gt; true | _ -&gt; false)) g in</div>
+<div id="L76">  let ths = List.concat (map (fun v -&gt; try c3b_tfacts (rand v) with Failure _ -&gt; []) vs) in</div>
+<div id="L77">  let ths = filter (fun th -&gt; hyp th = [] &amp;&amp; not (concl th = `T`)) ths in</div>
+<div id="L78">  setify_thms ths;;</div>
+<div id="L79"></div>
+<div id="L80">let c3b_mths asl = filter (fun th -&gt; vk_is_memfact (concl th)) (map snd asl);;</div>
+<div id="L81">let c3b_ctr = ref 0;;</div>
+<div id="L82">let c3b_fresh () = incr c3b_ctr; &quot;s&quot; ^ string_of_int !c3b_ctr;;</div>
+<div id="L83">let c3b_log = ref true;;</div>
+<div id="L84"></div>
+<div id="L85">let C3B_STEP1 exec sname : tactic = fun (asl,w) -&gt;</div>
+<div id="L86">  (CAP_STEP_TAC exec (READ_COMPONENT_COMPOSE :: (!c3b_extra @ c3b_mths asl)) sname THEN</div>
+<div id="L87">   CAP_DISCARD_OLD_TAC sname THEN WASM_COMPACT_HYPS_TAC) (asl,w);;</div>
+<div id="L88"></div>
+<div id="L89">let c3b_pc asl s =</div>
+<div id="L90">  let th = find (fun th -&gt; let c = concl th in is_eq c &amp;&amp;</div>
+<div id="L91">     (match lhs c with Comb(Comb(Const(&quot;read&quot;,_),Const(&quot;wpc&quot;,_)),s&#x27;) -&gt; s&#x27; = s | _ -&gt; false)) (map snd asl) in</div>
+<div id="L92">  dest_small_numeral(rand(rhs(concl th)));;</div>
+<div id="L93"></div>
+<div id="L94">let c3b_status asl s =</div>
+<div id="L95">  try let th = find (fun th -&gt; let c = concl th in is_eq c &amp;&amp;</div>
+<div id="L96">     (match lhs c with Comb(Comb(Const(&quot;read&quot;,_),Const(&quot;wstatus&quot;,_)),s&#x27;) -&gt; s&#x27; = s | _ -&gt; false)) (map snd asl) in</div>
+<div id="L97">  rhs(concl th) with Failure _ -&gt; `WTrap`;;</div>
+<div id="L98"></div>
+<div id="L99">let c3b_guard exec (asl,w) =</div>
+<div id="L100">  let s = rand w in</div>
+<div id="L101">  let s&#x27; = mk_var(&quot;s_c3bg&quot;,`:wasmstate`) in</div>
+<div id="L102">  let th = WASM_CONV (snd exec) (READ_COMPONENT_COMPOSE :: (!c3b_extra @ c3b_mths asl)) (map snd asl)</div>
+<div id="L103">             (mk_comb(mk_comb(`wasm`,s),s&#x27;)) in</div>
+<div id="L104">  let r = rhs(concl th) in</div>
+<div id="L105">  let c = find_term is_cond r in</div>
+<div id="L106">  lhand(rator c);;</div>
+<div id="L107"></div>
+<div id="L108">let c3b_strip_neg g = if is_neg g then rand g else g;;</div>
+<div id="L109"></div>
+<div id="L110">let c3b_is_statefree tm = not (can (find_term (fun t -&gt; type_of t = `:wasmstate`)) tm);;</div>
+<div id="L111">(* prove g (or ~g) from the state-free num assumptions and the val-bound facts *)</div>
+<div id="L112">let c3b_decide asl g =</div>
+<div id="L113">  let fs = c3b_gfacts g in</div>
+<div id="L114">  let ants = filter (fun th -&gt; let c = concl th in wasm_is_numrel c &amp;&amp; c3b_is_statefree c &amp;&amp; not (is_disj c)) (map snd asl) @ fs in</div>
+<div id="L115">  let pr t = if ants = [] then ARITH_RULE t else</div>
+<div id="L116">    MP (ARITH_RULE (mk_imp(list_mk_conj(map concl ants), t))) (end_itlist CONJ ants) in</div>
+<div id="L117">  try EQT_INTRO (pr g) with Failure _ -&gt; EQF_INTRO (pr (mk_neg g));;</div>
+<div id="L118"></div>
+<div id="L119">let C3B_GSTEP exec sname : tactic = fun (asl,w) -&gt;</div>
+<div id="L120">  let pc = c3b_pc asl (rand w) in</div>
+<div id="L121">  let g = try c3b_guard exec (asl,w) with Failure m -&gt;</div>
+<div id="L122">    ((try ignore(C3B_STEP1 exec sname (asl,w)) with Failure m2 -&gt;</div>
+<div id="L123">        Printf.printf &quot;@@STUCK pc %d: %s\n%!&quot; pc (String.sub m2 0 (min 600 (String.length m2))));</div>
+<div id="L124">     failwith (&quot;c3b stuck at pc &quot; ^ string_of_int pc)) in</div>
+<div id="L125">  (try let gth = c3b_decide asl g in</div>
+<div id="L126">     (fun gl -&gt; let old = !c3b_extra in</div>
+<div id="L127">        c3b_extra := gth :: old;</div>
+<div id="L128">        let r = (try C3B_STEP1 exec sname gl with e -&gt; (c3b_extra := old; raise e)) in</div>
+<div id="L129">        c3b_extra := old;</div>
+<div id="L130">        if !c3b_log then Printf.printf &quot;@@BOUND pc %d\n%!&quot; pc; r)</div>
+<div id="L131">   with Failure _ -&gt;</div>
+<div id="L132">   (fun gl -&gt; let g&#x27; = c3b_strip_neg g in</div>
+<div id="L133">    (if !c3b_log then let st = String.map (fun c -&gt; if c = &#x27;\n&#x27; then &#x27; &#x27; else c) (string_of_term g&#x27;) in</div>
+<div id="L134">       Printf.printf &quot;@@SPLIT pc %d: %s\n%!&quot; pc (if String.length st &gt; 400 then String.sub st 0 400 else st));</div>
+<div id="L135">    (ASM_CASES_TAC g&#x27; THEN C3B_STEP1 exec sname) gl)) (asl,w);;</div>
+<div id="L136"></div>
+<div id="L137">(* data-blind generalization: a stack/local value of the current state bigger than the threshold becomes a fresh</div>
+<div id="L138">   variable (its defining equation is dropped, which only strengthens the goal) *)</div>
+<div id="L139">let c3b_abbrev_thresh = ref 0;;</div>
+<div id="L140">let rec c3b_tsize t = match t with Comb(a,b) -&gt; c3b_tsize a + c3b_tsize b | Abs(_,b) -&gt; 1 + c3b_tsize b | _ -&gt; 1;;</div>
+<div id="L141">let c3b_vctr = ref 0;;</div>
+<div id="L142">let C3B_GEN_TAC : tactic = fun (asl,w) -&gt;</div>
+<div id="L143">  if !c3b_abbrev_thresh = 0 then ALL_TAC (asl,w) else</div>
+<div id="L144">  let s = rand w in</div>
+<div id="L145">  let vals = List.concat (map (fun (_,th) -&gt; let c = concl th in</div>
+<div id="L146">     if is_eq c &amp;&amp; (match lhs c with Comb(Comb(Const(&quot;read&quot;,_),comp),s&#x27;) -&gt;</div>
+<div id="L147">                      s&#x27; = s &amp;&amp; (comp = `wstack` || (is_comb comp &amp;&amp; rator comp = `wlocal`)) | _ -&gt; false)</div>
+<div id="L148">     then (let r = rhs c in</div>
+<div id="L149">           let elems = if is_list r then dest_list r else [r] in</div>
+<div id="L150">           mapfilter (fun e -&gt; let h,a = strip_comb e in</div>
+<div id="L151">                        if (h = `I32` || h = `I64`) &amp;&amp; length a = 1 then hd a else fail()) elems)</div>
+<div id="L152">     else []) asl) in</div>
+<div id="L153">  let big = setify (filter (fun v -&gt; c3b_tsize v &gt; !c3b_abbrev_thresh &amp;&amp; not (is_var v)) vals) in</div>
+<div id="L154">  let big = sort (fun a b -&gt; c3b_tsize a &gt; c3b_tsize b) big in</div>
+<div id="L155">  MAP_EVERY (fun v -&gt; fun g -&gt; incr c3b_vctr;</div>
+<div id="L156">       let nv = mk_var(&quot;ab&quot; ^ string_of_int !c3b_vctr, type_of v) in</div>
+<div id="L157">       (ABBREV_TAC (mk_eq(nv, v)) THEN</div>
+<div id="L158">        REPEAT(FIRST_X_ASSUM(K ALL_TAC o check (fun th -&gt; let c = concl th in is_eq c &amp;&amp; rhs c = nv)))) g) big (asl,w);;</div>
+<div id="L159"></div>
+<div id="L160">(* run until the pc is in stops (or the status is not WRunning) *)</div>
+<div id="L161">let rec C3B_RUN exec stops : tactic = fun (asl,w) -&gt;</div>
+<div id="L162">  let s = rand w in</div>
+<div id="L163">  if c3b_status asl s &lt;&gt; `WRunning` then ALL_TAC (asl,w) else</div>
+<div id="L164">  let pc = c3b_pc asl s in</div>
+<div id="L165">  if mem pc stops then ALL_TAC (asl,w) else</div>
+<div id="L166">  let sn = c3b_fresh() in</div>
+<div id="L167">  ((C3B_STEP1 exec sn ORELSE C3B_GSTEP exec sn) THEN C3B_GEN_TAC THEN C3B_RUN exec stops) (asl,w);;</div>
+<div id="L168"></div>
+<div id="L169">let C3B_RUN1 exec stops : tactic = fun (asl,w) -&gt;</div>
+<div id="L170">  let sn = c3b_fresh() in ((C3B_STEP1 exec sn ORELSE C3B_GSTEP exec sn) THEN C3B_RUN exec stops) (asl,w);;</div>
+<div id="L171"></div>
+<div id="L172">let c3b_time name (tac:tactic) : tactic = fun g -&gt;</div>
+<div id="L173">  let t0 = Sys.time() in let r = tac g in</div>
+<div id="L174">  Printf.printf &quot;@@TIME %s %.1f s cpu\n%!&quot; name (Sys.time() -. t0); r;;</div>
+<div id="L175"></div>
+<div id="L176">(* ---- interface predicates: control shape, typed locals, tracked locals, memory m0 *)</div>
+<div id="L177">let c3b_ity i = i &lt;= 2 || i = 8 || i = 11 || i = 15;;</div>
+<div id="L178">let c3b_rd i = mk_comb(mk_comb(`read:(wasmstate,wval)component-&gt;wasmstate-&gt;wval`, mk_comb(`wlocal`, mk_small_numeral i)), `s:wasmstate`);;</div>
+<div id="L179">let c3b_typed i =</div>
+<div id="L180">  let xv = mk_var(&quot;x&quot; ^ string_of_int i, if c3b_ity i then `:int32` else `:int64`) in</div>
+<div id="L181">  mk_exists(xv, mk_eq(c3b_rd i, mk_comb((if c3b_ity i then `I32` else `I64`), xv)));;</div>
+<div id="L182">let c3b_trk i v = mk_eq(c3b_rd i, mk_comb((if c3b_ity i then `I32` else `I64`), v));;</div>
+<div id="L183">let c3b_lbl l = mk_list(map (fun (a,b,c) -&gt; mk_pair(mk_small_numeral a, mk_pair(mk_small_numeral b, mk_small_numeral c))) l,</div>
+<div id="L184">                        `:num#num#num`);;</div>
+<div id="L185">(* blk e = block whose end instruction is at e (continuation e+1); lp p = loop instruction at p *)</div>
+<div id="L186">type c3b_lab = Blk of int | Lp of int;;</div>
+<div id="L187">let c3b_lb = function Blk e -&gt; (0,e+1,0) | Lp p -&gt; (0,p,0);;</div>
+<div id="L188">let c3b_body pc lbls tracked extra =</div>
+<div id="L189">  let locs = map (fun i -&gt; try c3b_trk i (assoc i tracked) with Failure _ -&gt; c3b_typed i) (0--15) in</div>
+<div id="L190">  list_mk_conj</div>
+<div id="L191">   ([`read wcode s = va1_f25_mc`; mk_eq(`read wpc s`, mk_comb(`word:num-&gt;int64`, mk_small_numeral pc));</div>
+<div id="L192">     `read wstatus s = WRunning`; `read wstack s = []`; mk_eq(`read wlabels s`, c3b_lbl (map c3b_lb lbls));</div>
+<div id="L193">     `read warity s = 1`; `read wmemsize s = 4194304`] @ locs @ [`read wmem s = m0`] @ extra);;</div>
+<div id="L194">let c3b_pred pc lbls tracked extra = mk_abs(`s:wasmstate`, c3b_body pc lbls tracked extra);;</div>
+<div id="L195">let c3b_rest q = let s,b = dest_abs q in mk_abs(s, rand(rand b));;</div>
+<div id="L196">let C3B_FRAME = `MAYCHANGE [wpc] ,, MAYCHANGE [wstack] ,, MAYCHANGE [wlabels] ,, MAYCHANGE [wstatus] ,,</div>
+<div id="L197">           MAYCHANGE [wlocal 0; wlocal 1; wlocal 2; wlocal 3; wlocal 4; wlocal 5; wlocal 6; wlocal 7;</div>
+<div id="L198">                      wlocal 8; wlocal 9; wlocal 10; wlocal 11; wlocal 12; wlocal 13; wlocal 14; wlocal 15] ,,</div>
+<div id="L199">           MAYCHANGE [wmem :&gt; bytes(word 16396,8)] ,, MAYCHANGE [wmem :&gt; bytes(word 16408,96)] ,,</div>
+<div id="L200">           MAYCHANGE [wmem :&gt; bytes(word 1130496,835584)]`;;</div>
+<div id="L201">let c3b_ens p q = mk_comb(mk_comb(mk_comb(`ensures wasm`, p), q), C3B_FRAME);;</div>
+<div id="L202">let C3B_EX_EQ = prove(`!t:A. (?x. t = x) &lt;=&gt; T`, MESON_TAC[]);;</div>
+<div id="L203">(* close a post conjunction at the final state *)</div>
+<div id="L204">let C3B_CLOSE_TAC =</div>
+<div id="L205">  ASM_REWRITE_TAC[injectivity &quot;wval&quot;; C3B_EX_EQ] THEN</div>
+<div id="L206">  CONV_TAC(DEPTH_CONV(WORD_RED_CONV ORELSEC NUM_RED_CONV)) THEN ASM_REWRITE_TAC[injectivity &quot;wval&quot;; C3B_EX_EQ];;</div>
+<div id="L207"></div>
+<div id="L208">(* the clamped divisors (select(v,1,v &gt;s 1)) are never 0 *)</div>
+<div id="L209">let c3b_sel_nz ty = let v = mk_var(&quot;v&quot;, ty) in</div>
+<div id="L210">  let nn = if ty = `:int64` then `:64` else `:32` in</div>
+<div id="L211">  let sel = inst [nn,`:N`] `(if ival (v:N word) &gt; &amp;1 then v else word 1)` in</div>
+<div id="L212">  let c0,(a0,b0) = dest_cond sel in</div>
+<div id="L213">  let sel&#x27; = mk_cond(mk_neg c0, b0, a0) in</div>
+<div id="L214">  let z = inst [nn,`:N`] `word 0:N word` in</div>
+<div id="L215">  let m1 = if ty = `:int64` then `word 18446744073709551615:int64` else `word 4294967295:int32` in</div>
+<div id="L216">  let n1 = inst [nn,`:N`] `word_neg (word 1):N word` in</div>
+<div id="L217">  let eqs = List.concat (map (fun t -&gt; [mk_eq(t,z); mk_eq(z,t); mk_eq(t,m1); mk_eq(t,n1)]) [sel; sel&#x27;]) in</div>
+<div id="L218">  let eqs = mk_conj(c0, mk_eq(v,z)) :: eqs in</div>
+<div id="L219">  let stmt = mk_forall(v, list_mk_conj(map (fun e -&gt; mk_eq(e,`F`)) eqs)) in</div>
+<div id="L220">  prove(stmt, GEN_TAC THEN ASM_CASES_TAC (mk_eq(v,z)) THENL</div>
+<div id="L221">   [ASM_REWRITE_TAC[IVAL_WORD_0] THEN CONV_TAC(DEPTH_CONV(WORD_RED_CONV ORELSEC INT_RED_CONV)) THEN REWRITE_TAC[];</div>
+<div id="L222">    ASM_REWRITE_TAC[] THEN CONV_TAC(DEPTH_CONV WORD_RED_CONV) THEN</div>
+<div id="L223">    COND_CASES_TAC THEN ASM_REWRITE_TAC[] THEN CONV_TAC(DEPTH_CONV WORD_RED_CONV) THEN REWRITE_TAC[] THEN</div>
+<div id="L224">    TRY(POP_ASSUM MP_TAC THEN POP_ASSUM MP_TAC THEN</div>
+<div id="L225">        REWRITE_TAC[GSYM IVAL_EQ; IVAL_WORD_0] THEN CONV_TAC(DEPTH_CONV(WORD_RED_CONV ORELSEC INT_RED_CONV)) THEN</div>
+<div id="L226">        INT_ARITH_TAC) THEN ASM_MESON_TAC[]]);;</div>
+<div id="L227">let C3B_SEL1_NZ = CONJ (c3b_sel_nz `:int64`) (c3b_sel_nz `:int32`);;</div>
+<div id="L228">let () = c3b_extra := [VK_COND_I64; VK_COND_I32; C3B_SEL1_NZ];;</div>
+<div id="L229"></div>
+<div id="L230">let C3B_INIT_TAC = ENSURES_INIT_TAC &quot;s0&quot; THEN REPEAT(FIRST_X_ASSUM(STRIP_ASSUME_TAC o check (is_exists o concl)));;</div>
+<div id="L231">(* final state: close one of the post disjuncts *)</div>
+<div id="L232">let C3B_CLOSE1 = C3B_CLOSE_TAC THEN TRY(REPEAT CONJ_TAC THEN ASM_ARITH_TAC) THEN NO_TAC;;</div>
+<div id="L233">let C3B_FIN_TAC : tactic =</div>
+<div id="L234">  ENSURES_FINAL_STATE_TAC THEN</div>
+<div id="L235">  FIRST [C3B_CLOSE1; DISJ1_TAC THEN C3B_CLOSE1; DISJ2_TAC THEN C3B_CLOSE1;</div>
+<div id="L236">         DISJ2_TAC THEN DISJ1_TAC THEN C3B_CLOSE1; DISJ2_TAC THEN DISJ2_TAC THEN C3B_CLOSE1];;</div>
+<div id="L237">let C3B_SEG_TAC name stops : tactic =</div>
+<div id="L238">  REPEAT GEN_TAC THEN TRY(DISCH_THEN STRIP_ASSUME_TAC) THEN C3B_INIT_TAC THEN</div>
+<div id="L239">  c3b_time name (C3B_RUN C3B_EXEC stops) THEN C3B_FIN_TAC;;</div>
+<div id="L240"></div>
+<div id="L241">(* use a lemma |- !vars. [A ==&gt;] ensures P Q C for a goal ensures P&#x27; Q&#x27; C (weakening by rewriting) *)</div>
+<div id="L242">let C3B_USE_TAC th : tactic = fun (asl,w) -&gt;</div>
+<div id="L243">  let th1 = SPEC_ALL th in</div>
+<div id="L244">  let th2 = if is_imp (concl th1) then MP th1 (TAC_PROOF((asl, lhand (concl th1)), ASM_ARITH_TAC)) else th1 in</div>
+<div id="L245">  let th3 = try PART_MATCH I th2 w with Failure _ -&gt; th2 in</div>
+<div id="L246">  let c = concl th3 in</div>
+<div id="L247">  let p = rand(rator(rator c)) and q = rand(rator c) in</div>
+<div id="L248">  (MATCH_ACCEPT_TAC th3 ORELSE</div>
+<div id="L249">   (MATCH_MP_TAC ENSURES_PRECONDITION_THM THEN EXISTS_TAC p THEN CONJ_TAC THENL</div>
+<div id="L250">     [X_GEN_TAC `s:wasmstate` THEN CONV_TAC(TOP_DEPTH_CONV BETA_CONV) THEN STRIP_TAC THEN C3B_CLOSE_TAC;</div>
+<div id="L251">      MATCH_MP_TAC ENSURES_POSTCONDITION_THM THEN EXISTS_TAC q THEN CONJ_TAC THENL</div>
+<div id="L252">       [X_GEN_TAC `s:wasmstate` THEN CONV_TAC(TOP_DEPTH_CONV BETA_CONV) THEN STRIP_TAC THEN C3B_CLOSE_TAC;</div>
+<div id="L253">        ACCEPT_TAC th3]])) (asl,w);;</div>
+<div id="L254"></div>
+<div id="L255">(* ---- the isqrt loops: loop instr at lp, body start bp = lp + 2, exit ep (after end), counter local ctr from c down *)</div>
+<div id="L256">let C3B_DEC1 = prove</div>
+<div id="L257"> (`!c. c &lt; 4294967296 ==&gt; word_add (word (SUC c)) (word 4294967295):int32 = word c /\ (word c:int32 = word 0 &lt;=&gt; c = 0)`,</div>
+<div id="L258">  REPEAT STRIP_TAC THENL</div>
+<div id="L259">   [REWRITE_TAC[GSYM WORD_ADD; ARITH_RULE `SUC c + 4294967295 = c + 4294967296`] THEN</div>
+<div id="L260">    REWRITE_TAC[WORD_ADD; WORD_RED_CONV `word 4294967296:int32`; WORD_ADD_0];</div>
+<div id="L261">    REWRITE_TAC[GSYM VAL_EQ; VAL_WORD; VAL_WORD_0; DIMINDEX_32] THEN CONV_TAC NUM_REDUCE_CONV THEN</div>
+<div id="L262">    ASM_SIMP_TAC[MOD_LT]]);;</div>
+<div id="L263">let c3b_isq_stmt lp ep ctr outer trk =</div>
+<div id="L264">  let bp = lp + 2 in</div>
+<div id="L265">  let pre = c3b_pred bp (Lp lp :: outer) ((ctr, `word c:int32`) :: trk) [] in</div>
+<div id="L266">  let post = c3b_pred ep outer trk [] in</div>
+<div id="L267">  let e = c3b_ens pre post in</div>
+<div id="L268">  let vs = subtract (frees e) [`c:num`] in</div>
+<div id="L269">  mk_forall(`c:num`, mk_imp(`1 &lt;= c /\ c &lt;= 32`, list_mk_forall(vs, e)));;</div>
+<div id="L270">let C3B_ISQ_TAC name lp ep ctr outer trk : tactic =</div>
+<div id="L271">  let bp = lp + 2 in</div>
+<div id="L272">  INDUCT_TAC THENL [ARITH_TAC; ALL_TAC] THEN DISCH_TAC THEN REPEAT GEN_TAC THEN</div>
+<div id="L273">  MP_TAC(SPEC `c:num` C3B_DEC1) THEN ANTS_TAC THENL [ASM_ARITH_TAC; DISCH_THEN(CONJUNCTS_THEN ASSUME_TAC)] THEN</div>
+<div id="L274">  ASM_CASES_TAC `c = 0` THENL</div>
+<div id="L275">   [C3B_INIT_TAC THEN c3b_time name (C3B_RUN1 C3B_EXEC [ep; bp]) THEN C3B_FIN_TAC;</div>
+<div id="L276">    ENSURES_SEQUENCE_TAC (mk_small_numeral bp) (c3b_rest (c3b_pred bp (Lp lp :: outer) ((ctr, `word c:int32`) :: trk) [])) THEN</div>
+<div id="L277">    CONJ_TAC THENL</div>
+<div id="L278">     [C3B_INIT_TAC THEN c3b_time name (C3B_RUN1 C3B_EXEC [ep; bp]) THEN C3B_FIN_TAC;</div>
+<div id="L279">      FIRST_X_ASSUM(MP_TAC o check (fun th -&gt; is_imp(concl th) &amp;&amp; is_forall(rand(concl th)))) THEN</div>
+<div id="L280">      ANTS_TAC THENL [ASM_ARITH_TAC; DISCH_THEN(fun th -&gt; C3B_USE_TAC th)]]];;</div>
+<div id="L281"></div>
+<div id="L282">let C3B_DECLS = prove(`!decls. wasm_decl_vals va1_f25_mc = SOME decls &lt;=&gt; decls = [I64 (word 0); I64 (word 0); I64 (word 0); I64 (word 0); I64 (word 0); I32 (word 0); I64 (word 0); I64 (word 0); I32 (word 0); I64 (word 0); I64 (word 0); I64 (word 0); I32 (word 0)]`,</div>
+<div id="L283">  REWRITE_TAC[CONJUNCT2 VA1_F25_CALLEE; option_INJ] THEN MESON_TAC[]);;</div>
+<div id="L284"></div>
+<div id="L285">(* after ENSURES_INIT_TAC: the wlocals fact becomes 16 wlocal facts *)</div>
+<div id="L286">let C3B_LOCALS_TAC : tactic = fun (asl,w) -&gt;</div>
+<div id="L287">  let s = rand w in</div>
+<div id="L288">  let lth = find (fun th -&gt; let c = concl th in is_eq c &amp;&amp; lhs c = mk_comb(`read wlocals`, s)) (map snd asl) in</div>
+<div id="L289">  let dth = find (fun th -&gt; let c = concl th in is_eq c &amp;&amp; can (find_term ((=) `wasm_decl_vals`)) c) (map snd asl) in</div>
+<div id="L290">  let dth&#x27; = EQ_MP (SPEC (rand(rand(concl dth))) C3B_DECLS) dth in</div>
+<div id="L291">  let mk i = let t = mk_comb(mk_comb(`read:(wasmstate,wval)component-&gt;wasmstate-&gt;wval`, mk_comb(`wlocal`, mk_small_numeral i)), s) in</div>
+<div id="L292">    let th = (REWRITE_CONV[wlocal; READ_COMPONENT_COMPOSE; READ_ELEMENT; lth; dth&#x27;; wcall_locals; LENGTH] THENC</div>
+<div id="L293">              NUM_REDUCE_CONV THENC REWRITE_CONV[] THENC ONCE_DEPTH_CONV EL_CONV THENC NUM_REDUCE_CONV THENC</div>
+<div id="L294">              TRY_CONV(ONCE_DEPTH_CONV EL_CONV)) t in th in</div>
+<div id="L295">  MAP_EVERY (fun i -&gt; ASSUME_TAC (mk i)) (0--15) (asl,w);;</div>
+<div id="L296"></div>
+<div id="L297">let GP = `!(a0:int32) (a1:int32) (a2:int32) (decls:wval list).</div>
+<div id="L298">     wasm_decl_vals va1_f25_mc = SOME decls</div>
+<div id="L299">     ==&gt; ensures wasm</div>
+<div id="L300">          (\s. read wcode s = va1_f25_mc /\ read wpc s = word 13 /\ read wstatus s = WRunning /\</div>
+<div id="L301">               read wstack s = [] /\ read wlabels s = [] /\ read warity s = 1 /\</div>
+<div id="L302">               read wmemsize s = 4194304 /\</div>
+<div id="L303">               read wlocals s = wcall_locals [I32 a2; I32 a1; I32 a0] decls /\</div>
+<div id="L304">               ~(read (bytes32 (word 16396)) (read wmem s) = word 4294967295))</div>
+<div id="L305">          (\s. read wstatus s = WDone /\ read wstack s = [I32 (word 1)])</div>
+<div id="L306">          (MAYCHANGE [wpc] ,, MAYCHANGE [wstack] ,, MAYCHANGE [wlabels] ,, MAYCHANGE [wstatus])`;;</div>
+<div id="L307"></div>
+<div id="L308">let GA = `!(decls:wval list).</div>
+<div id="L309">     wasm_decl_vals va1_f25_mc = SOME decls</div>
+<div id="L310">     ==&gt; ensures wasm</div>
+<div id="L311">          (\s. read wcode s = va1_f25_mc /\ read wpc s = word 13 /\ read wstatus s = WRunning /\</div>
+<div id="L312">               read wstack s = [] /\ read wlabels s = [] /\ read warity s = 1 /\</div>
+<div id="L313">               read wmemsize s = 4194304 /\</div>
+<div id="L314">               read wlocals s = wcall_locals [I32 (word 0); I32 (word 0); I32 (word 0)] decls /\</div>
+<div id="L315">               read (bytes32 (word 16396)) (read wmem s) = word 4294967295)</div>
+<div id="L316">          (\s. read wstatus s = WDone /\ read wstack s = [I32 (word 2)])</div>
+<div id="L317">          (MAYCHANGE [wpc] ,, MAYCHANGE [wstack] ,, MAYCHANGE [wlabels] ,, MAYCHANGE [wstatus])`;;</div>
+<div id="L318"></div>
+<div id="L319">let C3B_GUARD_TAC = REPEAT GEN_TAC THEN DISCH_TAC THEN ENSURES_INIT_TAC &quot;s0&quot; THEN C3B_LOCALS_TAC THEN</div>
+<div id="L320">  ABBREV_TAC `m0 = read wmem s0` THEN C3B_RUN C3B_EXEC [] THEN ENSURES_FINAL_STATE_TAC THEN ASM_REWRITE_TAC[];;</div>
+<div id="L321"></div>
+<div id="L322">let VA1_F25_GUARD_P = prove(GP, C3B_GUARD_TAC);;</div>
+<div id="L323"></div>
+<div id="L324">let VA1_F25_GUARD_ARGS = prove(GA, C3B_GUARD_TAC);;</div>
+<div id="L325"></div>
+<div id="L326">let c3b_trkA = [0,`a0:int32`; 1,`a1:int32`; 2,`a2:int32`];;</div>
+<div id="L327"></div>
+<div id="L328">let c3b_trk0 = c3b_trkA @ map (fun i -&gt; i, if c3b_ity i then `word 0:int32` else `word 0:int64`) (3--15);;</div>
+<div id="L329"></div>
+<div id="L330">let c3b_seg hyps p q = let e = c3b_ens p q in</div>
+<div id="L331">  let vs = filter (fun v -&gt; not (mem v [`s:wasmstate`])) (frees e @ frees hyps) in</div>
+<div id="L332">  list_mk_forall(setify vs, mk_imp(hyps, e));;</div>
+<div id="L333"></div>
+<div id="L334">let C3B_PRO = prove(c3b_seg `read (bytes32 (word 16396)) m0 = word 4294967295 /\ ~(word_or (word_or (a1:int32) a0) a2 = word 0)`</div>
+<div id="L335">   (c3b_pred 13 [] c3b_trk0 []) (c3b_pred 98 [Lp 96] ((8,`word 32:int32`) :: c3b_trkA) []),</div>
+<div id="L336">  C3B_SEG_TAC &quot;pro&quot; [98]);;</div>
+<div id="L337"></div>
+<div id="L338">let C3B_ISQ1 = prove(c3b_isq_stmt 96 152 8 [] c3b_trkA, C3B_ISQ_TAC &quot;isq1&quot; 96 152 8 [] c3b_trkA);;</div>
+<div id="L339"></div>
+<div id="L340">let C3B_MID = prove(c3b_seg `T` (c3b_pred 152 [] c3b_trkA []) (c3b_pred 275 [Lp 273] ((8,`word 32:int32`) :: c3b_trkA) []),</div>
+<div id="L341">  C3B_SEG_TAC &quot;mid&quot; [275]);;</div>
+<div id="L342"></div>
+<div id="L343">let C3B_ISQ2 = prove(c3b_isq_stmt 273 329 8 [] c3b_trkA, C3B_ISQ_TAC &quot;isq2&quot; 273 329 8 [] c3b_trkA);;</div>
+<div id="L344"></div>
+<div id="L345">let CAP_B32_SAME_C3 = CAP_B32_SAME;;</div>
+<div id="L346"></div>
+<div id="L347">let C3B_W32S_W32 = prove</div>
+<div id="L348"> (`!base n f e (v:int32) m.</div>
+<div id="L349">     va1_w32s base n f m /\ (e + 4 &lt;= base \/ base + 4 * n &lt;= e) /\</div>
+<div id="L350">     base + 4 * n &lt;= 4294967296 /\ e &lt; 4294967296</div>
+<div id="L351">     ==&gt; va1_w32s base n f (write (bytes32 (word e)) v m)`,</div>
+<div id="L352">  REWRITE_TAC[va1_w32s] THEN REPEAT STRIP_TAC THEN</div>
+<div id="L353">  MP_TAC(SPECL [`base + 4 * k`; `e:num`; `v:int32`; `m:int64-&gt;byte`] VK_R32_W32) THEN</div>
+<div id="L354">  (ANTS_TAC THENL [ASM_ARITH_TAC; DISCH_THEN SUBST1_TAC THEN ASM_SIMP_TAC[]]));;</div>
+<div id="L355"></div>
+<div id="L356">let C3B_MDL_W32S = prove(`!mdl m. va1_mdl mdl m &lt;=&gt; va1_w32s 16640 1024 mdl m`, REWRITE_TAC[va1_mdl; va1_w32s]);;</div>
+<div id="L357"></div>
+<div id="L358">let C3B_R32_W32_NUM = prove</div>
+<div id="L359"> (`!x a (v:int32) m. (x + 4 &lt;= a \/ a + 4 &lt;= x) /\ x &lt; 4294967296 /\ a &lt; 4294967296</div>
+<div id="L360">     ==&gt; read (bytes32 (word x)) (write (bytes32 (word a)) v m) = read (bytes32 (word x)) m`,</div>
+<div id="L361">  REWRITE_TAC[VK_R32_W32]);;</div>
+<div id="L362"></div>
+<div id="L363">let C3B_MEMFACT_TAC : tactic =</div>
+<div id="L364">  REWRITE_TAC[C3B_MDL_W32S] THEN</div>
+<div id="L365">  REPEAT((MATCH_MP_TAC C3B_W32S_W32 THEN CONV_TAC(DEPTH_CONV NUM_RED_CONV) THEN REWRITE_TAC[]) ORELSE</div>
+<div id="L366">         (W(fun (asl,w) -&gt; let l = lhs w in</div>
+<div id="L367">              let m = rand l in</div>
+<div id="L368">              let a = rand(rand(rand(rator(rator m)))) and x = rand(rand(rand(rator l))) in</div>
+<div id="L369">              if x = a then REWRITE_TAC[CAP_B32_SAME_C3]</div>
+<div id="L370">              else (MP_TAC(SPECL [x; a; rand(rator m); rand m] C3B_R32_W32_NUM) THEN</div>
+<div id="L371">                    CONV_TAC(DEPTH_CONV NUM_RED_CONV) THEN REWRITE_TAC[] THEN DISCH_THEN SUBST1_TAC)))) THEN</div>
+<div id="L372">  ASM_REWRITE_TAC[GSYM C3B_MDL_W32S];;</div>
+<div id="L373"></div>
+<div id="L374">let c3b_trkL4 k = [8, mk_comb(`word:num-&gt;int32`, mk_binop `( * ):num-&gt;num-&gt;num` `4` k);</div>
+<div id="L375">                   11, mk_comb(`word:num-&gt;int32`, mk_binop `(+):num-&gt;num-&gt;num` `65536` (mk_binop `( * ):num-&gt;num-&gt;num` `512` k));</div>
+<div id="L376">                   15, mk_comb(`word:num-&gt;int32`, k)];;</div>
+<div id="L377"></div>
+<div id="L378">let c3b_bodym mv pc lbls trk extra = subst [mv,`m0:int64-&gt;byte`] (c3b_body pc lbls trk extra);;</div>
+<div id="L379"></div>
+<div id="L380">let c3b_F mv = subst [mv,`m:int64-&gt;byte`]</div>
+<div id="L381">  `read (bytes32 (word 16396)) (m:int64-&gt;byte) = t /\ read (bytes32 (word 16408)) m = a0 /\</div>
+<div id="L382">   read (bytes32 (word 16412)) m = a1 /\ read (bytes32 (word 16416)) m = (a2:int32) /\</div>
+<div id="L383">   va1_mdl mdl m /\ va1_w32s 65536 262144 tbl m`;;</div>
+<div id="L384"></div>
+<div id="L385">let C3B_HDR_STMT = c3b_seg `read (bytes32 (word 16392)) m0 = (t:int32) /\ va1_mdl mdl m0 /\ va1_w32s 65536 262144 tbl m0`</div>
+<div id="L386">   (c3b_pred 329 [] c3b_trkA [])</div>
+<div id="L387">   (mk_abs(`s:wasmstate`, mk_exists(`m1:int64-&gt;byte`, mk_conj(c3b_bodym `m1:int64-&gt;byte` 718 [Lp 716] (c3b_trkL4 `0`) [], c3b_F `m1:int64-&gt;byte`))));;</div>
+<div id="L388"></div>
+<div id="L389">let C3B_VW32 = prove(`!n. n &lt; 4294967296 ==&gt; val (word n:int32) = n`,</div>
+<div id="L390">  REPEAT STRIP_TAC THEN MATCH_MP_TAC VAL_WORD_EQ THEN REWRITE_TAC[DIMINDEX_32] THEN ASM_ARITH_TAC);;</div>
+<div id="L391"></div>
+<div id="L392">let C3B_VADD32 = prove(`!a b. a + b &lt; 4294967296 ==&gt; val (word_add (word a) (word b):int32) = a + b`,</div>
+<div id="L393">  REPEAT STRIP_TAC THEN REWRITE_TAC[GSYM WORD_ADD] THEN MATCH_MP_TAC C3B_VW32 THEN ASM_ARITH_TAC);;</div>
+<div id="L394"></div>
+<div id="L395">let c3b_numasms asl = filter (fun th -&gt; let c = concl th in wasm_is_numrel c &amp;&amp; c3b_is_statefree c &amp;&amp; not (is_disj c)) (map snd asl);;</div>
+<div id="L396"></div>
+<div id="L397">let c3b_arith asl t = let ants = c3b_numasms asl in</div>
+<div id="L398">  if ants = [] then ARITH_RULE t else MP (ARITH_RULE (mk_imp(list_mk_conj(map concl ants), t))) (end_itlist CONJ ants);;</div>
+<div id="L399"></div>
+<div id="L400">(* canonical form of the number inside every word e (e not a numeral) *)</div>
+<div id="L401">let C3B_WARG_CONV t = match t with</div>
+<div id="L402">    Comb(Const(&quot;word&quot;,_),e) when type_of e = `:num` &amp;&amp; not (is_numeral e) -&gt; RAND_CONV NUM_NORMALIZE_CONV t</div>
+<div id="L403">  | _ -&gt; failwith &quot;C3B_WARG_CONV&quot;;;</div>
+<div id="L404"></div>
+<div id="L405">let C3B_WNORM_TAC = RULE_ASSUM_TAC(CONV_RULE(ONCE_DEPTH_CONV C3B_WARG_CONV)) THEN CONV_TAC(ONCE_DEPTH_CONV C3B_WARG_CONV);;</div>
+<div id="L406"></div>
+<div id="L407">let C3B_ROW = prove</div>
+<div id="L408"> (`!x a (v:int32) m. (x = a \/ x + 4 &lt;= a \/ a + 4 &lt;= x) /\ x &lt; 4294967296 /\ a &lt; 4294967296</div>
+<div id="L409">     ==&gt; read (bytes32 (word x)) (write (bytes32 (word a)) v m) = if x = a then v else read (bytes32 (word x)) m`,</div>
+<div id="L410">  REPEAT GEN_TAC THEN ASM_CASES_TAC `x:num = a` THEN ASM_REWRITE_TAC[CAP_B32_SAME] THEN</div>
+<div id="L411">  STRIP_TAC THEN MATCH_MP_TAC VK_R32_W32 THEN ASM_ARITH_TAC);;</div>
+<div id="L412"></div>
+<div id="L413">let c3b_is_row t = match t with</div>
+<div id="L414">    Comb(Comb(Const(&quot;read&quot;,_),Comb(Const(&quot;bytes32&quot;,_),Comb(Const(&quot;word&quot;,_),_))),</div>
+<div id="L415">         Comb(Comb(Comb(Const(&quot;write&quot;,_),Comb(Const(&quot;bytes32&quot;,_),Comb(Const(&quot;word&quot;,_),_))),_),_)) -&gt; true</div>
+<div id="L416">  | _ -&gt; false;;</div>
+<div id="L417"></div>
+<div id="L418">let c3b_ldctr = ref 0;;</div>
+<div id="L419"></div>
+<div id="L420">let c3b_is_ld t = match t with Comb(Comb(Const(&quot;read&quot;,_),Comb(Const(&quot;bytes32&quot;,_),_)),m) -&gt; not (can (find_term (fun u -&gt; type_of u = `:wasmstate`)) m) | _ -&gt; false;;</div>
+<div id="L421"></div>
+<div id="L422">let C3B_LDABBREV_TAC : tactic = fun (asl,w) -&gt;</div>
+<div id="L423">  let s = rand w in</div>
+<div id="L424">  let facts = filter (fun th -&gt; let c = concl th in is_eq c &amp;&amp; (match lhs c with Comb(Comb(Const(&quot;read&quot;,_),comp),s&#x27;) -&gt; s&#x27; = s &amp;&amp; (comp = `wstack` || (is_comb comp &amp;&amp; rator comp = `wlocal`)) | _ -&gt; false)) (map snd asl) in</div>
+<div id="L425">  let lds = setify (List.concat (map (fun th -&gt; find_terms c3b_is_ld (rhs(concl th))) facts)) in</div>
+<div id="L426">  MAP_EVERY (fun t g -&gt; incr c3b_ldctr; ABBREV_TAC (mk_eq(mk_var(&quot;ld&quot;^string_of_int !c3b_ldctr, type_of t), t)) g) lds (asl,w);;</div>
+<div id="L427"></div>
+<div id="L428">let rec C3B_RUN exec stops : tactic = fun (asl,w) -&gt;</div>
+<div id="L429">  let s = rand w in</div>
+<div id="L430">  if c3b_status asl s &lt;&gt; `WRunning` then ALL_TAC (asl,w) else</div>
+<div id="L431">  let pc = c3b_pc asl s in</div>
+<div id="L432">  if mem pc stops then ALL_TAC (asl,w) else</div>
+<div id="L433">  let sn = c3b_fresh() in</div>
+<div id="L434">  ((C3B_STEP1 exec sn ORELSE C3B_GSTEP exec sn) THEN C3B_LDABBREV_TAC THEN C3B_GEN_TAC THEN C3B_RUN exec stops) (asl,w);;</div>
+<div id="L435"></div>
+<div id="L436">let C3B_RUN1 exec stops : tactic = fun (asl,w) -&gt;</div>
+<div id="L437">  let sn = c3b_fresh() in ((C3B_STEP1 exec sn ORELSE C3B_GSTEP exec sn) THEN C3B_LDABBREV_TAC THEN C3B_RUN exec stops) (asl,w);;</div>
+<div id="L438"></div>
+<div id="L439">let C3B_EXIT4 = prove(`!k. k &lt; 2048 ==&gt; (word_add (word (4 * k)) (word 4):int32 = word 8192 &lt;=&gt; k + 1 = 2048)`,</div>
+<div id="L440">  REPEAT STRIP_TAC THEN REWRITE_TAC[GSYM WORD_ADD; GSYM VAL_EQ] THEN</div>
+<div id="L441">  SUBGOAL_THEN `val (word (4 * k + 4):int32) = 4 * k + 4 /\ val (word 8192:int32) = 8192` (fun th -&gt; REWRITE_TAC[th]) THENL</div>
+<div id="L442">   [CONJ_TAC THEN MATCH_MP_TAC C3B_VW32 THEN ASM_ARITH_TAC; ARITH_TAC]);;</div>
+<div id="L443"></div>
+<div id="L444">let C3B_EXISTS_MEM_TAC : tactic = W(fun (asl,w) -&gt; let th = find (fun th -&gt; let c = concl th in is_eq c &amp;&amp; is_comb(lhs c) &amp;&amp; rator(lhs c) = `read wmem` ) (map snd (rev asl)) in EXISTS_TAC (rhs(concl th)));;</div>
+<div id="L445"></div>
+<div id="L446">let C3B_ARITH_TAC : tactic = fun (asl,w) -&gt; ACCEPT_TAC (c3b_arith asl w) (asl,w);;</div>
+<div id="L447"></div>
+<div id="L448">let C3B_DISJ_CLOSE_TAC = FIRST [DISJ1_TAC THEN CONJ_TAC THENL [C3B_CLOSE_TAC THEN NO_TAC; C3B_ARITH_TAC];</div>
+<div id="L449">                                DISJ2_TAC THEN CONJ_TAC THENL [C3B_CLOSE_TAC THEN NO_TAC; C3B_ARITH_TAC]];;</div>
+<div id="L450"></div>
+<div id="L451">let PL5_R32_W64_ZERO_C3 = prove</div>
+<div id="L452"> (`!(x:int64) (m:int64-&gt;byte).</div>
+<div id="L453">     read (bytes32 x) (write (bytes64 x) (word 0) m) = word 0 /\</div>
+<div id="L454">     read (bytes32 (word_add x (word 4))) (write (bytes64 x) (word 0) m) = word 0`,</div>
+<div id="L455">  REPEAT GEN_TAC THEN</div>
+<div id="L456">  SUBGOAL_THEN `!y (mm:int64-&gt;byte). read (bytes32 y) mm = word (read (bytes(y,4)) mm)`</div>
+<div id="L457">    (fun th -&gt; REWRITE_TAC[th]) THENL</div>
+<div id="L458">   [REWRITE_TAC[bytes32; READ_COMPONENT_COMPOSE; asword; through; read]; ALL_TAC] THEN</div>
+<div id="L459">  SUBGOAL_THEN `write (bytes64 x) (word 0:int64) (m:int64-&gt;byte) = write (bytes(x,8)) 0 m`</div>
+<div id="L460">    SUBST1_TAC THENL</div>
+<div id="L461">   [REWRITE_TAC[bytes64; WRITE_COMPONENT_COMPOSE; asword; through; write; read; VAL_WORD_0];</div>
+<div id="L462">    ALL_TAC] THEN</div>
+<div id="L463">  MP_TAC(ISPECL [`x:int64`; `4`; `4`; `write (bytes(x:int64,8)) 0 (m:int64-&gt;byte)`] READ_BYTES_COMBINE) THEN</div>
+<div id="L464">  REWRITE_TAC[ARITH_RULE `4 + 4 = 8`] THEN</div>
+<div id="L465">  SIMP_TAC[READ_WRITE_BYTES; DIMINDEX_64; ARITH_RULE `8 &lt;= 2 EXP 64`; MOD_0] THEN</div>
+<div id="L466">  CONV_TAC(ONCE_DEPTH_CONV NUM_REDUCE_CONV) THEN</div>
+<div id="L467">  DISCH_THEN(MP_TAC o SYM) THEN REWRITE_TAC[ADD_EQ_0; MULT_EQ_0] THEN</div>
+<div id="L468">  CONV_TAC(ONCE_DEPTH_CONV NUM_REDUCE_CONV) THEN SIMP_TAC[]);;</div>
+<div id="L469"></div>
+<div id="L470">let C3B_VADD32W = prove(`!a b. 4294967296 &lt;= a + b /\ a + b &lt; 8589934592 ==&gt; val (word_add (word a) (word b):int32) = (a + b) - 4294967296`,</div>
+<div id="L471">  REPEAT STRIP_TAC THEN REWRITE_TAC[VAL_WORD_ADD; VAL_WORD; DIMINDEX_32] THEN CONV_TAC NUM_REDUCE_CONV THEN</div>
+<div id="L472">  REWRITE_TAC[MOD_ADD_MOD] THEN MATCH_MP_TAC MOD_UNIQ THEN EXISTS_TAC `1` THEN ASM_ARITH_TAC);;</div>
+<div id="L473"></div>
+<div id="L474">let c3b_veq asl t =</div>
+<div id="L475">  let lt a b = mk_binop `(&lt;):num-&gt;num-&gt;bool` a b and le a b = mk_binop `(&lt;=):num-&gt;num-&gt;bool` a b</div>
+<div id="L476">  and pl a b = mk_binop `(+):num-&gt;num-&gt;num` a b in</div>
+<div id="L477">  match rand t with</div>
+<div id="L478">      Comb(Const(&quot;word&quot;,_),e) -&gt; MP (SPEC e C3B_VW32) (c3b_arith asl (lt e `4294967296`))</div>
+<div id="L479">    | x -&gt; let a = rand(lhand x) and b = rand(rand x) in</div>
+<div id="L480">           (try MP (SPECL [a;b] C3B_VADD32) (c3b_arith asl (lt (pl a b) `4294967296`))</div>
+<div id="L481">            with Failure _ -&gt;</div>
+<div id="L482">              let th = MP (SPECL [a;b] C3B_VADD32W) (c3b_arith asl (mk_conj(le `4294967296` (pl a b), lt (pl a b) `8589934592`))) in</div>
+<div id="L483">              let n = rhs(concl(NUM_NORMALIZE_CONV (pl a b))) in</div>
+<div id="L484">              let (x,k) = try let l,r = dest_binop `(+):num-&gt;num-&gt;num` n in</div>
+<div id="L485">                                if is_numeral r then (l,r) else if is_numeral l then (r,l) else failwith &quot;&quot; with Failure _ -&gt; failwith &quot;wrapnorm&quot; in</div>
+<div id="L486">              let k&#x27; = mk_numeral (Num.sub_num (dest_numeral k) (Num.num_of_string &quot;4294967296&quot;)) in</div>
+<div id="L487">              let tgt = mk_binop `(+):num-&gt;num-&gt;num` x k&#x27; in</div>
+<div id="L488">              TRANS th (c3b_arith asl (mk_eq(rhs(concl th), tgt))));;</div>
+<div id="L489"></div>
+<div id="L490">let c3b_is_v t = match t with</div>
+<div id="L491">      Comb(Const(&quot;val&quot;,_),Comb(Const(&quot;word&quot;,_),e)) -&gt; type_of (rand t) = `:int32`</div>
+<div id="L492">    | Comb(Const(&quot;val&quot;,_),Comb(Comb(Const(&quot;word_add&quot;,_),Comb(Const(&quot;word&quot;,_),_)),Comb(Const(&quot;word&quot;,_),_))) -&gt; type_of (rand t) = `:int32`</div>
+<div id="L493">    | _ -&gt; false;;</div>
+<div id="L494"></div>
+<div id="L495">let C3B_VNORM_TAC : tactic = fun (asl,w) -&gt;</div>
+<div id="L496">  let tms = w :: map (concl o snd) asl in</div>
+<div id="L497">  let vs = setify (List.concat (map (find_terms c3b_is_v) tms)) in</div>
+<div id="L498">  let ths = mapfilter (c3b_veq asl) vs in</div>
+<div id="L499">  if ths = [] then ALL_TAC (asl,w) else (RULE_ASSUM_TAC(REWRITE_RULE ths) THEN REWRITE_TAC ths) (asl,w);;</div>
+<div id="L500"></div>
+<div id="L501">(* add val facts for given int32 terms as assumptions (for the stepper&#x27;s bound decisions) *)</div>
+<div id="L502">let C3B_VFACTS_TAC (ts:term list) : tactic = fun (asl,w) -&gt;</div>
+<div id="L503">  MAP_EVERY (fun t -&gt; ASSUME_TAC (c3b_veq asl (mk_comb(`val:int32-&gt;num`, t)))) ts (asl,w);;</div>
+<div id="L504"></div>
+<div id="L505">let C3B_R32_W64Z = prove</div>
+<div id="L506"> (`!x a (m:int64-&gt;byte). (x = a \/ x = a + 4 \/ x + 4 &lt;= a \/ a + 8 &lt;= x) /\ x &lt; 4294967296 /\ a + 4 &lt; 4294967296</div>
+<div id="L507">     ==&gt; read (bytes32 (word x)) (write (bytes64 (word a)) (word 0) m) =</div>
+<div id="L508">         if x = a \/ x = a + 4 then word 0 else read (bytes32 (word x)) m`,</div>
+<div id="L509">  REPEAT GEN_TAC THEN ASM_CASES_TAC `x:num = a` THEN ASM_REWRITE_TAC[PL5_R32_W64_ZERO_C3] THEN</div>
+<div id="L510">  ASM_CASES_TAC `x:num = a + 4` THEN ASM_REWRITE_TAC[] THENL</div>
+<div id="L511">   [DISCH_TAC THEN REWRITE_TAC[WORD_ADD] THEN REWRITE_TAC[PL5_R32_W64_ZERO_C3];</div>
+<div id="L512">    STRIP_TAC THEN MATCH_MP_TAC VK_R32_W64 THEN ASM_ARITH_TAC]);;</div>
+<div id="L513"></div>
+<div id="L514">let c3b_is_row64 t = match t with</div>
+<div id="L515">    Comb(Comb(Const(&quot;read&quot;,_),Comb(Const(&quot;bytes32&quot;,_),Comb(Const(&quot;word&quot;,_),_))),</div>
+<div id="L516">         Comb(Comb(Comb(Const(&quot;write&quot;,_),Comb(Const(&quot;bytes64&quot;,_),Comb(Const(&quot;word&quot;,_),_))),z),_)) -&gt; z = `word 0:int64`</div>
+<div id="L517">  | _ -&gt; false;;</div>
+<div id="L518"></div>
+<div id="L519">let rec C3B_ROWC asl t =</div>
+<div id="L520">  if c3b_is_row t then</div>
+<div id="L521">    let x = rand(rand(rand(rator t))) and m = rand t in</div>
+<div id="L522">    let a = rand(rand(rand(rator(rator m)))) and v = rand(rator m) and m&#x27; = rand m in</div>
+<div id="L523">    let th = SPECL [x;a;v;m&#x27;] C3B_ROW in</div>
+<div id="L524">    let th = MP th (c3b_arith asl (lhand(concl th))) in</div>
+<div id="L525">    let c = mk_eq(x,a) in</div>
+<div id="L526">    let d = try EQT_INTRO (c3b_arith asl c) with Failure _ -&gt; EQF_INTRO (c3b_arith asl (mk_neg c)) in</div>
+<div id="L527">    let th2 = CONV_RULE(RAND_CONV(REWRITE_CONV[d])) th in</div>
+<div id="L528">    TRANS th2 (C3B_ROWC asl (rhs(concl th2)))</div>
+<div id="L529">  else if c3b_is_row64 t then</div>
+<div id="L530">    let x = rand(rand(rand(rator t))) and m = rand t in</div>
+<div id="L531">    let a = rand(rand(rand(rator(rator m)))) and m&#x27; = rand m in</div>
+<div id="L532">    let th = SPECL [x;a;m&#x27;] C3B_R32_W64Z in</div>
+<div id="L533">    let th = MP th (c3b_arith asl (lhand(concl th))) in</div>
+<div id="L534">    let c = rand(rator(rator(rhs(concl th)))) in</div>
+<div id="L535">    let d = try EQT_INTRO (c3b_arith asl c) with Failure _ -&gt; EQF_INTRO (c3b_arith asl (mk_neg c)) in</div>
+<div id="L536">    let th2 = CONV_RULE(RAND_CONV(REWRITE_CONV[d])) th in</div>
+<div id="L537">    TRANS th2 (C3B_ROWC asl (rhs(concl th2)))</div>
+<div id="L538">  else REFL t;;</div>
+<div id="L539"></div>
+<div id="L540">let C3B_ROW1_TAC : tactic = fun (asl,w) -&gt;</div>
+<div id="L541">  let ts = find_terms (fun t -&gt; c3b_is_row t || c3b_is_row64 t) w in</div>
+<div id="L542">  let rec go = function [] -&gt; failwith &quot;C3B_ROW1_TAC&quot;</div>
+<div id="L543">    | t::r -&gt; (try let th = C3B_ROWC asl t in if rhs(concl th) = t then go r else th with Failure _ -&gt; go r) in</div>
+<div id="L544">  let th = go ts in REWRITE_TAC[th] (asl,w);;</div>
+<div id="L545"></div>
+<div id="L546">let C3B_ROW_TAC = REPEAT C3B_ROW1_TAC;;</div>
+<div id="L547"></div>
+<div id="L548">let C3B_W32S_W64 = prove</div>
+<div id="L549"> (`!base n f e (v:int64) m.</div>
+<div id="L550">     va1_w32s base n f m /\ (e + 8 &lt;= base \/ base + 4 * n &lt;= e) /\</div>
+<div id="L551">     base + 4 * n &lt;= 4294967296 /\ e &lt; 4294967296</div>
+<div id="L552">     ==&gt; va1_w32s base n f (write (bytes64 (word e)) v m)`,</div>
+<div id="L553">  REWRITE_TAC[va1_w32s] THEN REPEAT STRIP_TAC THEN</div>
+<div id="L554">  MP_TAC(SPECL [`base + 4 * k`; `e:num`; `v:int64`; `m:int64-&gt;byte`] VK_R32_W64) THEN</div>
+<div id="L555">  (ANTS_TAC THENL [ASM_ARITH_TAC; DISCH_THEN SUBST1_TAC THEN ASM_SIMP_TAC[]]));;</div>
+<div id="L556"></div>
+<div id="L557">let C3B_W32S_TAC = REWRITE_TAC[C3B_MDL_W32S] THEN</div>
+<div id="L558">  REPEAT ((MATCH_MP_TAC C3B_W32S_W32 ORELSE MATCH_MP_TAC C3B_W32S_W64) THEN CONJ_TAC THENL [ALL_TAC; C3B_ARITH_TAC]) THEN</div>
+<div id="L559">  ASM_REWRITE_TAC[GSYM C3B_MDL_W32S];;</div>
+<div id="L560"></div>
+<div id="L561">let c3b_is_ldeq c = is_eq c &amp;&amp; is_var (rhs c) &amp;&amp; (let n = fst(dest_var(rhs c)) in String.length n &gt; 2 &amp;&amp; String.sub n 0 2 = &quot;ld&quot;) &amp;&amp; c3b_is_ld (lhs c);;</div>
+<div id="L562"></div>
+<div id="L563">let c3b_wn th = CONV_RULE(ONCE_DEPTH_CONV C3B_WARG_CONV) th;;</div>
+<div id="L564"></div>
+<div id="L565">(* replace every load abbreviation ldN by the fact it reads (facts: |- read (bytes32 (word X)) m0 = value) *)</div>
+<div id="L566">let C3B_LDFIX_TAC (facts:thm list) : tactic = fun (asl,w) -&gt;</div>
+<div id="L567">  let facts = map c3b_wn facts in</div>
+<div id="L568">  let lds = filter (fun th -&gt; c3b_is_ldeq (concl th)) (map snd asl) in</div>
+<div id="L569">  let fix th = let l = lhs(concl th) in</div>
+<div id="L570">    let r = C3B_ROWC asl l in</div>
+<div id="L571">    let th&#x27; = c3b_wn (TRANS (SYM r) th) in</div>
+<div id="L572">    let f = find (fun f -&gt; lhs(concl f) = lhs(concl th&#x27;)) facts in</div>
+<div id="L573">    TRANS (SYM th&#x27;) f in</div>
+<div id="L574">  let eqs = mapfilter fix lds in</div>
+<div id="L575">  MAP_EVERY (fun e -&gt; SUBST_ALL_TAC e) eqs (asl,w);;</div>
+<div id="L576"></div>
+<div id="L577">(* the table and model facts the bead loop reads, at bead k *)</div>
+<div id="L578">let c3b_l4facts asl =</div>
+<div id="L579">  let tb = find (fun th -&gt; match strip_comb (concl th) with (Const(&quot;va1_w32s&quot;,_),[b;_;_;m]) -&gt; b = `65536` &amp;&amp; m = `m0:int64-&gt;byte` | _ -&gt; false) (map snd asl) in</div>
+<div id="L580">  let tb&#x27; = REWRITE_RULE[va1_w32s] tb in</div>
+<div id="L581">  let inst e = MP (SPEC e tb&#x27;) (c3b_arith asl (mk_binop `(&lt;):num-&gt;num-&gt;bool` e `262144`)) in</div>
+<div id="L582">  let md = find (fun th -&gt; let c = concl th in is_eq c &amp;&amp; is_comb (lhs c) &amp;&amp; lhs c = `read (bytes32 (word 16648)) (m0:int64-&gt;byte)`) (map snd asl) in</div>
+<div id="L583">  [inst `128 * k`; inst `128 * k + 1`; md];;</div>
+<div id="L584"></div>
+<div id="L585">let C3B_HDR = prove(C3B_HDR_STMT,</div>
+<div id="L586">  REPEAT GEN_TAC THEN TRY(DISCH_THEN STRIP_ASSUME_TAC) THEN C3B_INIT_TAC THEN</div>
+<div id="L587">  (fun g -&gt; c3b_abbrev_thresh := 60; let r = (try C3B_RUN C3B_EXEC [718] g with e -&gt; (c3b_abbrev_thresh := 0; raise e)) in c3b_abbrev_thresh := 0; r) THEN</div>
+<div id="L588">  ENSURES_FINAL_STATE_TAC THEN CONV_TAC(TOP_DEPTH_CONV BETA_CONV) THEN C3B_EXISTS_MEM_TAC THEN C3B_CLOSE_TAC THEN</div>
+<div id="L589">  REPEAT CONJ_TAC THEN C3B_MEMFACT_TAC);;</div>
+<div id="L590"></div>
+<div id="L591">let C3B_L4MEM_TAC : tactic =</div>
+<div id="L592">  W(fun (asl,w) -&gt; C3B_LDFIX_TAC (c3b_l4facts asl)) THEN</div>
+<div id="L593">  CONJ_TAC THENL</div>
+<div id="L594">   [REPEAT CONJ_TAC THEN TRY C3B_ROW_TAC THEN TRY C3B_W32S_TAC THEN ASM_REWRITE_TAC[] THEN NO_TAC;</div>
+<div id="L595">    X_GEN_TAC `j:num` THEN DISCH_TAC THEN ASM_CASES_TAC `j:num = k` THENL</div>
+<div id="L596">     [FIRST_X_ASSUM SUBST_ALL_TAC THEN C3B_ROW_TAC THEN</div>
+<div id="L597">      REWRITE_TAC[va1_rbinit; va1_zpseed; LET_DEF; LET_END_DEF; COND_SWAP];</div>
+<div id="L598">      C3B_ROW_TAC THEN FIRST_X_ASSUM(MP_TAC o SPEC `j:num` o check (is_forall o concl)) THEN</div>
+<div id="L599">      ANTS_TAC THENL [C3B_ARITH_TAC; SIMP_TAC[]]]];;</div>
+<div id="L600"></div>
+<div id="L601">let c3b_A kk mv = subst [kk,`k:num`; mv,`m:int64-&gt;byte`]</div>
+<div id="L602">  `!j. j &lt; k ==&gt; read (bytes32 (word (1130496 + 4 * j))) (m:int64-&gt;byte) = word 251658 /\</div>
+<div id="L603">                 read (bytes32 (word (1138688 + 4 * j))) m = va1_rbinit tbl j /\</div>
+<div id="L604">                 read (bytes32 (word (1146880 + 4 * j))) m = word 0 /\</div>
+<div id="L605">                 read (bytes32 (word (1155072 + 4 * j))) m = word 0 /\</div>
+<div id="L606">                 read (bytes32 (word (1163264 + 4 * j))) m = word 0 /\</div>
+<div id="L607">                 read (bytes32 (word (1171456 + 4 * j))) m = va1_zpseed mdl j`;;</div>
+<div id="L608"></div>
+<div id="L609">let C3B_IT4_STMT = c3b_seg (list_mk_conj [`k &lt; 2048`; c3b_F `m0:int64-&gt;byte`; c3b_A `k:num` `m0:int64-&gt;byte`;</div>
+<div id="L610">      `read (bytes32 (word 16648)) m0 = (mdl:num-&gt;int32) 2`])</div>
+<div id="L611">   (c3b_pred 718 [Lp 716] (c3b_trkL4 `k:num`) [])</div>
+<div id="L612">   (mk_abs(`s:wasmstate`, mk_exists(`m1:int64-&gt;byte`, list_mk_conj</div>
+<div id="L613">      [mk_disj(mk_conj(c3b_bodym `m1:int64-&gt;byte` 718 [Lp 716] (c3b_trkL4 `k + 1`) [], `k + 1 &lt; 2048`),</div>
+<div id="L614">               mk_conj(c3b_bodym `m1:int64-&gt;byte` 964 [] [] [], `k + 1 = 2048`));</div>
+<div id="L615">       c3b_F `m1:int64-&gt;byte`; c3b_A `k + 1` `m1:int64-&gt;byte`])));;</div>
+<div id="L616"></div>
+<div id="L617">let C3B_IT4 = prove(C3B_IT4_STMT,</div>
+<div id="L618">  REPEAT GEN_TAC THEN TRY(DISCH_THEN STRIP_ASSUME_TAC) THEN C3B_INIT_TAC THEN c3b_time &quot;it4&quot; (C3B_RUN1 C3B_EXEC [718; 964]) THEN</div>
+<div id="L619">  ENSURES_FINAL_STATE_TAC THEN CONV_TAC(TOP_DEPTH_CONV BETA_CONV) THEN</div>
+<div id="L620">  (CONJ_TAC THENL [ALL_TAC; C3B_VNORM_TAC THEN MONOTONE_MAYCHANGE_TAC]) THEN</div>
+<div id="L621">  C3B_EXISTS_MEM_TAC THEN</div>
+<div id="L622">  RULE_ASSUM_TAC(REWRITE_RULE[MP (SPEC `k:num` C3B_EXIT4) (ASSUME `k &lt; 2048`)]) THEN</div>
+<div id="L623">  C3B_VNORM_TAC THEN REWRITE_TAC[GSYM WORD_ADD] THEN RULE_ASSUM_TAC(REWRITE_RULE[GSYM WORD_ADD]) THEN C3B_WNORM_TAC THEN</div>
+<div id="L624">  (CONJ_TAC THENL [C3B_DISJ_CLOSE_TAC; ALL_TAC]) THEN</div>
+<div id="L625">  c3b_time &quot;l4mem&quot; C3B_L4MEM_TAC);;</div>
+<div id="L626"></div>
+<div id="L627">let C3B_ENS_PRE_CONJ = prove(`!A c Q (C:wasmstate-&gt;wasmstate-&gt;bool). (c ==&gt; ensures wasm A Q C) ==&gt; ensures wasm (\s. A s /\ c) Q C`, REWRITE_TAC[ensures] THEN MESON_TAC[]);;</div>
+<div id="L628"></div>
+<div id="L629">let C3B_ENS_TRANS = prove(mk_forall(`P:wasmstate-&gt;bool`, mk_forall(`Q:wasmstate-&gt;bool`, mk_forall(`R:wasmstate-&gt;bool`,</div>
+<div id="L630">   mk_imp(mk_conj(c3b_ens `P:wasmstate-&gt;bool` `Q:wasmstate-&gt;bool`, c3b_ens `Q:wasmstate-&gt;bool` `R:wasmstate-&gt;bool`),</div>
+<div id="L631">          c3b_ens `P:wasmstate-&gt;bool` `R:wasmstate-&gt;bool`)))),</div>
+<div id="L632">  REPEAT STRIP_TAC THEN MATCH_MP_TAC ENSURES_TRANS_SIMPLE THEN EXISTS_TAC `Q:wasmstate-&gt;bool` THEN</div>
+<div id="L633">  ASM_REWRITE_TAC[] THEN MAYCHANGE_IDEMPOT_TAC);;</div>
+<div id="L634"></div>
+<div id="L635">let C3B_ENS_CASES = prove</div>
+<div id="L636"> (`!P A B R (C:wasmstate-&gt;wasmstate-&gt;bool).</div>
+<div id="L637">     (!s. P s ==&gt; A s \/ B s) /\ ensures wasm A R C /\ ensures wasm B R C ==&gt; ensures wasm P R C`,</div>
+<div id="L638">  REWRITE_TAC[ensures] THEN MESON_TAC[]);;</div>
+<div id="L639"></div>
+<div id="L640">let C3B_ENS_EXISTS = prove</div>
+<div id="L641"> (`!P R (C:wasmstate-&gt;wasmstate-&gt;bool). (!m:int64-&gt;byte. ensures wasm (P m) R C) ==&gt; ensures wasm (\s. ?m. P m s) R C`,</div>
+<div id="L642">  REWRITE_TAC[ensures] THEN MESON_TAC[]);;</div>
+<div id="L643"></div>
+<div id="L644">let C3B_ENS_FALSE = prove</div>
+<div id="L645"> (`!P R (C:wasmstate-&gt;wasmstate-&gt;bool). (!s. ~P s) ==&gt; ensures wasm P R C`,</div>
+<div id="L646">  REWRITE_TAC[ensures] THEN MESON_TAC[]);;</div>
+<div id="L647"></div>
+<div id="L648">let C3B_ENS_NOW = prove(mk_forall(`P:wasmstate-&gt;bool`, mk_forall(`Q:wasmstate-&gt;bool`,</div>
+<div id="L649">   mk_imp(`!s:wasmstate. P s ==&gt; Q s`, c3b_ens `P:wasmstate-&gt;bool` `Q:wasmstate-&gt;bool`))),</div>
+<div id="L650">  REPEAT STRIP_TAC THEN ENSURES_INIT_TAC &quot;s0&quot; THEN ENSURES_FINAL_STATE_TAC THEN ASM_SIMP_TAC[]);;</div>
+<div id="L651"></div>
+<div id="L652">let C3B_ENS_PRE = prove</div>
+<div id="L653"> (`!P P&#x27; Q (C:wasmstate-&gt;wasmstate-&gt;bool). (!s. P s ==&gt; P&#x27; s) /\ ensures wasm P&#x27; Q C ==&gt; ensures wasm P Q C`,</div>
+<div id="L654">  REWRITE_TAC[ensures] THEN MESON_TAC[]);;</div>
+<div id="L655"></div>
+<div id="L656">let c3b_L4post = mk_abs(`s:wasmstate`, mk_exists(`m1:int64-&gt;byte`, list_mk_conj</div>
+<div id="L657">   [c3b_bodym `m1:int64-&gt;byte` 964 [] [] []; c3b_F `m1:int64-&gt;byte`; c3b_A `2048` `m1:int64-&gt;byte`]));;</div>
+<div id="L658"></div>
+<div id="L659">let C3B_LOOP4_STMT = mk_forall(`d:num`, list_mk_forall([`k:num`;`m0:int64-&gt;byte`;`t:int32`;`a0:int32`;`a1:int32`;`a2:int32`;`mdl:num-&gt;int32`;`tbl:num-&gt;int32`],</div>
+<div id="L660">   mk_imp(list_mk_conj [`k + d = 2047`; c3b_F `m0:int64-&gt;byte`; c3b_A `k:num` `m0:int64-&gt;byte`],</div>
+<div id="L661">          c3b_ens (c3b_pred 718 [Lp 716] (c3b_trkL4 `k:num`) []) c3b_L4post)));;</div>
+<div id="L662"></div>
+<div id="L663">let C3B_MDL2 = prove(`!mdl m. va1_mdl mdl m ==&gt; read (bytes32 (word 16648)) m = mdl 2`,</div>
+<div id="L664">  REWRITE_TAC[va1_mdl] THEN REPEAT STRIP_TAC THEN FIRST_X_ASSUM(MP_TAC o SPEC `2`) THEN CONV_TAC NUM_REDUCE_CONV THEN SIMP_TAC[]);;</div>
+<div id="L665"></div>
+<div id="L666">let C3B_LOOP4 = prove(C3B_LOOP4_STMT,</div>
+<div id="L667">  INDUCT_TAC THEN (REPEAT GEN_TAC THEN STRIP_TAC THEN</div>
+<div id="L668">  (MATCH_MP_TAC C3B_ENS_TRANS THEN</div>
+<div id="L669">   W(fun (asl,w) -&gt; let it = SPEC_ALL C3B_IT4 in</div>
+<div id="L670">     EXISTS_TAC (rand(rator(snd(dest_imp(concl it))))) THEN CONJ_TAC THENL</div>
+<div id="L671">      [MATCH_MP_TAC it THEN ASM_REWRITE_TAC[] THEN CONJ_TAC THENL [ASM_ARITH_TAC; MATCH_MP_TAC C3B_MDL2 THEN ASM_REWRITE_TAC[]];</div>
+<div id="L672">       ALL_TAC]) THEN</div>
+<div id="L673">   MATCH_MP_TAC C3B_ENS_EXISTS THEN X_GEN_TAC `m1:int64-&gt;byte` THEN</div>
+<div id="L674">   MATCH_MP_TAC C3B_ENS_CASES THEN</div>
+<div id="L675">   EXISTS_TAC (mk_abs(`s:wasmstate`, list_mk_conj [c3b_bodym `m1:int64-&gt;byte` 718 [Lp 716] (c3b_trkL4 `k + 1`) []; `k + 1 &lt; 2048`;</div>
+<div id="L676">                    c3b_F `m1:int64-&gt;byte`; c3b_A `k + 1` `m1:int64-&gt;byte`])) THEN</div>
+<div id="L677">   EXISTS_TAC (mk_abs(`s:wasmstate`, list_mk_conj [c3b_bodym `m1:int64-&gt;byte` 964 [] [] []; `k + 1 = 2048`;</div>
+<div id="L678">                    c3b_F `m1:int64-&gt;byte`; c3b_A `k + 1` `m1:int64-&gt;byte`])) THEN</div>
+<div id="L679">   REPEAT CONJ_TAC THENL</div>
+<div id="L680">    [GEN_TAC THEN CONV_TAC(TOP_DEPTH_CONV BETA_CONV) THEN CONV_TAC TAUT;</div>
+<div id="L681">     ALL_TAC;</div>
+<div id="L682">     MATCH_MP_TAC C3B_ENS_NOW THEN GEN_TAC THEN CONV_TAC(TOP_DEPTH_CONV BETA_CONV) THEN STRIP_TAC THEN</div>
+<div id="L683">     EXISTS_TAC `m1:int64-&gt;byte` THEN FIRST_X_ASSUM(SUBST_ALL_TAC o check (fun th -&gt; concl th = `k + 1 = 2048`)) THEN</div>
+<div id="L684">     ASM_REWRITE_TAC[] THEN REWRITE_TAC[injectivity &quot;wval&quot;; C3B_EX_EQ]]) THEN</div>
+<div id="L685">  (ASM_CASES_TAC `k + 1 &lt; 2048` THENL</div>
+<div id="L686">   [ALL_TAC; MATCH_MP_TAC C3B_ENS_FALSE THEN CONV_TAC(TOP_DEPTH_CONV BETA_CONV) THEN ASM_REWRITE_TAC[]]) THEN</div>
+<div id="L687">  TRY(MATCH_MP_TAC(TAUT `F ==&gt; p`) THEN ASM_ARITH_TAC) THEN</div>
+<div id="L688">  MATCH_MP_TAC C3B_ENS_PRE THEN EXISTS_TAC (mk_abs(`s:wasmstate`, mk_conj(c3b_bodym `m1:int64-&gt;byte` 718 [Lp 716] (c3b_trkL4 `k + 1`) [],</div>
+<div id="L689">     list_mk_conj [c3b_F `m1:int64-&gt;byte`; c3b_A `k + 1` `m1:int64-&gt;byte`]))) THEN</div>
+<div id="L690">  (CONJ_TAC THENL [GEN_TAC THEN CONV_TAC(TOP_DEPTH_CONV BETA_CONV) THEN CONV_TAC TAUT; ALL_TAC]) THEN</div>
+<div id="L691">  MATCH_MP_TAC C3B_ENS_PRE_CONJ THEN STRIP_TAC THEN</div>
+<div id="L692">  FIRST_X_ASSUM(MP_TAC o SPECL [`k + 1`; `m1:int64-&gt;byte`; `t:int32`;`a0:int32`;`a1:int32`;`a2:int32`;`mdl:num-&gt;int32`;`tbl:num-&gt;int32`]) THEN</div>
+<div id="L693">  ASM_REWRITE_TAC[] THEN DISCH_THEN MATCH_MP_TAC THEN ASM_ARITH_TAC));;</div>
+<div id="L694"></div>
+<div id="L695">let c3b_D ii mv = subst [ii,`i:num`; mv,`m:int64-&gt;byte`]</div>
+<div id="L696">  `!j. j &lt; 8 * i ==&gt; read (bytes32 (word (1179648 + 4 * j))) (m:int64-&gt;byte) = word 0`;;</div>
+<div id="L697"></div>
+<div id="L698">let c3b_trkL5 ii = [8, mk_comb(`word:num-&gt;int32`, mk_binop `(+):num-&gt;num-&gt;num` `4294180864` (mk_binop `( * ):num-&gt;num-&gt;num` `32` ii))];;</div>
+<div id="L699"></div>
+<div id="L700">let C3B_EXIT5 = prove(`!i. i &lt; 24576 ==&gt; (word_add (word (4294180864 + 32 * i)) (word 32):int32 = word 0 &lt;=&gt; i + 1 = 24576)`,</div>
+<div id="L701">  REPEAT STRIP_TAC THEN ASM_CASES_TAC `i = 24575` THENL</div>
+<div id="L702">   [ASM_REWRITE_TAC[] THEN CONV_TAC(DEPTH_CONV(NUM_RED_CONV ORELSEC WORD_RED_CONV)) THEN REWRITE_TAC[];</div>
+<div id="L703">    REWRITE_TAC[GSYM WORD_ADD; GSYM VAL_EQ; VAL_WORD_0] THEN</div>
+<div id="L704">    SUBGOAL_THEN `val (word ((4294180864 + 32 * i) + 32):int32) = (4294180864 + 32 * i) + 32` SUBST1_TAC THENL</div>
+<div id="L705">     [MATCH_MP_TAC C3B_VW32 THEN ASM_ARITH_TAC; ASM_ARITH_TAC]]);;</div>
+<div id="L706"></div>
+<div id="L707">let C3B_IT5_STMT = c3b_seg (list_mk_conj [`i &lt; 24576`; c3b_F `m0:int64-&gt;byte`; c3b_A `2048` `m0:int64-&gt;byte`; c3b_D `i:num` `m0:int64-&gt;byte`])</div>
+<div id="L708">   (c3b_pred 972 [Lp 970] (c3b_trkL5 `i:num`) [])</div>
+<div id="L709">   (mk_abs(`s:wasmstate`, mk_exists(`m1:int64-&gt;byte`, list_mk_conj</div>
+<div id="L710">      [mk_disj(mk_conj(c3b_bodym `m1:int64-&gt;byte` 972 [Lp 970] (c3b_trkL5 `i + 1`) [], `i + 1 &lt; 24576`),</div>
+<div id="L711">               mk_conj(c3b_bodym `m1:int64-&gt;byte` 1034 [] [] [], `i + 1 = 24576`));</div>
+<div id="L712">       c3b_F `m1:int64-&gt;byte`; c3b_A `2048` `m1:int64-&gt;byte`; c3b_D `i + 1` `m1:int64-&gt;byte`])));;</div>
+<div id="L713"></div>
+<div id="L714">let C3B_R8_TAC : tactic =</div>
+<div id="L715">  SUBGOAL_THEN `?r. r &lt; 8 /\ j = 8 * i + r` STRIP_ASSUME_TAC THENL</div>
+<div id="L716">   [EXISTS_TAC `j - 8 * i` THEN ASM_ARITH_TAC; ALL_TAC] THEN</div>
+<div id="L717">  FIRST_X_ASSUM SUBST_ALL_TAC THEN</div>
+<div id="L718">  FIRST_X_ASSUM(DISJ_CASES_THEN2 SUBST_ALL_TAC (DISJ_CASES_THEN2 SUBST_ALL_TAC (DISJ_CASES_THEN2 SUBST_ALL_TAC</div>
+<div id="L719">     (DISJ_CASES_THEN2 SUBST_ALL_TAC (DISJ_CASES_THEN2 SUBST_ALL_TAC (DISJ_CASES_THEN2 SUBST_ALL_TAC</div>
+<div id="L720">     (DISJ_CASES_THEN2 SUBST_ALL_TAC SUBST_ALL_TAC)))))) o MATCH_MP (ARITH_RULE `r &lt; 8 ==&gt; r = 0 \/ r = 1 \/ r = 2 \/ r = 3 \/ r = 4 \/ r = 5 \/ r = 6 \/ r = 7`)) THEN</div>
+<div id="L721">  C3B_WNORM_TAC THEN C3B_ROW_TAC;;</div>
+<div id="L722"></div>
+<div id="L723">let C3B_L5MEM_TAC : tactic =</div>
+<div id="L724">  CONJ_TAC THENL [REPEAT CONJ_TAC THEN TRY C3B_ROW_TAC THEN TRY C3B_W32S_TAC THEN ASM_REWRITE_TAC[] THEN NO_TAC; ALL_TAC] THEN</div>
+<div id="L725">  CONJ_TAC THENL</div>
+<div id="L726">   [X_GEN_TAC `j:num` THEN DISCH_TAC THEN C3B_ROW_TAC THEN</div>
+<div id="L727">    FIRST_X_ASSUM(MP_TAC o SPEC `j:num` o check (fun th -&gt; is_forall(concl th) &amp;&amp; can (find_term ((=) `251658`)) (concl th))) THEN</div>
+<div id="L728">    ASM_SIMP_TAC[];</div>
+<div id="L729">    X_GEN_TAC `j:num` THEN DISCH_TAC THEN ASM_CASES_TAC `j &lt; 8 * i` THENL</div>
+<div id="L730">     [C3B_ROW_TAC THEN FIRST_X_ASSUM(MP_TAC o SPEC `j:num` o check (fun th -&gt; is_forall(concl th) &amp;&amp; can (find_term ((=) `1179648`)) (concl th))) THEN</div>
+<div id="L731">      ASM_SIMP_TAC[];</div>
+<div id="L732">      C3B_R8_TAC]];;</div>
+<div id="L733"></div>
+<div id="L734">let C3B_IT5 = prove(C3B_IT5_STMT,</div>
+<div id="L735">  REPEAT GEN_TAC THEN TRY(DISCH_THEN STRIP_ASSUME_TAC) THEN C3B_INIT_TAC THEN</div>
+<div id="L736">  C3B_VFACTS_TAC (map (fun c -&gt; mk_binop `word_add:int32-&gt;int32-&gt;int32` `word (4294180864 + 32 * i):int32` (mk_comb(`word:num-&gt;int32`, mk_small_numeral c))) [1966104;1966096;1966088;1966080]) THEN c3b_time &quot;it5&quot; (C3B_RUN1 C3B_EXEC [972; 1034]) THEN</div>
+<div id="L737">  ENSURES_FINAL_STATE_TAC THEN CONV_TAC(TOP_DEPTH_CONV BETA_CONV) THEN</div>
+<div id="L738">  TRY(CONJ_TAC THENL [ALL_TAC; C3B_VNORM_TAC THEN MONOTONE_MAYCHANGE_TAC]) THEN</div>
+<div id="L739">  C3B_EXISTS_MEM_TAC THEN</div>
+<div id="L740">  RULE_ASSUM_TAC(REWRITE_RULE[MP (SPEC `i:num` C3B_EXIT5) (ASSUME `i &lt; 24576`)]) THEN</div>
+<div id="L741">  C3B_VNORM_TAC THEN REWRITE_TAC[GSYM WORD_ADD] THEN RULE_ASSUM_TAC(REWRITE_RULE[GSYM WORD_ADD]) THEN C3B_WNORM_TAC THEN</div>
+<div id="L742">  (CONJ_TAC THENL [C3B_DISJ_CLOSE_TAC; ALL_TAC]) THEN</div>
+<div id="L743">  c3b_time &quot;l5mem&quot; C3B_L5MEM_TAC);;</div>
+<div id="L744"></div>
+<div id="L745">let c3b_L5post = mk_abs(`s:wasmstate`, mk_exists(`m1:int64-&gt;byte`, list_mk_conj</div>
+<div id="L746">   [c3b_bodym `m1:int64-&gt;byte` 1034 [] [] []; c3b_F `m1:int64-&gt;byte`; c3b_A `2048` `m1:int64-&gt;byte`; c3b_D `24576` `m1:int64-&gt;byte`]));;</div>
+<div id="L747"></div>
+<div id="L748">let C3B_LOOP5_STMT = mk_forall(`d:num`, list_mk_forall([`i:num`;`m0:int64-&gt;byte`;`t:int32`;`a0:int32`;`a1:int32`;`a2:int32`;`mdl:num-&gt;int32`;`tbl:num-&gt;int32`],</div>
+<div id="L749">   mk_imp(list_mk_conj [`i + d = 24575`; c3b_F `m0:int64-&gt;byte`; c3b_A `2048` `m0:int64-&gt;byte`; c3b_D `i:num` `m0:int64-&gt;byte`],</div>
+<div id="L750">          c3b_ens (c3b_pred 972 [Lp 970] (c3b_trkL5 `i:num`) []) c3b_L5post)));;</div>
+<div id="L751"></div>
+<div id="L752">let C3B_LOOP5 = prove(C3B_LOOP5_STMT,</div>
+<div id="L753">  INDUCT_TAC THEN (REPEAT GEN_TAC THEN STRIP_TAC THEN</div>
+<div id="L754">  (MATCH_MP_TAC C3B_ENS_TRANS THEN</div>
+<div id="L755">   W(fun (asl,w) -&gt; let it = SPEC_ALL C3B_IT5 in</div>
+<div id="L756">     EXISTS_TAC (rand(rator(snd(dest_imp(concl it))))) THEN CONJ_TAC THENL</div>
+<div id="L757">      [MATCH_MP_TAC it THEN ASM_REWRITE_TAC[] THEN ASM_ARITH_TAC;</div>
+<div id="L758">       ALL_TAC]) THEN</div>
+<div id="L759">   MATCH_MP_TAC C3B_ENS_EXISTS THEN X_GEN_TAC `m1:int64-&gt;byte` THEN</div>
+<div id="L760">   MATCH_MP_TAC C3B_ENS_CASES THEN</div>
+<div id="L761">   EXISTS_TAC (mk_abs(`s:wasmstate`, list_mk_conj [c3b_bodym `m1:int64-&gt;byte` 972 [Lp 970] (c3b_trkL5 `i + 1`) []; `i + 1 &lt; 24576`;</div>
+<div id="L762">                    c3b_F `m1:int64-&gt;byte`; c3b_A `2048` `m1:int64-&gt;byte`; c3b_D `i + 1` `m1:int64-&gt;byte`])) THEN</div>
+<div id="L763">   EXISTS_TAC (mk_abs(`s:wasmstate`, list_mk_conj [c3b_bodym `m1:int64-&gt;byte` 1034 [] [] []; `i + 1 = 24576`;</div>
+<div id="L764">                    c3b_F `m1:int64-&gt;byte`; c3b_A `2048` `m1:int64-&gt;byte`; c3b_D `i + 1` `m1:int64-&gt;byte`])) THEN</div>
+<div id="L765">   REPEAT CONJ_TAC THENL</div>
+<div id="L766">    [GEN_TAC THEN CONV_TAC(TOP_DEPTH_CONV BETA_CONV) THEN CONV_TAC TAUT;</div>
+<div id="L767">     ALL_TAC;</div>
+<div id="L768">     MATCH_MP_TAC C3B_ENS_NOW THEN GEN_TAC THEN CONV_TAC(TOP_DEPTH_CONV BETA_CONV) THEN STRIP_TAC THEN</div>
+<div id="L769">     EXISTS_TAC `m1:int64-&gt;byte` THEN FIRST_X_ASSUM(SUBST_ALL_TAC o check (fun th -&gt; concl th = `i + 1 = 24576`)) THEN</div>
+<div id="L770">     ASM_REWRITE_TAC[] THEN REWRITE_TAC[injectivity &quot;wval&quot;; C3B_EX_EQ]]) THEN</div>
+<div id="L771">  (ASM_CASES_TAC `i + 1 &lt; 24576` THENL</div>
+<div id="L772">   [ALL_TAC; MATCH_MP_TAC C3B_ENS_FALSE THEN CONV_TAC(TOP_DEPTH_CONV BETA_CONV) THEN ASM_REWRITE_TAC[]]) THEN</div>
+<div id="L773">  TRY(MATCH_MP_TAC(TAUT `F ==&gt; p`) THEN ASM_ARITH_TAC) THEN</div>
+<div id="L774">  MATCH_MP_TAC C3B_ENS_PRE THEN EXISTS_TAC (mk_abs(`s:wasmstate`, mk_conj(c3b_bodym `m1:int64-&gt;byte` 972 [Lp 970] (c3b_trkL5 `i + 1`) [],</div>
+<div id="L775">     list_mk_conj [c3b_F `m1:int64-&gt;byte`; c3b_A `2048` `m1:int64-&gt;byte`; c3b_D `i + 1` `m1:int64-&gt;byte`]))) THEN</div>
+<div id="L776">  (CONJ_TAC THENL [GEN_TAC THEN CONV_TAC(TOP_DEPTH_CONV BETA_CONV) THEN CONV_TAC TAUT; ALL_TAC]) THEN</div>
+<div id="L777">  MATCH_MP_TAC C3B_ENS_PRE_CONJ THEN STRIP_TAC THEN</div>
+<div id="L778">  FIRST_X_ASSUM(MP_TAC o SPECL [`i + 1`; `m1:int64-&gt;byte`; `t:int32`;`a0:int32`;`a1:int32`;`a2:int32`;`mdl:num-&gt;int32`;`tbl:num-&gt;int32`]) THEN</div>
+<div id="L779">  ASM_REWRITE_TAC[] THEN DISCH_THEN MATCH_MP_TAC THEN ASM_ARITH_TAC));;</div>
+<div id="L780"></div>
+<div id="L781">let C3B_L5E = prove(c3b_seg `T` (c3b_pred 964 [] [] []) (c3b_pred 972 [Lp 970] (c3b_trkL5 `0`) []),</div>
+<div id="L782">  C3B_SEG_TAC &quot;l5e&quot; [972]);;</div>
+<div id="L783"></div>
+<div id="L784">let C3B_TAIL_STMT = c3b_seg (list_mk_conj [c3b_F `m0:int64-&gt;byte`; c3b_A `2048` `m0:int64-&gt;byte`; c3b_D `24576` `m0:int64-&gt;byte`])</div>
+<div id="L785">   (c3b_pred 1034 [] [] [])</div>
+<div id="L786">   `\s. read wstatus s = WDone /\ read wstack s = [I32 (word 0)] /\ va1_f25_post t mdl tbl a0 a1 a2 (read wmem s)`;;</div>
+<div id="L787"></div>
+<div id="L788">let C3B_ASPLIT_TAC : tactic =</div>
+<div id="L789">  ASM_CASES_TAC `k &lt; 2048` THENL</div>
+<div id="L790">   [ALL_TAC;</div>
+<div id="L791">    ASM_CASES_TAC `k &lt; 4096` THENL</div>
+<div id="L792">     [SUBGOAL_THEN `?j. j &lt; 2048 /\ k = 2048 + j` STRIP_ASSUME_TAC THENL [EXISTS_TAC `k - 2048` THEN ASM_ARITH_TAC; ALL_TAC];</div>
+<div id="L793">      SUBGOAL_THEN `?j. j &lt; 2048 /\ k = 4096 + j` STRIP_ASSUME_TAC THENL [EXISTS_TAC `k - 4096` THEN ASM_ARITH_TAC; ALL_TAC]] THEN</div>
+<div id="L794">    FIRST_X_ASSUM SUBST_ALL_TAC THEN C3B_WNORM_TAC];;</div>
+<div id="L795"></div>
+<div id="L796">let c3b_asm_with c = fun (asl:(string*thm)list) -&gt; find (fun th -&gt; is_forall(concl th) &amp;&amp; can (find_term ((=) c)) (concl th)) (map snd asl);;</div>
+<div id="L797"></div>
+<div id="L798">let C3B_USEFACT_TAC c v : tactic = fun (asl,w) -&gt;</div>
+<div id="L799">  let th = c3b_asm_with c asl in</div>
+<div id="L800">  (MP_TAC (SPEC v th) THEN ANTS_TAC THENL [C3B_ARITH_TAC; SIMP_TAC[]]) (asl,w);;</div>
+<div id="L801"></div>
+<div id="L802">let C3B_TAILMEM_TAC : tactic =</div>
+<div id="L803">  X_GEN_TAC `k:num` THEN DISCH_TAC THEN C3B_ROW_TAC THEN</div>
+<div id="L804">  FIRST [C3B_USEFACT_TAC `1130496` `k:num` THEN NO_TAC;</div>
+<div id="L805">         C3B_USEFACT_TAC `1179648` `k:num` THEN NO_TAC;</div>
+<div id="L806">         C3B_ASPLIT_TAC THEN FIRST [C3B_USEFACT_TAC `1130496` `k:num` THEN NO_TAC; C3B_USEFACT_TAC `1130496` `j:num` THEN NO_TAC]];;</div>
+<div id="L807"></div>
+<div id="L808">let C3B_TAIL = prove(C3B_TAIL_STMT,</div>
+<div id="L809">  REPEAT GEN_TAC THEN TRY(DISCH_THEN STRIP_ASSUME_TAC) THEN C3B_INIT_TAC THEN C3B_RUN C3B_EXEC [] THEN</div>
+<div id="L810">  ENSURES_FINAL_STATE_TAC THEN ASM_REWRITE_TAC[injectivity &quot;wval&quot;] THEN</div>
+<div id="L811">  REWRITE_TAC[va1_f25_post; va1_w32s] THEN C3B_WNORM_TAC THEN REPEAT CONJ_TAC THEN</div>
+<div id="L812">  TRY(C3B_ROW_TAC THEN ASM_REWRITE_TAC[] THEN NO_TAC) THEN C3B_TAILMEM_TAC);;</div>
+<div id="L813"></div>
+<div id="L814">let C3B_F25_OK_STMT = `!(a0:int32) (a1:int32) (a2:int32) (t:int32) (mdl:num-&gt;int32) (tbl:num-&gt;int32) (decls:wval list).</div>
+<div id="L815">     ~(a0 = word 0 /\ a1 = word 0 /\ a2 = word 0) /\ wasm_decl_vals va1_f25_mc = SOME decls</div>
+<div id="L816">     ==&gt; ensures wasm</div>
+<div id="L817">          (\s. read wcode s = va1_f25_mc /\ read wpc s = word 13 /\ read wstatus s = WRunning /\</div>
+<div id="L818">               read wstack s = [] /\ read wlabels s = [] /\ read warity s = 1 /\</div>
+<div id="L819">               read wmemsize s = 4194304 /\</div>
+<div id="L820">               read wlocals s = wcall_locals [I32 a2; I32 a1; I32 a0] decls /\</div>
+<div id="L821">               va1_tick t (read wmem s) /\ read (bytes32 (word 16396)) (read wmem s) = word 4294967295 /\</div>
+<div id="L822">               va1_mdl mdl (read wmem s) /\ va1_w32s 65536 262144 tbl (read wmem s))</div>
+<div id="L823">          (\s. read wstatus s = WDone /\ read wstack s = [I32 (word 0)] /\</div>
+<div id="L824">               va1_f25_post t mdl tbl a0 a1 a2 (read wmem s))</div>
+<div id="L825">          (MAYCHANGE [wpc] ,, MAYCHANGE [wstack] ,, MAYCHANGE [wlabels] ,, MAYCHANGE [wstatus] ,,</div>
+<div id="L826">           MAYCHANGE [wlocal 0; wlocal 1; wlocal 2; wlocal 3; wlocal 4; wlocal 5; wlocal 6; wlocal 7;</div>
+<div id="L827">                      wlocal 8; wlocal 9; wlocal 10; wlocal 11; wlocal 12; wlocal 13; wlocal 14; wlocal 15] ,,</div>
+<div id="L828">           MAYCHANGE [wmem :&gt; bytes(word 16396,8)] ,, MAYCHANGE [wmem :&gt; bytes(word 16408,96)] ,,</div>
+<div id="L829">           MAYCHANGE [wmem :&gt; bytes(word 1130496,835584)])`;;</div>
+<div id="L830"></div>
+<div id="L831">let c3b_chain ths = end_itlist (fun a b -&gt; MATCH_MP C3B_ENS_TRANS (CONJ a b)) ths;;</div>
+<div id="L832"></div>
+<div id="L833">let c3b_mp asl th = let th1 = SPEC_ALL th in</div>
+<div id="L834">  if is_imp (concl th1) then MP th1 (TAC_PROOF((asl, lhand(concl th1)), ASM_REWRITE_TAC[] THEN TRY C3B_ARITH_TAC)) else th1;;</div>
+<div id="L835"></div>
+<div id="L836">let C3B_ENTRY_LOCALS_TAC : tactic =</div>
+<div id="L837">  FIRST_X_ASSUM(MP_TAC o check (fun th -&gt; can (find_term ((=) `wlocals`)) (concl th))) THEN</div>
+<div id="L838">  FIRST_X_ASSUM(MP_TAC o check (fun th -&gt; can (find_term ((=) `wasm_decl_vals`)) (concl th))) THEN</div>
+<div id="L839">  REWRITE_TAC[C3B_DECLS] THEN DISCH_THEN SUBST1_TAC THEN</div>
+<div id="L840">  REWRITE_TAC[wlocal; READ_COMPONENT_COMPOSE] THEN DISCH_THEN SUBST1_TAC THEN</div>
+<div id="L841">  REWRITE_TAC[wcall_locals; LENGTH; READ_ELEMENT] THEN CONV_TAC(ONCE_DEPTH_CONV EL_CONV) THEN</div>
+<div id="L842">  CONV_TAC(ONCE_DEPTH_CONV NUM_REDUCE_CONV) THEN REWRITE_TAC[] THEN CONV_TAC(ONCE_DEPTH_CONV EL_CONV);;</div>
+<div id="L843"></div>
+<div id="L844">let C3B_A0 = prove(c3b_A `0` `m:int64-&gt;byte`, REWRITE_TAC[LT]);;</div>
+<div id="L845"></div>
+<div id="L846">let C3B_D0 = prove(c3b_D `0` `m:int64-&gt;byte`, REWRITE_TAC[MULT_CLAUSES; LT]);;</div>
+<div id="L847"></div>
+<div id="L848">let c3b_mpi asl th inst = let th1 = INST inst (SPEC_ALL th) in</div>
+<div id="L849">  if is_imp (concl th1) then MP th1 (TAC_PROOF((asl, lhand(concl th1)), ASM_REWRITE_TAC[C3B_A0; C3B_D0] THEN TRY C3B_ARITH_TAC)) else th1;;</div>
+<div id="L850"></div>
+<div id="L851">let c3b_isq32 th = SPEC_ALL (MP (SPEC `32` th) (ARITH_RULE `1 &lt;= 32 /\ 32 &lt;= 32`));;</div>
+<div id="L852"></div>
+<div id="L853">let C3B_STEP_TO_TAC (th:thm) : tactic =</div>
+<div id="L854">  MATCH_MP_TAC C3B_ENS_TRANS THEN EXISTS_TAC (rand(rator(concl th))) THEN CONJ_TAC THENL [ACCEPT_TAC th; ALL_TAC];;</div>
+<div id="L855"></div>
+<div id="L856">let C3B_OPEN_TAC v : tactic = MATCH_MP_TAC C3B_ENS_EXISTS THEN X_GEN_TAC v THEN BETA_TAC THEN MATCH_MP_TAC C3B_ENS_PRE_CONJ THEN STRIP_TAC;;</div>
+<div id="L857"></div>
+<div id="L858">let VA1_F25_OK = prove(C3B_F25_OK_STMT,</div>
+<div id="L859">  REPEAT GEN_TAC THEN STRIP_TAC THEN MATCH_MP_TAC C3B_ENS_PRE THEN</div>
+<div id="L860">  EXISTS_TAC (mk_abs(`s:wasmstate`, mk_exists(`m0:int64-&gt;byte`, list_mk_conj [c3b_body 13 [] c3b_trk0 [];</div>
+<div id="L861">     `read (bytes32 (word 16396)) (m0:int64-&gt;byte) = word 4294967295 /\ ~(word_or (word_or (a1:int32) a0) a2 = word 0) /\</div>
+<div id="L862">      read (bytes32 (word 16392)) m0 = (t:int32) /\ va1_mdl mdl m0 /\ va1_w32s 65536 262144 tbl m0`]))) THEN</div>
+<div id="L863">  (CONJ_TAC THENL</div>
+<div id="L864">   [X_GEN_TAC `s:wasmstate` THEN CONV_TAC(TOP_DEPTH_CONV BETA_CONV) THEN STRIP_TAC THEN EXISTS_TAC `read wmem (s:wasmstate)` THEN</div>
+<div id="L865">    C3B_ENTRY_LOCALS_TAC THEN RULE_ASSUM_TAC(REWRITE_RULE[va1_tick]) THEN ASM_REWRITE_TAC[WORD_OR_EQ_0] THEN ASM_MESON_TAC[];</div>
+<div id="L866">    ALL_TAC]) THEN</div>
+<div id="L867">  C3B_OPEN_TAC `m0:int64-&gt;byte` THEN</div>
+<div id="L868">  W(fun (asl,w) -&gt; C3B_STEP_TO_TAC (c3b_chain [c3b_mp asl C3B_PRO; c3b_isq32 C3B_ISQ1; c3b_mp asl C3B_MID; c3b_isq32 C3B_ISQ2; c3b_mp asl C3B_HDR])) THEN</div>
+<div id="L869">  C3B_OPEN_TAC `m1:int64-&gt;byte` THEN</div>
+<div id="L870">  W(fun (asl,w) -&gt; C3B_STEP_TO_TAC (c3b_mpi asl C3B_LOOP4 [`2047`,`d:num`; `0`,`k:num`; `m1:int64-&gt;byte`,`m0:int64-&gt;byte`])) THEN</div>
+<div id="L871">  C3B_OPEN_TAC `m2:int64-&gt;byte` THEN</div>
+<div id="L872">  W(fun (asl,w) -&gt; C3B_STEP_TO_TAC (c3b_chain [c3b_mpi asl C3B_L5E [`m2:int64-&gt;byte`,`m0:int64-&gt;byte`];</div>
+<div id="L873">                                                 c3b_mpi asl C3B_LOOP5 [`24575`,`d:num`; `0`,`i:num`; `m2:int64-&gt;byte`,`m0:int64-&gt;byte`]])) THEN</div>
+<div id="L874">  C3B_OPEN_TAC `m3:int64-&gt;byte` THEN</div>
+<div id="L875">  W(fun (asl,w) -&gt; ACCEPT_TAC (c3b_mpi asl C3B_TAIL [`m3:int64-&gt;byte`,`m0:int64-&gt;byte`])));;</div>
+</div>
+<p class="dim">Generated by <code>tools/build_trail.py</code> from the published files; checked by <code>tools/check_trail.py</code>.</p>
+</body>
+</html>

@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>chain_c3b_final.ml: Vortex Echo proof trail</title>
+<link rel="icon" href="data:,">
+<style>
+:root { --bg:#fbfbfa; --ink:#1d2129; --dim:#5b6372; --line:#e2e4e8; --acc:#2f5bb7; --code:#f1f2f4; --ok:#1d7a46; --hl:#fff3b8; }
+@media (prefers-color-scheme: dark) { :root { --bg:#0f1116; --ink:#dde1e8; --dim:#9aa3b3; --line:#2a2f3a; --acc:#8fb0ff; --code:#1a1e27; --ok:#5fd08e; --hl:#3d3615; } }
+html { background:var(--bg); color:var(--ink); }
+body { margin:0 auto; max-width:980px; padding:22px 22px 80px; font:16px/1.55 -apple-system,"Segoe UI",Helvetica,Arial,sans-serif; }
+h1 { font-size:26px; line-height:1.25; margin:6px 0 14px; }
+h2 { font-size:20px; margin:34px 0 10px; padding-top:10px; border-top:1px solid var(--line); }
+h3 { font-size:16px; margin:0 0 8px; }
+a { color:var(--acc); }
+code, pre { font:12.5px/1.45 ui-monospace,Menlo,Consolas,monospace; }
+code { background:var(--code); padding:1px 4px; border-radius:4px; }
+pre { background:var(--code); padding:10px 12px; border-radius:8px; overflow:auto; }
+pre code { background:none; padding:0; }
+pre.stmt { white-space:pre-wrap; word-break:break-all; max-height:28em; }
+.crumbs { font-size:14px; color:var(--dim); }
+.walk { display:flex; flex-wrap:wrap; gap:6px; align-items:center; font-size:14px; margin:10px 0 18px; }
+.walk a, .walk span.s { border:1px solid var(--line); border-radius:999px; padding:3px 10px; text-decoration:none; background:var(--code); }
+.walk .arr { color:var(--dim); }
+blockquote { margin:10px 0; padding:8px 14px; border-left:4px solid var(--acc); background:var(--code); border-radius:0 8px 8px 0; }
+.thm { border:1px solid var(--line); border-radius:10px; padding:14px 16px; margin:14px 0; }
+.thm:target, .step:target, .fn:target { outline:3px solid var(--acc); outline-offset:2px; }
+.thm, .step, .fn, .box, h2 { scroll-margin-top:70px; }
+.src div { scroll-margin-top:120px; }
+ol.steps { margin:6px 0 0; padding-left:22px; }
+ol.steps > li { margin:10px 0; }
+ol.steps > li > b { display:inline-block; min-width:5.5em; }
+.ok { color:var(--ok); font-weight:600; }
+.dim { color:var(--dim); font-size:14px; }
+.box { border:1px solid var(--line); border-radius:10px; padding:12px 16px; margin:12px 0; background:var(--code); }
+.box pre { background:var(--bg); }
+.replay { border-color:var(--ok); }
+table { border-collapse:collapse; font-size:13.5px; line-height:1.4; }
+th, td { border:1px solid var(--line); padding:5px 8px; vertical-align:top; text-align:left; }
+th { background:var(--code); }
+.tw { overflow-x:auto; margin:10px 0; }
+.src { font:12.5px/1.5 ui-monospace,Menlo,Consolas,monospace; background:var(--code); border-radius:8px; padding:8px 0; overflow-x:auto; }
+.src { counter-reset:ln; }
+.src div { white-space:pre; padding:0 12px 0 0; counter-increment:ln; }
+.src div::before { content:counter(ln); display:inline-block; width:4.5em; padding-right:1em; text-align:right; color:var(--dim); user-select:none; }
+.src div:target { background:var(--hl); }
+pre.hex { line-height:1.5; }
+.hex .o { color:var(--dim); }
+</style>
+</head>
+<body>
+<p class="crumbs"><a href="../../index.html">Vortex Echo</a> · <a href="../../trail/index.html">Proof trail</a> · <code>chain_c3b_final.ml</code></p>
+<h1><code>chain_c3b_final.ml</code></h1>
+<p>The proof file of receipt <code>chain_c3b_final</code>. Published at <a href="../../proof-tree/tasks/bubble-echo/vortex/proofs/chain_c3b_final.ml"><code>proof-tree/tasks/bubble-echo/vortex/proofs/chain_c3b_final.ml</code></a> (SHA-256 <code>a3d038e99d110096ec42ab6278b4d8853cb7fd0d733f1b2d0cfbcbef5bf0fc10</code>; <a href="https://github.com/BenKnill/vortex-echo/blob/main/proof-tree/tasks/bubble-echo/vortex/proofs/chain_c3b_final.ml">on GitHub</a>). Line N has the anchor <code>#LN</code>.</p>
+<div class="src" data-src="proof-tree/tasks/bubble-echo/vortex/proofs/chain_c3b_final.ml">
+<div id="L1">needs &quot;ve_vort.ml&quot;;;</div>
+<div id="L2">needs &quot;ve_tick.ml&quot;;;</div>
+<div id="L3">needs &quot;ve_vk.ml&quot;;;</div>
+<div id="L4">needs &quot;va1_code.ml&quot;;;</div>
+<div id="L5">needs &quot;va1_seq_final2.ml&quot;;;</div>
+<div id="L6">needs &quot;pop_design_defs.ml&quot;;;</div>
+<div id="L7">needs &quot;pop_design_stmts.ml&quot;;;</div>
+<div id="L8">needs &quot;chain_c3b_dec.ml&quot;;;</div>
+<div id="L9">needs &quot;chain_c3b_defs.ml&quot;;;</div>
+<div id="L10">needs &quot;chain_c3b_l1.ml&quot;;;</div>
+<div id="L11">needs &quot;chain_c3b_pure.ml&quot;;;</div>
+<div id="L12">(* vortex-chain c3b (Claude Opus 5.5, 2026-11-13): spec-locked final leaf for chain_c3b_final.spec</div>
+<div id="L13">   (frozen sha256 296578ea2110e60d0c5a28a5ee7a9c10ab42f1a1e0f49dbe8ce30813208c2a18): re-binds its 9 theorems. *)</div>
+<div id="L14">let VA1_F25_ENTRY = prove(`wasm_entry va1_f25_mc = SOME 13`,</div>
+<div id="L15">  MATCH_ACCEPT_TAC VA1_F25_ENTRY);;</div>
+<div id="L16">let VA1_F25_OK = prove(`!(a0:int32) (a1:int32) (a2:int32) (t:int32) (mdl:num-&gt;int32) (tbl:num-&gt;int32) (decls:wval list).</div>
+<div id="L17">     ~(a0 = word 0 /\ a1 = word 0 /\ a2 = word 0) /\ wasm_decl_vals va1_f25_mc = SOME decls</div>
+<div id="L18">     ==&gt; ensures wasm</div>
+<div id="L19">          (\s. read wcode s = va1_f25_mc /\ read wpc s = word 13 /\ read wstatus s = WRunning /\</div>
+<div id="L20">               read wstack s = [] /\ read wlabels s = [] /\ read warity s = 1 /\</div>
+<div id="L21">               read wmemsize s = 4194304 /\</div>
+<div id="L22">               read wlocals s = wcall_locals [I32 a2; I32 a1; I32 a0] decls /\</div>
+<div id="L23">               va1_tick t (read wmem s) /\ read (bytes32 (word 16396)) (read wmem s) = word 4294967295 /\</div>
+<div id="L24">               va1_mdl mdl (read wmem s) /\ va1_w32s 65536 262144 tbl (read wmem s))</div>
+<div id="L25">          (\s. read wstatus s = WDone /\ read wstack s = [I32 (word 0)] /\</div>
+<div id="L26">               va1_f25_post t mdl tbl a0 a1 a2 (read wmem s))</div>
+<div id="L27">          (MAYCHANGE [wpc] ,, MAYCHANGE [wstack] ,, MAYCHANGE [wlabels] ,, MAYCHANGE [wstatus] ,,</div>
+<div id="L28">           MAYCHANGE [wlocal 0; wlocal 1; wlocal 2; wlocal 3; wlocal 4; wlocal 5; wlocal 6; wlocal 7;</div>
+<div id="L29">                      wlocal 8; wlocal 9; wlocal 10; wlocal 11; wlocal 12; wlocal 13; wlocal 14; wlocal 15] ,,</div>
+<div id="L30">           MAYCHANGE [wmem :&gt; bytes(word 16396,8)] ,, MAYCHANGE [wmem :&gt; bytes(word 16408,96)] ,,</div>
+<div id="L31">           MAYCHANGE [wmem :&gt; bytes(word 1130496,835584)])`,</div>
+<div id="L32">  MATCH_ACCEPT_TAC VA1_F25_OK);;</div>
+<div id="L33">let VA1_F25_GUARD_P = prove(`!(a0:int32) (a1:int32) (a2:int32) (decls:wval list).</div>
+<div id="L34">     wasm_decl_vals va1_f25_mc = SOME decls</div>
+<div id="L35">     ==&gt; ensures wasm</div>
+<div id="L36">          (\s. read wcode s = va1_f25_mc /\ read wpc s = word 13 /\ read wstatus s = WRunning /\</div>
+<div id="L37">               read wstack s = [] /\ read wlabels s = [] /\ read warity s = 1 /\</div>
+<div id="L38">               read wmemsize s = 4194304 /\</div>
+<div id="L39">               read wlocals s = wcall_locals [I32 a2; I32 a1; I32 a0] decls /\</div>
+<div id="L40">               ~(read (bytes32 (word 16396)) (read wmem s) = word 4294967295))</div>
+<div id="L41">          (\s. read wstatus s = WDone /\ read wstack s = [I32 (word 1)])</div>
+<div id="L42">          (MAYCHANGE [wpc] ,, MAYCHANGE [wstack] ,, MAYCHANGE [wlabels] ,, MAYCHANGE [wstatus])`,</div>
+<div id="L43">  MATCH_ACCEPT_TAC VA1_F25_GUARD_P);;</div>
+<div id="L44">let VA1_F25_GUARD_ARGS = prove(`!(decls:wval list).</div>
+<div id="L45">     wasm_decl_vals va1_f25_mc = SOME decls</div>
+<div id="L46">     ==&gt; ensures wasm</div>
+<div id="L47">          (\s. read wcode s = va1_f25_mc /\ read wpc s = word 13 /\ read wstatus s = WRunning /\</div>
+<div id="L48">               read wstack s = [] /\ read wlabels s = [] /\ read warity s = 1 /\</div>
+<div id="L49">               read wmemsize s = 4194304 /\</div>
+<div id="L50">               read wlocals s = wcall_locals [I32 (word 0); I32 (word 0); I32 (word 0)] decls /\</div>
+<div id="L51">               read (bytes32 (word 16396)) (read wmem s) = word 4294967295)</div>
+<div id="L52">          (\s. read wstatus s = WDone /\ read wstack s = [I32 (word 2)])</div>
+<div id="L53">          (MAYCHANGE [wpc] ,, MAYCHANGE [wstack] ,, MAYCHANGE [wlabels] ,, MAYCHANGE [wstatus])`,</div>
+<div id="L54">  MATCH_ACCEPT_TAC VA1_F25_GUARD_ARGS);;</div>
+<div id="L55">let VA1_F25_FRAME_BYTES = prove(`!(s:wasmstate) (s&#x27;:wasmstate).</div>
+<div id="L56">     (MAYCHANGE [wpc] ,, MAYCHANGE [wstack] ,, MAYCHANGE [wlabels] ,, MAYCHANGE [wstatus] ,,</div>
+<div id="L57">      MAYCHANGE [wlocal 0; wlocal 1; wlocal 2; wlocal 3; wlocal 4; wlocal 5; wlocal 6; wlocal 7;</div>
+<div id="L58">                 wlocal 8; wlocal 9; wlocal 10; wlocal 11; wlocal 12; wlocal 13; wlocal 14; wlocal 15] ,,</div>
+<div id="L59">      MAYCHANGE [wmem :&gt; bytes(word 16396,8)] ,, MAYCHANGE [wmem :&gt; bytes(word 16408,96)] ,,</div>
+<div id="L60">      MAYCHANGE [wmem :&gt; bytes(word 1130496,835584)]) s s&#x27;</div>
+<div id="L61">     ==&gt; va1_f25_frame (read wmem s) (read wmem s&#x27;)`,</div>
+<div id="L62">  MATCH_ACCEPT_TAC VA1_F25_FRAME_BYTES);;</div>
+<div id="L63">let VA1_F25_SAT = prove(`!(a0:int32) (a1:int32) (a2:int32) (t:int32) (mdl:num-&gt;int32) (tbl:num-&gt;int32).</div>
+<div id="L64">     ?(decls:wval list) (s:wasmstate).</div>
+<div id="L65">       wasm_decl_vals va1_f25_mc = SOME decls /\</div>
+<div id="L66">       read wcode s = va1_f25_mc /\ read wpc s = word 13 /\ read wstatus s = WRunning /\</div>
+<div id="L67">       read wstack s = [] /\ read wlabels s = [] /\ read warity s = 1 /\</div>
+<div id="L68">       read wmemsize s = 4194304 /\</div>
+<div id="L69">       read wlocals s = wcall_locals [I32 a2; I32 a1; I32 a0] decls /\</div>
+<div id="L70">       va1_tick t (read wmem s) /\ read (bytes32 (word 16396)) (read wmem s) = word 4294967295 /\</div>
+<div id="L71">       va1_mdl mdl (read wmem s) /\ va1_w32s 65536 262144 tbl (read wmem s)`,</div>
+<div id="L72">  MATCH_ACCEPT_TAC VA1_F25_SAT);;</div>
+<div id="L73">let VA1_BAD_PUNCT = prove(`!(mdl:num-&gt;int32) (tbl:num-&gt;int32).</div>
+<div id="L74">     va1_bad mdl tbl ((\k. word 251658), va1_rbinit tbl, (\k. word 0), (\k. word 0), (\k. word 0),</div>
+<div id="L75">                      va1_zpseed mdl, word 0) = word 0`,</div>
+<div id="L76">  MATCH_ACCEPT_TAC VA1_BAD_PUNCT);;</div>
+<div id="L77">let VA1_PUNCT_UNPUNCT_INVERSE = prove(`!(t:int32) (mdl:num-&gt;int32) (tbl:num-&gt;int32) (a0:int32) (a1:int32) (a2:int32)</div>
+<div id="L78">   (m0:int64-&gt;byte) (m1:int64-&gt;byte) (m2:int64-&gt;byte).</div>
+<div id="L79">     ~(t = word 4294967295) /\</div>
+<div id="L80">     va1_punct_clean m0 /\ va1_mdl mdl m0 /\ va1_w32s 65536 262144 tbl m0 /\</div>
+<div id="L81">     va1_f25_post t mdl tbl a0 a1 a2 m1 /\ va1_f25_frame m0 m1 /\</div>
+<div id="L82">     va1_unpunct_post m1 m2 /\ va1_unpunct_frame m1 m2</div>
+<div id="L83">     ==&gt; !a. a &lt; 4194304 ==&gt; read (bytes8 (word a)) m2 = read (bytes8 (word a)) m0`,</div>
+<div id="L84">  MATCH_ACCEPT_TAC VA1_PUNCT_UNPUNCT_INVERSE);;</div>
+<div id="L85">let VA1_PUNCT_UNPUNCT_SAT = prove(`!(t:int32) (mdl:num-&gt;int32) (tbl:num-&gt;int32) (a0:int32) (a1:int32) (a2:int32).</div>
+<div id="L86">     ~(t = word 4294967295)</div>
+<div id="L87">     ==&gt; ?(m0:int64-&gt;byte) (m1:int64-&gt;byte) (m2:int64-&gt;byte).</div>
+<div id="L88">           va1_punct_clean m0 /\ va1_mdl mdl m0 /\ va1_w32s 65536 262144 tbl m0 /\</div>
+<div id="L89">           va1_f25_post t mdl tbl a0 a1 a2 m1 /\ va1_f25_frame m0 m1 /\</div>
+<div id="L90">           va1_unpunct_post m1 m2 /\ va1_unpunct_frame m1 m2`,</div>
+<div id="L91">  MATCH_ACCEPT_TAC VA1_PUNCT_UNPUNCT_SAT);;</div>
+</div>
+<p class="dim">Generated by <code>tools/build_trail.py</code> from the published files; checked by <code>tools/check_trail.py</code>.</p>
+</body>
+</html>

@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>c8b_pop_u.ml: Vortex Echo proof trail</title>
+<link rel="icon" href="data:,">
+<style>
+:root { --bg:#fbfbfa; --ink:#1d2129; --dim:#5b6372; --line:#e2e4e8; --acc:#2f5bb7; --code:#f1f2f4; --ok:#1d7a46; --hl:#fff3b8; }
+@media (prefers-color-scheme: dark) { :root { --bg:#0f1116; --ink:#dde1e8; --dim:#9aa3b3; --line:#2a2f3a; --acc:#8fb0ff; --code:#1a1e27; --ok:#5fd08e; --hl:#3d3615; } }
+html { background:var(--bg); color:var(--ink); }
+body { margin:0 auto; max-width:980px; padding:22px 22px 80px; font:16px/1.55 -apple-system,"Segoe UI",Helvetica,Arial,sans-serif; }
+h1 { font-size:26px; line-height:1.25; margin:6px 0 14px; }
+h2 { font-size:20px; margin:34px 0 10px; padding-top:10px; border-top:1px solid var(--line); }
+h3 { font-size:16px; margin:0 0 8px; }
+a { color:var(--acc); }
+code, pre { font:12.5px/1.45 ui-monospace,Menlo,Consolas,monospace; }
+code { background:var(--code); padding:1px 4px; border-radius:4px; }
+pre { background:var(--code); padding:10px 12px; border-radius:8px; overflow:auto; }
+pre code { background:none; padding:0; }
+pre.stmt { white-space:pre-wrap; word-break:break-all; max-height:28em; }
+.crumbs { font-size:14px; color:var(--dim); }
+.walk { display:flex; flex-wrap:wrap; gap:6px; align-items:center; font-size:14px; margin:10px 0 18px; }
+.walk a, .walk span.s { border:1px solid var(--line); border-radius:999px; padding:3px 10px; text-decoration:none; background:var(--code); }
+.walk .arr { color:var(--dim); }
+blockquote { margin:10px 0; padding:8px 14px; border-left:4px solid var(--acc); background:var(--code); border-radius:0 8px 8px 0; }
+.thm { border:1px solid var(--line); border-radius:10px; padding:14px 16px; margin:14px 0; }
+.thm:target, .step:target, .fn:target { outline:3px solid var(--acc); outline-offset:2px; }
+.thm, .step, .fn, .box, h2 { scroll-margin-top:70px; }
+.src div { scroll-margin-top:120px; }
+ol.steps { margin:6px 0 0; padding-left:22px; }
+ol.steps > li { margin:10px 0; }
+ol.steps > li > b { display:inline-block; min-width:5.5em; }
+.ok { color:var(--ok); font-weight:600; }
+.dim { color:var(--dim); font-size:14px; }
+.box { border:1px solid var(--line); border-radius:10px; padding:12px 16px; margin:12px 0; background:var(--code); }
+.box pre { background:var(--bg); }
+.replay { border-color:var(--ok); }
+table { border-collapse:collapse; font-size:13.5px; line-height:1.4; }
+th, td { border:1px solid var(--line); padding:5px 8px; vertical-align:top; text-align:left; }
+th { background:var(--code); }
+.tw { overflow-x:auto; margin:10px 0; }
+.src { font:12.5px/1.5 ui-monospace,Menlo,Consolas,monospace; background:var(--code); border-radius:8px; padding:8px 0; overflow-x:auto; }
+.src { counter-reset:ln; }
+.src div { white-space:pre; padding:0 12px 0 0; counter-increment:ln; }
+.src div::before { content:counter(ln); display:inline-block; width:4.5em; padding-right:1em; text-align:right; color:var(--dim); user-select:none; }
+.src div:target { background:var(--hl); }
+pre.hex { line-height:1.5; }
+.hex .o { color:var(--dim); }
+</style>
+</head>
+<body>
+<p class="crumbs"><a href="../../index.html">Vortex Echo</a> · <a href="../../trail/index.html">Proof trail</a> · <code>c8b_pop_u.ml</code></p>
+<h1><code>c8b_pop_u.ml</code></h1>
+<p>A file loaded by a proof run. Published at <a href="../../proof-tree/tasks/bubble-echo/vortex/proofs/c8b_pop_u.ml"><code>proof-tree/tasks/bubble-echo/vortex/proofs/c8b_pop_u.ml</code></a> (SHA-256 <code>108e7679db73a7462c615625644441593dca20a486ba520220d519c9cbb73378</code>; <a href="https://github.com/BenKnill/vortex-echo/blob/main/proof-tree/tasks/bubble-echo/vortex/proofs/c8b_pop_u.ml">on GitHub</a>). Line N has the anchor <code>#LN</code>.</p>
+<div class="src" data-src="proof-tree/tasks/bubble-echo/vortex/proofs/c8b_pop_u.ml">
+<div id="L1">(* ========================================================================= *)</div>
+<div id="L2">(* C8b rows B3-B6 (lane vortex-chain-20261111-142342, role c8b, Claude Opus  *)</div>
+<div id="L3">(* 5.5, 2026-11-14): the pop ticks keep the unused vortex words.            *)</div>
+<div id="L4">(* B3 VA1P_CALL_F9_U / F10_U: pop_q0_calls.ml&#x27;s Q0_CALL_TAC on the B1       *)</div>
+<div id="L5">(*    leaves; every other call-site lemma the R2/R3 runs use gets the       *)</div>
+<div id="L6">(*    conjunct by C8B_GHOST_RULE (their frames avoid [1114112,1130496)).    *)</div>
+<div id="L7">(* B4 VA1_TICK_POP_INVERSE_COND_U, B5 VA1_TICK_FORWARD_POP_COND_U: the runs *)</div>
+<div id="L8">(*    of pop_q1_untick.ml / pop_q2_forward.ml with the _U call lemmas.      *)</div>
+<div id="L9">(* B6 R4, R4b, R4c: the MATCH_MP_TAC chains of pop_r5_r4c_final.ml.          *)</div>
+<div id="L10">(* ========================================================================= *)</div>
+<div id="L11"></div>
+<div id="L12">(* the ghosted form of a statement !vs. A ==&gt; ensures step P Q C *)</div>
+<div id="L13">let c8b_ghost_tm (tm:term) =</div>
+<div id="L14">  let vs, b = strip_forall tm in</div>
+<div id="L15">  let n = find (fun v -&gt; fst(dest_var v) = &quot;N&quot;) vs in</div>
+<div id="L16">  let uw = `uw:(num-&gt;int32)#(num-&gt;int32)` in</div>
+<div id="L17">  let a, e = dest_imp b in</div>
+<div id="L18">  let ens, args = strip_comb e in</div>
+<div id="L19">  let [step;p;q;c] = args in</div>
+<div id="L20">  let addc lam = let s,bd = dest_abs lam in</div>
+<div id="L21">    mk_abs(s, mk_conj(bd, list_mk_comb(`va1_vabu`, [n; uw; mk_comb(`read wmem`, s)]))) in</div>
+<div id="L22">  list_mk_forall(vs @ [uw], mk_imp(a, list_mk_comb(ens, [step; addc p; addc q; c])));;</div>
+<div id="L23"></div>
+<div id="L24">(* ---- B3 ---- *)</div>
+<div id="L25">let Q0_VORT_LEAF_U (th:thm) =</div>
+<div id="L26">  let th1 = MP (SPEC `ve_vk` th) VE_VK_OK in</div>
+<div id="L27">  let th2 = SPECL [`N:num`; `mdl:num-&gt;int32`; `FST (x:(num-&gt;int32)#(num-&gt;int32))`;</div>
+<div id="L28">                   `SND (x:(num-&gt;int32)#(num-&gt;int32))`; `uw:(num-&gt;int32)#(num-&gt;int32)`] th1 in</div>
+<div id="L29">  MP th2 (end_itlist CONJ (map ASSUME</div>
+<div id="L30">    [`(mdl:num-&gt;int32) 1 = word N`; `1 &lt;= N`; `N &lt;= 640`]));;</div>
+<div id="L31"></div>
+<div id="L32">let VA1P_CALL_F9_U = prove(parse_term c8b_spec_VA1P_CALL_F9_U,</div>
+<div id="L33">  REWRITE_TAC[VA1_F9_IS_VORT_APPLY] THEN</div>
+<div id="L34">  Q0_CALL_TAC (Q0_VORT_LEAF_U VE_VORT_APPLY_FREDKIN_U) VE_VORT_APPLY_CALLEE `9` `0` `0`);;</div>
+<div id="L35"></div>
+<div id="L36">let VA1P_CALL_F10_U = prove(parse_term c8b_spec_VA1P_CALL_F10_U,</div>
+<div id="L37">  REWRITE_TAC[VA1_F10_IS_VORT_UNAPPLY] THEN</div>
+<div id="L38">  Q0_CALL_TAC (Q0_VORT_LEAF_U VE_VORT_UNAPPLY_FREDKIN_U) VE_VORT_UNAPPLY_CALLEE `10` `0` `0`);;</div>
+<div id="L39"></div>
+<div id="L40">let VA1P_CALL_F11_U = C8B_GHOST_RULE VA1P_CALL_F11;;</div>
+<div id="L41">let VA1P_CALL_F12_U = C8B_GHOST_RULE VA1P_CALL_F12;;</div>
+<div id="L42">let VA1P_CALL_F13_U = C8B_GHOST_RULE VA1P_CALL_F13;;</div>
+<div id="L43">let VA1P_CALL_F14_U = C8B_GHOST_RULE VA1P_CALL_F14;;</div>
+<div id="L44">let VA1P_CALL_F15_U = C8B_GHOST_RULE VA1P_CALL_F15;;</div>
+<div id="L45">let VA1P_CALL_F16_U = C8B_GHOST_RULE VA1P_CALL_F16;;</div>
+<div id="L46">let VA1P_CALL_F17_U = C8B_GHOST_RULE VA1P_CALL_F17;;</div>
+<div id="L47">let VA1P_CALL_F18_U = C8B_GHOST_RULE VA1P_CALL_F18;;</div>
+<div id="L48">let VA1P_CALL_F19_U = C8B_GHOST_RULE VA1P_CALL_F19;;</div>
+<div id="L49">let VA1P_CALL_F20_U = C8B_GHOST_RULE VA1P_CALL_F20;;</div>
+<div id="L50">let VA1P_CALL_F21_U = C8B_GHOST_RULE VA1P_CALL_F21;;</div>
+<div id="L51">let VA1P_CALL_F22_U = C8B_GHOST_RULE VA1P_CALL_F22;;</div>
+<div id="L52">let VA1P_CALL_F23_U = C8B_GHOST_RULE VA1P_CALL_F23;;</div>
+<div id="L53">let VA1P_CALL_F24_U = C8B_GHOST_RULE VA1P_CALL_F24;;</div>
+<div id="L54">let VA1P_CALL_F27_U = C8B_GHOST_RULE VA1P_CALL_F27;;</div>
+<div id="L55">let VA1P_CALL_F28_U = C8B_GHOST_RULE VA1P_CALL_F28;;</div>
+<div id="L56"></div>
+<div id="L57">(* ---- B4: backward pop ---- *)</div>
+<div id="L58">let VA1Q1_CALLS_U =</div>
+<div id="L59">  [10,VA1P_CALL_F10_U; 12,VA1P_CALL_F12_U; 14,VA1P_CALL_F14_U; 16,VA1P_CALL_F16_U;</div>
+<div id="L60">   18,VA1P_CALL_F18_U; 20,VA1P_CALL_F20_U; 22,VA1P_CALL_F22_U; 24,VA1P_CALL_F24_U;</div>
+<div id="L61">   28,VA1P_CALL_F28_U];;</div>
+<div id="L62"></div>
+<div id="L63">let VA1Q1_TICK_BACKWARD_POP_U = prove</div>
+<div id="L64"> (c8b_ghost_tm va1q1_gen_tm,</div>
+<div id="L65">  REPEAT GEN_TAC THEN STRIP_TAC THEN</div>
+<div id="L66">  FIRST_ASSUM(STRIP_ASSUME_TAC o MATCH_MP VA1_WINDOW_FACTS) THEN</div>
+<div id="L67">  ENSURES_INIT_TAC &quot;s0&quot; THEN VA1Q1_MEMNAME_TAC true &quot;mm0&quot; THEN</div>
+<div id="L68">  VA1Q1_RUN_TAC VA1_TICK_BACKWARD_EXEC VA1Q1_CALLS_U [] THEN</div>
+<div id="L69">  ENSURES_FINAL_STATE_TAC THEN ASM_REWRITE_TAC[] THEN</div>
+<div id="L70">  VA1Q1_CLOSE_TAC);;</div>
+<div id="L71"></div>
+<div id="L72">let VA1_TICK_POP_INVERSE_COND_U = prove(parse_term c8b_spec_VA1_TICK_POP_INVERSE_COND_U,</div>
+<div id="L73">  REPEAT GEN_TAC THEN STRIP_TAC THEN</div>
+<div id="L74">  FIRST_ASSUM(STRIP_ASSUME_TAC o MATCH_MP VA1_WINDOW_FACTS) THEN</div>
+<div id="L75">  SUBGOAL_THEN `val (word_add nd (word (LENGTH (L:(num-&gt;int32)list))):int32) = val nd + LENGTH L`</div>
+<div id="L76">    ASSUME_TAC THENL [MATCH_MP_TAC VA1Q1_VAL_ADD THEN ASM_REWRITE_TAC[]; ALL_TAC] THEN</div>
+<div id="L77">  SUBGOAL_THEN</div>
+<div id="L78">   `!zq&#x27; zp&#x27;. va1_unb (word_add t (word 1)) (val nd + LENGTH L)</div>
+<div id="L79">                (va1_push L (va1_drop_fwd nd di,zq&#x27;,zp&#x27;,nd)) =</div>
+<div id="L80">              (va1_drop_fwd nd di,zq&#x27;,zp&#x27;,nd)`</div>
+<div id="L81">    ASSUME_TAC THENL</div>
+<div id="L82">   [REPEAT GEN_TAC THEN MATCH_MP_TAC VA1_PUSH_UNB_INVERSE THEN</div>
+<div id="L83">    ASM_SIMP_TAC[VA1_LOG_OK_DROP]; ALL_TAC] THEN</div>
+<div id="L84">  W(fun (asl,w) -&gt;</div>
+<div id="L85">     let _,[_;pre;_;_] = strip_comb w in</div>
+<div id="L86">     let st = find (fun c -&gt; va1q1_head c = &quot;va1_st&quot;) (conjuncts(snd(dest_abs pre))) in</div>
+<div id="L87">     let _,stargs = strip_comb st in</div>
+<div id="L88">     let y = el 5 stargs and pf = el 8 stargs in</div>
+<div id="L89">     let rec tl t = if is_pair t then let a,b = dest_pair t in a::tl b else [t] in</div>
+<div id="L90">     let projs = tl(rand(concl(ISPEC pf VA1Q1_TUPLE8))) in</div>
+<div id="L91">     let fv = frees w @ freesl(map (concl o snd) asl) in</div>
+<div id="L92">     let gv n = find (fun v -&gt; fst(dest_var v) = n) fv in</div>
+<div id="L93">     let inst = map gv [&quot;CK&quot;;&quot;JK&quot;;&quot;fs&quot;;&quot;gl&quot;;&quot;t&quot;;&quot;p&quot;;&quot;ap&quot;;&quot;mdl&quot;;&quot;N&quot;] @ [y] @</div>
+<div id="L94">                map gv [&quot;hp&quot;;&quot;tbl&quot;] @ projs @ [gv &quot;uw&quot;] in</div>
+<div id="L95">     MP_TAC(SPECL inst VA1Q1_TICK_BACKWARD_POP_U)) THEN</div>
+<div id="L96">  ANTS_TAC THENL</div>
+<div id="L97">   [ASM_REWRITE_TAC[] THEN</div>
+<div id="L98">    REWRITE_TAC[va1_pop_fwd; LET_DEF; LET_END_DEF] THEN</div>
+<div id="L99">    CONV_TAC(TOP_DEPTH_CONV BETA_CONV) THEN REWRITE_TAC[FST; SND; VA1_PUSH_ND] THEN</div>
+<div id="L100">    ASM_REWRITE_TAC[];</div>
+<div id="L101">    ALL_TAC] THEN</div>
+<div id="L102">  DISCH_THEN(fun th -&gt;</div>
+<div id="L103">    let _,[_;p0;q0;_] = strip_comb(concl th) in</div>
+<div id="L104">    MATCH_MP_TAC ENSURES_PREPOSTCONDITION_THM THEN</div>
+<div id="L105">    MAP_EVERY EXISTS_TAC [p0;q0] THEN</div>
+<div id="L106">    CONJ_TAC THENL [ALL_TAC; CONJ_TAC THENL [ALL_TAC; ACCEPT_TAC th]]) THENL</div>
+<div id="L107">   [GEN_TAC THEN BETA_TAC THEN STRIP_TAC THEN ASM_REWRITE_TAC[PAIR];</div>
+<div id="L108">    GEN_TAC THEN BETA_TAC THEN STRIP_TAC THEN ASM_REWRITE_TAC[] THEN</div>
+<div id="L109">    FIRST_X_ASSUM(MP_TAC o check (fun th -&gt; va1q1_head(concl th) = &quot;va1_st&quot;)) THEN</div>
+<div id="L110">    REWRITE_TAC[FREDKIN_STEP_INVERSE] THEN</div>
+<div id="L111">    MATCH_MP_TAC EQ_IMP THEN AP_THM_TAC THEN AP_TERM_TAC THEN</div>
+<div id="L112">    REWRITE_TAC[va1_pop_fwd; LET_DEF; LET_END_DEF] THEN</div>
+<div id="L113">    CONV_TAC(TOP_DEPTH_CONV BETA_CONV) THEN</div>
+<div id="L114">    REWRITE_TAC[FST; SND; PAIR] THEN</div>
+<div id="L115">    ASM_REWRITE_TAC[VA1_PUSH_ND; FST; SND; PAIR; VA1_DROP_INVERSE;</div>
+<div id="L116">                    FREDKIN_STEP_INVERSE; KICK_DRIFT_INVERSE; KICK_DRIFT_STEPS_INVERSE]]);;</div>
+<div id="L117"></div>
+<div id="L118">(* ---- B5: forward pop ---- *)</div>
+<div id="L119">let Q2_CALLS_U =</div>
+<div id="L120">  [15,VA1P_CALL_F15_U; 21,VA1P_CALL_F21_U; 23,VA1P_CALL_F23_U; 17,VA1P_CALL_F17_U;</div>
+<div id="L121">   19,VA1P_CALL_F19_U; 11,VA1P_CALL_F11_U; 13,VA1P_CALL_F13_U; 9,VA1P_CALL_F9_U;</div>
+<div id="L122">   27,VA1P_CALL_F27_U];;</div>
+<div id="L123"></div>
+<div id="L124">let VA1_TICK_FORWARD_POP_COND_U = prove</div>
+<div id="L125"> (parse_term c8b_spec_VA1_TICK_FORWARD_POP_COND_U,</div>
+<div id="L126">  REPEAT GEN_TAC THEN DISCH_THEN(REPEAT_TCL CONJUNCTS_THEN ASSUME_TAC) THEN</div>
+<div id="L127">  FIRST_ASSUM(STRIP_ASSUME_TAC o MATCH_MP VA1_WINDOW_FACTS) THEN</div>
+<div id="L128">  FIRST_ASSUM(ASSUME_TAC o MATCH_MP VA1_LOG_OK_DROP) THEN</div>
+<div id="L129">  ENSURES_INIT_TAC &quot;s0&quot; THEN Q2_MEMNAME_TAC &quot;mm0&quot; THEN</div>
+<div id="L130">  Q2_RUN_TAC VA1_TICK_FORWARD_EXEC Q2_CALLS_U [] THEN</div>
+<div id="L131">  ENSURES_FINAL_STATE_TAC THEN</div>
+<div id="L132">  ASM_REWRITE_TAC[] THEN</div>
+<div id="L133">  EXISTS_TAC `L:(num-&gt;int32)list` THEN ASM_REWRITE_TAC[] THEN</div>
+<div id="L134">  W(fun (asl,w) -&gt;</div>
+<div id="L135">    let th = find (fun th -&gt; let c = concl th in</div>
+<div id="L136">               q2_is_head &quot;va1_st&quot; c &amp;&amp; rand c = rand w) (map snd asl) in</div>
+<div id="L137">    let ps = el 8 (snd(strip_comb(concl th))) in</div>
+<div id="L138">    let lhs = el 8 (snd(strip_comb w)) in</div>
+<div id="L139">    SUBGOAL_THEN (mk_eq(lhs,ps)) SUBST1_TAC THENL</div>
+<div id="L140">     [Q2_FINAL_TAC; ACCEPT_TAC th]));;</div>
+<div id="L141"></div>
+<div id="L142">(* ---- B6: R4, R4b, R4c ---- *)</div>
+<div id="L143">let VA1_TICK_POP_INVERSE_U = prove(parse_term c8b_spec_VA1_TICK_POP_INVERSE_U,</div>
+<div id="L144">  REPEAT GEN_TAC THEN STRIP_TAC THEN</div>
+<div id="L145">  MATCH_MP_TAC VA1_TICK_POP_INVERSE_COND_U THEN</div>
+<div id="L146">  ASM_REWRITE_TAC POP_Q3_R1_OKS);;</div>
+<div id="L147"></div>
+<div id="L148">let VA1_TICK_FORWARD_POP_U = prove(parse_term c8b_spec_VA1_TICK_FORWARD_POP_U,</div>
+<div id="L149">  REPEAT GEN_TAC THEN STRIP_TAC THEN</div>
+<div id="L150">  MATCH_MP_TAC VA1_TICK_FORWARD_POP_COND_U THEN</div>
+<div id="L151">  ASM_REWRITE_TAC POP_Q3_R1_OKS);;</div>
+<div id="L152"></div>
+<div id="L153">let VA1_TICK_POP_INVERSE_R5_U = prove(parse_term c8b_spec_VA1_TICK_POP_INVERSE_R5_U,</div>
+<div id="L154">  REPEAT GEN_TAC THEN STRIP_TAC THEN</div>
+<div id="L155">  MATCH_MP_TAC VA1_TICK_POP_INVERSE_U THEN</div>
+<div id="L156">  ASM_REWRITE_TAC[VA1_CORRK_OK; VA1_JIGK_OK]);;</div>
+<div id="L157"></div>
+<div id="L158">let VA1_TICK_FORWARD_POP_R5_U = prove(parse_term c8b_spec_VA1_TICK_FORWARD_POP_R5_U,</div>
+<div id="L159">  REPEAT GEN_TAC THEN STRIP_TAC THEN</div>
+<div id="L160">  MATCH_MP_TAC VA1_TICK_FORWARD_POP_U THEN</div>
+<div id="L161">  ASM_REWRITE_TAC[VA1_CORRK_OK; VA1_JIGK_OK]);;</div>
+<div id="L162"></div>
+<div id="L163">let VA1_TICK_FORWARD_POP_R5C_U = prove(parse_term c8b_spec_VA1_TICK_FORWARD_POP_R5C_U,</div>
+<div id="L164">  REPEAT GEN_TAC THEN STRIP_TAC THEN</div>
+<div id="L165">  MATCH_MP_TAC VA1_TICK_FORWARD_POP_R5_U THEN</div>
+<div id="L166">  ASM_REWRITE_TAC[VA1_BIRTH_OK]);;</div>
+</div>
+<p class="dim">Generated by <code>tools/build_trail.py</code> from the published files; checked by <code>tools/check_trail.py</code>.</p>
+</body>
+</html>

@@ -1,0 +1,1414 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>chain_c5p_frames.ml: Vortex Echo proof trail</title>
+<link rel="icon" href="data:,">
+<style>
+:root { --bg:#fbfbfa; --ink:#1d2129; --dim:#5b6372; --line:#e2e4e8; --acc:#2f5bb7; --code:#f1f2f4; --ok:#1d7a46; --hl:#fff3b8; }
+@media (prefers-color-scheme: dark) { :root { --bg:#0f1116; --ink:#dde1e8; --dim:#9aa3b3; --line:#2a2f3a; --acc:#8fb0ff; --code:#1a1e27; --ok:#5fd08e; --hl:#3d3615; } }
+html { background:var(--bg); color:var(--ink); }
+body { margin:0 auto; max-width:980px; padding:22px 22px 80px; font:16px/1.55 -apple-system,"Segoe UI",Helvetica,Arial,sans-serif; }
+h1 { font-size:26px; line-height:1.25; margin:6px 0 14px; }
+h2 { font-size:20px; margin:34px 0 10px; padding-top:10px; border-top:1px solid var(--line); }
+h3 { font-size:16px; margin:0 0 8px; }
+a { color:var(--acc); }
+code, pre { font:12.5px/1.45 ui-monospace,Menlo,Consolas,monospace; }
+code { background:var(--code); padding:1px 4px; border-radius:4px; }
+pre { background:var(--code); padding:10px 12px; border-radius:8px; overflow:auto; }
+pre code { background:none; padding:0; }
+pre.stmt { white-space:pre-wrap; word-break:break-all; max-height:28em; }
+.crumbs { font-size:14px; color:var(--dim); }
+.walk { display:flex; flex-wrap:wrap; gap:6px; align-items:center; font-size:14px; margin:10px 0 18px; }
+.walk a, .walk span.s { border:1px solid var(--line); border-radius:999px; padding:3px 10px; text-decoration:none; background:var(--code); }
+.walk .arr { color:var(--dim); }
+blockquote { margin:10px 0; padding:8px 14px; border-left:4px solid var(--acc); background:var(--code); border-radius:0 8px 8px 0; }
+.thm { border:1px solid var(--line); border-radius:10px; padding:14px 16px; margin:14px 0; }
+.thm:target, .step:target, .fn:target { outline:3px solid var(--acc); outline-offset:2px; }
+.thm, .step, .fn, .box, h2 { scroll-margin-top:70px; }
+.src div { scroll-margin-top:120px; }
+ol.steps { margin:6px 0 0; padding-left:22px; }
+ol.steps > li { margin:10px 0; }
+ol.steps > li > b { display:inline-block; min-width:5.5em; }
+.ok { color:var(--ok); font-weight:600; }
+.dim { color:var(--dim); font-size:14px; }
+.box { border:1px solid var(--line); border-radius:10px; padding:12px 16px; margin:12px 0; background:var(--code); }
+.box pre { background:var(--bg); }
+.replay { border-color:var(--ok); }
+table { border-collapse:collapse; font-size:13.5px; line-height:1.4; }
+th, td { border:1px solid var(--line); padding:5px 8px; vertical-align:top; text-align:left; }
+th { background:var(--code); }
+.tw { overflow-x:auto; margin:10px 0; }
+.src { font:12.5px/1.5 ui-monospace,Menlo,Consolas,monospace; background:var(--code); border-radius:8px; padding:8px 0; overflow-x:auto; }
+.src { counter-reset:ln; }
+.src div { white-space:pre; padding:0 12px 0 0; counter-increment:ln; }
+.src div::before { content:counter(ln); display:inline-block; width:4.5em; padding-right:1em; text-align:right; color:var(--dim); user-select:none; }
+.src div:target { background:var(--hl); }
+pre.hex { line-height:1.5; }
+.hex .o { color:var(--dim); }
+</style>
+</head>
+<body>
+<p class="crumbs"><a href="../../index.html">Vortex Echo</a> · <a href="../../trail/index.html">Proof trail</a> · <code>chain_c5p_frames.ml</code></p>
+<h1><code>chain_c5p_frames.ml</code></h1>
+<p>A file loaded by a proof run. Published at <a href="../../proof-tree/tasks/bubble-echo/vortex/proofs/chain_c5p_frames.ml"><code>proof-tree/tasks/bubble-echo/vortex/proofs/chain_c5p_frames.ml</code></a> (SHA-256 <code>f809937836ffbb129c8d43f433a51168fcc26c80722bd534bccf0f526f57c41e</code>; <a href="https://github.com/BenKnill/vortex-echo/blob/main/proof-tree/tasks/bubble-echo/vortex/proofs/chain_c5p_frames.ml">on GitHub</a>). Line N has the anchor <code>#LN</code>.</p>
+<div class="src" data-src="proof-tree/tasks/bubble-echo/vortex/proofs/chain_c5p_frames.ml">
+<div id="L1">(* Vortex chain rung C5&#x27; (lane vortex-chain-20261111-142342 c5p, Claude Opus 5.5, 2026-11-13): the G1 shim.        *)</div>
+<div id="L2">(* Makes hol-hearth main&#x27;s explicit-frame call model (wasmf, wasmn, wfsum, the wasmc -&gt; wasmn transfer H2, the      *)</div>
+<div id="L3">(* global-restore rule G3 and the H4/H5 tactics) available on the vortex chain WITHOUT a Hearth change and WITHOUT *)</div>
+<div id="L4">(* replacing the vortex prefix copy of wasm_call.ml (091a9057), which would re-key the whole chain.                *)</div>
+<div id="L5">(* Content, in order, all VERBATIM from hol-hearth main 6adb41ce as deployed on the shared runtime:                *)</div>
+<div id="L6">(*   (1) wasm/proofs/wasm_call.ml (sha256 11d1dd37) lines 468-589: WASMC_MEM_UPDATE_TAC, WASMC_GEN_STATE_TAC,      *)</div>
+<div id="L7">(*       WASMC_CALL0_SITE_TAC (OCaml tactics only: no constant, no theorem). Main&#x27;s lines 1-467 define exactly the *)</div>
+<div id="L8">(*       same constants and theorems as the vortex copy (lines 1-423 identical; 424-467 differ only in two tactics *)</div>
+<div id="L9">(*       that add WASM_COMPACT_HYPS_TAC, which this shim does not redefine).                                         *)</div>
+<div id="L10">(*   (2) wasm/proofs/wasm_frames.ml (sha256 25eb21a4) lines 113-1327 (everything after its two needs lines).       *)</div>
+<div id="L11">(* Every theorem below is proved by the kernel when this file loads; the file adds no axiom.                        *)</div>
+<div id="L12">needs &quot;wasm/proofs/wasm_tactics.ml&quot;;;</div>
+<div id="L13">needs &quot;wasm_call.ml&quot;;;</div>
+<div id="L14"></div>
+<div id="L15">(* ======== (1) main wasm_call.ml lines 468-589 ======== *)</div>
+<div id="L16"></div>
+<div id="L17">(* ------------------------------------------------------------------------- *)</div>
+<div id="L18">(* A call site as a caller-level ensures lemma (0 params). Goal shape, after *)</div>
+<div id="L19">(* the lemma&#x27;s hypotheses are stripped into the assumptions:                 *)</div>
+<div id="L20">(*   ensures (wasmc fs) (\s. read wcode s = mc /\ read wpc s = word p /\ .. ) *)</div>
+<div id="L21">(*                      (\s. .. read wpc s = word (p + n) ..) (frame)        *)</div>
+<div id="L22">(* with fs f = (code,0,0), p &lt; 2 EXP 64 and wasm_decode mc p = SOME          *)</div>
+<div id="L23">(* (Wcall f,n) among the assumptions and read wmemsize / read wglobals facts *)</div>
+<div id="L24">(* in the precondition. lth = |- ensures wasm P Q C (the callee leaf,        *)</div>
+<div id="L25">(* instantiated), cth = WASM_CALLEE_RULE code_def. The callee&#x27;s MAYCHANGE    *)</div>
+<div id="L26">(* frame is expanded into a write chain; the caller&#x27;s next state is          *)</div>
+<div id="L27">(* write wpc .. (write (wmem :&gt; d) .. s0), so the caller-level MAYCHANGE      *)</div>
+<div id="L28">(* is accounted as for a step. close_tac finishes the postcondition, given   *)</div>
+<div id="L29">(* the callee&#x27;s postcondition facts (memory as `read (..) mmK`) and the      *)</div>
+<div id="L30">(* memory names mm0 (caller entry) and the new memory equation.              *)</div>
+<div id="L31">(* ------------------------------------------------------------------------- *)</div>
+<div id="L32"></div>
+<div id="L33">let WASMC_MEM_UPDATE_TAC (asl,w) =</div>
+<div id="L34">  let uth_tm = lhand w in</div>
+<div id="L35">  let s = repeat rand (lhand uth_tm) in</div>
+<div id="L36">  let ws = `:wasmstate` in</div>
+<div id="L37">  let rec writes_wmem tm =</div>
+<div id="L38">    match tm with</div>
+<div id="L39">      Comb(Comb(Comb(Const(&quot;write&quot;,_),c),_),t) -&gt;</div>
+<div id="L40">        (match c with</div>
+<div id="L41">           Comb(Comb(Const(&quot;:&gt;&quot;,_),Const(&quot;wmem&quot;,_)),_) -&gt; true</div>
+<div id="L42">         | _ -&gt; writes_wmem t)</div>
+<div id="L43">    | _ -&gt; false in</div>
+<div id="L44">  if not (writes_wmem (lhand uth_tm)) then ALL_TAC (asl,w) else</div>
+<div id="L45">  let rmem = mk_comb(`read wmem`,s) in</div>
+<div id="L46">  let names = mapfilter (fun th -&gt; let c = concl th in</div>
+<div id="L47">      if is_eq c &amp;&amp; lhs c = rmem &amp;&amp;</div>
+<div id="L48">         not (can (find_term (fun t -&gt; type_of t = ws)) (rhs c)) then th</div>
+<div id="L49">      else fail()) (map snd asl) in</div>
+<div id="L50">  if names = [] then ALL_TAC (asl,w) else</div>
+<div id="L51">  (DISCH_THEN(fun uth -&gt;</div>
+<div id="L52">     let th0 = SYM(AP_TERM `read wmem` uth) in</div>
+<div id="L53">     let th1 = CONV_RULE(RAND_CONV WMEM_READ_OVER_WRITES_CONV) th0 in</div>
+<div id="L54">     let th2 = GEN_REWRITE_RULE (RAND_CONV o DEPTH_CONV) names th1 in</div>
+<div id="L55">     MP_TAC uth THEN ASSUME_TAC th2)) (asl,w);;</div>
+<div id="L56"></div>
+<div id="L57">let WASMC_GEN_STATE_TAC (s1:term) : tactic = fun (asl,w) -&gt;</div>
+<div id="L58">  let x = find_term (fun t -&gt; can (term_match [] `write wpc (z:int64) (s:wasmstate)`) t) w in</div>
+<div id="L59">  let gth = mk_forall(s1, mk_imp(mk_eq(x,s1), subst [s1,x] w)) in</div>
+<div id="L60">  (SUBGOAL_THEN gth (fun th -&gt; MATCH_MP_TAC th THEN REFL_TAC)) (asl,w);;</div>
+<div id="L61"></div>
+<div id="L62">let WASMC_CALL0_SITE_TAC (lth:thm) (cth:thm) (f:term) (n:term)</div>
+<div id="L63">                         (close_tac:tactic) : tactic =</div>
+<div id="L64">  let _,[_;pp;qq;cc] = strip_comb(concl lth) in</div>
+<div id="L65">  let eth,dth = CONJ_PAIR cth in</div>
+<div id="L66">  let code = rand(lhand(concl eth)) and e = rand(rand(concl eth))</div>
+<div id="L67">  and decls = rand(rand(concl dth)) in</div>
+<div id="L68">  let c0tm = list_mk_comb(`wcall_entry`,</div>
+<div id="L69">     [code; `0`; `0`; `read wstack (s0:wasmstate)`; e; decls; `s0:wasmstate`]) in</div>
+<div id="L70">  let is_rmem_c1 th = let c = concl th in</div>
+<div id="L71">     is_eq c &amp;&amp; lhs c = `read wmem (c1:wasmstate)` in</div>
+<div id="L72">  ENSURES_INIT_TAC &quot;s0&quot; THEN</div>
+<div id="L73">  RULE_ASSUM_TAC(REWRITE_RULE[READ_COMPONENT_COMPOSE]) THEN</div>
+<div id="L74">  ABBREV_TAC `mm0 = read wmem (s0:wasmstate)` THEN</div>
+<div id="L75">  POP_ASSUM(fun th -&gt; RULE_ASSUM_TAC(REWRITE_RULE[th]) THEN ASSUME_TAC th) THEN</div>
+<div id="L76">  (fun (asl,w) -&gt;</div>
+<div id="L77">     let fs = rand(rand(rator(rator w))) in</div>
+<div id="L78">     MATCH_MP_TAC (ISPECL [fs; f; code; `0`; e; decls; pp; qq; cc; n]</div>
+<div id="L79">                     WASMC_CALL0_STEP) (asl,w)) THEN</div>
+<div id="L80">  CONJ_TAC THENL [ACCEPT_TAC lth; ALL_TAC] THEN</div>
+<div id="L81">  CONJ_TAC THENL</div>
+<div id="L82">   [CONV_TAC(TOP_DEPTH_CONV BETA_CONV) THEN MESON_TAC[distinctness &quot;wstat&quot;];</div>
+<div id="L83">    ALL_TAC] THEN</div>
+<div id="L84">  CONJ_TAC THENL [ASM_REWRITE_TAC[]; ALL_TAC] THEN</div>
+<div id="L85">  CONJ_TAC THENL [ACCEPT_TAC eth; ALL_TAC] THEN</div>
+<div id="L86">  CONJ_TAC THENL [ACCEPT_TAC dth; ALL_TAC] THEN</div>
+<div id="L87">  CONJ_TAC THENL [ASM_REWRITE_TAC[]; ALL_TAC] THEN</div>
+<div id="L88">  CONJ_TAC THENL</div>
+<div id="L89">   [ASM_REWRITE_TAC[VAL_WORD; DIMINDEX_64] THEN ASM_SIMP_TAC[MOD_LT]; ALL_TAC] THEN</div>
+<div id="L90">  CONJ_TAC THENL</div>
+<div id="L91">   [CONV_TAC(TOP_DEPTH_CONV BETA_CONV) THEN</div>
+<div id="L92">    REWRITE_TAC[WCALL_ENTRY_READS; READ_COMPONENT_COMPOSE] THEN</div>
+<div id="L93">    ASM_SIMP_TAC[PAIR];</div>
+<div id="L94">    ALL_TAC] THEN</div>
+<div id="L95">  X_GEN_TAC `c1:wasmstate` THEN</div>
+<div id="L96">  ABBREV_TAC (mk_eq(`c0:wasmstate`, c0tm)) THEN</div>
+<div id="L97">  SUBGOAL_THEN `read wmem (c0:wasmstate) = mm0 /\</div>
+<div id="L98">                read wmemsize c0 = read wmemsize (s0:wasmstate) /\</div>
+<div id="L99">                read wglobals c0 = read wglobals (s0:wasmstate)`</div>
+<div id="L100">    STRIP_ASSUME_TAC THENL</div>
+<div id="L101">   [EXPAND_TAC &quot;c0&quot; THEN ASM_REWRITE_TAC[WCALL_ENTRY_READS]; ALL_TAC] THEN</div>
+<div id="L102">  DISCH_THEN(CONJUNCTS_THEN2</div>
+<div id="L103">    (STRIP_ASSUME_TAC o CONV_RULE(TOP_DEPTH_CONV BETA_CONV)) MP_TAC) THEN</div>
+<div id="L104">  GEN_REWRITE_TAC (LAND_CONV o TOP_DEPTH_CONV) [MAYCHANGE; SEQ_ID] THEN</div>
+<div id="L105">  GEN_REWRITE_TAC (LAND_CONV o TOP_DEPTH_CONV) [GSYM SEQ_ASSOC] THEN</div>
+<div id="L106">  GEN_REWRITE_TAC (LAND_CONV o TOP_DEPTH_CONV) [ASSIGNS_SEQ] THEN</div>
+<div id="L107">  GEN_REWRITE_TAC (LAND_CONV o TOP_DEPTH_CONV) [ASSIGNS_THM] THEN</div>
+<div id="L108">  REWRITE_TAC[LEFT_IMP_EXISTS_THM] THEN REPEAT GEN_TAC THEN</div>
+<div id="L109">  WASMC_MEM_UPDATE_TAC THEN ASSUMPTION_STATE_UPDATE_TAC THEN DISCH_THEN(K ALL_TAC) THEN</div>
+<div id="L110">  (fun (asl,w) -&gt;</div>
+<div id="L111">     let p = rand(rhs(concl(find_read_th &quot;wpc&quot; `s0:wasmstate` (map snd asl)))) in</div>
+<div id="L112">     let gth = mk_eq(list_mk_comb(`wcall_return`,</div>
+<div id="L113">                 [mk_binop `(+):num-&gt;num-&gt;num` `val (read wpc (s0:wasmstate))` n; `0`;</div>
+<div id="L114">                  `c1:wasmstate`; `s0:wasmstate`]),</div>
+<div id="L115">               list_mk_comb(`write wpc`,</div>
+<div id="L116">                 [mk_comb(`word:num-&gt;int64`, mk_binop `(+):num-&gt;num-&gt;num` p n);</div>
+<div id="L117">                  `write wmem (read wmem c1) (s0:wasmstate)`])) in</div>
+<div id="L118">     (SUBGOAL_THEN gth SUBST1_TAC THENL</div>
+<div id="L119">      [SUBGOAL_THEN (mk_eq(`val (read wpc (s0:wasmstate))`, p)) SUBST1_TAC THENL</div>
+<div id="L120">        [ASM_REWRITE_TAC[VAL_WORD; DIMINDEX_64] THEN ASM_SIMP_TAC[MOD_LT]; ALL_TAC] THEN</div>
+<div id="L121">       MATCH_MP_TAC WCALL_RETURN0 THEN ASM_REWRITE_TAC[];</div>
+<div id="L122">       ALL_TAC]) (asl,w)) THEN</div>
+<div id="L123">  RULE_ASSUM_TAC(REWRITE_RULE[READ_COMPONENT_COMPOSE]) THEN</div>
+<div id="L124">  FIRST_X_ASSUM(fun th -&gt; if is_rmem_c1 th</div>
+<div id="L125">    then REWRITE_TAC[th] THEN RULE_ASSUM_TAC(REWRITE_RULE[th]) else NO_TAC) THEN</div>
+<div id="L126">  FIRST_ASSUM(fun th -&gt; if concl th = `read wmem (s0:wasmstate) = mm0`</div>
+<div id="L127">    then REWRITE_TAC[SYM th] else NO_TAC) THEN</div>
+<div id="L128">  REWRITE_TAC[WCALL_WRITE_MEM1; WCALL_WRITE_MEM2] THEN</div>
+<div id="L129">  WASMC_GEN_STATE_TAC `s1:wasmstate` THEN</div>
+<div id="L130">  X_GEN_TAC `s1:wasmstate` THEN</div>
+<div id="L131">  WASMC_MEM_UPDATE_TAC THEN ASSUMPTION_STATE_UPDATE_TAC THEN MAYCHANGE_STATE_UPDATE_TAC THEN</div>
+<div id="L132">  DISCH_THEN(fun th -&gt;</div>
+<div id="L133">    let thl = STATE_UPDATE_NEW_RULE th in</div>
+<div id="L134">    if thl = [] then ALL_TAC else MP_TAC(end_itlist CONJ thl) THEN STRIP_TAC) THEN</div>
+<div id="L135">  CONV_TAC(TOP_DEPTH_CONV BETA_CONV) THEN</div>
+<div id="L136">  CONJ_TAC THENL [ALL_TAC; MONOTONE_MAYCHANGE_TAC] THEN</div>
+<div id="L137">  close_tac;;</div>
+<div id="L138"></div>
+<div id="L139">(* ======== (2) main wasm_frames.ml lines 113-1327 ======== *)</div>
+<div id="L140"></div>
+<div id="L141">(* ------------------------------------------------------------------------- *)</div>
+<div id="L142">(* The reference relation.                                                   *)</div>
+<div id="L143">(* ------------------------------------------------------------------------- *)</div>
+<div id="L144"></div>
+<div id="L145">let wasmf = new_definition</div>
+<div id="L146"> `wasmf (fs:num-&gt;byte list#num#num)</div>
+<div id="L147">        (x:wasmstate#(wasmstate#num#num)list)</div>
+<div id="L148">        (y:wasmstate#(wasmstate#num#num)list) &lt;=&gt;</div>
+<div id="L149">    (wasm (FST x) (FST y) /\ SND y = SND x) \/</div>
+<div id="L150">    (read wstatus (FST x) = WRunning /\</div>
+<div id="L151">     ?f n code np nr e decls.</div>
+<div id="L152">       wasm_decode (read wcode (FST x)) (val (read wpc (FST x))) =</div>
+<div id="L153">         SOME (Wcall f,n) /\</div>
+<div id="L154">       fs f = (code,np,nr) /\ np &lt;= LENGTH (read wstack (FST x)) /\</div>
+<div id="L155">       wasm_entry code = SOME e /\ wasm_decl_vals code = SOME decls /\</div>
+<div id="L156">       FST y = wcall_entry code np nr (read wstack (FST x)) e decls (FST x) /\</div>
+<div id="L157">       SND y = CONS (FST x,val (read wpc (FST x)) + n,np) (SND x)) \/</div>
+<div id="L158">    (~(read wstatus (FST x) = WRunning) /\</div>
+<div id="L159">     ?c npc np k. SND x = CONS (c,npc,np) k /\</div>
+<div id="L160">                  FST y = wcall_return npc np (FST x) c /\ SND y = k)`;;</div>
+<div id="L161"></div>
+<div id="L162">(* ------------------------------------------------------------------------- *)</div>
+<div id="L163">(* The three cases of a wasmf step.                                          *)</div>
+<div id="L164">(* ------------------------------------------------------------------------- *)</div>
+<div id="L165"></div>
+<div id="L166">(* a body that can take a wasm step: wasmf is that step, frames unchanged *)</div>
+<div id="L167">let WASMF_WASM_STEP = prove</div>
+<div id="L168"> (`!fs s k t k&#x27; u.</div>
+<div id="L169">     wasm s u ==&gt; (wasmf fs (s,k) (t,k&#x27;) &lt;=&gt; wasm s t /\ k&#x27; = k)`,</div>
+<div id="L170">  REPEAT GEN_TAC THEN DISCH_TAC THEN REWRITE_TAC[wasmf; FST; SND] THEN</div>
+<div id="L171">  SUBGOAL_THEN `read wstatus s = WRunning` ASSUME_TAC THENL</div>
+<div id="L172">   [ASM_MESON_TAC[WASM_FINAL]; ASM_REWRITE_TAC[]] THEN</div>
+<div id="L173">  MATCH_MP_TAC(TAUT `~q ==&gt; (p \/ q &lt;=&gt; p)`) THEN</div>
+<div id="L174">  REWRITE_TAC[NOT_EXISTS_THM] THEN REPEAT STRIP_TAC THEN</div>
+<div id="L175">  ASM_MESON_TAC[WASM_WCALL_NO_STEP]);;</div>
+<div id="L176"></div>
+<div id="L177">(* a body at `call f`: wasmf enters the callee and pushes the frame *)</div>
+<div id="L178">let WASMF_CALL_STEP = prove</div>
+<div id="L179"> (`!fs s k t k&#x27; f n.</div>
+<div id="L180">     read wstatus s = WRunning /\</div>
+<div id="L181">     wasm_decode (read wcode s) (val (read wpc s)) = SOME (Wcall f,n)</div>
+<div id="L182">     ==&gt; (wasmf fs (s,k) (t,k&#x27;) &lt;=&gt;</div>
+<div id="L183">          ?code np nr e decls.</div>
+<div id="L184">            fs f = (code,np,nr) /\ np &lt;= LENGTH (read wstack s) /\</div>
+<div id="L185">            wasm_entry code = SOME e /\ wasm_decl_vals code = SOME decls /\</div>
+<div id="L186">            t = wcall_entry code np nr (read wstack s) e decls s /\</div>
+<div id="L187">            k&#x27; = CONS (s,val (read wpc s) + n,np) k)`,</div>
+<div id="L188">  REPEAT GEN_TAC THEN STRIP_TAC THEN REWRITE_TAC[wasmf; FST; SND] THEN</div>
+<div id="L189">  ASM_REWRITE_TAC[option_INJ; PAIR_EQ; WCALL_INJ] THEN</div>
+<div id="L190">  MP_TAC(SPECL [`s:wasmstate`; `t:wasmstate`; `f:num`; `n:num`]</div>
+<div id="L191">    WASM_WCALL_NO_STEP) THEN</div>
+<div id="L192">  ASM_REWRITE_TAC[] THEN DISCH_TAC THEN ASM_REWRITE_TAC[] THEN</div>
+<div id="L193">  MESON_TAC[]);;</div>
+<div id="L194"></div>
+<div id="L195">(* a finished body with a frame above it: pop and resume the caller *)</div>
+<div id="L196">let WASMF_RETURN_STEP = prove</div>
+<div id="L197"> (`!fs s c npc np k t k&#x27;.</div>
+<div id="L198">     ~(read wstatus s = WRunning)</div>
+<div id="L199">     ==&gt; (wasmf fs (s,CONS (c,npc,np) k) (t,k&#x27;) &lt;=&gt;</div>
+<div id="L200">          t = wcall_return npc np s c /\ k&#x27; = k)`,</div>
+<div id="L201">  REPEAT GEN_TAC THEN DISCH_TAC THEN REWRITE_TAC[wasmf; FST; SND] THEN</div>
+<div id="L202">  ASM_SIMP_TAC[WASM_FINAL; CONS_11; PAIR_EQ] THEN MESON_TAC[]);;</div>
+<div id="L203"></div>
+<div id="L204">(* a finished body with no frame: final *)</div>
+<div id="L205">let WASMF_FINAL = prove</div>
+<div id="L206"> (`!fs s y. ~(read wstatus s = WRunning) ==&gt; ~(wasmf fs (s,[]) y)`,</div>
+<div id="L207">  REPEAT GEN_TAC THEN DISCH_TAC THEN REWRITE_TAC[wasmf; FST; SND] THEN</div>
+<div id="L208">  ASM_SIMP_TAC[WASM_FINAL; NOT_CONS_NIL; GSYM NOT_CONS_NIL]);;</div>
+<div id="L209"></div>
+<div id="L210">(* ------------------------------------------------------------------------- *)</div>
+<div id="L211">(* Determinism.                                                              *)</div>
+<div id="L212">(* ------------------------------------------------------------------------- *)</div>
+<div id="L213"></div>
+<div id="L214">let WASMF_DET = prove</div>
+<div id="L215"> (`!fs x y z. wasmf fs x y /\ wasmf fs x z ==&gt; y = z`,</div>
+<div id="L216">  GEN_TAC THEN REWRITE_TAC[FORALL_PAIR_THM; PAIR_EQ] THEN</div>
+<div id="L217">  MAP_EVERY X_GEN_TAC [`s:wasmstate`; `k:(wasmstate#num#num)list`;</div>
+<div id="L218">    `s1:wasmstate`; `k1:(wasmstate#num#num)list`;</div>
+<div id="L219">    `s2:wasmstate`; `k2:(wasmstate#num#num)list`] THEN</div>
+<div id="L220">  ASM_CASES_TAC `read wstatus s = WRunning` THENL</div>
+<div id="L221">   [ASM_CASES_TAC</div>
+<div id="L222">     `?f n. wasm_decode (read wcode s) (val (read wpc s)) = SOME (Wcall f,n)`</div>
+<div id="L223">    THENL</div>
+<div id="L224">     [FIRST_X_ASSUM(X_CHOOSE_THEN `f:num` (X_CHOOSE_TAC `n:num`)) THEN</div>
+<div id="L225">      ASM_SIMP_TAC[WASMF_CALL_STEP] THEN</div>
+<div id="L226">      DISCH_THEN(CONJUNCTS_THEN2</div>
+<div id="L227">       (X_CHOOSE_THEN `code1:byte list` (X_CHOOSE_THEN `np1:num`</div>
+<div id="L228">         (X_CHOOSE_THEN `nr1:num` (X_CHOOSE_THEN `e1:num`</div>
+<div id="L229">           (X_CHOOSE_THEN `decls1:wval list` STRIP_ASSUME_TAC)))))</div>
+<div id="L230">       (X_CHOOSE_THEN `code2:byte list` (X_CHOOSE_THEN `np2:num`</div>
+<div id="L231">         (X_CHOOSE_THEN `nr2:num` (X_CHOOSE_THEN `e2:num`</div>
+<div id="L232">           (X_CHOOSE_THEN `decls2:wval list` STRIP_ASSUME_TAC)))))) THEN</div>
+<div id="L233">      SUBGOAL_THEN `code2:byte list = code1 /\ np2:num = np1 /\ nr2:num = nr1`</div>
+<div id="L234">        (REPEAT_TCL CONJUNCTS_THEN SUBST_ALL_TAC) THENL</div>
+<div id="L235">       [UNDISCH_TAC `(fs:num-&gt;byte list#num#num) f = (code1,np1,nr1)` THEN</div>
+<div id="L236">        ASM_REWRITE_TAC[PAIR_EQ] THEN MESON_TAC[];</div>
+<div id="L237">        ALL_TAC] THEN</div>
+<div id="L238">      SUBGOAL_THEN `e2:num = e1 /\ decls2:wval list = decls1`</div>
+<div id="L239">        (CONJUNCTS_THEN SUBST_ALL_TAC) THENL</div>
+<div id="L240">       [ASM_MESON_TAC[option_INJ]; ASM_REWRITE_TAC[]];</div>
+<div id="L241">      ALL_TAC] THEN</div>
+<div id="L242">    REWRITE_TAC[wasmf; FST; SND] THEN ASM_REWRITE_TAC[] THEN</div>
+<div id="L243">    RULE_ASSUM_TAC(REWRITE_RULE[NOT_EXISTS_THM]) THEN</div>
+<div id="L244">    ASM_REWRITE_TAC[] THEN MESON_TAC[WASM_DETERMINISTIC];</div>
+<div id="L245">    REWRITE_TAC[wasmf; FST; SND] THEN ASM_SIMP_TAC[WASM_FINAL] THEN</div>
+<div id="L246">    REPEAT STRIP_TAC THEN</div>
+<div id="L247">    RULE_ASSUM_TAC(REWRITE_RULE[]) THEN</div>
+<div id="L248">    REPEAT(FIRST_X_ASSUM(SUBST_ALL_TAC o check (fun th -&gt;</div>
+<div id="L249">      let c = concl th in is_eq c &amp;&amp; lhs c = `k:(wasmstate#num#num)list`))) THEN</div>
+<div id="L250">    RULE_ASSUM_TAC(REWRITE_RULE[CONS_11; PAIR_EQ]) THEN</div>
+<div id="L251">    ASM_MESON_TAC[]]);;</div>
+<div id="L252"></div>
+<div id="L253">(* ------------------------------------------------------------------------- *)</div>
+<div id="L254">(* Frame stacks below a run do not matter (append at the bottom).           *)</div>
+<div id="L255">(* ------------------------------------------------------------------------- *)</div>
+<div id="L256"></div>
+<div id="L257">let WASMF_APPEND = prove</div>
+<div id="L258"> (`!fs x y k. wasmf fs x y</div>
+<div id="L259">              ==&gt; wasmf fs (FST x,APPEND (SND x) k) (FST y,APPEND (SND y) k)`,</div>
+<div id="L260">  REWRITE_TAC[FORALL_PAIR_THM; wasmf; FST; SND] THEN REPEAT STRIP_TAC THEN</div>
+<div id="L261">  ASM_REWRITE_TAC[APPEND] THEN ASM_MESON_TAC[]);;</div>
+<div id="L262"></div>
+<div id="L263">let RTC_WASMF_APPEND = prove</div>
+<div id="L264"> (`!fs x y. RTC (wasmf fs) x y</div>
+<div id="L265">            ==&gt; !k. RTC (wasmf fs) (FST x,APPEND (SND x) k)</div>
+<div id="L266">                                   (FST y,APPEND (SND y) k)`,</div>
+<div id="L267">  GEN_TAC THEN MATCH_MP_TAC RTC_INDUCT THEN</div>
+<div id="L268">  CONV_TAC(TOP_DEPTH_CONV BETA_CONV) THEN REPEAT CONJ_TAC THENL</div>
+<div id="L269">   [MESON_TAC[WASMF_APPEND; RTC_INC];</div>
+<div id="L270">    REWRITE_TAC[RTC_REFL];</div>
+<div id="L271">    MESON_TAC[RTC_TRANS]]);;</div>
+<div id="L272"></div>
+<div id="L273">(* ------------------------------------------------------------------------- *)</div>
+<div id="L274">(* Generic facts about eventually.                                          *)</div>
+<div id="L275">(* ------------------------------------------------------------------------- *)</div>
+<div id="L276"></div>
+<div id="L277">let EVENTUALLY_NOW = prove</div>
+<div id="L278"> (`!(step:A-&gt;A-&gt;bool) P s. P s ==&gt; eventually step P s`,</div>
+<div id="L279">  MESON_TAC[eventually_RULES]);;</div>
+<div id="L280"></div>
+<div id="L281">(* along a deterministic relation, eventually propagates back along a run *)</div>
+<div id="L282">let EVENTUALLY_RTC_DET = prove</div>
+<div id="L283"> (`!(R:A-&gt;A-&gt;bool) P.</div>
+<div id="L284">     (!x y z. R x y /\ R x z ==&gt; y = z)</div>
+<div id="L285">     ==&gt; !x y. RTC R x y ==&gt; eventually R P y ==&gt; eventually R P x`,</div>
+<div id="L286">  REPEAT GEN_TAC THEN DISCH_TAC THEN MATCH_MP_TAC RTC_INDUCT_R THEN</div>
+<div id="L287">  CONV_TAC(TOP_DEPTH_CONV BETA_CONV) THEN REWRITE_TAC[] THEN REPEAT STRIP_TAC THEN</div>
+<div id="L288">  ONCE_REWRITE_TAC[eventually_CASES] THEN DISJ2_TAC THEN</div>
+<div id="L289">  ASM_MESON_TAC[]);;</div>
+<div id="L290"></div>
+<div id="L291">(* no eventually from a state with an infinite run avoiding P *)</div>
+<div id="L292">let NOT_EVENTUALLY_INVARIANT = prove</div>
+<div id="L293"> (`!(R:A-&gt;A-&gt;bool) P Inv.</div>
+<div id="L294">     (!x. Inv x ==&gt; ~P x /\ ?y. R x y /\ Inv y)</div>
+<div id="L295">     ==&gt; !x. Inv x ==&gt; ~eventually R P x`,</div>
+<div id="L296">  REPEAT GEN_TAC THEN DISCH_TAC THEN</div>
+<div id="L297">  SUBGOAL_THEN `!x:A. eventually R P x ==&gt; ~Inv x`</div>
+<div id="L298">    (fun th -&gt; MESON_TAC[th]) THEN</div>
+<div id="L299">  MATCH_MP_TAC eventually_INDUCT THEN CONV_TAC(TOP_DEPTH_CONV BETA_CONV) THEN</div>
+<div id="L300">  ASM_MESON_TAC[]);;</div>
+<div id="L301"></div>
+<div id="L302">(* ------------------------------------------------------------------------- *)</div>
+<div id="L303">(* Lifting: a call-free leaf theorem holds under wasmf, any frames below.   *)</div>
+<div id="L304">(* ------------------------------------------------------------------------- *)</div>
+<div id="L305"></div>
+<div id="L306">let WASMF_LIFT_EVENTUALLY = prove</div>
+<div id="L307"> (`!fs (Q:wasmstate-&gt;bool) k s.</div>
+<div id="L308">     eventually wasm Q s</div>
+<div id="L309">     ==&gt; eventually (wasmf fs) (\x. Q (FST x) /\ SND x = k) (s,k)`,</div>
+<div id="L310">  REPEAT GEN_TAC THEN SPEC_TAC(`s:wasmstate`,`s:wasmstate`) THEN</div>
+<div id="L311">  MATCH_MP_TAC eventually_INDUCT THEN CONV_TAC(TOP_DEPTH_CONV BETA_CONV) THEN</div>
+<div id="L312">  CONJ_TAC THENL</div>
+<div id="L313">   [REPEAT STRIP_TAC THEN MATCH_MP_TAC EVENTUALLY_NOW THEN</div>
+<div id="L314">    CONV_TAC(TOP_DEPTH_CONV BETA_CONV) THEN ASM_REWRITE_TAC[FST; SND];</div>
+<div id="L315">    ALL_TAC] THEN</div>
+<div id="L316">  X_GEN_TAC `s:wasmstate` THEN</div>
+<div id="L317">  DISCH_THEN(CONJUNCTS_THEN2 (X_CHOOSE_TAC `u:wasmstate`) ASSUME_TAC) THEN</div>
+<div id="L318">  ONCE_REWRITE_TAC[eventually_CASES] THEN DISJ2_TAC THEN</div>
+<div id="L319">  REWRITE_TAC[FORALL_PAIR_THM; EXISTS_PAIR_THM] THEN</div>
+<div id="L320">  FIRST_ASSUM(fun th -&gt; REWRITE_TAC[MATCH_MP WASMF_WASM_STEP th]) THEN</div>
+<div id="L321">  CONJ_TAC THENL [ASM_MESON_TAC[]; ALL_TAC] THEN</div>
+<div id="L322">  REPEAT STRIP_TAC THEN ASM_MESON_TAC[]);;</div>
+<div id="L323"></div>
+<div id="L324">let WASMF_LIFT = prove</div>
+<div id="L325"> (`!fs (P:wasmstate-&gt;bool) Q C.</div>
+<div id="L326">     ensures wasm P Q C</div>
+<div id="L327">     ==&gt; !k. ensures (wasmf fs) (\x. P (FST x) /\ SND x = k)</div>
+<div id="L328">                                (\x. Q (FST x) /\ SND x = k)</div>
+<div id="L329">                                (\x y. C (FST x) (FST y))`,</div>
+<div id="L330">  REPEAT GEN_TAC THEN REWRITE_TAC[ensures; FORALL_PAIR_THM] THEN</div>
+<div id="L331">  CONV_TAC(TOP_DEPTH_CONV BETA_CONV) THEN REWRITE_TAC[FST; SND] THEN</div>
+<div id="L332">  DISCH_TAC THEN MAP_EVERY X_GEN_TAC</div>
+<div id="L333">   [`k:(wasmstate#num#num)list`; `s:wasmstate`; `k0:(wasmstate#num#num)list`] THEN</div>
+<div id="L334">  STRIP_TAC THEN</div>
+<div id="L335">  FIRST_X_ASSUM(MP_TAC o SPEC `s:wasmstate`) THEN ASM_REWRITE_TAC[] THEN</div>
+<div id="L336">  DISCH_TAC THEN</div>
+<div id="L337">  MP_TAC(ISPECL [`fs:num-&gt;byte list#num#num`;</div>
+<div id="L338">    `\s&#x27;. (Q:wasmstate-&gt;bool) s&#x27; /\ C (s:wasmstate) s&#x27;`;</div>
+<div id="L339">    `k0:(wasmstate#num#num)list`; `s:wasmstate`] WASMF_LIFT_EVENTUALLY) THEN</div>
+<div id="L340">  ASM_REWRITE_TAC[] THEN</div>
+<div id="L341">  MATCH_MP_TAC(REWRITE_RULE[RIGHT_IMP_FORALL_THM] EVENTUALLY_MONO) THEN</div>
+<div id="L342">  CONV_TAC(TOP_DEPTH_CONV BETA_CONV) THEN</div>
+<div id="L343">  REWRITE_TAC[FORALL_PAIR_THM; FST; SND] THEN ASM_MESON_TAC[]);;</div>
+<div id="L344"></div>
+<div id="L345">(* ------------------------------------------------------------------------- *)</div>
+<div id="L346">(* Callee summaries and the derived big-step relation wasmn.                *)</div>
+<div id="L347">(* ------------------------------------------------------------------------- *)</div>
+<div id="L348"></div>
+<div id="L349">(* a callee summary: from an empty frame stack (callees push their own)    *)</div>
+<div id="L350">let wfsum = new_definition</div>
+<div id="L351"> `wfsum (fs:num-&gt;byte list#num#num) (P:wasmstate-&gt;bool) Q C &lt;=&gt;</div>
+<div id="L352">    ensures (wasmf fs) (\x. P (FST x) /\ SND x = [])</div>
+<div id="L353">                       (\x. Q (FST x) /\ SND x = [])</div>
+<div id="L354">                       (\x y. C (FST x) (FST y))`;;</div>
+<div id="L355"></div>
+<div id="L356">let wasm_calln = new_definition</div>
+<div id="L357"> `wasm_calln (fs:num-&gt;byte list#num#num) f npc (s:wasmstate) (s&#x27;:wasmstate) &lt;=&gt;</div>
+<div id="L358">    ?code np nr e decls c1.</div>
+<div id="L359">      fs f = (code,np,nr) /\ np &lt;= LENGTH (read wstack s) /\</div>
+<div id="L360">      wasm_entry code = SOME e /\ wasm_decl_vals code = SOME decls /\</div>
+<div id="L361">      RTC (wasmf fs) (wcall_entry code np nr (read wstack s) e decls s,[])</div>
+<div id="L362">                     (c1,[]) /\</div>
+<div id="L363">      ~(read wstatus c1 = WRunning) /\</div>
+<div id="L364">      s&#x27; = wcall_return npc np c1 s`;;</div>
+<div id="L365"></div>
+<div id="L366">let wasmn = new_definition</div>
+<div id="L367"> `wasmn (fs:num-&gt;byte list#num#num) s s&#x27; &lt;=&gt;</div>
+<div id="L368">    wasm s s&#x27; \/</div>
+<div id="L369">    read wstatus s = WRunning /\</div>
+<div id="L370">    ?f n. wasm_decode (read wcode s) (val (read wpc s)) = SOME (Wcall f,n) /\</div>
+<div id="L371">          wasm_calln fs f (val (read wpc s) + n) s s&#x27;`;;</div>
+<div id="L372"></div>
+<div id="L373">let WASMN_CALL = prove</div>
+<div id="L374"> (`!fs f n s s&#x27;.</div>
+<div id="L375">     read wstatus s = WRunning /\</div>
+<div id="L376">     wasm_decode (read wcode s) (val (read wpc s)) = SOME (Wcall f,n)</div>
+<div id="L377">     ==&gt; (wasmn fs s s&#x27; &lt;=&gt; wasm_calln fs f (val (read wpc s) + n) s s&#x27;)`,</div>
+<div id="L378">  REPEAT STRIP_TAC THEN REWRITE_TAC[wasmn] THEN</div>
+<div id="L379">  MP_TAC(SPECL [`s:wasmstate`; `s&#x27;:wasmstate`; `f:num`; `n:num`]</div>
+<div id="L380">    WASM_WCALL_NO_STEP) THEN</div>
+<div id="L381">  ASM_REWRITE_TAC[] THEN DISCH_TAC THEN</div>
+<div id="L382">  ASM_REWRITE_TAC[option_INJ; PAIR_EQ; WCALL_INJ] THEN MESON_TAC[]);;</div>
+<div id="L383"></div>
+<div id="L384">let WASMN_NONCALL = prove</div>
+<div id="L385"> (`!fs s s&#x27; mc pc i n.</div>
+<div id="L386">     read wcode s = mc /\ read wpc s = word pc /\ pc &lt; 2 EXP 64 /\</div>
+<div id="L387">     wasm_decode mc pc = SOME (i,n) /\ (!f. ~(i = Wcall f))</div>
+<div id="L388">     ==&gt; (wasmn fs s s&#x27; &lt;=&gt; wasm s s&#x27;)`,</div>
+<div id="L389">  REPEAT STRIP_TAC THEN REWRITE_TAC[wasmn] THEN</div>
+<div id="L390">  ASM_REWRITE_TAC[VAL_WORD; DIMINDEX_64] THEN</div>
+<div id="L391">  ASM_SIMP_TAC[MOD_LT; option_INJ; PAIR_EQ] THEN</div>
+<div id="L392">  ASM_MESON_TAC[]);;</div>
+<div id="L393"></div>
+<div id="L394">let WASMN_FINAL = prove</div>
+<div id="L395"> (`!fs s s&#x27;. ~(read wstatus s = WRunning) ==&gt; ~(wasmn fs s s&#x27;)`,</div>
+<div id="L396">  SIMP_TAC[wasmn; WASM_FINAL]);;</div>
+<div id="L397"></div>
+<div id="L398">let WASMN_WASM = prove</div>
+<div id="L399"> (`!fs s s&#x27;. wasm s s&#x27; ==&gt; wasmn fs s s&#x27;`,</div>
+<div id="L400">  SIMP_TAC[wasmn]);;</div>
+<div id="L401"></div>
+<div id="L402">(* ------------------------------------------------------------------------- *)</div>
+<div id="L403">(* Transfer: wasmn theorems hold under the reference wasmf.                 *)</div>
+<div id="L404">(* ------------------------------------------------------------------------- *)</div>
+<div id="L405"></div>
+<div id="L406">let WASMN_TO_WASMF_EVENTUALLY = prove</div>
+<div id="L407"> (`!fs (R:wasmstate-&gt;bool) s.</div>
+<div id="L408">     eventually (wasmn fs) R s</div>
+<div id="L409">     ==&gt; !k. eventually (wasmf fs) (\x. R (FST x) /\ SND x = k) (s,k)`,</div>
+<div id="L410">  GEN_TAC THEN GEN_TAC THEN MATCH_MP_TAC eventually_INDUCT THEN</div>
+<div id="L411">  CONV_TAC(TOP_DEPTH_CONV BETA_CONV) THEN CONJ_TAC THENL</div>
+<div id="L412">   [REPEAT STRIP_TAC THEN MATCH_MP_TAC EVENTUALLY_NOW THEN</div>
+<div id="L413">    CONV_TAC(TOP_DEPTH_CONV BETA_CONV) THEN ASM_REWRITE_TAC[FST; SND];</div>
+<div id="L414">    ALL_TAC] THEN</div>
+<div id="L415">  X_GEN_TAC `s:wasmstate` THEN</div>
+<div id="L416">  DISCH_THEN(CONJUNCTS_THEN2 (X_CHOOSE_TAC `s&#x27;:wasmstate`) (LABEL_TAC &quot;ih&quot;)) THEN</div>
+<div id="L417">  X_GEN_TAC `k:(wasmstate#num#num)list` THEN</div>
+<div id="L418">  ASM_CASES_TAC `?u. wasm s u` THENL</div>
+<div id="L419">   [FIRST_X_ASSUM(X_CHOOSE_TAC `u:wasmstate`) THEN</div>
+<div id="L420">    ONCE_REWRITE_TAC[eventually_CASES] THEN DISJ2_TAC THEN</div>
+<div id="L421">    REWRITE_TAC[FORALL_PAIR_THM; EXISTS_PAIR_THM] THEN</div>
+<div id="L422">    FIRST_ASSUM(fun th -&gt; REWRITE_TAC[MATCH_MP WASMF_WASM_STEP th]) THEN</div>
+<div id="L423">    CONJ_TAC THENL [ASM_MESON_TAC[]; ALL_TAC] THEN</div>
+<div id="L424">    REPEAT STRIP_TAC THEN ASM_MESON_TAC[WASMN_WASM];</div>
+<div id="L425">    ALL_TAC] THEN</div>
+<div id="L426">  (* the step from s is a call *)</div>
+<div id="L427">  SUBGOAL_THEN</div>
+<div id="L428">   `read wstatus s = WRunning /\</div>
+<div id="L429">    ?f n. wasm_decode (read wcode s) (val (read wpc s)) = SOME (Wcall f,n) /\</div>
+<div id="L430">          wasm_calln fs f (val (read wpc s) + n) s s&#x27;`</div>
+<div id="L431">    MP_TAC THENL [ASM_MESON_TAC[wasmn]; ALL_TAC] THEN</div>
+<div id="L432">  DISCH_THEN(CONJUNCTS_THEN2 ASSUME_TAC</div>
+<div id="L433">    (X_CHOOSE_THEN `f:num` (X_CHOOSE_THEN `n:num` STRIP_ASSUME_TAC))) THEN</div>
+<div id="L434">  FIRST_X_ASSUM(MP_TAC o GEN_REWRITE_RULE I [wasm_calln] o check (fun th -&gt;</div>
+<div id="L435">    can (term_match [] `wasm_calln a b c d e`) (concl th))) THEN</div>
+<div id="L436">  REWRITE_TAC[LEFT_IMP_EXISTS_THM] THEN</div>
+<div id="L437">  MAP_EVERY X_GEN_TAC [`code:byte list`; `np:num`; `nr:num`; `e:num`;</div>
+<div id="L438">                       `decls:wval list`; `c1:wasmstate`] THEN</div>
+<div id="L439">  STRIP_TAC THEN</div>
+<div id="L440">  REMOVE_THEN &quot;ih&quot; (MP_TAC o SPECL [`s&#x27;:wasmstate`]) THEN</div>
+<div id="L441">  ANTS_TAC THENL</div>
+<div id="L442">   [FIRST_ASSUM ACCEPT_TAC;</div>
+<div id="L443">    DISCH_THEN(MP_TAC o SPEC `k:(wasmstate#num#num)list`)] THEN</div>
+<div id="L444">  MATCH_MP_TAC(MATCH_MP (ISPEC `wasmf fs` EVENTUALLY_RTC_DET)</div>
+<div id="L445">                 (SPEC `fs:num-&gt;byte list#num#num` WASMF_DET)) THEN</div>
+<div id="L446">  (* (s,k) -&gt; (c0, frame::k) -&gt;* (c1, frame::k) -&gt; (s&#x27;,k) *)</div>
+<div id="L447">  MATCH_MP_TAC RTC_TRANS_R THEN</div>
+<div id="L448">  EXISTS_TAC `(wcall_entry code np nr (read wstack s) e decls s,</div>
+<div id="L449">               CONS (s,val (read wpc s) + n,np) (k:(wasmstate#num#num)list))` THEN</div>
+<div id="L450">  CONJ_TAC THENL</div>
+<div id="L451">   [ASM_SIMP_TAC[WASMF_CALL_STEP] THEN</div>
+<div id="L452">    MAP_EVERY EXISTS_TAC [`code:byte list`; `np:num`; `nr:num`; `e:num`;</div>
+<div id="L453">                          `decls:wval list`] THEN ASM_REWRITE_TAC[];</div>
+<div id="L454">    ALL_TAC] THEN</div>
+<div id="L455">  MATCH_MP_TAC RTC_TRANS_L THEN</div>
+<div id="L456">  EXISTS_TAC `(c1:wasmstate,</div>
+<div id="L457">               CONS (s,val (read wpc s) + n,np) (k:(wasmstate#num#num)list))` THEN</div>
+<div id="L458">  CONJ_TAC THENL</div>
+<div id="L459">   [FIRST_X_ASSUM(MP_TAC o SPEC</div>
+<div id="L460">      `CONS (s,val (read wpc s) + n,np) (k:(wasmstate#num#num)list)` o</div>
+<div id="L461">      MATCH_MP RTC_WASMF_APPEND) THEN</div>
+<div id="L462">    REWRITE_TAC[FST; SND; APPEND];</div>
+<div id="L463">    ASM_SIMP_TAC[WASMF_RETURN_STEP]]);;</div>
+<div id="L464"></div>
+<div id="L465">let WASMN_TO_WASMF = prove</div>
+<div id="L466"> (`!fs (P:wasmstate-&gt;bool) Q C.</div>
+<div id="L467">     ensures (wasmn fs) P Q C</div>
+<div id="L468">     ==&gt; !k. ensures (wasmf fs) (\x. P (FST x) /\ SND x = k)</div>
+<div id="L469">                                (\x. Q (FST x) /\ SND x = k)</div>
+<div id="L470">                                (\x y. C (FST x) (FST y))`,</div>
+<div id="L471">  REPEAT GEN_TAC THEN REWRITE_TAC[ensures; FORALL_PAIR_THM] THEN</div>
+<div id="L472">  CONV_TAC(TOP_DEPTH_CONV BETA_CONV) THEN REWRITE_TAC[FST; SND] THEN</div>
+<div id="L473">  DISCH_TAC THEN MAP_EVERY X_GEN_TAC</div>
+<div id="L474">   [`k:(wasmstate#num#num)list`; `s:wasmstate`; `k0:(wasmstate#num#num)list`] THEN</div>
+<div id="L475">  STRIP_TAC THEN FIRST_X_ASSUM(SUBST_ALL_TAC o check (fun th -&gt;</div>
+<div id="L476">    concl th = `k0:(wasmstate#num#num)list = k`)) THEN</div>
+<div id="L477">  FIRST_X_ASSUM(MP_TAC o SPEC `s:wasmstate`) THEN ASM_REWRITE_TAC[] THEN</div>
+<div id="L478">  DISCH_THEN(MP_TAC o SPEC `k:(wasmstate#num#num)list` o</div>
+<div id="L479">    MATCH_MP WASMN_TO_WASMF_EVENTUALLY) THEN</div>
+<div id="L480">  MATCH_MP_TAC(REWRITE_RULE[RIGHT_IMP_FORALL_THM] EVENTUALLY_MONO) THEN</div>
+<div id="L481">  CONV_TAC(TOP_DEPTH_CONV BETA_CONV) THEN</div>
+<div id="L482">  REWRITE_TAC[FORALL_PAIR_THM; FST; SND] THEN ASM_MESON_TAC[]);;</div>
+<div id="L483"></div>
+<div id="L484">let WASMN_TO_WFSUM = prove</div>
+<div id="L485"> (`!fs (P:wasmstate-&gt;bool) Q C. ensures (wasmn fs) P Q C ==&gt; wfsum fs P Q C`,</div>
+<div id="L486">  REPEAT GEN_TAC THEN</div>
+<div id="L487">  DISCH_THEN(MP_TAC o SPEC `[]:(wasmstate#num#num)list` o</div>
+<div id="L488">    MATCH_MP WASMN_TO_WASMF) THEN</div>
+<div id="L489">  REWRITE_TAC[wfsum]);;</div>
+<div id="L490"></div>
+<div id="L491">let WASM_TO_WFSUM = prove</div>
+<div id="L492"> (`!fs (P:wasmstate-&gt;bool) Q C. ensures wasm P Q C ==&gt; wfsum fs P Q C`,</div>
+<div id="L493">  REPEAT GEN_TAC THEN</div>
+<div id="L494">  DISCH_THEN(MP_TAC o SPECL [`fs:num-&gt;byte list#num#num`;</div>
+<div id="L495">    `[]:(wasmstate#num#num)list`] o MATCH_MP WASMF_LIFT) THEN</div>
+<div id="L496">  REWRITE_TAC[wfsum]);;</div>
+<div id="L497"></div>
+<div id="L498">(* ------------------------------------------------------------------------- *)</div>
+<div id="L499">(* The call rule under wasmn (np params, nr results), ensures form.         *)</div>
+<div id="L500">(* ------------------------------------------------------------------------- *)</div>
+<div id="L501"></div>
+<div id="L502">let WASMN_CALL_ENSURES = prove</div>
+<div id="L503"> (`!fs f code np nr e decls (P:wasmstate-&gt;bool) Q C Pre Post D n.</div>
+<div id="L504">     wfsum fs P Q C /\</div>
+<div id="L505">     (!c. Q c ==&gt; ~(read wstatus c = WRunning)) /\</div>
+<div id="L506">     fs f = (code,np,nr) /\ wasm_entry code = SOME e /\</div>
+<div id="L507">     wasm_decl_vals code = SOME decls /\</div>
+<div id="L508">     (!s. Pre s ==&gt; read wstatus s = WRunning /\</div>
+<div id="L509">                    wasm_decode (read wcode s) (val (read wpc s)) = SOME (Wcall f,n) /\</div>
+<div id="L510">                    np &lt;= LENGTH (read wstack s) /\</div>
+<div id="L511">                    P (wcall_entry code np nr (read wstack s) e decls s)) /\</div>
+<div id="L512">     (!s c1. Pre s /\ Q c1 /\ C (wcall_entry code np nr (read wstack s) e decls s) c1</div>
+<div id="L513">             ==&gt; Post (wcall_return (val (read wpc s) + n) np c1 s) /\</div>
+<div id="L514">                 D s (wcall_return (val (read wpc s) + n) np c1 s))</div>
+<div id="L515">     ==&gt; ensures (wasmn fs) Pre Post D`,</div>
+<div id="L516">  REPEAT GEN_TAC THEN REWRITE_TAC[wfsum; ensures] THEN</div>
+<div id="L517">  DISCH_THEN(CONJUNCTS_THEN2 (LABEL_TAC &quot;leaf&quot;) MP_TAC) THEN</div>
+<div id="L518">  DISCH_THEN(CONJUNCTS_THEN2 (LABEL_TAC &quot;fin&quot;) MP_TAC) THEN</div>
+<div id="L519">  DISCH_THEN(CONJUNCTS_THEN2 ASSUME_TAC MP_TAC) THEN</div>
+<div id="L520">  DISCH_THEN(CONJUNCTS_THEN2 ASSUME_TAC MP_TAC) THEN</div>
+<div id="L521">  DISCH_THEN(CONJUNCTS_THEN2 ASSUME_TAC MP_TAC) THEN</div>
+<div id="L522">  DISCH_THEN(CONJUNCTS_THEN2 (LABEL_TAC &quot;pre&quot;) (LABEL_TAC &quot;post&quot;)) THEN</div>
+<div id="L523">  X_GEN_TAC `s:wasmstate` THEN DISCH_TAC THEN</div>
+<div id="L524">  REMOVE_THEN &quot;pre&quot; (MP_TAC o SPEC `s:wasmstate`) THEN</div>
+<div id="L525">  ANTS_TAC THENL [FIRST_ASSUM ACCEPT_TAC; STRIP_TAC] THEN</div>
+<div id="L526">  ABBREV_TAC `c0 = wcall_entry code np nr (read wstack s) e decls s` THEN</div>
+<div id="L527">  REMOVE_THEN &quot;leaf&quot; (MP_TAC o SPEC</div>
+<div id="L528">    `(c0:wasmstate,[]:(wasmstate#num#num)list)`) THEN</div>
+<div id="L529">  REWRITE_TAC[FST; SND] THEN ANTS_TAC THENL [FIRST_ASSUM ACCEPT_TAC; DISCH_TAC] THEN</div>
+<div id="L530">  FIRST_ASSUM(MP_TAC o MATCH_MP EVENTUALLY_RTC_EXISTS) THEN</div>
+<div id="L531">  REWRITE_TAC[EXISTS_PAIR_THM; FST; SND] THEN</div>
+<div id="L532">  DISCH_THEN(X_CHOOSE_THEN `c1:wasmstate` (X_CHOOSE_THEN</div>
+<div id="L533">    `k1:(wasmstate#num#num)list` STRIP_ASSUME_TAC)) THEN</div>
+<div id="L534">  FIRST_X_ASSUM(SUBST_ALL_TAC o check (fun th -&gt;</div>
+<div id="L535">    concl th = `k1:(wasmstate#num#num)list = []`)) THEN</div>
+<div id="L536">  ONCE_REWRITE_TAC[eventually_CASES] THEN DISJ2_TAC THEN</div>
+<div id="L537">  SUBGOAL_THEN `!s&#x27;. wasmn fs s s&#x27; &lt;=&gt; wasm_calln fs f (val (read wpc s) + n) s s&#x27;`</div>
+<div id="L538">    (fun th -&gt; REWRITE_TAC[th]) THENL</div>
+<div id="L539">   [GEN_TAC THEN MATCH_MP_TAC WASMN_CALL THEN ASM_REWRITE_TAC[]; ALL_TAC] THEN</div>
+<div id="L540">  CONJ_TAC THENL</div>
+<div id="L541">   [EXISTS_TAC `wcall_return (val (read wpc s) + n) np c1 s` THEN</div>
+<div id="L542">    REWRITE_TAC[wasm_calln] THEN</div>
+<div id="L543">    MAP_EVERY EXISTS_TAC [`code:byte list`; `np:num`; `nr:num`; `e:num`;</div>
+<div id="L544">                          `decls:wval list`; `c1:wasmstate`] THEN</div>
+<div id="L545">    ASM_REWRITE_TAC[] THEN USE_THEN &quot;fin&quot; MATCH_MP_TAC THEN ASM_REWRITE_TAC[];</div>
+<div id="L546">    ALL_TAC] THEN</div>
+<div id="L547">  X_GEN_TAC `s&#x27;:wasmstate` THEN REWRITE_TAC[wasm_calln; LEFT_IMP_EXISTS_THM] THEN</div>
+<div id="L548">  MAP_EVERY X_GEN_TAC [`code&#x27;:byte list`; `np&#x27;:num`; `nr&#x27;:num`; `e&#x27;:num`;</div>
+<div id="L549">                       `decls&#x27;:wval list`; `c1&#x27;:wasmstate`] THEN</div>
+<div id="L550">  ASM_REWRITE_TAC[PAIR_EQ] THEN</div>
+<div id="L551">  STRIP_TAC THEN</div>
+<div id="L552">  REPEAT(FIRST_X_ASSUM(SUBST_ALL_TAC o SYM o check (fun th -&gt;</div>
+<div id="L553">    let c = concl th in is_eq c &amp;&amp; is_var(rhs c) &amp;&amp;</div>
+<div id="L554">      mem (fst(dest_var(rhs c))) [&quot;code&#x27;&quot;; &quot;np&#x27;&quot;; &quot;nr&#x27;&quot;]))) THEN</div>
+<div id="L555">  SUBGOAL_THEN `e&#x27;:num = e /\ decls&#x27;:wval list = decls`</div>
+<div id="L556">    (CONJUNCTS_THEN SUBST_ALL_TAC) THENL</div>
+<div id="L557">   [ASM_MESON_TAC[option_INJ]; ALL_TAC] THEN</div>
+<div id="L558">  RULE_ASSUM_TAC(fun th -&gt;</div>
+<div id="L559">    if is_eq(concl th) &amp;&amp; rhs(concl th) = `c0:wasmstate` then th else</div>
+<div id="L560">    REWRITE_RULE[ASSUME</div>
+<div id="L561">      `wcall_entry code np nr (read wstack s) e decls s = c0`] th) THEN</div>
+<div id="L562">  SUBGOAL_THEN `(Q:wasmstate-&gt;bool) c1&#x27; /\ C (c0:wasmstate) (c1&#x27;:wasmstate)`</div>
+<div id="L563">    STRIP_ASSUME_TAC THENL</div>
+<div id="L564">   [MP_TAC(ISPECL [`wasmf fs`;</div>
+<div id="L565">      `\x:wasmstate#(wasmstate#num#num)list.</div>
+<div id="L566">         ((Q:wasmstate-&gt;bool) (FST x) /\ SND x = []) /\</div>
+<div id="L567">         (C:wasmstate-&gt;wasmstate-&gt;bool) c0 (FST x)`]</div>
+<div id="L568">      EVENTUALLY_RTC_FINAL) THEN</div>
+<div id="L569">    REWRITE_TAC[] THEN ANTS_TAC THENL</div>
+<div id="L570">     [REWRITE_TAC[FORALL_PAIR_THM; FST; SND] THEN REPEAT STRIP_TAC THEN</div>
+<div id="L571">      FIRST_X_ASSUM SUBST_ALL_TAC THEN ASM_MESON_TAC[WASMF_FINAL];</div>
+<div id="L572">      ALL_TAC] THEN</div>
+<div id="L573">    DISCH_THEN(MP_TAC o SPEC `(c0:wasmstate,[]:(wasmstate#num#num)list)`) THEN</div>
+<div id="L574">    ANTS_TAC THENL [FIRST_ASSUM ACCEPT_TAC; ALL_TAC] THEN</div>
+<div id="L575">    DISCH_THEN(MP_TAC o SPEC `(c1&#x27;:wasmstate,[]:(wasmstate#num#num)list)`) THEN</div>
+<div id="L576">    REWRITE_TAC[FST; SND] THEN DISCH_THEN MATCH_MP_TAC THEN</div>
+<div id="L577">    ASM_MESON_TAC[WASMF_FINAL];</div>
+<div id="L578">    ALL_TAC] THEN</div>
+<div id="L579">  ONCE_REWRITE_TAC[eventually_CASES] THEN DISJ1_TAC THEN</div>
+<div id="L580">  CONV_TAC(TOP_DEPTH_CONV BETA_CONV) THEN ASM_REWRITE_TAC[] THEN</div>
+<div id="L581">  REMOVE_THEN &quot;post&quot; MATCH_MP_TAC THEN ASM_REWRITE_TAC[] THEN</div>
+<div id="L582">  EXPAND_TAC &quot;c0&quot; THEN ASM_REWRITE_TAC[]);;</div>
+<div id="L583"></div>
+<div id="L584">(* simulation form, inside a caller proof: through the call, continue with *)</div>
+<div id="L585">(* eventually from the return state                                         *)</div>
+<div id="L586">let WASMN_CALL_STEP = prove</div>
+<div id="L587"> (`!fs f code np nr e decls (P:wasmstate-&gt;bool) Q C n s R.</div>
+<div id="L588">     wfsum fs P Q C /\</div>
+<div id="L589">     (!c. Q c ==&gt; ~(read wstatus c = WRunning)) /\</div>
+<div id="L590">     fs f = (code,np,nr) /\ wasm_entry code = SOME e /\</div>
+<div id="L591">     wasm_decl_vals code = SOME decls /\</div>
+<div id="L592">     read wstatus s = WRunning /\</div>
+<div id="L593">     wasm_decode (read wcode s) (val (read wpc s)) = SOME (Wcall f,n) /\</div>
+<div id="L594">     np &lt;= LENGTH (read wstack s) /\</div>
+<div id="L595">     P (wcall_entry code np nr (read wstack s) e decls s) /\</div>
+<div id="L596">     (!c1. Q c1 /\ C (wcall_entry code np nr (read wstack s) e decls s) c1</div>
+<div id="L597">           ==&gt; eventually (wasmn fs) R (wcall_return (val (read wpc s) + n) np c1 s))</div>
+<div id="L598">     ==&gt; eventually (wasmn fs) R s`,</div>
+<div id="L599">  REPEAT GEN_TAC THEN STRIP_TAC THEN</div>
+<div id="L600">  MP_TAC(ISPECL [`fs:num-&gt;byte list#num#num`; `f:num`; `code:byte list`;</div>
+<div id="L601">    `np:num`; `nr:num`; `e:num`; `decls:wval list`; `P:wasmstate-&gt;bool`;</div>
+<div id="L602">    `Q:wasmstate-&gt;bool`; `C:wasmstate-&gt;wasmstate-&gt;bool`;</div>
+<div id="L603">    `\x:wasmstate. x = s`; `eventually (wasmn fs) R`;</div>
+<div id="L604">    `\x:wasmstate y:wasmstate. T`; `n:num`] WASMN_CALL_ENSURES) THEN</div>
+<div id="L605">  ASM_REWRITE_TAC[] THEN ANTS_TAC THENL</div>
+<div id="L606">   [CONJ_TAC THEN REPEAT GEN_TAC THEN CONV_TAC(TOP_DEPTH_CONV BETA_CONV) THEN</div>
+<div id="L607">    STRIP_TAC THEN FIRST_X_ASSUM(SUBST_ALL_TAC o check (fun th -&gt;</div>
+<div id="L608">      let c = concl th in is_eq c &amp;&amp; rhs c = `s:wasmstate` &amp;&amp; is_var(lhs c))) THEN</div>
+<div id="L609">    ASM_REWRITE_TAC[] THEN FIRST_X_ASSUM MATCH_MP_TAC THEN ASM_REWRITE_TAC[];</div>
+<div id="L610">    REWRITE_TAC[ensures] THEN DISCH_THEN(MP_TAC o SPEC `s:wasmstate`) THEN</div>
+<div id="L611">    REWRITE_TAC[ETA_AX; EVENTUALLY_EVENTUALLY]]);;</div>
+<div id="L612"></div>
+<div id="L613">(* ------------------------------------------------------------------------- *)</div>
+<div id="L614">(* Divergence regression (Sol, design s2): entry-&gt;return, entry-&gt;loop,      *)</div>
+<div id="L615">(* loop-&gt;loop. State 0 = entry, 1 = return, 2 = loop.                       *)</div>
+<div id="L616">(* ------------------------------------------------------------------------- *)</div>
+<div id="L617"></div>
+<div id="L618">let div3 = new_definition</div>
+<div id="L619"> `div3 (x:num) (y:num) &lt;=&gt;</div>
+<div id="L620">    (x = 0 /\ y = 1) \/ (x = 0 /\ y = 2) \/ (x = 2 /\ y = 2)`;;</div>
+<div id="L621"></div>
+<div id="L622">(* an existential finite execution from entry reaches return, which is final *)</div>
+<div id="L623">let DIV3_EXISTS_RETURN = prove</div>
+<div id="L624"> (`RTC div3 0 1 /\ !y. ~div3 1 y`,</div>
+<div id="L625">  CONJ_TAC THENL</div>
+<div id="L626">   [MATCH_MP_TAC RTC_INC THEN REWRITE_TAC[div3];</div>
+<div id="L627">    REWRITE_TAC[div3] THEN ARITH_TAC]);;</div>
+<div id="L628"></div>
+<div id="L629">(* but the small-step system does not eventually return from entry *)</div>
+<div id="L630">let DIV3_NOT_EVENTUALLY = prove</div>
+<div id="L631"> (`~eventually div3 (\x. x = 1) 0`,</div>
+<div id="L632">  ONCE_REWRITE_TAC[eventually_CASES] THEN REWRITE_TAC[ARITH_EQ] THEN</div>
+<div id="L633">  REWRITE_TAC[DE_MORGAN_THM; NOT_FORALL_THM; NOT_IMP] THEN DISJ2_TAC THEN</div>
+<div id="L634">  EXISTS_TAC `2` THEN REWRITE_TAC[div3; ARITH_EQ] THEN</div>
+<div id="L635">  MP_TAC(ISPECL [`div3`; `\x:num. x = 1`; `\x:num. x = 2`]</div>
+<div id="L636">    NOT_EVENTUALLY_INVARIANT) THEN</div>
+<div id="L637">  REWRITE_TAC[div3] THEN ANTS_TAC THENL</div>
+<div id="L638">   [GEN_TAC THEN DISCH_THEN SUBST1_TAC THEN CONV_TAC NUM_REDUCE_CONV THEN</div>
+<div id="L639">    MESON_TAC[];</div>
+<div id="L640">    DISCH_THEN(MP_TAC o SPEC `2`) THEN REWRITE_TAC[]]);;</div>
+<div id="L641"></div>
+<div id="L642">(* the existential big-step summary of div3 (one step to any reachable     *)</div>
+<div id="L643">(* final state) DOES eventually reach return from entry: it hides the loop *)</div>
+<div id="L644">let div3_big = new_definition</div>
+<div id="L645"> `div3_big (x:num) (y:num) &lt;=&gt; RTC div3 x y /\ ~(x = y) /\ !z. ~div3 y z`;;</div>
+<div id="L646"></div>
+<div id="L647">let DIV3_BIG_HIDES_LOOP = prove</div>
+<div id="L648"> (`eventually div3_big (\x. x = 1) 0`,</div>
+<div id="L649">  ONCE_REWRITE_TAC[eventually_CASES] THEN DISJ2_TAC THEN CONJ_TAC THENL</div>
+<div id="L650">   [EXISTS_TAC `1` THEN REWRITE_TAC[div3_big; DIV3_EXISTS_RETURN; ARITH_EQ];</div>
+<div id="L651">    ALL_TAC] THEN</div>
+<div id="L652">  X_GEN_TAC `y:num` THEN REWRITE_TAC[div3_big] THEN STRIP_TAC THEN</div>
+<div id="L653">  ONCE_REWRITE_TAC[eventually_CASES] THEN DISJ1_TAC THEN</div>
+<div id="L654">  ASM_CASES_TAC `y = 1` THEN ASM_REWRITE_TAC[] THEN</div>
+<div id="L655">  (* any other final y: 0 and 2 both have successors *)</div>
+<div id="L656">  FIRST_X_ASSUM(MP_TAC o check (fun th -&gt; is_forall(concl th))) THEN</div>
+<div id="L657">  ASM_CASES_TAC `y = 2` THENL</div>
+<div id="L658">   [ASM_REWRITE_TAC[div3] THEN MESON_TAC[]; ALL_TAC] THEN</div>
+<div id="L659">  DISCH_THEN(K ALL_TAC) THEN</div>
+<div id="L660">  (* RTC div3 0 y with y not 0,1,2 is impossible *)</div>
+<div id="L661">  SUBGOAL_THEN `!a b. RTC div3 a b ==&gt; a &lt;= 2 ==&gt; b &lt;= 2` MP_TAC THENL</div>
+<div id="L662">   [MATCH_MP_TAC RTC_INDUCT THEN CONV_TAC(TOP_DEPTH_CONV BETA_CONV) THEN</div>
+<div id="L663">    REWRITE_TAC[div3] THEN REPEAT CONJ_TAC THEN ARITH_TAC;</div>
+<div id="L664">    ALL_TAC] THEN</div>
+<div id="L665">  DISCH_THEN(MP_TAC o SPECL [`0`; `y:num`]) THEN ASM_REWRITE_TAC[ARITH_LE] THEN</div>
+<div id="L666">  UNDISCH_TAC `~(0 = y)` THEN UNDISCH_TAC `~(y = 1)` THEN UNDISCH_TAC `~(y = 2)` THEN</div>
+<div id="L667">  ARITH_TAC);;</div>
+<div id="L668"></div>
+<div id="L669">(* determinism is exactly what fails: the transfer premise is false here  *)</div>
+<div id="L670">let DIV3_NONDETERMINISTIC = prove</div>
+<div id="L671"> (`~(!x y z. div3 x y /\ div3 x z ==&gt; y = z)`,</div>
+<div id="L672">  REWRITE_TAC[NOT_FORALL_THM; NOT_IMP] THEN</div>
+<div id="L673">  MAP_EVERY EXISTS_TAC [`0`; `1`; `2`] THEN REWRITE_TAC[div3] THEN ARITH_TAC);;</div>
+<div id="L674"></div>
+<div id="L675">(* ------------------------------------------------------------------------- *)</div>
+<div id="L676">(* Observations of a trapped state (Sol review r1). Wasm discards the       *)</div>
+<div id="L677">(* operand stacks, locals and labels of every frame a trap unwinds; in this *)</div>
+<div id="L678">(* model a trapped state keeps them (wcall_return restores the caller&#x27;s     *)</div>
+<div id="L679">(* saved state with status WTrapped). They are NOT observations: the        *)</div>
+<div id="L680">(* observation of a trapped state is wtrap_obs (status, memory, memory size,*)</div>
+<div id="L681">(* globals), and theorems about trapping runs state only these components.  *)</div>
+<div id="L682">(* Unwinding preserves the observation exactly (WASMF_TRAPPED_RTC).         *)</div>
+<div id="L683">(* ------------------------------------------------------------------------- *)</div>
+<div id="L684"></div>
+<div id="L685">let wtrap_obs = new_definition</div>
+<div id="L686"> `wtrap_obs (s:wasmstate) =</div>
+<div id="L687">    (read wstatus s,read wmem s,read wmemsize s,read wglobals s)`;;</div>
+<div id="L688"></div>
+<div id="L689">let WCALL_RETURN_TRAP_OBS = prove</div>
+<div id="L690"> (`!npc np c1 s. read wstatus c1 = WTrapped</div>
+<div id="L691">     ==&gt; wtrap_obs (wcall_return npc np c1 s) = wtrap_obs c1`,</div>
+<div id="L692">  REPEAT STRIP_TAC THEN</div>
+<div id="L693">  ASM_REWRITE_TAC[wtrap_obs; wcall_return; distinctness &quot;wstat&quot;] THEN</div>
+<div id="L694">  CONV_TAC(TOP_DEPTH_CONV COMPONENT_READ_OVER_WRITE_CONV) THEN REWRITE_TAC[]);;</div>
+<div id="L695"></div>
+<div id="L696">let WASMF_TRAPPED_STEP = prove</div>
+<div id="L697"> (`!fs x y. wasmf fs x y /\ read wstatus (FST x) = WTrapped</div>
+<div id="L698">            ==&gt; read wstatus (FST y) = WTrapped /\ wtrap_obs (FST y) = wtrap_obs (FST x)`,</div>
+<div id="L699">  GEN_TAC THEN REWRITE_TAC[FORALL_PAIR_THM; wasmf; FST; SND] THEN</div>
+<div id="L700">  MAP_EVERY X_GEN_TAC [`s:wasmstate`; `k:(wasmstate#num#num)list`;</div>
+<div id="L701">                       `t:wasmstate`; `k&#x27;:(wasmstate#num#num)list`] THEN</div>
+<div id="L702">  ASM_CASES_TAC `read wstatus s = WTrapped` THEN</div>
+<div id="L703">  ASM_REWRITE_TAC[wasm; distinctness &quot;wstat&quot;] THEN STRIP_TAC THEN</div>
+<div id="L704">  ASM_SIMP_TAC[WCALL_RETURN_TRAP_OBS] THEN</div>
+<div id="L705">  REWRITE_TAC[wcall_return] THEN ASM_REWRITE_TAC[distinctness &quot;wstat&quot;] THEN</div>
+<div id="L706">  CONV_TAC(TOP_DEPTH_CONV COMPONENT_READ_OVER_WRITE_CONV) THEN REWRITE_TAC[]);;</div>
+<div id="L707"></div>
+<div id="L708">let WASMF_TRAPPED_RTC = prove</div>
+<div id="L709"> (`!fs x y. RTC (wasmf fs) x y</div>
+<div id="L710">            ==&gt; read wstatus (FST x) = WTrapped</div>
+<div id="L711">                ==&gt; read wstatus (FST y) = WTrapped /\</div>
+<div id="L712">                    wtrap_obs (FST y) = wtrap_obs (FST x)`,</div>
+<div id="L713">  GEN_TAC THEN MATCH_MP_TAC RTC_INDUCT THEN CONV_TAC(TOP_DEPTH_CONV BETA_CONV) THEN</div>
+<div id="L714">  MESON_TAC[WASMF_TRAPPED_STEP]);;</div>
+<div id="L715"></div>
+<div id="L716">(* ------------------------------------------------------------------------- *)</div>
+<div id="L717">(* An inline call step for wasmn simulations (np params, nr results).       *)</div>
+<div id="L718">(*                                                                           *)</div>
+<div id="L719">(* WASMN_CALL_TAC execth lth cth sname, on a goal                            *)</div>
+<div id="L720">(*   eventually (wasmn fs) R s                                              *)</div>
+<div id="L721">(* where s is at `call f` (decode from execth = the caller&#x27;s exec rule),    *)</div>
+<div id="L722">(* the assumptions give read wcode / wpc / wstatus / wstack of s and        *)</div>
+<div id="L723">(* fs f = (code,np,nr); lth = |- wfsum fs P Q C (the callee summary,        *)</div>
+<div id="L724">(* instantiated; from WASM_TO_WFSUM for a call-free leaf or WASMN_TO_WFSUM  *)</div>
+<div id="L725">(* for a callee that calls) and cth = WASM_CALLEE_RULE code_def. It proves  *)</div>
+<div id="L726">(* the callee precondition at the entry state (wcall_entry: parameters in  *)</div>
+<div id="L727">(* locals 0..np-1, declared locals zero by type, the caller&#x27;s memory,      *)</div>
+<div id="L728">(* memory size and globals), expands the callee&#x27;s MAYCHANGE frame, and     *)</div>
+<div id="L729">(* continues at a fresh state sname = the caller after the return (results *)</div>
+<div id="L730">(* replace the parameters on the caller&#x27;s stack; the callee&#x27;s memory). The *)</div>
+<div id="L731">(* callee must leave memory size and globals unchanged (the frame must not *)</div>
+<div id="L732">(* name wmemsize or wglobals); memory writes are carried over by name as   *)</div>
+<div id="L733">(* in WASMC_CALL0_SITE_TAC (name the caller memory `read wmem s = mm`).    *)</div>
+<div id="L734">(* ------------------------------------------------------------------------- *)</div>
+<div id="L735"></div>
+<div id="L736">let EL_ALT = prove</div>
+<div id="L737"> (`!n (l:A list). EL n l = if n = 0 then HD l else EL (n - 1) (TL l)`,</div>
+<div id="L738">  INDUCT_TAC THEN REWRITE_TAC[EL; NOT_SUC; SUC_SUB1]);;</div>
+<div id="L739"></div>
+<div id="L740">let WTAKE_0 = prove</div>
+<div id="L741"> (`!l:A list. wtake 0 l = []`,</div>
+<div id="L742">  LIST_INDUCT_TAC THEN REWRITE_TAC[wtake]);;</div>
+<div id="L743"></div>
+<div id="L744">let wcall_compset = wasm_mk_decode_compset [wcall_locals; EL_ALT; APPEND; WTAKE_0; WDROP_0];;</div>
+<div id="L745"></div>
+<div id="L746">let WCALL_LIST_CONV = Compute.WEAK_CBV_CONV wcall_compset;;</div>
+<div id="L747"></div>
+<div id="L748">let WCALL_LOCALS_EVAL_CONV tm =</div>
+<div id="L749">  match strip_comb tm with</div>
+<div id="L750">    Const(&quot;wcall_locals&quot;,_),[_;_;_] -&gt; CHANGED_CONV WCALL_LIST_CONV tm</div>
+<div id="L751">  | Const(&quot;wtake&quot;,_),[_;_] -&gt; CHANGED_CONV WCALL_LIST_CONV tm</div>
+<div id="L752">  | Const(&quot;wdrop&quot;,_),[_;_] -&gt; CHANGED_CONV WCALL_LIST_CONV tm</div>
+<div id="L753">  | Const(&quot;APPEND&quot;,_),[_;_] -&gt; CHANGED_CONV WCALL_LIST_CONV tm</div>
+<div id="L754">  | _ -&gt; failwith &quot;WCALL_LOCALS_EVAL_CONV&quot;;;</div>
+<div id="L755"></div>
+<div id="L756">let WCALL_RETURN_N = prove</div>
+<div id="L757"> (`!npc np c1 s.</div>
+<div id="L758">     read wstatus c1 = WDone /\</div>
+<div id="L759">     read wmemsize c1 = read wmemsize s /\ read wglobals c1 = read wglobals s</div>
+<div id="L760">     ==&gt; wcall_return npc np c1 s =</div>
+<div id="L761">         write wpc (word npc)</div>
+<div id="L762">          (write wstack (APPEND (read wstack c1) (wdrop np (read wstack s)))</div>
+<div id="L763">            (write wmem (read wmem c1) s))`,</div>
+<div id="L764">  REPEAT STRIP_TAC THEN ASM_REWRITE_TAC[wcall_return] THEN</div>
+<div id="L765">  REWRITE_TAC[WGLOBALS_SVC; WMEMSIZE_SVC]);;</div>
+<div id="L766"></div>
+<div id="L767">let WCALL_ENTRY_TAC =</div>
+<div id="L768">  CONV_TAC(TOP_DEPTH_CONV BETA_CONV) THEN</div>
+<div id="L769">  RULE_ASSUM_TAC(REWRITE_RULE[wlocal; wglobal; READ_COMPONENT_COMPOSE; READ_ELEMENT]) THEN</div>
+<div id="L770">  REWRITE_TAC[wlocal; wglobal; READ_COMPONENT_COMPOSE; WCALL_ENTRY_READS] THEN</div>
+<div id="L771">  REWRITE_TAC[READ_ELEMENT] THEN ASM_REWRITE_TAC[] THEN</div>
+<div id="L772">  CONV_TAC(ONCE_DEPTH_CONV WCALL_LOCALS_EVAL_CONV) THEN</div>
+<div id="L773">  ASM_REWRITE_TAC[];;</div>
+<div id="L774"></div>
+<div id="L775">(* generalize the state argument of an eventually goal to a fresh variable *)</div>
+<div id="L776">let WASM_GEN_EVENTUALLY_STATE_TAC (sname:string) : tactic = fun (asl,w) -&gt;</div>
+<div id="L777">  let x = rand w in</div>
+<div id="L778">  let sv = mk_var(sname,`:wasmstate`) in</div>
+<div id="L779">  let gth = mk_forall(sv, mk_imp(mk_eq(x,sv), mk_comb(rator w, sv))) in</div>
+<div id="L780">  (SUBGOAL_THEN gth (fun th -&gt; MATCH_MP_TAC th THEN REFL_TAC) THEN</div>
+<div id="L781">   X_GEN_TAC sv) (asl,w);;</div>
+<div id="L782"></div>
+<div id="L783">(* DISCARD_OLD_WASMSTATE_TAC that counts only :wasmstate terms as states:  *)</div>
+<div id="L784">(* a fact whose read arguments are state-free (read (bytes8 a) mm = v, or  *)</div>
+<div id="L785">(* read c (write .. mm) = v, with mm a memory term) is kept; facts about   *)</div>
+<div id="L786">(* other wasmstate terms than the new state are dropped as before.         *)</div>
+<div id="L787">let WASMN_DISCARD_OLD_TAC s =</div>
+<div id="L788">  let v = mk_var(s,`:wasmstate`) in</div>
+<div id="L789">  let ws = `:wasmstate` in</div>
+<div id="L790">  let rec svars bound tm =</div>
+<div id="L791">    match tm with</div>
+<div id="L792">      Comb(Comb(Const(&quot;read&quot;,_),_),x) -&gt;</div>
+<div id="L793">        if mem x bound then [] else</div>
+<div id="L794">        if type_of x = ws then [x] else svars bound x</div>
+<div id="L795">    | Comb(a,b) -&gt; union (svars bound a) (svars bound b)</div>
+<div id="L796">    | Abs(x,t) -&gt; svars (x::bound) t</div>
+<div id="L797">    | _ -&gt; [] in</div>
+<div id="L798">  DISCARD_ASSUMPTIONS_TAC(fun th -&gt;</div>
+<div id="L799">    let us = svars [] (concl th) in</div>
+<div id="L800">    not(us = [] || us = [v]));;</div>
+<div id="L801"></div>
+<div id="L802">(* callee entry locals by rewriting: a fallback for WCALL_ENTRY_TAC when    *)</div>
+<div id="L803">(* the compset evaluator leaves wcall_locals/wtake terms (seen with three   *)</div>
+<div id="L804">(* i32 arguments, app sprint M2)                                            *)</div>
+<div id="L805">let WCALL_LOCALS_REWRITE_TAC : tactic =</div>
+<div id="L806">  CONV_TAC(REPEATC(CHANGED_CONV(REWRITE_CONV[wtake; wcall_locals; LENGTH; HD; TL] THENC</div>
+<div id="L807">                                DEPTH_CONV(NUM_RED_CONV ORELSEC EL_NUM_CONV)))) THEN</div>
+<div id="L808">  REWRITE_TAC[HD; TL];;</div>
+<div id="L809"></div>
+<div id="L810">let WASMN_CALL_GEN_TAC (_,decode_ths) (lth0:thm) (cth:thm) (cont:term-&gt;term-&gt;term-&gt;term-&gt;term-&gt;tactic) : tactic =</div>
+<div id="L811">  fun (asl,w) -&gt;</div>
+<div id="L812">    let s = rand w in</div>
+<div id="L813">    let stepr = rand(rator(rator w)) in</div>
+<div id="L814">    let fs = rand stepr in</div>
+<div id="L815">    let rr = rand(rator w) in</div>
+<div id="L816">    let lth = if is_forall(concl lth0) then ISPEC fs lth0 else lth0 in</div>
+<div id="L817">    let _,largs = strip_comb(concl lth) in</div>
+<div id="L818">    let pp = el 1 largs and qq = el 2 largs and cc = el 3 largs in</div>
+<div id="L819">    let eth,dth = CONJ_PAIR cth in</div>
+<div id="L820">    let code = rand(lhand(concl eth)) and e = rand(rand(concl eth))</div>
+<div id="L821">    and decls = rand(rand(concl dth)) in</div>
+<div id="L822">    let ths = map snd asl in</div>
+<div id="L823">    let pc_th = find_read_th &quot;wpc&quot; s ths</div>
+<div id="L824">    and code_th = find_read_th &quot;wcode&quot; s ths</div>
+<div id="L825">    and st_th = find_read_th &quot;wstatus&quot; s ths</div>
+<div id="L826">    and stk_th = find_read_th &quot;wstack&quot; s ths in</div>
+<div id="L827">    let pc_num = rand(rhs(concl pc_th)) in</div>
+<div id="L828">    let pc = dest_small_numeral pc_num in</div>
+<div id="L829">    let dec = match (try decode_ths.(pc) with _ -&gt; None) with</div>
+<div id="L830">        Some th -&gt; th | None -&gt; failwith &quot;WASMN_CALL_TAC: no decode at pc&quot; in</div>
+<div id="L831">    let ins,n = dest_pair(rand(rhs(concl dec))) in</div>
+<div id="L832">    let f = rand ins in</div>
+<div id="L833">    let fsf = mk_comb(fs,f) in</div>
+<div id="L834">    let fsth = try find (fun th -&gt; let c = concl th in is_eq c &amp;&amp; lhs c = fsf) ths</div>
+<div id="L835">               with Failure _ -&gt; failwith &quot;WASMN_CALL_TAC: no fs f = .. assumption&quot; in</div>
+<div id="L836">    let _,npnr = dest_pair(rhs(concl fsth)) in</div>
+<div id="L837">    let np,nr = dest_pair npnr in</div>
+<div id="L838">    let sth = ISPECL [fs; f; code; np; nr; e; decls; pp; qq; cc; n; s; rr]</div>
+<div id="L839">                WASMN_CALL_STEP in</div>
+<div id="L840">    let c0tm = list_mk_comb(`wcall_entry`,</div>
+<div id="L841">       [code; np; nr; mk_comb(`read wstack`,s); e; decls; s]) in</div>
+<div id="L842">    (MATCH_MP_TAC sth THEN</div>
+<div id="L843">     REPEAT CONJ_TAC THENL</div>
+<div id="L844">      [ACCEPT_TAC lth;</div>
+<div id="L845">       CONV_TAC(TOP_DEPTH_CONV BETA_CONV) THEN MESON_TAC[distinctness &quot;wstat&quot;];</div>
+<div id="L846">       ACCEPT_TAC fsth;</div>
+<div id="L847">       ACCEPT_TAC eth;</div>
+<div id="L848">       ACCEPT_TAC dth;</div>
+<div id="L849">       ACCEPT_TAC st_th;</div>
+<div id="L850">       REWRITE_TAC[code_th; pc_th; VAL_WORD; DIMINDEX_64] THEN</div>
+<div id="L851">       CONV_TAC NUM_REDUCE_CONV THEN ACCEPT_TAC dec;</div>
+<div id="L852">       REWRITE_TAC[stk_th; LENGTH] THEN ARITH_TAC;</div>
+<div id="L853">       WCALL_ENTRY_TAC THEN TRY(WCALL_LOCALS_REWRITE_TAC THEN ASM_REWRITE_TAC[]);</div>
+<div id="L854">       cont s pc_num n np c0tm]) (asl,w);;</div>
+<div id="L855"></div>
+<div id="L856">(* continuation after a callee that returned (WDone) *)</div>
+<div id="L857">(* name the callee entry memory after the caller&#x27;s: rewrite the right-hand side of     *)</div>
+<div id="L858">(* `read wmem c0 = read wmem s` with a caller fact `read wmem s = mm` (mm free of      *)</div>
+<div id="L859">(* states), so WASMC_MEM_UPDATE_TAC can express the callee&#x27;s writes over mm            *)</div>
+<div id="L860">let WASMN_NAME_C0_MEM_TAC (s:term) : tactic = fun (asl,w) -&gt;</div>
+<div id="L861">  let rmem = mk_comb(`read wmem`,s) in</div>
+<div id="L862">  let ws = `:wasmstate` in</div>
+<div id="L863">  let names = mapfilter (fun th -&gt; let c = concl th in</div>
+<div id="L864">      if is_eq c &amp;&amp; lhs c = rmem &amp;&amp;</div>
+<div id="L865">         not (can (find_term (fun t -&gt; type_of t = ws)) (rhs c)) then th</div>
+<div id="L866">      else fail()) (map snd asl) in</div>
+<div id="L867">  if names = [] then ALL_TAC (asl,w) else</div>
+<div id="L868">  RULE_ASSUM_TAC(fun th -&gt; let c = concl th in</div>
+<div id="L869">    if is_eq c &amp;&amp; lhs c = `read wmem (c0:wasmstate)` &amp;&amp; rhs c = rmem</div>
+<div id="L870">    then GEN_REWRITE_RULE RAND_CONV names th else th) (asl,w);;</div>
+<div id="L871"></div>
+<div id="L872">let WASMN_DONE_CONT (sname:string) s pc_num n np c0tm : tactic =</div>
+<div id="L873">  let npc = mk_binop `(+):num-&gt;num-&gt;num` pc_num n in</div>
+<div id="L874">  let sv&#x27; = mk_var(sname,`:wasmstate`) in</div>
+<div id="L875">  let pc_th_tm = mk_eq(mk_comb(`read wpc`,s), mk_comb(`word:num-&gt;int64`,pc_num)) in</div>
+<div id="L876">  let is_rmem_c1 th = let c = concl th in</div>
+<div id="L877">     is_eq c &amp;&amp; lhs c = `read wmem (c1:wasmstate)` in</div>
+<div id="L878">       X_GEN_TAC `c1:wasmstate` THEN</div>
+<div id="L879">       ABBREV_TAC (mk_eq(`c0:wasmstate`, c0tm)) THEN</div>
+<div id="L880">       SUBGOAL_THEN (subst [s,`s:wasmstate`]</div>
+<div id="L881">          `read wmem (c0:wasmstate) = read wmem (s:wasmstate) /\</div>
+<div id="L882">           read wmemsize c0 = read wmemsize (s:wasmstate) /\</div>
+<div id="L883">           read wglobals c0 = read wglobals (s:wasmstate)`)</div>
+<div id="L884">         STRIP_ASSUME_TAC THENL</div>
+<div id="L885">        [EXPAND_TAC &quot;c0&quot; THEN REWRITE_TAC[WCALL_ENTRY_READS]; ALL_TAC] THEN</div>
+<div id="L886">       WASMN_NAME_C0_MEM_TAC s THEN</div>
+<div id="L887">       DISCH_THEN(CONJUNCTS_THEN2</div>
+<div id="L888">         (STRIP_ASSUME_TAC o CONV_RULE(TOP_DEPTH_CONV BETA_CONV)) MP_TAC) THEN</div>
+<div id="L889">       GEN_REWRITE_TAC (LAND_CONV o TOP_DEPTH_CONV) [MAYCHANGE; SEQ_ID] THEN</div>
+<div id="L890">       GEN_REWRITE_TAC (LAND_CONV o TOP_DEPTH_CONV) [GSYM SEQ_ASSOC] THEN</div>
+<div id="L891">       GEN_REWRITE_TAC (LAND_CONV o TOP_DEPTH_CONV) [ASSIGNS_SEQ] THEN</div>
+<div id="L892">       GEN_REWRITE_TAC (LAND_CONV o TOP_DEPTH_CONV) [ASSIGNS_THM] THEN</div>
+<div id="L893">       REWRITE_TAC[LEFT_IMP_EXISTS_THM] THEN REPEAT GEN_TAC THEN</div>
+<div id="L894">       WASMC_MEM_UPDATE_TAC THEN ASSUMPTION_STATE_UPDATE_TAC THEN</div>
+<div id="L895">       DISCH_THEN(K ALL_TAC) THEN</div>
+<div id="L896">       SUBGOAL_THEN</div>
+<div id="L897">         (mk_eq(list_mk_comb(`wcall_return`,</div>
+<div id="L898">                  [mk_binop `(+):num-&gt;num-&gt;num` (mk_comb(`val:int64-&gt;num`,</div>
+<div id="L899">                     mk_comb(`read wpc`,s))) n; np; `c1:wasmstate`; s]),</div>
+<div id="L900">                list_mk_comb(`write wpc`,</div>
+<div id="L901">                  [mk_comb(`word:num-&gt;int64`, npc);</div>
+<div id="L902">                   list_mk_comb(`write wstack`,</div>
+<div id="L903">                     [list_mk_comb(`APPEND:wval list-&gt;wval list-&gt;wval list`,</div>
+<div id="L904">                        [`read wstack (c1:wasmstate)`;</div>
+<div id="L905">                         list_mk_comb(`wdrop:num-&gt;wval list-&gt;wval list`,</div>
+<div id="L906">                                      [np; mk_comb(`read wstack`,s)])]);</div>
+<div id="L907">                      list_mk_comb(`write wmem`, [`read wmem (c1:wasmstate)`; s])])])))</div>
+<div id="L908">         SUBST1_TAC THENL</div>
+<div id="L909">        [SUBGOAL_THEN (mk_eq(mk_comb(`val:int64-&gt;num`, mk_comb(`read wpc`,s)), pc_num))</div>
+<div id="L910">           SUBST1_TAC THENL</div>
+<div id="L911">          [REWRITE_TAC[ASSUME pc_th_tm; VAL_WORD; DIMINDEX_64] THEN CONV_TAC NUM_REDUCE_CONV;</div>
+<div id="L912">           ALL_TAC] THEN</div>
+<div id="L913">         MATCH_MP_TAC WCALL_RETURN_N THEN ASM_REWRITE_TAC[];</div>
+<div id="L914">         ALL_TAC] THEN</div>
+<div id="L915">       (* the callee&#x27;s postcondition facts about c1&#x27;s memory become facts about the     *)</div>
+<div id="L916">       (* returned memory, read over its writes, so they survive when old states are   *)</div>
+<div id="L917">       (* discarded (WASMN_DISCARD_OLD_TAC below keeps state-free facts; the profile&#x27;s *)</div>
+<div id="L918">       (* DISCARD_OLD_WASMSTATE_TAC drops them until its next re-vendor)                *)</div>
+<div id="L919">       FIRST_X_ASSUM(fun th -&gt; if is_rmem_c1 th then</div>
+<div id="L920">         REWRITE_TAC[th] THEN</div>
+<div id="L921">         RULE_ASSUM_TAC(fun a -&gt; if free_in `c1:wasmstate` (concl a)</div>
+<div id="L922">           then CONV_RULE(ONCE_DEPTH_CONV COMPONENT_READ_OVER_WRITE_CONV)</div>
+<div id="L923">                  (REWRITE_RULE[READ_COMPONENT_COMPOSE; th] a) else a)</div>
+<div id="L924">         else NO_TAC) THEN</div>
+<div id="L925">       REWRITE_TAC[WMEM_SVC; WCALL_WRITE_MEM1; WCALL_WRITE_MEM2] THEN</div>
+<div id="L926">       ASM_REWRITE_TAC[] THEN</div>
+<div id="L927">       CONV_TAC(ONCE_DEPTH_CONV WCALL_LOCALS_EVAL_CONV) THEN</div>
+<div id="L928">       CONV_TAC(DEPTH_CONV NUM_ADD_CONV) THEN</div>
+<div id="L929">       WASMC_GEN_STATE_TAC sv&#x27; THEN</div>
+<div id="L930">       X_GEN_TAC sv&#x27; THEN</div>
+<div id="L931">       WASMC_MEM_UPDATE_TAC THEN ASSUMPTION_STATE_UPDATE_TAC THEN</div>
+<div id="L932">       MAYCHANGE_STATE_UPDATE_TAC THEN</div>
+<div id="L933">       DISCH_THEN(fun th -&gt;</div>
+<div id="L934">         let thl = STATE_UPDATE_NEW_RULE th in</div>
+<div id="L935">         if thl = [] then ALL_TAC else MP_TAC(end_itlist CONJ thl) THEN STRIP_TAC) THEN</div>
+<div id="L936">       WASMN_DISCARD_OLD_TAC sname THEN WASM_COMPACT_HYPS_TAC;;</div>
+<div id="L937"></div>
+<div id="L938">(* continuation after a callee that trapped: the caller traps with the    *)</div>
+<div id="L939">(* callee&#x27;s memory, memory size and globals (frame: the caller must allow *)</div>
+<div id="L940">(* wstatus, wmem, wmemsize and wglobals to change)                         *)</div>
+<div id="L941">let WASMN_TRAP_CONT (sname:string) s pc_num n np c0tm : tactic =</div>
+<div id="L942">  X_GEN_TAC `c1:wasmstate` THEN</div>
+<div id="L943">  DISCH_THEN(CONJUNCTS_THEN2</div>
+<div id="L944">    (STRIP_ASSUME_TAC o CONV_RULE(TOP_DEPTH_CONV BETA_CONV)) (K ALL_TAC)) THEN</div>
+<div id="L945">  REWRITE_TAC[wcall_return] THEN</div>
+<div id="L946">  ASM_REWRITE_TAC[distinctness &quot;wstat&quot;] THEN</div>
+<div id="L947">  WASM_GEN_EVENTUALLY_STATE_TAC sname THEN</div>
+<div id="L948">  ASSUMPTION_STATE_UPDATE_TAC THEN MAYCHANGE_STATE_UPDATE_TAC THEN</div>
+<div id="L949">  DISCH_THEN(fun th -&gt;</div>
+<div id="L950">    let thl = STATE_UPDATE_NEW_RULE th in</div>
+<div id="L951">    if thl = [] then ALL_TAC else MP_TAC(end_itlist CONJ thl) THEN STRIP_TAC) THEN</div>
+<div id="L952">  WASM_COMPACT_HYPS_TAC;;</div>
+<div id="L953"></div>
+<div id="L954">let WASMN_CALL_TAC execth lth cth sname =</div>
+<div id="L955">  WASMN_CALL_GEN_TAC execth lth cth (WASMN_DONE_CONT sname);;</div>
+<div id="L956"></div>
+<div id="L957">(* continuation after a callee that returned and may have WRITTEN memory    *)</div>
+<div id="L958">(* (app sprint 2026-11-08, M0/M2 calls_mem.ml). The caller must have named  *)</div>
+<div id="L959">(* its memory (`read wmem s = mm`, mm a variable or any state-free term);   *)</div>
+<div id="L960">(* the callee&#x27;s postcondition facts about c1&#x27;s memory are rewritten to      *)</div>
+<div id="L961">(* state-free facts about the new memory before c1 goes, and the caller&#x27;s   *)</div>
+<div id="L962">(* new state is a component write (frames as for a store), so a caller      *)</div>
+<div id="L963">(* frame that names only the written bytes (MAYCHANGE [wmem :&gt; bytes ..])   *)</div>
+<div id="L964">(* survives. WASMN_DONE_CONT also uses the memory name when there is one    *)</div>
+<div id="L965">(* (WASMN_NAME_C0_MEM_TAC), but returns the callee&#x27;s whole memory, so the   *)</div>
+<div id="L966">(* caller&#x27;s frame must then name all of wmem (header: which tactic to use). *)</div>
+<div id="L967">let WASMN_DONE_MEM_CONT (sname:string) s pc_num n np c0tm : tactic =</div>
+<div id="L968">  let npc = mk_binop `(+):num-&gt;num-&gt;num` pc_num n in</div>
+<div id="L969">  let sv&#x27; = mk_var(sname,`:wasmstate`) in</div>
+<div id="L970">  let pc_th_tm = mk_eq(mk_comb(`read wpc`,s), mk_comb(`word:num-&gt;int64`,pc_num)) in</div>
+<div id="L971">  let rmem_s = mk_comb(`read wmem`,s) in</div>
+<div id="L972">  let ws = `:wasmstate` in</div>
+<div id="L973">  let is_rmem_c1 th = let c = concl th in</div>
+<div id="L974">     is_eq c &amp;&amp; lhs c = `read wmem (c1:wasmstate)` in</div>
+<div id="L975">  fun (asl,w) -&gt;</div>
+<div id="L976">  let mth = try find (fun th -&gt; let c = concl th in</div>
+<div id="L977">                is_eq c &amp;&amp; lhs c = rmem_s &amp;&amp;</div>
+<div id="L978">                not (can (find_term (fun t -&gt; type_of t = ws)) (rhs c))) (map snd asl)</div>
+<div id="L979">            with Failure _ -&gt; failwith &quot;WASMN_CALL_MEM_TAC: name the caller memory first (read wmem s = mm)&quot; in</div>
+<div id="L980">  let not_mth th = not (concl th = concl mth) in</div>
+<div id="L981">  (X_GEN_TAC `c1:wasmstate` THEN</div>
+<div id="L982">   ABBREV_TAC (mk_eq(`c0:wasmstate`, c0tm)) THEN</div>
+<div id="L983">   SUBGOAL_THEN (subst [s,`s:wasmstate`]</div>
+<div id="L984">      `read wmem (c0:wasmstate) = read wmem (s:wasmstate) /\</div>
+<div id="L985">       read wmemsize c0 = read wmemsize (s:wasmstate) /\</div>
+<div id="L986">       read wglobals c0 = read wglobals (s:wasmstate)`)</div>
+<div id="L987">     STRIP_ASSUME_TAC THENL</div>
+<div id="L988">    [EXPAND_TAC &quot;c0&quot; THEN REWRITE_TAC[WCALL_ENTRY_READS]; ALL_TAC] THEN</div>
+<div id="L989">   FIRST_X_ASSUM(fun th -&gt; if concl th = mk_eq(`read wmem (c0:wasmstate)`, rmem_s)</div>
+<div id="L990">     then MP_TAC th else NO_TAC) THEN</div>
+<div id="L991">   GEN_REWRITE_TAC (LAND_CONV o RAND_CONV) [mth] THEN DISCH_TAC THEN</div>
+<div id="L992">   DISCH_THEN(CONJUNCTS_THEN2</div>
+<div id="L993">     (STRIP_ASSUME_TAC o CONV_RULE(TOP_DEPTH_CONV BETA_CONV)) MP_TAC) THEN</div>
+<div id="L994">   GEN_REWRITE_TAC (LAND_CONV o TOP_DEPTH_CONV) [MAYCHANGE; SEQ_ID] THEN</div>
+<div id="L995">   GEN_REWRITE_TAC (LAND_CONV o TOP_DEPTH_CONV) [GSYM SEQ_ASSOC] THEN</div>
+<div id="L996">   GEN_REWRITE_TAC (LAND_CONV o TOP_DEPTH_CONV) [ASSIGNS_SEQ] THEN</div>
+<div id="L997">   GEN_REWRITE_TAC (LAND_CONV o TOP_DEPTH_CONV) [ASSIGNS_THM] THEN</div>
+<div id="L998">   REWRITE_TAC[LEFT_IMP_EXISTS_THM] THEN REPEAT GEN_TAC THEN</div>
+<div id="L999">   WASMC_MEM_UPDATE_TAC THEN ASSUMPTION_STATE_UPDATE_TAC THEN</div>
+<div id="L1000">   DISCH_THEN(K ALL_TAC) THEN</div>
+<div id="L1001">   (* callee facts about c1&#x27;s memory -&gt; state-free facts *)</div>
+<div id="L1002">   RULE_ASSUM_TAC(REWRITE_RULE[READ_COMPONENT_COMPOSE]) THEN</div>
+<div id="L1003">   FIRST_ASSUM(fun rth -&gt; if is_rmem_c1 rth then</div>
+<div id="L1004">       REPEAT(FIRST_X_ASSUM(fun th -&gt;</div>
+<div id="L1005">         if not(concl th = concl rth) &amp;&amp; free_in `read wmem (c1:wasmstate)` (concl th)</div>
+<div id="L1006">         then MP_TAC th else NO_TAC)) THEN</div>
+<div id="L1007">       REWRITE_TAC[rth] THEN REPEAT DISCH_TAC</div>
+<div id="L1008">     else NO_TAC) THEN</div>
+<div id="L1009">   SUBGOAL_THEN</div>
+<div id="L1010">     (mk_eq(list_mk_comb(`wcall_return`,</div>
+<div id="L1011">              [mk_binop `(+):num-&gt;num-&gt;num` (mk_comb(`val:int64-&gt;num`,</div>
+<div id="L1012">                 mk_comb(`read wpc`,s))) n; np; `c1:wasmstate`; s]),</div>
+<div id="L1013">            list_mk_comb(`write wpc`,</div>
+<div id="L1014">              [mk_comb(`word:num-&gt;int64`, npc);</div>
+<div id="L1015">               list_mk_comb(`write wstack`,</div>
+<div id="L1016">                 [list_mk_comb(`APPEND:wval list-&gt;wval list-&gt;wval list`,</div>
+<div id="L1017">                    [`read wstack (c1:wasmstate)`;</div>
+<div id="L1018">                     list_mk_comb(`wdrop:num-&gt;wval list-&gt;wval list`,</div>
+<div id="L1019">                                  [np; mk_comb(`read wstack`,s)])]);</div>
+<div id="L1020">                  list_mk_comb(`write wmem`, [`read wmem (c1:wasmstate)`; s])])])))</div>
+<div id="L1021">     SUBST1_TAC THENL</div>
+<div id="L1022">    [SUBGOAL_THEN (mk_eq(mk_comb(`val:int64-&gt;num`, mk_comb(`read wpc`,s)), pc_num))</div>
+<div id="L1023">       SUBST1_TAC THENL</div>
+<div id="L1024">      [REWRITE_TAC[ASSUME pc_th_tm; VAL_WORD; DIMINDEX_64] THEN CONV_TAC NUM_REDUCE_CONV;</div>
+<div id="L1025">       ALL_TAC] THEN</div>
+<div id="L1026">     MATCH_MP_TAC WCALL_RETURN_N THEN ASM_REWRITE_TAC[];</div>
+<div id="L1027">     ALL_TAC] THEN</div>
+<div id="L1028">   FIRST_X_ASSUM(fun th -&gt; if is_rmem_c1 th then REWRITE_TAC[th] else NO_TAC) THEN</div>
+<div id="L1029">   REWRITE_TAC[SYM mth] THEN</div>
+<div id="L1030">   REWRITE_TAC[WMEM_SVC; WCALL_WRITE_MEM1; WCALL_WRITE_MEM2] THEN</div>
+<div id="L1031">   (fun (asl,w) -&gt; REWRITE_TAC (filter not_mth (map snd asl)) (asl,w)) THEN</div>
+<div id="L1032">   CONV_TAC(ONCE_DEPTH_CONV WCALL_LOCALS_EVAL_CONV) THEN</div>
+<div id="L1033">   CONV_TAC(DEPTH_CONV NUM_ADD_CONV) THEN</div>
+<div id="L1034">   WASMC_GEN_STATE_TAC sv&#x27; THEN</div>
+<div id="L1035">   X_GEN_TAC sv&#x27; THEN</div>
+<div id="L1036">   WASMC_MEM_UPDATE_TAC THEN</div>
+<div id="L1037">   ASSUMPTION_STATE_UPDATE_TAC THEN</div>
+<div id="L1038">   MAYCHANGE_STATE_UPDATE_TAC THEN</div>
+<div id="L1039">   DISCH_THEN(fun th -&gt;</div>
+<div id="L1040">     let thl = STATE_UPDATE_NEW_RULE th in</div>
+<div id="L1041">     if thl = [] then ALL_TAC else MP_TAC(end_itlist CONJ thl) THEN STRIP_TAC) THEN</div>
+<div id="L1042">   WASMN_DISCARD_OLD_TAC sname THEN WASM_COMPACT_HYPS_TAC) (asl,w);;</div>
+<div id="L1043"></div>
+<div id="L1044">let WASMN_CALL_MEM_TAC execth lth cth sname =</div>
+<div id="L1045">  WASMN_CALL_GEN_TAC execth lth cth (WASMN_DONE_MEM_CONT sname);;</div>
+<div id="L1046"></div>
+<div id="L1047">let WASMN_CALL_TRAP_TAC execth lth cth sname =</div>
+<div id="L1048">  WASMN_CALL_GEN_TAC execth lth cth (WASMN_TRAP_CONT sname);;</div>
+<div id="L1049"></div>
+<div id="L1050">(* ------------------------------------------------------------------------- *)</div>
+<div id="L1051">(* Non-call steps under wasmn (twins of WASMC_CONV / WASMC_STEP_TAC).       *)</div>
+<div id="L1052">(* ------------------------------------------------------------------------- *)</div>
+<div id="L1053"></div>
+<div id="L1054">let WASMN_CONV (decode_ths:thm option array) (extra:thm list) (ths:thm list) tm =</div>
+<div id="L1055">  let fsm,s&#x27; = dest_comb tm in</div>
+<div id="L1056">  let fsm,s = dest_comb fsm in</div>
+<div id="L1057">  let fs = rand fsm in</div>
+<div id="L1058">  let eth = WASM_CONV decode_ths extra ths (mk_comb(mk_comb(`wasm`,s),s&#x27;)) in</div>
+<div id="L1059">  let pc_th = find_read_th &quot;wpc&quot; s ths</div>
+<div id="L1060">  and code_th = find_read_th &quot;wcode&quot; s ths in</div>
+<div id="L1061">  let pc_num = rand(rhs(concl pc_th)) in</div>
+<div id="L1062">  let pc = dest_small_numeral pc_num in</div>
+<div id="L1063">  let dth = match (try decode_ths.(pc) with _ -&gt; None) with</div>
+<div id="L1064">      Some th -&gt; th | None -&gt; failwith (&quot;WASMN_CONV: no decode at pc &quot;^string_of_int pc) in</div>
+<div id="L1065">  let i,n = dest_pair(rand(rhs(concl dth))) in</div>
+<div id="L1066">  let lt_th = EQT_ELIM(NUM_REDUCE_CONV(mk_binary &quot;&lt;&quot; (pc_num,`2 EXP 64`))) in</div>
+<div id="L1067">  let nth = MP (ISPECL [fs; s; s&#x27;; rhs(concl code_th); pc_num; i; n] WASMN_NONCALL)</div>
+<div id="L1068">               (end_itlist CONJ [code_th; pc_th; lt_th; dth; WASMC_NONCALL_TH i]) in</div>
+<div id="L1069">  TRANS nth eth;;</div>
+<div id="L1070"></div>
+<div id="L1071">let WASMN_BASIC_STEP_TAC =</div>
+<div id="L1072">  let ws_ty = `:wasmstate` in</div>
+<div id="L1073">  fun decode_ths extra sname (asl,w) -&gt;</div>
+<div id="L1074">    let sv = rand w and sv&#x27; = mk_var(sname,ws_ty) in</div>
+<div id="L1075">    let stepr = rand(rator(rator w)) in</div>
+<div id="L1076">    let atm = mk_comb(mk_comb(stepr,sv),sv&#x27;) in</div>
+<div id="L1077">    let eth = WASMN_CONV decode_ths extra (map snd asl) atm in</div>
+<div id="L1078">    let r = rhs(concl eth) in</div>
+<div id="L1079">    if not (is_eq r &amp;&amp; rand r = sv&#x27;) then</div>
+<div id="L1080">      failwith (&quot;WASMN_BASIC_STEP_TAC: step did not reduce to a state update: &quot;^</div>
+<div id="L1081">                string_of_term r) else</div>
+<div id="L1082">    (GEN_REWRITE_TAC I [eventually_CASES] THEN DISJ2_TAC THEN CONJ_TAC THENL</div>
+<div id="L1083">     [GEN_REWRITE_TAC BINDER_CONV [eth] THEN CONV_TAC EXISTS_NONTRIVIAL_CONV;</div>
+<div id="L1084">      X_GEN_TAC sv&#x27; THEN GEN_REWRITE_TAC LAND_CONV [eth]]) (asl,w);;</div>
+<div id="L1085"></div>
+<div id="L1086">let WASMN_STEP_TAC (_,decode_ths) extra sname =</div>
+<div id="L1087">  WASMN_BASIC_STEP_TAC decode_ths extra sname THEN</div>
+<div id="L1088">  WASM_MEM_UPDATE_TAC THEN</div>
+<div id="L1089">  ASSUMPTION_STATE_UPDATE_TAC THEN</div>
+<div id="L1090">  MAYCHANGE_STATE_UPDATE_TAC THEN</div>
+<div id="L1091">  DISCH_THEN(fun th -&gt;</div>
+<div id="L1092">    let thl = STATE_UPDATE_NEW_RULE th in</div>
+<div id="L1093">    if thl = [] then ALL_TAC else</div>
+<div id="L1094">    MP_TAC(end_itlist CONJ thl) THEN</div>
+<div id="L1095">    CONV_TAC(LAND_CONV(DEPTH_CONV(WORD_RED_CONV ORELSEC NUM_RED_CONV))) THEN</div>
+<div id="L1096">    STRIP_TAC);;</div>
+<div id="L1097"></div>
+<div id="L1098">(* compacted after each step as WASMC_STEPS_TAC (WASM_COMPACT_HYPS_TAC, #165); *)</div>
+<div id="L1099">(* the call continuations above end with it too                              *)</div>
+<div id="L1100">let WASMN_STEPS_TAC execth snums =</div>
+<div id="L1101">  MAP_EVERY (fun s -&gt; WASMN_STEP_TAC execth [] s THEN WASMN_DISCARD_OLD_TAC s THEN</div>
+<div id="L1102">                      WASM_COMPACT_HYPS_TAC)</div>
+<div id="L1103">            (statenames &quot;s&quot; snums);;</div>
+<div id="L1104"></div>
+<div id="L1105"></div>
+<div id="L1106"></div>
+<div id="L1107">(* ------------------------------------------------------------------------- *)</div>
+<div id="L1108">(* From wasmc to wasmn (hol-hearth wasm tooling H2, 2026-11-11).             *)</div>
+<div id="L1109">(* wasmc fs (wasm_call.ml) runs a callee under plain wasm; wasmn fs runs it  *)</div>
+<div id="L1110">(* under wasmf, so every wasmc step is a wasmn step (WASMC_WASMN). wasmn fs  *)</div>
+<div id="L1111">(* is deterministic (WASMN_DET), so a total-correctness result transfers:   *)</div>
+<div id="L1112">(* eventually (wasmc fs) P s ==&gt; eventually (wasmn fs) P s                   *)</div>
+<div id="L1113">(* (EVENTUALLY_WASMC_WASMN; ENSURES_WASMC_WASMN for leaves). The transfer is *)</div>
+<div id="L1114">(* the generic EVENTUALLY_SUBREL_DET: a sub-relation of a deterministic      *)</div>
+<div id="L1115">(* relation reaches every eventually-goal it reaches.                        *)</div>
+<div id="L1116">(* ------------------------------------------------------------------------- *)</div>
+<div id="L1117"></div>
+<div id="L1118">let RTC_WASM_WASMF = prove</div>
+<div id="L1119"> (`!fs a b. RTC wasm a b ==&gt; RTC (wasmf fs) (a,[]) (b,[])`,</div>
+<div id="L1120">  GEN_TAC THEN MATCH_MP_TAC RTC_INDUCT THEN CONV_TAC(TOP_DEPTH_CONV BETA_CONV) THEN</div>
+<div id="L1121">  REPEAT CONJ_TAC THENL</div>
+<div id="L1122">   [REPEAT STRIP_TAC THEN MATCH_MP_TAC RTC_INC THEN</div>
+<div id="L1123">    FIRST_ASSUM(fun th -&gt; REWRITE_TAC[MATCH_MP WASMF_WASM_STEP th]) THEN</div>
+<div id="L1124">    ASM_REWRITE_TAC[];</div>
+<div id="L1125">    REWRITE_TAC[RTC_REFL];</div>
+<div id="L1126">    MESON_TAC[RTC_TRANS]]);;</div>
+<div id="L1127"></div>
+<div id="L1128">let WASMC_WASMN = prove</div>
+<div id="L1129"> (`!fs s s&#x27;. wasmc fs s s&#x27; ==&gt; wasmn fs s s&#x27;`,</div>
+<div id="L1130">  REWRITE_TAC[wasmc; wasmn; wasm_call; wasm_calln] THEN MESON_TAC[RTC_WASM_WASMF]);;</div>
+<div id="L1131"></div>
+<div id="L1132">(* a deterministic relation reaches at most one terminal state *)</div>
+<div id="L1133">let RTC_DET_FINAL = prove</div>
+<div id="L1134"> (`!(R:A-&gt;A-&gt;bool).</div>
+<div id="L1135">     (!x y z. R x y /\ R x z ==&gt; y = z)</div>
+<div id="L1136">     ==&gt; !x y. RTC R x y</div>
+<div id="L1137">               ==&gt; !z. RTC R x z /\ (!u. ~R y u) /\ (!u. ~R z u) ==&gt; y = z`,</div>
+<div id="L1138">  GEN_TAC THEN DISCH_TAC THEN MATCH_MP_TAC RTC_INDUCT_R THEN</div>
+<div id="L1139">  CONV_TAC(TOP_DEPTH_CONV BETA_CONV) THEN CONJ_TAC THENL</div>
+<div id="L1140">   [MESON_TAC[RTC_CASES_R]; ASM_MESON_TAC[RTC_CASES_R]]);;</div>
+<div id="L1141"></div>
+<div id="L1142">let WASM_CALLN_DET = prove</div>
+<div id="L1143"> (`!fs f npc s a b.</div>
+<div id="L1144">     wasm_calln fs f npc s a /\ wasm_calln fs f npc s b ==&gt; a = b`,</div>
+<div id="L1145">  REPEAT GEN_TAC THEN REWRITE_TAC[wasm_calln] THEN</div>
+<div id="L1146">  DISCH_THEN(CONJUNCTS_THEN2</div>
+<div id="L1147">   (X_CHOOSE_THEN `code1:byte list` (X_CHOOSE_THEN `np1:num` (X_CHOOSE_THEN `nr1:num`</div>
+<div id="L1148">     (X_CHOOSE_THEN `e1:num` (X_CHOOSE_THEN `decls1:wval list`</div>
+<div id="L1149">       (X_CHOOSE_THEN `c1:wasmstate` STRIP_ASSUME_TAC))))))</div>
+<div id="L1150">   (X_CHOOSE_THEN `code2:byte list` (X_CHOOSE_THEN `np2:num` (X_CHOOSE_THEN `nr2:num`</div>
+<div id="L1151">     (X_CHOOSE_THEN `e2:num` (X_CHOOSE_THEN `decls2:wval list`</div>
+<div id="L1152">       (X_CHOOSE_THEN `c2:wasmstate` STRIP_ASSUME_TAC))))))) THEN</div>
+<div id="L1153">  SUBGOAL_THEN `code2:byte list = code1 /\ np2:num = np1 /\ nr2:num = nr1`</div>
+<div id="L1154">    (REPEAT_TCL CONJUNCTS_THEN SUBST_ALL_TAC) THENL</div>
+<div id="L1155">   [UNDISCH_TAC `(fs:num-&gt;byte list#num#num) f = (code1,np1,nr1)` THEN</div>
+<div id="L1156">    ASM_REWRITE_TAC[PAIR_EQ] THEN MESON_TAC[];</div>
+<div id="L1157">    ALL_TAC] THEN</div>
+<div id="L1158">  SUBGOAL_THEN `e2:num = e1 /\ decls2:wval list = decls1`</div>
+<div id="L1159">    (CONJUNCTS_THEN SUBST_ALL_TAC) THENL [ASM_MESON_TAC[option_INJ]; ALL_TAC] THEN</div>
+<div id="L1160">  SUBGOAL_THEN `c2:wasmstate = c1` SUBST_ALL_TAC THENL</div>
+<div id="L1161">   [ALL_TAC; ASM_REWRITE_TAC[]] THEN</div>
+<div id="L1162">  MP_TAC(MATCH_MP (ISPEC `wasmf fs` RTC_DET_FINAL) (SPEC `fs:num-&gt;byte list#num#num` WASMF_DET)) THEN</div>
+<div id="L1163">  DISCH_THEN(MP_TAC o SPECL</div>
+<div id="L1164">   [`(wcall_entry code1 np1 nr1 (read wstack s) e1 decls1 s,[]:(wasmstate#num#num)list)`;</div>
+<div id="L1165">    `(c2:wasmstate,[]:(wasmstate#num#num)list)`]) THEN</div>
+<div id="L1166">  ASM_REWRITE_TAC[] THEN</div>
+<div id="L1167">  DISCH_THEN(MP_TAC o SPEC `(c1:wasmstate,[]:(wasmstate#num#num)list)`) THEN</div>
+<div id="L1168">  ASM_SIMP_TAC[WASMF_FINAL; PAIR_EQ]);;</div>
+<div id="L1169"></div>
+<div id="L1170">let WASMN_DET = prove</div>
+<div id="L1171"> (`!fs s a b. wasmn fs s a /\ wasmn fs s b ==&gt; a = b`,</div>
+<div id="L1172">  REPEAT GEN_TAC THEN ASM_CASES_TAC `?u. wasm s u` THENL</div>
+<div id="L1173">   [FIRST_X_ASSUM(X_CHOOSE_TAC `u:wasmstate`) THEN REWRITE_TAC[wasmn] THEN</div>
+<div id="L1174">    SUBGOAL_THEN `!f n. ~(wasm_decode (read wcode s) (val (read wpc s)) = SOME (Wcall f,n))`</div>
+<div id="L1175">      (fun th -&gt; REWRITE_TAC[th]) THENL</div>
+<div id="L1176">     [ASM_MESON_TAC[WASM_WCALL_NO_STEP]; MESON_TAC[WASM_DETERMINISTIC]];</div>
+<div id="L1177">    RULE_ASSUM_TAC(REWRITE_RULE[NOT_EXISTS_THM]) THEN ASM_REWRITE_TAC[wasmn] THEN</div>
+<div id="L1178">    DISCH_THEN(CONJUNCTS_THEN2</div>
+<div id="L1179">      (CONJUNCTS_THEN2 ASSUME_TAC (X_CHOOSE_THEN `f1:num` (X_CHOOSE_THEN `n1:num` STRIP_ASSUME_TAC)))</div>
+<div id="L1180">      (CONJUNCTS_THEN2 ASSUME_TAC (X_CHOOSE_THEN `f2:num` (X_CHOOSE_THEN `n2:num` STRIP_ASSUME_TAC)))) THEN</div>
+<div id="L1181">    SUBGOAL_THEN `f2:num = f1 /\ n2:num = n1` (CONJUNCTS_THEN SUBST_ALL_TAC) THENL</div>
+<div id="L1182">     [UNDISCH_TAC `wasm_decode (read wcode s) (val (read wpc s)) = SOME (Wcall f1,n1)` THEN</div>
+<div id="L1183">      ASM_REWRITE_TAC[option_INJ; PAIR_EQ; WCALL_INJ] THEN MESON_TAC[];</div>
+<div id="L1184">      ASM_MESON_TAC[WASM_CALLN_DET]]]);;</div>
+<div id="L1185"></div>
+<div id="L1186">let EVENTUALLY_SUBREL_DET = prove</div>
+<div id="L1187"> (`!(r1:A-&gt;A-&gt;bool) r2 P.</div>
+<div id="L1188">     (!x y. r1 x y ==&gt; r2 x y) /\ (!x y z. r2 x y /\ r2 x z ==&gt; y = z)</div>
+<div id="L1189">     ==&gt; !s. eventually r1 P s ==&gt; eventually r2 P s`,</div>
+<div id="L1190">  REPEAT GEN_TAC THEN STRIP_TAC THEN MATCH_MP_TAC eventually_INDUCT THEN</div>
+<div id="L1191">  CONJ_TAC THENL [MESON_TAC[eventually_RULES]; ALL_TAC] THEN</div>
+<div id="L1192">  X_GEN_TAC `s:A` THEN DISCH_THEN(CONJUNCTS_THEN2 (X_CHOOSE_TAC `s1:A`) ASSUME_TAC) THEN</div>
+<div id="L1193">  ONCE_REWRITE_TAC[eventually_CASES] THEN DISJ2_TAC THEN ASM_MESON_TAC[]);;</div>
+<div id="L1194"></div>
+<div id="L1195">let EVENTUALLY_WASMC_WASMN = prove</div>
+<div id="L1196"> (`!fs P s. eventually (wasmc fs) P s ==&gt; eventually (wasmn fs) P s`,</div>
+<div id="L1197">  GEN_TAC THEN GEN_TAC THEN MATCH_MP_TAC EVENTUALLY_SUBREL_DET THEN</div>
+<div id="L1198">  REWRITE_TAC[WASMC_WASMN; WASMN_DET]);;</div>
+<div id="L1199"></div>
+<div id="L1200">let ENSURES_WASMC_WASMN = prove</div>
+<div id="L1201"> (`!fs (P:wasmstate-&gt;bool) Q C. ensures (wasmc fs) P Q C ==&gt; ensures (wasmn fs) P Q C`,</div>
+<div id="L1202">  REWRITE_TAC[ensures] THEN MESON_TAC[EVENTUALLY_WASMC_WASMN]);;</div>
+<div id="L1203"></div>
+<div id="L1204">(* ------------------------------------------------------------------------- *)</div>
+<div id="L1205">(* A component written and then restored drops out of the frame (H2, G3).    *)</div>
+<div id="L1206">(* A callee that moves the stack pointer global and puts it back has a       *)</div>
+<div id="L1207">(* frame C ,, MAYCHANGE [c] with read c s&#x27; = read c s at the end; then C     *)</div>
+<div id="L1208">(* alone is a frame for it, provided C keeps c and c is a valid component.  *)</div>
+<div id="L1209">(* WASM_ENSURES_GLOBAL_RESTORED is the instance for wglobal k.              *)</div>
+<div id="L1210">(* ------------------------------------------------------------------------- *)</div>
+<div id="L1211"></div>
+<div id="L1212">let MAYCHANGE_RESTORED = prove</div>
+<div id="L1213"> (`!(c:(A,B)component) (C:A-&gt;A-&gt;bool).</div>
+<div id="L1214">     strongly_valid_component c /\ (!s s&#x27;. C s s&#x27; ==&gt; read c s&#x27; = read c s)</div>
+<div id="L1215">     ==&gt; !s s&#x27;. (C ,, MAYCHANGE [c]) s s&#x27; /\ read c s&#x27; = read c s ==&gt; C s s&#x27;`,</div>
+<div id="L1216">  REWRITE_TAC[STRONGLY_VALID_COMPONENT_UNWAP; read_over_write; write_over_read;</div>
+<div id="L1217">              write_over_write; MAYCHANGE; SEQ_ID; seq; ASSIGNS_THM] THEN</div>
+<div id="L1218">  CONV_TAC(TOP_DEPTH_CONV BETA_CONV) THEN MESON_TAC[]);;</div>
+<div id="L1219"></div>
+<div id="L1220">let ENSURES_MAYCHANGE_RESTORED = prove</div>
+<div id="L1221"> (`!(step:A-&gt;A-&gt;bool) P Q C (c:(A,B)component).</div>
+<div id="L1222">     strongly_valid_component c /\ (!s s&#x27;. C s s&#x27; ==&gt; read c s&#x27; = read c s) /\</div>
+<div id="L1223">     (!s s&#x27;. P s /\ Q s&#x27; /\ (C ,, MAYCHANGE [c]) s s&#x27; ==&gt; read c s&#x27; = read c s) /\</div>
+<div id="L1224">     ensures step P Q (C ,, MAYCHANGE [c])</div>
+<div id="L1225">     ==&gt; ensures step P Q C`,</div>
+<div id="L1226">  REPEAT GEN_TAC THEN</div>
+<div id="L1227">  DISCH_THEN(CONJUNCTS_THEN2 ASSUME_TAC (CONJUNCTS_THEN2 ASSUME_TAC</div>
+<div id="L1228">    (CONJUNCTS_THEN2 ASSUME_TAC MP_TAC))) THEN</div>
+<div id="L1229">  REWRITE_TAC[ensures] THEN MATCH_MP_TAC MONO_FORALL THEN X_GEN_TAC `s:A` THEN</div>
+<div id="L1230">  DISCH_THEN(fun th -&gt; DISCH_TAC THEN MP_TAC(UNDISCH th)) THEN</div>
+<div id="L1231">  MATCH_MP_TAC(REWRITE_RULE[RIGHT_IMP_FORALL_THM] EVENTUALLY_MONO) THEN</div>
+<div id="L1232">  CONV_TAC(TOP_DEPTH_CONV BETA_CONV) THEN X_GEN_TAC `s&#x27;:A` THEN STRIP_TAC THEN</div>
+<div id="L1233">  ASM_REWRITE_TAC[] THEN</div>
+<div id="L1234">  MP_TAC(ISPECL [`c:(A,B)component`; `C:A-&gt;A-&gt;bool`] MAYCHANGE_RESTORED) THEN</div>
+<div id="L1235">  ASM_REWRITE_TAC[] THEN DISCH_THEN MATCH_MP_TAC THEN ASM_MESON_TAC[]);;</div>
+<div id="L1236"></div>
+<div id="L1237">let WASM_ENSURES_GLOBAL_RESTORED = prove</div>
+<div id="L1238"> (`!(step:wasmstate-&gt;wasmstate-&gt;bool) P Q C k.</div>
+<div id="L1239">     (!s s&#x27;. C s s&#x27; ==&gt; read (wglobal k) s&#x27; = read (wglobal k) s) /\</div>
+<div id="L1240">     (!s s&#x27;. P s /\ Q s&#x27; /\ (C ,, MAYCHANGE [wglobal k]) s s&#x27;</div>
+<div id="L1241">             ==&gt; read (wglobal k) s&#x27; = read (wglobal k) s) /\</div>
+<div id="L1242">     ensures step P Q (C ,, MAYCHANGE [wglobal k])</div>
+<div id="L1243">     ==&gt; ensures step P Q C`,</div>
+<div id="L1244">  REPEAT STRIP_TAC THEN</div>
+<div id="L1245">  MATCH_MP_TAC(ISPECL [`step:wasmstate-&gt;wasmstate-&gt;bool`; `P:wasmstate-&gt;bool`;</div>
+<div id="L1246">                       `Q:wasmstate-&gt;bool`; `C:wasmstate-&gt;wasmstate-&gt;bool`; `wglobal k`]</div>
+<div id="L1247">                      ENSURES_MAYCHANGE_RESTORED) THEN</div>
+<div id="L1248">  REPEAT CONJ_TAC THEN TRY(FIRST_ASSUM ACCEPT_TAC) THEN</div>
+<div id="L1249">  REWRITE_TAC[wglobal] THEN MATCH_MP_TAC STRONGLY_VALID_COMPONENT_COMPOSE THEN</div>
+<div id="L1250">  REWRITE_TAC[STRONGLY_VALID_COMPONENT_ELEMENT] THEN</div>
+<div id="L1251">  REWRITE_TAC[strongly_valid_component; WGLOBALS_SVC]);;</div>
+<div id="L1252"></div>
+<div id="L1253">(* ------------------------------------------------------------------------- *)</div>
+<div id="L1254">(* Loops whose bodies make calls (hol-hearth wasm tooling H4, 2026-11-11).   *)</div>
+<div id="L1255">(*                                                                           *)</div>
+<div id="L1256">(* WASMC_SITE_TAC sth sname: one caller-level step through a call site      *)</div>
+<div id="L1257">(*   lemma sth |- !v1 .. vk. ensures (wasmc fs) P Q C (all other premises    *)</div>
+<div id="L1258">(*   discharged; e.g. a WASMC_CALL0_SITE_TAC lemma at a fixed pc). The       *)</div>
+<div id="L1259">(*   values v1 .. vk are found by matching P&#x27;s conjuncts, at the current    *)</div>
+<div id="L1260">(*   state, against the assumptions (so name them as P does, e.g.           *)</div>
+<div id="L1261">(*   read (wmem :&gt; bytes32 (word 0)) s = n); then WASMC_BIGSTEP_TAC sname,   *)</div>
+<div id="L1262">(*   discarding old states and compacting hypotheses as WASMC_STEPS_TAC.    *)</div>
+<div id="L1263">(* WASMC_SIM_CALLS_TAC execth sites snums: WASMC_STEPS_TAC over snums, but  *)</div>
+<div id="L1264">(*   a state whose pc is a key of sites (pc, sth) steps by WASMC_SITE_TAC.  *)</div>
+<div id="L1265">(* WASMC_WHILE_UP_TAC k pc1 pc2 inv: s2n&#x27;s ENSURES_WHILE_UP_TAC (generic in *)</div>
+<div id="L1266">(*   the step relation) with the ~(k = 0) side goal closed from the         *)</div>
+<div id="L1267">(*   assumptions; leaves entry, body, back-edge test and exit, in order.   *)</div>
+<div id="L1268">(*   The body goal is stepped with WASMC_SIM_CALLS_TAC.                     *)</div>
+<div id="L1269">(* Regression: wasm/demos/loop_calls.ml (a counted loop calling a leaf).     *)</div>
+<div id="L1270">(* ------------------------------------------------------------------------- *)</div>
+<div id="L1271"></div>
+<div id="L1272">let WASMC_SITE_TAC (sth0:thm) (sname:string) : tactic = fun (asl,w) -&gt;</div>
+<div id="L1273">  let s = rand w in</div>
+<div id="L1274">  (* freshen the lemma&#x27;s binders away from the goal and assumptions: term_match *)</div>
+<div id="L1275">  (* drops identity bindings, so a binder named like the assumption&#x27;s value    *)</div>
+<div id="L1276">  (* would otherwise get no instance                                           *)</div>
+<div id="L1277">  let vs0 = fst(strip_forall(concl sth0)) in</div>
+<div id="L1278">  let avoid = itlist (fun (_,th) acc -&gt; union (frees(concl th)) acc) asl (frees w) in</div>
+<div id="L1279">  let vs1 = variants avoid vs0 in</div>
+<div id="L1280">  let sth = GENL vs1 (SPECL vs1 sth0) in</div>
+<div id="L1281">  let vs,body = strip_forall(concl sth) in</div>
+<div id="L1282">  let pp = el 1 (snd(strip_comb body)) in</div>
+<div id="L1283">  let pbody = rhs(concl(BETA_CONV(mk_comb(pp,s)))) in</div>
+<div id="L1284">  let conjs = conjuncts pbody in</div>
+<div id="L1285">  let asms = map (concl o snd) asl in</div>
+<div id="L1286">  let lconsts = subtract (frees pbody) vs in</div>
+<div id="L1287">  let inst = itlist (fun c acc -&gt;</div>
+<div id="L1288">      let c&#x27; = subst acc c in</div>
+<div id="L1289">      if intersect (frees c&#x27;) vs = [] then acc else</div>
+<div id="L1290">      try let _,tmin,_ = tryfind (fun a -&gt; term_match lconsts c&#x27; a) asms in tmin @ acc</div>
+<div id="L1291">      with Failure _ -&gt; acc) conjs [] in</div>
+<div id="L1292">  let vals = map (fun v -&gt; try rev_assoc v inst with Failure _ -&gt;</div>
+<div id="L1293">      failwith (&quot;WASMC_SITE_TAC: no assumption gives &quot;^fst(dest_var v))) vs in</div>
+<div id="L1294">  (MP_TAC(SPECL vals sth) THEN WASMC_BIGSTEP_TAC sname THEN</div>
+<div id="L1295">   DISCARD_OLD_WASMSTATE_TAC sname THEN WASM_COMPACT_HYPS_TAC) (asl,w);;</div>
+<div id="L1296"></div>
+<div id="L1297">let WASMC_SIM_CALLS_TAC execth (sites:(int*thm) list) snums : tactic =</div>
+<div id="L1298">  MAP_EVERY (fun k -&gt; fun (asl,w) -&gt;</div>
+<div id="L1299">      let s = rand w in</div>
+<div id="L1300">      let pc_th = find (fun th -&gt; let c = concl th in</div>
+<div id="L1301">          is_eq c &amp;&amp; lhs c = mk_comb(`read wpc`,s)) (map snd asl) in</div>
+<div id="L1302">      let pc = dest_small_numeral(rand(rhs(concl pc_th))) in</div>
+<div id="L1303">      (match (try Some(assoc pc sites) with Failure _ -&gt; None) with</div>
+<div id="L1304">         Some sth -&gt; WASMC_SITE_TAC sth (&quot;s&quot;^string_of_int k)</div>
+<div id="L1305">       | None -&gt; WASMC_STEPS_TAC execth [k]) (asl,w))</div>
+<div id="L1306">    snums;;</div>
+<div id="L1307"></div>
+<div id="L1308">let WASMC_WHILE_UP_TAC k pc1 pc2 inv =</div>
+<div id="L1309">  ENSURES_WHILE_UP_TAC k pc1 pc2 inv THEN REPEAT CONJ_TAC THENL</div>
+<div id="L1310">   [ASM_REWRITE_TAC[]; ALL_TAC; ALL_TAC; ALL_TAC; ALL_TAC];;</div>
+<div id="L1311"></div>
+<div id="L1312">(* ------------------------------------------------------------------------- *)</div>
+<div id="L1313">(* Float branches (hol-hearth wasm tooling H5, 2026-11-11).                  *)</div>
+<div id="L1314">(*                                                                           *)</div>
+<div id="L1315">(* A float compare leaves I32 (word (bitval (wfrel k a b))) on the stack and *)</div>
+<div id="L1316">(* a trapping trunc tests wftrap k a; a following br_if / if / trap test is *)</div>
+<div id="L1317">(* decided by WASM_CONV only when the atom (or its negation) is an           *)</div>
+<div id="L1318">(* assumption. WASM_F64_CASES_TAC splits on the first undecided wfrel or    *)</div>
+<div id="L1319">(* wftrap atom with state-free arguments, searching the assumptions newest  *)</div>
+<div id="L1320">(* first (so the value the last step pushed wins), then the goal, and in    *)</div>
+<div id="L1321">(* each term outer atoms before atoms nested in their operands; for full    *)</div>
+<div id="L1322">(* control use ASM_CASES_TAC on the atom directly.                          *)</div>
+<div id="L1323">(* (ASM_CASES_TAC), so each branch steps with the atom decided. The         *)</div>
+<div id="L1324">(* atom is never unfolded, so this works with the opaque float operations  *)</div>
+<div id="L1325">(* and with exact ones alike.                                                *)</div>
+<div id="L1326">(* WASM_F64_JOIN_TAC pc join: ENSURES_SEQUENCE_TAC at the join pc with the   *)</div>
+<div id="L1327">(* join assertion; state at the join what the rest needs, e.g. the exact    *)</div>
+<div id="L1328">(* value (local 0 = F64 (if wfrel k a b then u else v)) or only its type    *)</div>
+<div id="L1329">(* (?v. read (wlocal k) s = F64 v), so the paths do not multiply past the  *)</div>
+<div id="L1330">(* join. Regression: wasm/demos/f64_cases.ml.                               *)</div>
+<div id="L1331">(* ------------------------------------------------------------------------- *)</div>
+<div id="L1332"></div>
+<div id="L1333">let WASM_F64_CASES_TAC : tactic = fun (asl,w) -&gt;</div>
+<div id="L1334">  let ws = `:wasmstate` in</div>
+<div id="L1335">  let is_atom t =</div>
+<div id="L1336">    match strip_comb t with</div>
+<div id="L1337">      Const((&quot;wfrel&quot;|&quot;wftrap&quot;) as n,_),args -&gt;</div>
+<div id="L1338">        length args = (if n = &quot;wfrel&quot; then 3 else 2) &amp;&amp;</div>
+<div id="L1339">        not (can (find_term (fun u -&gt; type_of u = ws)) t)</div>
+<div id="L1340">    | _ -&gt; false in</div>
+<div id="L1341">  (* newest assumption first (the stack fact of the latest state), then the  *)</div>
+<div id="L1342">  (* goal; within one term, outer atoms before atoms inside their operands    *)</div>
+<div id="L1343">  let ordered tm =</div>
+<div id="L1344">    let ats = find_terms is_atom tm in</div>
+<div id="L1345">    let outer = filter (fun t -&gt; not (exists (fun u -&gt; u &lt;&gt; t &amp;&amp; free_in t u) ats)) ats in</div>
+<div id="L1346">    outer @ subtract ats outer in</div>
+<div id="L1347">  let cands = List.concat (map (fun (_,th) -&gt; ordered (concl th)) asl) @ ordered w in</div>
+<div id="L1348">  let decided t = exists (fun (_,th) -&gt; let c = concl th in c = t || c = mk_neg t) asl in</div>
+<div id="L1349">  let t = try find (not o decided) cands</div>
+<div id="L1350">          with Failure _ -&gt; failwith &quot;WASM_F64_CASES_TAC: no undecided wfrel/wftrap atom&quot; in</div>
+<div id="L1351">  ASM_CASES_TAC t (asl,w);;</div>
+<div id="L1352"></div>
+<div id="L1353">let WASM_F64_JOIN_TAC (pc:term) (join:term) : tactic =</div>
+<div id="L1354">  ENSURES_SEQUENCE_TAC pc join;;</div>
+</div>
+<p class="dim">Generated by <code>tools/build_trail.py</code> from the published files; checked by <code>tools/check_trail.py</code>.</p>
+</body>
+</html>
