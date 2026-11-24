@@ -918,15 +918,16 @@ void main() { vec2 q = gl_PointCoord * 2.0 - 1.0; q.y = -q.y; vec2 pr = vec2(-vA
   const compOf = re => (re > PI / 2 ? 1 - Math.sin(Math.min(PI, re)) : 0);   // fraction of the circumference lost since the equator (reads reff)
   const compG = rd => smooth(Math.sqrt(compOf(rd)), 0.0, 0.75);   // 0 before the equator, 1 when heavily compressed
   const bandW = re => FLAPW * (1 - 0.8 * smooth(re, PI / 2 - 0.1, PI / 2 + 0.35));   // the strip narrows as the rim gathers it
-  const LACE = +(Q.get('lace') || 2.5), KNOT = +(Q.get('knot') || 0.85);   // v4.3 thread lace and beading (0 = v4.2); v4.6: more beaded (v4.3-v4.5: 0.7)
+  const LACE = +(Q.get('lace') || 0.0001), KNOT = +(Q.get('knot') || 0.0001);   // R18 (caterpillar fix): no lace or beading (v4.6-v5.8: lace 2.5, knot 0.85)   // v4.3 thread lace and beading (0 = v4.2); v4.6: more beaded (v4.3-v4.5: 0.7)
   // v4.6: the refs' rim thread is thin and beaded, a little brighter than the mist, not a bright white double line:
   // thread brightness (thb) and side-strand brightness (strb) scaled down (v4.3-v4.5: thb 1, strb 0.55, thw 1.5)
   const THB = +(Q.get('thb') || 0.7), STRB = +(Q.get('strb') || 0.3);
-  const RIBW = +(Q.get('ribw') || 4.0), RIBB = +(Q.get('ribb') || 0.6), RIBM = +(Q.get('ribm') ?? 0.75), RIBH = +(Q.get('ribh') ?? 0.5);   // v4.7 late ribbon
+  const RIBW = +(Q.get('ribw') || 0.0001), RIBB = +(Q.get('ribb') || 0.0001),   /* R18: no late ribbon (v4.7-v5.8: ribw 4.0, ribb 0.6) */ RIBM = +(Q.get('ribm') ?? 0.75), RIBH = +(Q.get('ribh') ?? 0.5);   // v4.7 late ribbon
   // v4.3: in the room look the film is nearly clear, so a thread seen through it is barely dimmed (v3-v4.2: 0.18), and the
   // thread is drawn a little thicker; spray streams out from the surface as well as trailing (the veil beyond the outline)
-  const STRANDS = +(Q.get('strands') || 1);
-  const BEHIND = +(Q.get('behind') || (LOOK === 'r' ? 0.7 : 0.18)), THW = +(Q.get('thw') || 1.15), NOUT = +(Q.get('nout') || 0.05);   // v4.3 thread lace and beading (0 = v4.2)
+  const STRANDS = +(Q.get('strands') || 0.0001);   // R18: no side strands (v4.3-v5.8: 1)
+  const CRL = +(Q.get('crl') ?? 0);   // R18: brightness of the corrugation-crest strands (0 = off; v4-v5.8 drew them at 1)
+  const BEHIND = +(Q.get('behind') || (LOOK === 'r' ? 0.7 : 0.18)), THW = +(Q.get('thw') || 0.6) /* R18: thinner thread (v4.6-v5.8: 1.15) */, NOUT = +(Q.get('nout') || 0.05);   // v4.3 thread lace and beading (0 = v4.2)
   const LIFTC = +(Q.get('lift') || 0.016), SPLAYK = +(Q.get('splay') || 1);                       // modest outward lift of the compressed thread
   const SP = { x: 0, y: 0, z: 0, mx: 0, my: 0, mz: 0, crease: 0, rd: 0, r: 0, re: 0, h: 0, cg: 0 };
   // v5.7 (performance): the thread's noise depends on (u, sd, dth) only, not on t, so it is computed once per column
@@ -1041,8 +1042,8 @@ void main() { vec2 q = gl_PointCoord * 2.0 - 1.0; q.y = -q.y; vec2 pr = vec2(-vA
   // age between pina ticks (a pure function of the record). Their haze is kept.
   // v5.5: jet drawing (str: dash length in ticks of flight; min: shortest dash; b, t: brightness and its decay in ticks; lig:
   // ligament brightness; brk: ages over which the ligament breaks into drops) and the random spray dashes turned down (dash)
-  const JDR = { str: +(Q.get('jstr') || 2), min: 0.002, b: +(Q.get('jb') || 0.30), t: +(Q.get('jt') || 20), lig: +(Q.get('jlig') || 0.8), brk: (Q.get('jbrk') || '6,26').split(',').map(Number) };
-  const DASH = +(Q.get('dash') ?? 0.4), BIGB = +(Q.get('bigb') || 1.3);
+  const JDR = { str: +(Q.get('jstr') || 2), min: 0.002, b: +(Q.get('jb') || 0.05) /* R18 (v5.5-v5.8: 0.30) */, t: +(Q.get('jt') || 20), lig: +(Q.get('jlig') || 0.0001) /* R18 (v5.5-v5.8: 0.8) */, brk: (Q.get('jbrk') || '6,26').split(',').map(Number) };
+  const DASH = +(Q.get('dash') ?? 0.1) /* R18 (v5.5-v5.8: 0.4) */, BIGB = +(Q.get('bigb') || 1.3);
   // v5.8 (refs 103, 105: the fringe beyond the rim is a soft grey hair, the streaks slightly curved with grey mist between
   // them, not crisp straight needles; 106-107: the swept hole is dark, no hatching): jets bend gently off the surface
   // (each drop offset along its birth normal by jcv x (distance flown)^2, so a jet's string of drops curves, tip most), their
@@ -1236,7 +1237,7 @@ void main(){ vec3 h = texture(uA, vUV).rgb + uW * texture(uB, vUV).rgb; h = h / 
         if (rimFrontR(RD2[k], RD2[(k + 1) & (M - 1)], RD2[(k + M - 1) & (M - 1)], k, LF6) < 0.35) continue;
         const g = ligament(k, RD2[k], (z / SZ) * (0.7 + 0.6 * cg), HMk[k], LG, LF6), o = 6 * k * NSUB;
         let px = ED[o], py = ED[o + 1], pz = ED[o + 2];
-        const a = (0.10 + 0.28 * cg) * Math.min(1, z / zp) * (behindFilm(px, py, pz) ? 0.2 : 1), bx = px, by = py, bz = pz;
+        const a = CRL * (0.10 + 0.28 * cg) * Math.min(1, z / zp) * (behindFilm(px, py, pz) ? 0.2 : 1), bx = px, by = py, bz = pz;
         for (let j = 1; j <= 4; j++) { const u = j / 4, w0 = u - 0.5 * u * u, w1 = 0.5 * u * u;
           const x = bx + g[9] * (w0 * g[3] + w1 * g[6]), y = by + g[9] * (w0 * g[4] + w1 * g[7]), zz = bz + g[9] * (w0 * g[5] + w1 * g[8]);
           line(px, py, pz, x, y, zz, a * (1 - 0.6 * u)); px = x; py = y; pz = zz; } }
@@ -1285,7 +1286,7 @@ void main(){ vec3 h = texture(uA, vUV).rgb + uW * texture(uB, vUV).rgb; h = h / 
       // cobwebs (v4): lacy strands only where the fronts have met. A met bead pair sits on the meeting line; T (the arrival
       // time solved at the puncture) at that point says when they met, so strands show for WEBT ticks after a meeting and
       // fade. Strands join neighbouring meeting points with a sagging, wobbling thread and a few short side hairs.
-      const tnow = tick - popTick, WEBT = +(Q.get('webt') || 60);   // v4.5: cobwebs linger in the cloud (v4.1-v4.4: 34)
+      const tnow = tick - popTick, WEBT = +(Q.get('webt') || 1);   // R18: cobwebs fade at once (v4.5-v5.8: 60)   // v4.5: cobwebs linger in the cloud (v4.1-v4.4: 34)
       for (let k = 0; k < HALF; k += 6) {
         const k2 = k + 6; if (REF[k] < PI - 0.05 || REF[k2 % M] < PI - 0.05) continue;
         rimPos(RM[k], k, P6); const age = tnow - eT(P6[0], P6[1], P6[2]); if (age < 0 || age > WEBT) continue;
