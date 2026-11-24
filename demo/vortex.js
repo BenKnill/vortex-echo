@@ -782,7 +782,7 @@ ${LOOK_C ? `  vec3 R = min(film * uGain * (1.0 + 5.0 * pow(1.0 - ci, 3.0)) + vec
   const VS_PT = PRE + `in vec4 aP; in vec4 aK; uniform mat4 uVP; uniform float uFocal; out vec4 vK;
 void main() { vec4 c = uVP * vec4(aP.xyz, 1.0); gl_Position = c; gl_PointSize = clamp(2.0 * aP.w * uFocal / c.w, 1.5, 60.0); vK = aK; }`;
   const FS_PT = PRE + ENV + `in vec4 vK; uniform vec3 uCX, uCY, uCZ; out vec4 o;
-void main() { vec2 q = gl_PointCoord * 2.0 - 1.0; q.y = -q.y; float r2 = dot(q, q); if (r2 > 1.0) discard;
+void main() { vec2 q = gl_PointCoord * 2.0 - 1.0; q.y = -q.y; float r2 = dot(q, q); if (r2 > 1.0 || vK.z < -0.5) discard;   // R19: vK.z = -1 marks a haze-only point
   if (vK.z > 0.5) { o = vec4((vK.z > 1.5 ? vec3(0.25, 0.55, 1.6) : vec3(1.6, 0.35, 0.25)) * (1.0 - 0.5 * r2), 1.0); return; }
   vec3 n = vec3(q, sqrt(1.0 - r2)); vec3 rv = vec3(0.0, 0.0, -1.0) + 2.0 * n.z * n; vec3 rw = rv.x * uCX + rv.y * uCY + rv.z * uCZ;
   vec3 tv = normalize(vec3(-q * 0.8, -1.0)); vec3 tw = tv.x * uCX + tv.y * uCY + tv.z * uCZ;
@@ -1207,6 +1207,20 @@ void main(){ vec3 h = texture(uA, vUV).rgb + uW * texture(uB, vUV).rgb; h = h / 
       shp(sx, sy, sz, rad * 0.33, ux, uy, uz, wob(age + 2), 1.3, 0.8 * fade);
       if (age < 6) { const nx = 0.5 * (DP0[0] + sx), ny = 0.5 * (DP0[1] + sy), nz = 0.5 * (DP0[2] + sz), nl = Math.hypot(DP0[0] - sx, DP0[1] - sy, DP0[2] - sz), rn = rad * 0.18;
         if (nl > 2 * rn) shp(nx, ny, nz, rn, (DP0[0] - sx) / nl, (DP0[1] - sy) / nl, (DP0[2] - sz) / nl, Math.pow(nl / (2 * rn), 2 / 3), 1.3, 0.6 * fade * (1 - age / 6)); } } }
+  // ---- R19 ENDING DEFAULTS (2026-11-24; ENDING option o3, Ben's pick). Change the ending's look HERE and only here. ----
+  // Drawing only: the module and its drops are unchanged. Each value can be overridden by its URL knob
+  // (e.g. ?tap=0&mist=0 is the R18 ending) and read again every frame from window.KN.
+  //   tap   0..1  taper the rim thread's brightness and halo to 0 (tap=1: fully) as each part of it meets
+  //   taps  rad   over the last taps rad of the rim angle before the thread's cutoff (pi - 0.05)
+  //   tapw  0..1  the thread's width falls by this share over the same stretch (0.6: to 40%)
+  //   mist  >=0   extra haze carried by the module's own young drops of the kinds in mistk: mist*exp(-age/mistt)
+  //   mistt ticks how long that extra haze lasts (e-folding time)
+  //   mistk list  drop kinds that carry it (2 = the closing rim's liquid)
+  const ENDING_DEFAULTS = { tap: 1, taps: 0.3, tapw: 0.6, mist: 1, mistt: 40, mistk: [2] };
+  // ---- end of R19 ENDING DEFAULTS ----
+  const knQ = k => { const v = Q.get(k); return v === null || v.trim() === '' || !Number.isFinite(+v) ? ENDING_DEFAULTS[k] : +v; };
+  const knL = k => { const v = Q.get(k), a = v === null ? [] : v.split(',').map(x => x.trim()); return a.length && a.every(x => x !== '' && Number.isFinite(+x)) ? a.map(Number) : ENDING_DEFAULTS[k].slice(); };   // a list: any blank or non-numeric item -> the default
+  const KN = window.KN = { tap: knQ('tap'), taps: knQ('taps'), tapw: knQ('tapw'), mist: knQ('mist'), mistt: knQ('mistt'), mistk: knL('mistk') };
   function buildPoints() {
     let n = 0; nLines = 0; nFlap = 0; nSh = 0;
     const put = (x, y, z, r, glow, bright, hw) => { if (n >= PTMAX) return; const o = 8 * n++; ptData[o] = x; ptData[o + 1] = y; ptData[o + 2] = z; ptData[o + 3] = r; ptData[o + 4] = glow; ptData[o + 5] = bright; ptData[o + 6] = 0; ptData[o + 7] = hw || 0; };
@@ -1221,7 +1235,8 @@ void main(){ vec3 h = texture(uA, vUV).rgb + uW * texture(uB, vUV).rgb; h = h / 
       for (let i = 0; i < NE; i++) { const u = i / NSUB, k0 = Math.floor(u) % M, f = u - Math.floor(u), re = REF[k0] * (1 - f) + REF[(k0 + 1) % M] * f;
         if (re > PI - 0.05) { ED[6 * i + 3] = re; continue; }   // v5.7: a met point is not drawn and only its re is read
         edgePoint(u, ED, 6 * i); }
-      for (let i = 0; i < NE; i++) { const o = 6 * i; if (ED[o + 3] > PI - 0.05) continue; put(ED[o], ED[o + 1], ED[o + 2], ED[o + 5] * (THW - (THW - 1) * smooth(ED[o + 3], PI / 2, PI - 0.3)), 1.0, ED[o + 4] * (behindFilm(ED[o], ED[o + 1], ED[o + 2]) ? BEHIND : 1), RIBH * smooth(ED[o + 3], PI - 0.9, PI - 0.12)); }   // v4.7: soft halo at the end
+      for (let i = 0; i < NE; i++) { const o = 6 * i; if (ED[o + 3] > PI - 0.05) continue; const re = ED[o + 3], tf = KN.tap !== 0 && KN.taps > 0 ? 1 - KN.tap * smooth(re, PI - 0.05 - KN.taps, PI - 0.05) : 1;   // R19: taper (tf = 1: the R18 drawing)
+        put(ED[o], ED[o + 1], ED[o + 2], ED[o + 5] * (THW - (THW - 1) * smooth(re, PI / 2, PI - 0.3)) * (1 - KN.tapw * (1 - tf)), 1.0, ED[o + 4] * (behindFilm(ED[o], ED[o + 1], ED[o + 2]) ? BEHIND : 1) * tf, RIBH * smooth(re, PI - 0.9, PI - 0.12) * tf); }   // v4.7: soft halo at the end
       // v4.3 lace: two side strands split off the thread in patches and rejoin it, so the rim reads as the lacy, looped
       // string of 103/105 (where the separation envelope is zero the strands lie on the thread)
       if (STRANDS > 0) for (let sgn = -1; sgn <= 1; sgn += 2) for (let i = 0; i < NE; i += 2) { const o = 6 * i; if (ED[o + 3] > PI - 0.12) continue;
@@ -1277,7 +1292,9 @@ void main(){ vec3 h = texture(uA, vUV).rgb + uW * texture(uB, vUV).rgb; h = h / 
         if (kind !== 1 || q < 0.07) { const rad = kind === 2 ? 0.0009 + 0.0012 * q : 0.0007 + 0.0009 * q, q2 = RCV[c + 4];
           const far = PINR > 0 ? 1 - 0.85 * smooth(Math.hypot(DP0[0], DP0[1], DP0[2]), PINR, PINR + 0.6) : 1;   // v4.6: the far drops fade (refs: the drops hang in the cloud)
           const q3 = RCV[c + 5], t0 = PINA[0] + (PINA[1] - PINA[0]) * q3, pf = PINK >= 1 || q3 < PINK ? 1 : 1 - smooth(age, t0, t0 + 40);
-          const lw = limbC(c, age); if (pf > 0.02) put(DP0[0], DP0[1], DP0[2], rad, 1.3, pf * far * 1.25 * Math.exp(-age / 900) * (PINW > 0 ? PINB + PINW * q2 * q2 * q2 : 1), 0.25 * hzAge(age) * lw); }
+          const lw = limbC(c, age), mh = KN.mist > 0 && KN.mistt > 0 && KN.mistk.includes(kind) ? KN.mist * Math.exp(-age / KN.mistt) : 0;   // R19: the young drops' extra haze (mh = 0: the R18 drawing)
+          if (pf > 0.02) put(DP0[0], DP0[1], DP0[2], rad, 1.3, pf * far * 1.25 * Math.exp(-age / 900) * (PINW > 0 ? PINB + PINW * q2 * q2 * q2 : 1), mh > 0 ? 0.25 * hzAge(age) * lw + mh * lw : 0.25 * hzAge(age) * lw);
+          else if (mh > 0.005) { const n0 = n; put(DP0[0], DP0[1], DP0[2], rad, 1.3, 0, 0.25 * hzAge(age) * lw + mh * lw); if (n > n0) ptData[8 * n0 + 6] = -1; } }   // R19: haze only (flag -1: the opaque point pass discards it)
         else { dropAt(o, Math.max(0, age - STREAK), DP1); if (NOUT > 0) sprayOutC(o, Math.max(0, age - STREAK), DP1, c); drift(i, o, Math.max(0, age - STREAK), DP1, 1);
           const pk = RCV[c + 1];   // v4.3: the beard comes in patches (v5.7: cached)
           const yin = HZIN > 0 ? smooth(age, 0, HZIN) : 1;   // v4.6: young spray fades in (a pure function of its age)
@@ -1561,7 +1578,7 @@ void main(){ vec3 h = texture(uA, vUV).rgb + uW * texture(uB, vUV).rgb; h = h / 
     if (demoState === 'hold' && now > holdUntil) { if (tick > 0) { setDir(-1); demoState = 'rev'; } else { setDir(1); demoState = 'fwd'; } running = true; }
   }
   function frame(now) {
-    const dtms = Math.min(100, now - last); last = now;
+    const dtms = Math.max(0, Math.min(100, now - last)); last = now;   // ISO4: >= 0 (the first rAF time can precede the end of the synchronous start-up; a negative dt held playback at tick 0 for as long as start-up took)
     fpsT.push(now); while (fpsT.length && fpsT[0] < now - 1000) fpsT.shift(); fps = fpsT.length;
     try { pump(dtms, now); } catch (err) { fail('controller: ' + (err && err.message)); }
     try { drawFrame(); } catch (err) { fail('drawing: ' + (err && err.message)); }
